@@ -5,19 +5,49 @@ import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { Field, FieldError, FieldLabel } from "../ui/field";
 import { AuthValidation } from "@/validation/auth.validation";
+import { useLogin } from "@/hooks";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
+import { Spinner } from "../ui/spinner";
 
 const LoginForm = () => {
+  const { mutate: login, isPending } = useLogin();
+  const router = useRouter();
 
   const form = useForm({
     defaultValues: {
-      email: "",
-      password: "",
+      email: "admin@gmail.com",
+      password: "Admin@admin12345",
     },
     validators: {
       onSubmit: AuthValidation.LoginZodSchema,
     },
     onSubmit: async ({ value }) => {
-      console.log("Submitted Data:", value);
+      const loginData = {
+        email: value.email,
+        password: value.password,
+      };
+
+      login(loginData, {
+        onSuccess: (res) => {
+          router.push("/");
+          toast.success("Login Successful.", {
+            description: "Welcome back in ADVISO",
+            position: "top-right",
+          });
+        },
+        onError: (err: any) => {
+          const errorDescription =
+            err?.data?.message ||
+            err?.message ||
+            "Something went wrong. Please try again";
+
+          toast.error("Login Failed.", {
+            description: errorDescription,
+            position: "top-right",
+          });
+        },
+      });
     },
   });
 
@@ -36,7 +66,8 @@ const LoginForm = () => {
         {/* Email Field */}
         <form.Field name="email">
           {(field) => {
-            const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid;
+            const isInvalid =
+              field.state.meta.isTouched && !field.state.meta.isValid;
             return (
               <Field>
                 <FieldLabel htmlFor={field.name}>Email</FieldLabel>
@@ -59,7 +90,8 @@ const LoginForm = () => {
         {/* Password Field */}
         <form.Field name="password">
           {(field) => {
-            const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid;
+            const isInvalid =
+              field.state.meta.isTouched && !field.state.meta.isValid;
             return (
               <Field>
                 <FieldLabel htmlFor={field.name}>Password</FieldLabel>
@@ -79,15 +111,12 @@ const LoginForm = () => {
           }}
         </form.Field>
 
-        <form.Subscribe
-          selector={(state) => [state.canSubmit, state.isSubmitting]}
-        >
-          {([canSubmit, isSubmitting]) => (
-            <Button type="submit" disabled={!canSubmit || isSubmitting}>
-              {isSubmitting ? "Logging in..." : "Login"}
-            </Button>
-          )}
-        </form.Subscribe>
+        <Button disabled={isPending} type="submit">
+          {isPending ? <>
+           <Spinner/> submitting
+          </> : "Submit"}
+
+        </Button>
       </form>
     </div>
   );
