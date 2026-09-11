@@ -10,13 +10,12 @@ import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { Spinner } from "../ui/spinner";
 import { GoogleLogin } from "@react-oauth/google";
+import Link from "next/link";
+import Logo from "../layout/public/Logo";
 
 const LoginForm = () => {
-  
-
-
   const { mutate: login, isPending } = useLogin();
-  const {mutate: googleLogin } = useGoogleOAuth()
+  const { mutate: googleLogin } = useGoogleOAuth();
   const router = useRouter();
 
   const form = useForm({
@@ -34,10 +33,10 @@ const LoginForm = () => {
       };
 
       login(loginData, {
-        onSuccess: (res) => {
+        onSuccess: (_res) => {
           router.push("/");
           toast.success("Login Successful.", {
-            description: "Welcome back in ADVISO",
+            description: "Welcome back to ADVISO",
             position: "top-right",
           });
         },
@@ -56,20 +55,21 @@ const LoginForm = () => {
     },
   });
 
-  const handleGoogleSuccess = (credentialResponse : {credential? : string}) => {
-
+  const handleGoogleSuccess = (credentialResponse: { credential?: string }) => {
     const idToken = credentialResponse.credential;
 
-    if(!idToken){
-       toast.error("Something went wrong. Try Again")
-       return
+    if (!idToken) {
+      toast.error("Something went wrong. Try Again");
+      return;
     }
 
-    googleLogin({idToken, timezone : "UTC"}, {
-      onSuccess: (res) => {
+    googleLogin(
+      { idToken, timezone: "UTC" },
+      {
+        onSuccess: (_res) => {
           router.push("/");
           toast.success("Login Successful.", {
-            description: "Welcome back in ADVISO",
+            description: "Welcome back to ADVISO",
             position: "top-right",
           });
         },
@@ -84,27 +84,37 @@ const LoginForm = () => {
             position: "top-right",
           });
         },
-    })
-
-
-
-  }
+      }
+    );
+  };
 
   const handleGoogleError = () => {
-    toast.error("Something went wrong. Try Again")
-  }
+    toast.error("Something went wrong. Try Again");
+  };
 
   return (
-    <div className="max-w-md mx-auto p-4">
-      <h2 className="text-xl font-bold mb-4">Login Form</h2>
+    <div className="w-full space-y-8">
+      {/* Brand Header */}
+      <div className="flex flex-col items-center text-center space-y-3">
+        <Logo size="lg" className="scale-110 mb-1" />
+        <div className="space-y-1.5">
+          <h1 className="text-3xl font-extrabold tracking-tight text-foreground sm:text-4xl mt-6 text-orange-600">
+            Welcome back!
+          </h1>
+          <p className="text-base text-muted-foreground">
+            Simplify your consultations and guide your career path.
+          </p>
+        </div>
+      </div>
 
+      {/* Login Credentials Form */}
       <form
         onSubmit={(e) => {
           e.preventDefault();
           e.stopPropagation();
           form.handleSubmit();
         }}
-        className="space-y-4"
+        className="space-y-5"
       >
         {/* Email Field */}
         <form.Field name="email">
@@ -112,8 +122,10 @@ const LoginForm = () => {
             const isInvalid =
               field.state.meta.isTouched && !field.state.meta.isValid;
             return (
-              <Field>
-                <FieldLabel htmlFor={field.name}>Email</FieldLabel>
+              <Field className="space-y-2">
+                <FieldLabel htmlFor={field.name} className="text-base font-semibold">
+                  Email
+                </FieldLabel>
                 <Input
                   id={field.name}
                   name={field.name}
@@ -122,7 +134,8 @@ const LoginForm = () => {
                   onChange={(e) => field.handleChange(e.target.value)}
                   onBlur={field.handleBlur}
                   autoComplete="email"
-                  placeholder="Enter your email"
+                  placeholder="name@example.com"
+                  className="rounded-full px-5 h-14 text-base border-border/80 focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:border-orange-500 shadow-sm"
                 />
                 {isInvalid && <FieldError errors={field.state.meta.errors} />}
               </Field>
@@ -136,8 +149,18 @@ const LoginForm = () => {
             const isInvalid =
               field.state.meta.isTouched && !field.state.meta.isValid;
             return (
-              <Field>
-                <FieldLabel htmlFor={field.name}>Password</FieldLabel>
+              <Field className="space-y-2">
+                <div className="flex items-center justify-between">
+                  <FieldLabel htmlFor={field.name} className="text-base font-semibold">
+                    Password
+                  </FieldLabel>
+                  <Link
+                    href="/forgot-password"
+                    className="text-sm font-medium text-orange-600 hover:text-orange-700 dark:text-orange-400 hover:underline transition-colors"
+                  >
+                    Forgot Password?
+                  </Link>
+                </div>
                 <Input
                   id={field.name}
                   name={field.name}
@@ -147,6 +170,7 @@ const LoginForm = () => {
                   onBlur={field.handleBlur}
                   autoComplete="current-password"
                   placeholder="Enter your password"
+                  className="rounded-full px-5 h-14 text-base border-border/80 focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:border-orange-500 shadow-sm"
                 />
                 {isInvalid && <FieldError errors={field.state.meta.errors} />}
               </Field>
@@ -154,18 +178,53 @@ const LoginForm = () => {
           }}
         </form.Field>
 
-        <Button disabled={isPending} type="submit">
-          {isPending ? <>
-           <Spinner/> submitting
-          </> : "Submit"}
-
+        {/* Login Button */}
+        <Button
+          disabled={isPending}
+          type="submit"
+          className="w-full h-14 rounded-full bg-orange-500 hover:bg-orange-600 text-white font-semibold text-base transition-all shadow-md active:scale-[0.99] mt-2"
+        >
+          {isPending ? (
+            <span className="flex items-center gap-2">
+              <Spinner className="size-5" /> Submitting...
+            </span>
+          ) : (
+            "Login"
+          )}
         </Button>
       </form>
 
-      <FieldSeparator className="mt-6">Or</FieldSeparator>
-      <GoogleLogin shape="pill"
-        text="continue_with"
-      onSuccess={handleGoogleSuccess} onError={handleGoogleError}></GoogleLogin>
+      {/* Divider */}
+      <FieldSeparator className="text-xs uppercase font-medium tracking-wider text-muted-foreground my-6">
+        Or continue with
+      </FieldSeparator>
+
+      {/* Google OAuth Section */}
+     {/* Google OAuth Section */}
+<div className="w-full flex justify-center [&>div]:!w-full [&_iframe]:!w-full [&_iframe]:!mx-auto">
+  <div className="w-full flex justify-center">
+    <GoogleLogin
+      shape="pill"
+      size="large"
+      text="continue_with"
+      theme="outline"
+      width="100%"
+      onSuccess={handleGoogleSuccess}
+      onError={handleGoogleError}
+    />
+  </div>
+</div>
+
+      {/* Footer Register Link */}
+      <p className="text-center text-base text-muted-foreground pt-2">
+        Not a member?{" "}
+        <Link
+          href="/register"
+          className="font-bold text-orange-600 hover:text-orange-700 dark:text-orange-400 hover:underline"
+        >
+          Register now
+        </Link>
+      </p>
     </div>
   );
 };
