@@ -3,15 +3,20 @@
 import { useForm } from "@tanstack/react-form";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
-import { Field, FieldError, FieldLabel } from "../ui/field";
+import { Field, FieldError, FieldLabel, FieldSeparator } from "../ui/field";
 import { AuthValidation } from "@/validation/auth.validation";
-import { useLogin } from "@/hooks";
+import { useGoogleOAuth, useLogin } from "@/hooks";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { Spinner } from "../ui/spinner";
+import { GoogleLogin } from "@react-oauth/google";
 
 const LoginForm = () => {
+  
+
+
   const { mutate: login, isPending } = useLogin();
+  const {mutate: googleLogin } = useGoogleOAuth()
   const router = useRouter();
 
   const form = useForm({
@@ -50,6 +55,44 @@ const LoginForm = () => {
       });
     },
   });
+
+  const handleGoogleSuccess = (credentialResponse : {credential? : string}) => {
+
+    const idToken = credentialResponse.credential;
+
+    if(!idToken){
+       toast.error("Something went wrong. Try Again")
+       return
+    }
+
+    googleLogin({idToken, timezone : "UTC"}, {
+      onSuccess: (res) => {
+          router.push("/");
+          toast.success("Login Successful.", {
+            description: "Welcome back in ADVISO",
+            position: "top-right",
+          });
+        },
+        onError: (err: any) => {
+          const errorDescription =
+            err?.data?.message ||
+            err?.message ||
+            "Something went wrong. Please try again";
+
+          toast.error("Login Failed.", {
+            description: errorDescription,
+            position: "top-right",
+          });
+        },
+    })
+
+
+
+  }
+
+  const handleGoogleError = () => {
+    toast.error("Something went wrong. Try Again")
+  }
 
   return (
     <div className="max-w-md mx-auto p-4">
@@ -118,6 +161,11 @@ const LoginForm = () => {
 
         </Button>
       </form>
+
+      <FieldSeparator className="mt-6">Or</FieldSeparator>
+      <GoogleLogin shape="pill"
+        text="continue_with"
+      onSuccess={handleGoogleSuccess} onError={handleGoogleError}></GoogleLogin>
     </div>
   );
 };
