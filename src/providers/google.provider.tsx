@@ -1,14 +1,11 @@
-import { GoogleOAuthProvider } from '@react-oauth/google';
-import React, { ReactNode } from 'react';
+import { GoogleOAuthProvider } from "@react-oauth/google";
+import React, { ReactNode } from "react";
 
-const GoogleAuthProvider = ({children} : {children : ReactNode}) => {
-
-    const clientId = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID!
-    return (
-        <GoogleOAuthProvider clientId={clientId}>
-            {children}
-        </GoogleOAuthProvider>
-    );
+const GoogleAuthProvider = ({ children }: { children: ReactNode }) => {
+  const clientId = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID!;
+  return (
+    <GoogleOAuthProvider clientId={clientId}>{children}</GoogleOAuthProvider>
+  );
 };
 
 export default GoogleAuthProvider;

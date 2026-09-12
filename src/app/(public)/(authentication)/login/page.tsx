@@ -7,7 +7,7 @@ export default function LoginPage() {
     <main className="min-h-svh w-full grid lg:grid-cols-2 bg-background">
       {/* Left Column: Form Section */}
       <div className="flex flex-col justify-center items-center px-6 py-12 lg:px-16">
-        <div className="w-full max-w-[480px]">
+        <div className="w-full max-w-[400px]">
           <LoginForm />
         </div>
       </div>
@@ -28,8 +28,6 @@ export default function LoginPage() {
               className="object-contain"
             />
           </div>
-
-          
         </div>
       </div>
     </main>

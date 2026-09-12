@@ -15,15 +15,14 @@ export function useLogout() {
 
 export function useGetMe() {
   return useQuery({
-    queryKey: ['user'],
+    queryKey: ["user"],
     queryFn: getMe,
-    retry : false
-  })
+    retry: false,
+  });
 }
 
-export function useGoogleOAuth(){
+export function useGoogleOAuth() {
   return useMutation({
-    mutationFn : googleAuth
-  })
+    mutationFn: googleAuth,
+  });
 }
-

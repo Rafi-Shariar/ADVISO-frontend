@@ -30,7 +30,7 @@ const Logo = ({
       href="/"
       className={cn(
         "inline-flex items-center gap-2.5 transition-opacity hover:opacity-90 select-none",
-        className
+        className,
       )}
     >
       <Image
@@ -46,7 +46,7 @@ const Logo = ({
         <span
           className={cn(
             "font-extrabold tracking-tight text-foreground font-sans",
-            currentSize.text
+            currentSize.text,
           )}
         >
           ADVISO

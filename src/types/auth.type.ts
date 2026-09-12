@@ -4,6 +4,6 @@ export interface ILoginUserPayload {
 }
 
 export interface IGoogleLoginPayload {
-	idToken: string;
-	timezone: string;
+  idToken: string;
+  timezone: string;
 }

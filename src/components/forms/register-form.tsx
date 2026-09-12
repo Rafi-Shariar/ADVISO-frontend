@@ -13,21 +13,23 @@ import { GoogleLogin } from "@react-oauth/google";
 import Link from "next/link";
 import Logo from "../layout/public/Logo";
 
-const LoginForm = () => {
+const SignUpForm = () => {
   const { mutate: login, isPending } = useLogin();
   const { mutate: googleLogin } = useGoogleOAuth();
   const router = useRouter();
 
   const form = useForm({
     defaultValues: {
-      email: "admin@gmail.com",
-      password: "Admin@admin12345",
+      name: "",
+      email: "",
+      password: "",
     },
     validators: {
-      onSubmit: AuthValidation.LoginZodSchema,
+      onSubmit: AuthValidation.registerZodSchema,
     },
     onSubmit: async ({ value }) => {
       const loginData = {
+        name: value.name,
         email: value.email,
         password: value.password,
       };
@@ -63,11 +65,8 @@ const LoginForm = () => {
       return;
     }
 
-    const timezone =
-      Intl?.DateTimeFormat()?.resolvedOptions()?.timeZone || "UTC";
-
     googleLogin(
-      { idToken, timezone },
+      { idToken, timezone: "UTC" },
       {
         onSuccess: (_res) => {
           router.push("/");
@@ -96,15 +95,15 @@ const LoginForm = () => {
   };
 
   return (
-    <div className="w-full space-y-6">
+    <div className="w-full space-y-8">
       {/* Brand Header */}
-      <div className="flex flex-col items-center text-center space-y-2">
-        <Logo size="md" />
-        <div className="space-y-1">
-          <h1 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl text-orange-600 dark:text-orange-500">
+      <div className="flex flex-col items-center text-center space-y-3">
+        <Logo size="lg" className="scale-110 mb-1" />
+        <div className="space-y-1.5">
+          <h1 className="text-3xl font-extrabold tracking-tight text-foreground sm:text-4xl mt-6 text-orange-600">
             Welcome back!
           </h1>
-          <p className="text-sm text-muted-foreground">
+          <p className="text-base text-muted-foreground">
             Simplify your consultations and guide your career path.
           </p>
         </div>
@@ -117,18 +116,48 @@ const LoginForm = () => {
           e.stopPropagation();
           form.handleSubmit();
         }}
-        className="space-y-4"
+        className="space-y-5"
       >
+        {/* Name Field */}
+        <form.Field name="name">
+          {(field) => {
+            const isInvalid =
+              field.state.meta.isTouched && !field.state.meta.isValid;
+            return (
+              <Field className="space-y-2">
+                <FieldLabel
+                  htmlFor={field.name}
+                  className="text-base font-semibold"
+                >
+                  Name
+                </FieldLabel>
+                <Input
+                  id={field.name}
+                  name={field.name}
+                  type="text"
+                  value={field.state.value}
+                  onChange={(e) => field.handleChange(e.target.value)}
+                  onBlur={field.handleBlur}
+                  autoComplete="name"
+                  placeholder="enter your name"
+                  className="rounded-full px-5 h-14 text-base border-border/80 focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:border-orange-500 shadow-sm"
+                />
+                {isInvalid && <FieldError errors={field.state.meta.errors} />}
+              </Field>
+            );
+          }}
+        </form.Field>
+
         {/* Email Field */}
         <form.Field name="email">
           {(field) => {
             const isInvalid =
               field.state.meta.isTouched && !field.state.meta.isValid;
             return (
-              <Field className="space-y-1.5">
+              <Field className="space-y-2">
                 <FieldLabel
                   htmlFor={field.name}
-                  className="text-sm font-medium"
+                  className="text-base font-semibold"
                 >
                   Email
                 </FieldLabel>
@@ -141,7 +170,7 @@ const LoginForm = () => {
                   onBlur={field.handleBlur}
                   autoComplete="email"
                   placeholder="name@example.com"
-                  className="rounded-full px-4 h-11 text-sm border-border focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:border-orange-500 shadow-sm"
+                  className="rounded-full px-5 h-14 text-base border-border/80 focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:border-orange-500 shadow-sm"
                 />
                 {isInvalid && <FieldError errors={field.state.meta.errors} />}
               </Field>
@@ -155,17 +184,17 @@ const LoginForm = () => {
             const isInvalid =
               field.state.meta.isTouched && !field.state.meta.isValid;
             return (
-              <Field className="space-y-1.5">
+              <Field className="space-y-2">
                 <div className="flex items-center justify-between">
                   <FieldLabel
                     htmlFor={field.name}
-                    className="text-sm font-medium"
+                    className="text-base font-semibold"
                   >
                     Password
                   </FieldLabel>
                   <Link
                     href="/forgot-password"
-                    className="text-xs font-medium text-orange-600 hover:text-orange-700 dark:text-orange-400 hover:underline transition-colors"
+                    className="text-sm font-medium text-orange-600 hover:text-orange-700 dark:text-orange-400 hover:underline transition-colors"
                   >
                     Forgot Password?
                   </Link>
@@ -179,7 +208,7 @@ const LoginForm = () => {
                   onBlur={field.handleBlur}
                   autoComplete="current-password"
                   placeholder="Enter your password"
-                  className="rounded-full px-4 h-11 text-sm border-border focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:border-orange-500 shadow-sm"
+                  className="rounded-full px-5 h-14 text-base border-border/80 focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:border-orange-500 shadow-sm"
                 />
                 {isInvalid && <FieldError errors={field.state.meta.errors} />}
               </Field>
@@ -191,11 +220,11 @@ const LoginForm = () => {
         <Button
           disabled={isPending}
           type="submit"
-          className="w-full h-11 rounded-full bg-orange-500 hover:bg-orange-600 dark:bg-orange-600 dark:hover:bg-orange-700 text-white font-medium text-sm transition-all shadow-sm active:scale-[0.99] mt-1"
+          className="w-full h-14 rounded-full bg-orange-500 hover:bg-orange-600 text-white font-semibold text-base transition-all shadow-md active:scale-[0.99] mt-2"
         >
           {isPending ? (
             <span className="flex items-center gap-2">
-              <Spinner className="size-4" /> Submitting...
+              <Spinner className="size-5" /> Submitting...
             </span>
           ) : (
             "Login"
@@ -204,16 +233,17 @@ const LoginForm = () => {
       </form>
 
       {/* Divider */}
-      <FieldSeparator className="text-xs uppercase font-medium tracking-wider text-muted-foreground my-4">
+      <FieldSeparator className="text-xs uppercase font-medium tracking-wider text-muted-foreground my-6">
         Or continue with
       </FieldSeparator>
 
+      {/* Google OAuth Section */}
       {/* Google OAuth Section */}
       <div className="w-full flex justify-center [&>div]:!w-full [&_iframe]:!w-full [&_iframe]:!mx-auto">
         <div className="w-full flex justify-center">
           <GoogleLogin
             shape="pill"
-            size="medium"
+            size="large"
             text="continue_with"
             theme="outline"
             width="100%"
@@ -224,11 +254,11 @@ const LoginForm = () => {
       </div>
 
       {/* Footer Register Link */}
-      <p className="text-center text-sm text-muted-foreground pt-1">
+      <p className="text-center text-base text-muted-foreground pt-2">
         Not a member?{" "}
         <Link
           href="/register"
-          className="font-semibold text-orange-600 hover:text-orange-700 dark:text-orange-400 hover:underline"
+          className="font-bold text-orange-600 hover:text-orange-700 dark:text-orange-400 hover:underline"
         >
           Register now
         </Link>
@@ -237,4 +267,4 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+export default SignUpForm;

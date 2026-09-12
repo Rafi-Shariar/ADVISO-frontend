@@ -60,7 +60,7 @@ const Header = () => {
                   "text-sm font-medium transition-colors hover:text-orange-600 dark:hover:text-orange-400",
                   isActive
                     ? "text-orange-600 dark:text-orange-400 font-semibold"
-                    : "text-muted-foreground"
+                    : "text-muted-foreground",
                 )}
               >
                 {route.name}

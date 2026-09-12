@@ -13,6 +13,6 @@ export const getMe = () => {
   return apiClient("/api/v1/auth/me");
 };
 
-export const googleAuth = (payload : IGoogleLoginPayload) => {
+export const googleAuth = (payload: IGoogleLoginPayload) => {
   return apiClient("/api/v1/auth/google", { method: "POST", body: payload });
 };
