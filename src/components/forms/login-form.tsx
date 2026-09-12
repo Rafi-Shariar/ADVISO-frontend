@@ -18,7 +18,6 @@ const LoginForm = () => {
   const { mutate: googleLogin } = useGoogleOAuth();
   const router = useRouter();
 
-
   const form = useForm({
     defaultValues: {
       email: "admin@gmail.com",

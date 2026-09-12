@@ -13,13 +13,12 @@ import { GoogleLogin } from "@react-oauth/google";
 import Link from "next/link";
 import Logo from "../layout/public/Logo";
 
-
 const SignUpForm = () => {
   const { mutate: googleLogin, isPending } = useGoogleOAuth();
-  const { mutate : register} = useRegistration()
+  const { mutate: register } = useRegistration();
   const router = useRouter();
 
-   const timezone = Intl?.DateTimeFormat()?.resolvedOptions()?.timeZone || "UTC";
+  const timezone = Intl?.DateTimeFormat()?.resolvedOptions()?.timeZone || "UTC";
 
   const form = useForm({
     defaultValues: {
@@ -32,21 +31,19 @@ const SignUpForm = () => {
     },
     onSubmit: async ({ value }) => {
       const registerData = {
-        name : value.email,
+        name: value.email,
         email: value.email,
         password: value.password,
-        timezone
+        timezone,
       };
 
       register(registerData, {
         onSuccess: (res) => {
-
-          if(!res.success){
+          if (!res.success) {
             toast.error("Server Failure.", {
-            description: "Something went wrong. Please try again",
-            position: "top-right",
-          });
-
+              description: "Something went wrong. Please try again",
+              position: "top-right",
+            });
           }
 
           toast.success("OTP Sent to your email.", {
@@ -54,10 +51,9 @@ const SignUpForm = () => {
             position: "top-right",
           });
 
-          const params = new URLSearchParams({email : registerData.email})
+          const params = new URLSearchParams({ email: registerData.email });
 
           router.push(`/register/verify-account?${params.toString()}`);
-          
         },
         onError: (err: any) => {
           const errorDescription =
@@ -209,7 +205,6 @@ const SignUpForm = () => {
                   >
                     Password
                   </FieldLabel>
-                
                 </div>
                 <Input
                   id={field.name}

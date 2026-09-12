@@ -1,6 +1,10 @@
 import apiClient from "@/lib/apiClient";
-import { IGoogleLoginPayload, ILoginUserPayload, IRegisterUser } from "@/types/auth.type";
-
+import {
+  IGoogleLoginPayload,
+  ILoginUserPayload,
+  IRegisterUser,
+  IVerifyEmailPayload,
+} from "@/types/auth.type";
 
 export const userRegistration = (payload: IRegisterUser) => {
   return apiClient("/api/v1/auth/register", { method: "POST", body: payload });
@@ -20,4 +24,8 @@ export const getMe = () => {
 
 export const googleAuth = (payload: IGoogleLoginPayload) => {
   return apiClient("/api/v1/auth/google", { method: "POST", body: payload });
+};
+
+export const verifyAccount = (payload: IVerifyEmailPayload) => {
+  return apiClient("/api/v1/auth/verify-email", { method: "POST", body: payload });
 };
