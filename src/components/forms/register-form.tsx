@@ -5,7 +5,7 @@ import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { Field, FieldError, FieldLabel, FieldSeparator } from "../ui/field";
 import { AuthValidation } from "@/validation/auth.validation";
-import { useGoogleOAuth, useLogin } from "@/hooks";
+import { useGoogleOAuth, useLogin, useRegistration } from "@/hooks";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { Spinner } from "../ui/spinner";
@@ -13,10 +13,13 @@ import { GoogleLogin } from "@react-oauth/google";
 import Link from "next/link";
 import Logo from "../layout/public/Logo";
 
+
 const SignUpForm = () => {
-  const { mutate: login, isPending } = useLogin();
-  const { mutate: googleLogin } = useGoogleOAuth();
+  const { mutate: googleLogin, isPending } = useGoogleOAuth();
+  const { mutate : register} = useRegistration()
   const router = useRouter();
+
+   const timezone = Intl?.DateTimeFormat()?.resolvedOptions()?.timeZone || "UTC";
 
   const form = useForm({
     defaultValues: {
@@ -28,19 +31,33 @@ const SignUpForm = () => {
       onSubmit: AuthValidation.registerZodSchema,
     },
     onSubmit: async ({ value }) => {
-      const loginData = {
-        name: value.name,
+      const registerData = {
+        name : value.email,
         email: value.email,
         password: value.password,
+        timezone
       };
 
-      login(loginData, {
-        onSuccess: (_res) => {
-          router.push("/");
-          toast.success("Login Successful.", {
-            description: "Welcome back to ADVISO",
+      register(registerData, {
+        onSuccess: (res) => {
+
+          if(!res.success){
+            toast.error("Server Failure.", {
+            description: "Something went wrong. Please try again",
             position: "top-right",
           });
+
+          }
+
+          toast.success("OTP Sent to your email.", {
+            description: "Please verify your account.",
+            position: "top-right",
+          });
+
+          const params = new URLSearchParams({email : registerData.email})
+
+          router.push(`/register/verify-account?${params.toString()}`);
+          
         },
         onError: (err: any) => {
           const errorDescription =
@@ -66,7 +83,7 @@ const SignUpForm = () => {
     }
 
     googleLogin(
-      { idToken, timezone: "UTC" },
+      { idToken, timezone },
       {
         onSuccess: (_res) => {
           router.push("/");
@@ -192,12 +209,7 @@ const SignUpForm = () => {
                   >
                     Password
                   </FieldLabel>
-                  <Link
-                    href="/forgot-password"
-                    className="text-sm font-medium text-orange-600 hover:text-orange-700 dark:text-orange-400 hover:underline transition-colors"
-                  >
-                    Forgot Password?
-                  </Link>
+                
                 </div>
                 <Input
                   id={field.name}
@@ -220,14 +232,14 @@ const SignUpForm = () => {
         <Button
           disabled={isPending}
           type="submit"
-          className="w-full h-14 rounded-full bg-orange-500 hover:bg-orange-600 text-white font-semibold text-base transition-all shadow-md active:scale-[0.99] mt-2"
+          className="w-full h-11 rounded-full bg-orange-500 hover:bg-orange-600 dark:bg-orange-600 dark:hover:bg-orange-700 text-white font-medium text-sm transition-all shadow-sm active:scale-[0.99] mt-1"
         >
           {isPending ? (
             <span className="flex items-center gap-2">
-              <Spinner className="size-5" /> Submitting...
+              <Spinner className="size-4" />
             </span>
           ) : (
-            "Login"
+            "Register"
           )}
         </Button>
       </form>
@@ -255,12 +267,12 @@ const SignUpForm = () => {
 
       {/* Footer Register Link */}
       <p className="text-center text-base text-muted-foreground pt-2">
-        Not a member?{" "}
+        Already a member?{" "}
         <Link
-          href="/register"
+          href="/login"
           className="font-bold text-orange-600 hover:text-orange-700 dark:text-orange-400 hover:underline"
         >
-          Register now
+          Login now
         </Link>
       </p>
     </div>

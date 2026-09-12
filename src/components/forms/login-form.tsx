@@ -18,6 +18,7 @@ const LoginForm = () => {
   const { mutate: googleLogin } = useGoogleOAuth();
   const router = useRouter();
 
+
   const form = useForm({
     defaultValues: {
       email: "admin@gmail.com",
@@ -33,7 +34,7 @@ const LoginForm = () => {
       };
 
       login(loginData, {
-        onSuccess: (_res) => {
+        onSuccess: (res) => {
           router.push("/");
           toast.success("Login Successful.", {
             description: "Welcome back to ADVISO",
