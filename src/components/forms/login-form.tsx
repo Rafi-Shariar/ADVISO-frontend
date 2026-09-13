@@ -12,6 +12,7 @@ import { Spinner } from "../ui/spinner";
 import { GoogleLogin } from "@react-oauth/google";
 import Link from "next/link";
 import Logo from "../layout/public/Logo";
+import { ArrowRight } from "lucide-react";
 
 const LoginForm = () => {
   const { mutate: login, isPending } = useLogin();
@@ -33,7 +34,7 @@ const LoginForm = () => {
       };
 
       login(loginData, {
-        onSuccess: (res) => {
+        onSuccess: (_res) => {
           router.push("/");
           toast.success("Login Successful.", {
             description: "Welcome back to ADVISO",
@@ -87,7 +88,7 @@ const LoginForm = () => {
             position: "top-right",
           });
         },
-      },
+      }
     );
   };
 
@@ -98,14 +99,16 @@ const LoginForm = () => {
   return (
     <div className="w-full space-y-6">
       {/* Brand Header */}
-      <div className="flex flex-col items-center text-center space-y-2">
-        <Logo size="md" />
+      <div className="flex flex-col items-center text-center space-y-3">
+        <div className="p-2 rounded-2xl bg-orange-500/5 ring-1 ring-orange-500/10">
+          <Logo size="md" />
+        </div>
         <div className="space-y-1">
-          <h1 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl text-orange-600 dark:text-orange-500">
-            Welcome back!
+          <h1 className="text-2xl font-bold tracking-tight bg-gradient-to-r from-orange-600 to-amber-500 bg-clip-text text-transparent sm:text-3xl">
+            Welcome back
           </h1>
-          <p className="text-sm text-muted-foreground">
-            Simplify your consultations and guide your career path.
+          <p className="text-xs text-muted-foreground max-w-xs mx-auto">
+            Log in to continue your mentorship journey and manage your consultations.
           </p>
         </div>
       </div>
@@ -128,9 +131,9 @@ const LoginForm = () => {
               <Field className="space-y-1.5">
                 <FieldLabel
                   htmlFor={field.name}
-                  className="text-sm font-medium"
+                  className="text-xs font-semibold uppercase tracking-wider text-muted-foreground"
                 >
-                  Email
+                  Email Address
                 </FieldLabel>
                 <Input
                   id={field.name}
@@ -141,7 +144,7 @@ const LoginForm = () => {
                   onBlur={field.handleBlur}
                   autoComplete="email"
                   placeholder="name@example.com"
-                  className="rounded-full px-4 h-11 text-sm border-border focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:border-orange-500 shadow-sm"
+                  className="rounded-xl px-4 h-11 text-sm bg-background/60 border-border/60 focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:border-orange-500 transition-all shadow-inner"
                 />
                 {isInvalid && <FieldError errors={field.state.meta.errors} />}
               </Field>
@@ -159,7 +162,7 @@ const LoginForm = () => {
                 <div className="flex items-center justify-between">
                   <FieldLabel
                     htmlFor={field.name}
-                    className="text-sm font-medium"
+                    className="text-xs font-semibold uppercase tracking-wider text-muted-foreground"
                   >
                     Password
                   </FieldLabel>
@@ -178,8 +181,8 @@ const LoginForm = () => {
                   onChange={(e) => field.handleChange(e.target.value)}
                   onBlur={field.handleBlur}
                   autoComplete="current-password"
-                  placeholder="Enter your password"
-                  className="rounded-full px-4 h-11 text-sm border-border focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:border-orange-500 shadow-sm"
+                  placeholder="••••••••••••"
+                  className="rounded-xl px-4 h-11 text-sm bg-background/60 border-border/60 focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:border-orange-500 transition-all shadow-inner"
                 />
                 {isInvalid && <FieldError errors={field.state.meta.errors} />}
               </Field>
@@ -187,33 +190,36 @@ const LoginForm = () => {
           }}
         </form.Field>
 
-        {/* Login Button */}
+        {/* Login Button with Accent Glow */}
         <Button
           disabled={isPending}
           type="submit"
-          className="w-full h-11 rounded-full bg-orange-500 hover:bg-orange-600 dark:bg-orange-600 dark:hover:bg-orange-700 text-white font-medium text-sm transition-all shadow-sm active:scale-[0.99] mt-1"
+          className="group relative w-full h-11 rounded-xl bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-medium text-sm transition-all duration-300 shadow-[0_4px_16px_rgba(234,88,12,0.25)] hover:shadow-[0_6px_22px_rgba(234,88,12,0.35)] active:scale-[0.98] mt-2 overflow-hidden"
         >
           {isPending ? (
             <span className="flex items-center gap-2">
-              <Spinner className="size-4" /> Submitting...
+              <Spinner className="size-4" /> Authenticating...
             </span>
           ) : (
-            "Login"
+            <span className="flex items-center justify-center gap-1.5">
+              Sign In
+              <ArrowRight className="size-4 transition-transform duration-200 group-hover:translate-x-1" />
+            </span>
           )}
         </Button>
       </form>
 
       {/* Divider */}
-      <FieldSeparator className="text-xs uppercase font-medium tracking-wider text-muted-foreground my-4">
+      <FieldSeparator className="text-[11px] font-semibold uppercase tracking-widest text-muted-foreground/80 my-4">
         Or continue with
       </FieldSeparator>
 
       {/* Google OAuth Section */}
-      <div className="w-full flex justify-center [&>div]:!w-full [&_iframe]:!w-full [&_iframe]:!mx-auto">
+      <div className="w-full flex justify-center [&>div]:!w-full [&_iframe]:!w-full [&_iframe]:!mx-auto transition-transform active:scale-[0.99]">
         <div className="w-full flex justify-center">
           <GoogleLogin
-            shape="pill"
-            size="medium"
+            shape="rectangular"
+            size="large"
             text="continue_with"
             theme="outline"
             width="100%"
@@ -224,13 +230,13 @@ const LoginForm = () => {
       </div>
 
       {/* Footer Register Link */}
-      <p className="text-center text-sm text-muted-foreground pt-1">
-        Not a member?{" "}
+      <p className="text-center text-xs text-muted-foreground pt-1">
+        New to Adviso?{" "}
         <Link
           href="/register"
-          className="font-semibold text-orange-600 hover:text-orange-700 dark:text-orange-400 hover:underline"
+          className="font-semibold text-orange-600 hover:text-orange-700 dark:text-orange-400 hover:underline transition-colors"
         >
-          Register now
+          Create an account
         </Link>
       </p>
     </div>
