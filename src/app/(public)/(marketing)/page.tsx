@@ -1,3 +1,4 @@
+import BlogSection from "@/components/modules/homepage/BlogsSection";
 import FAQSection from "@/components/modules/homepage/FAQSection";
 import FeaturedMentors from "@/components/modules/homepage/FeaturedMentors";
 import HelpScopeSection from "@/components/modules/homepage/HelpScopeSection";
@@ -13,6 +14,7 @@ export default function Home() {
       <HelpScopeSection />
       <FeaturedMentors />
       <ProblemSolvingSteps/>
+      <BlogSection/>
       <FAQSection/>
     </div>
   );
