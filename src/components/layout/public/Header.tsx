@@ -12,6 +12,7 @@ import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useGetMe, useLogout } from "@/hooks";
 import { cn } from "@/lib/utils";
+import { ThemeToggleButton } from "./ThemeToggleButton";
 
 const routes = [
   { name: "Mentors", url: "/mentors" },
@@ -69,8 +70,14 @@ const Header = () => {
           })}
         </nav>
 
+            <ThemeToggleButton/>
+
+
         {/* Auth / Action Controls */}
         <div className="flex items-center gap-3">
+
+
+
           {isLoading ? (
             <Skeleton className="h-10 w-24 rounded-full bg-muted" />
           ) : !user ? (

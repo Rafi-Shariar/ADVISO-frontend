@@ -2,11 +2,16 @@
 import React, { ReactNode } from "react";
 import QueryProvider from "./query.provider";
 import GoogleAuthProvider from "./google.provider";
+import { ThemeProvider } from "./ThemeProvider";
 
 const Providers = ({ children }: { children: ReactNode }) => {
   return (
     <GoogleAuthProvider>
-      <QueryProvider>{children}</QueryProvider>
+      <QueryProvider>
+        <ThemeProvider>
+          {children}
+        </ThemeProvider>
+        </QueryProvider>
     </GoogleAuthProvider>
   );
 };
