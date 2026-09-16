@@ -23,7 +23,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning className="h-full">
-      <body className={cn(josefin.className, "antialiased min-h-full")} suppressHydrationWarning>
+      <body
+        className={cn(josefin.className, "antialiased min-h-full")}
+        suppressHydrationWarning
+      >
         <Providers>
           {children}
           <Toaster />

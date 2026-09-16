@@ -1,3 +1,4 @@
+import FeaturedMentors from "@/components/modules/homepage/FeaturedMentors";
 import HelpScopeSection from "@/components/modules/homepage/HelpScopeSection";
 import HeroBanner from "@/components/modules/homepage/Hero";
 import { Button } from "@/components/ui/button";
@@ -7,7 +8,8 @@ export default function Home() {
   return (
     <div className="">
       <HeroBanner />
-      <HelpScopeSection/>
+      <HelpScopeSection />
+      <FeaturedMentors />
     </div>
   );
 }

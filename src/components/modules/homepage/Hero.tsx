@@ -4,12 +4,7 @@ import React, { useRef } from "react";
 import Link from "next/link";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-import {
-  ArrowRight,
-  TrendingUp,
-  ShieldCheck,
-
-} from "lucide-react";
+import { ArrowRight, TrendingUp, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import PlatformAnalytics from "./Analytics";
 
@@ -30,9 +25,9 @@ const defaultAnalytics = {
 };
 
 const mentors = [
-  { id:1, name: "Alex R.", role: "Staff Eng @ Meta", bg: "bg-orange-500" },
-  { id:2, name: "Sarah K.", role: "VP of Product", bg: "bg-zinc-800" },
-  { id:3, name: "Tariq M.", role: "Solutions Architect", bg: "bg-amber-600" },
+  { id: 1, name: "Alex R.", role: "Staff Eng @ Meta", bg: "bg-orange-500" },
+  { id: 2, name: "Sarah K.", role: "VP of Product", bg: "bg-zinc-800" },
+  { id: 3, name: "Tariq M.", role: "Solutions Architect", bg: "bg-amber-600" },
 ];
 
 export default function HeroBanner() {
@@ -187,7 +182,6 @@ export default function HeroBanner() {
                 <svg
                   viewBox="0 0 280 90"
                   fill="none"
-                  
                   className="w-full h-20 overflow-visible"
                 >
                   <line

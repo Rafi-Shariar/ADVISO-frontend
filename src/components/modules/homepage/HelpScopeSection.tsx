@@ -2,13 +2,13 @@
 
 import React from "react";
 import Link from "next/link";
-import { 
-  ArrowUpRight, 
-  Sparkles, 
-  Compass, 
-  Rocket, 
-  CheckCircle2, 
-  Layers 
+import {
+  ArrowUpRight,
+  Sparkles,
+  Compass,
+  Rocket,
+  CheckCircle2,
+  Layers,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -83,15 +83,14 @@ export default function HelpScopeSection() {
   return (
     <section className="w-full py-20 px-4 sm:px-6 lg:px-8 bg-background selection:bg-orange-500/20 selection:text-orange-600">
       <div className="max-w-7xl mx-auto space-y-12">
-        
         {/* Section Header */}
         <div className="text-center space-y-3 max-w-2xl mx-auto">
-         
-          <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-foreground font-sans">
+          <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-foreground ">
             What do you want help with?
           </h2>
           <p className="text-sm sm:text-base text-muted-foreground font-normal">
-            You don't need to have every answer right now. Pick an intent to kick off your trajectory.
+            You don't need to have every answer right now. Pick an intent to
+            kick off your trajectory.
           </p>
         </div>
 
@@ -104,7 +103,6 @@ export default function HelpScopeSection() {
             >
               {/* Card Header & Texts */}
               <div className="space-y-4">
-
                 <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-foreground leading-snug">
                   {card.title}
                 </h3>
@@ -122,7 +120,9 @@ export default function HelpScopeSection() {
                     <span className="text-[10px] font-mono text-muted-foreground uppercase tracking-wider">
                       Strategy Memo
                     </span>
-                    <div className={`size-6 rounded-full ${card.visual.avatarBg} text-white font-bold text-[10px] flex items-center justify-center`}>
+                    <div
+                      className={`size-6 rounded-full ${card.visual.avatarBg} text-white font-bold text-[10px] flex items-center justify-center`}
+                    >
                       {card.visual.avatarInitials}
                     </div>
                   </div>
@@ -159,13 +159,9 @@ export default function HelpScopeSection() {
 
         {/* Quick Domain Pills Row (Enum Based) */}
         <div className=" flex flex-col items-center gap-4">
-        
           <div className="flex flex-wrap items-center justify-center gap-2 max-w-7xl">
             {popularDomains.map((domain) => (
-              <Link
-                key={domain.key}
-                href={`/mentors?domain=${domain.key}`}
-              >
+              <Link key={domain.key} href={`/mentors?domain=${domain.key}`}>
                 <Button
                   variant="outline"
                   size="sm"
@@ -177,7 +173,6 @@ export default function HelpScopeSection() {
             ))}
           </div>
         </div>
-
       </div>
     </section>
   );

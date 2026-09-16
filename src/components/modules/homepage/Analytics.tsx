@@ -20,7 +20,7 @@ export const PlatformAnalytics = ({ analytics }: AnalyticsProps) => {
 
   const stats = [
     {
-        id : 1,
+      id: 1,
       label: "Active Members",
       value: data?.totalUsers ?? analytics?.totalUsers ?? 2,
       suffix: "+",
@@ -28,7 +28,7 @@ export const PlatformAnalytics = ({ analytics }: AnalyticsProps) => {
       isFloat: false,
     },
     {
-        id : 2,
+      id: 2,
       label: "Verified Mentors",
       value: data?.totalMentors ?? analytics?.totalMentors ?? 5,
       suffix: "+",
@@ -36,7 +36,7 @@ export const PlatformAnalytics = ({ analytics }: AnalyticsProps) => {
       isFloat: false,
     },
     {
-        id : 3,
+      id: 3,
       label: "Session Hours",
       value: data?.totalSessionHours ?? analytics?.totalSessionHours ?? 0,
       suffix: "h",
@@ -44,7 +44,7 @@ export const PlatformAnalytics = ({ analytics }: AnalyticsProps) => {
       isFloat: false,
     },
     {
-        id : 4,
+      id: 4,
       label: "Satisfaction Score",
       value: data?.averageReview ?? analytics?.averageReview ?? 0.0,
       suffix: "/5.0",
@@ -75,7 +75,7 @@ export const PlatformAnalytics = ({ analytics }: AnalyticsProps) => {
         });
       });
     },
-    { scope: containerRef, dependencies: [data, isLoading] }
+    { scope: containerRef, dependencies: [data, isLoading] },
   );
 
   return (
@@ -89,12 +89,11 @@ export const PlatformAnalytics = ({ analytics }: AnalyticsProps) => {
                 idx === 0
                   ? "md:pr-6"
                   : idx === stats.length - 1
-                  ? "md:pl-6"
-                  : "md:px-6"
+                    ? "md:pl-6"
+                    : "md:px-6"
               }`}
             >
               {/* Micro Status Label */}
-             
 
               {/* Counter / Value */}
               {isLoading ? (
