@@ -15,8 +15,7 @@ export interface IRegisterUser {
   password: string;
 }
 
-
 export interface IVerifyEmailPayload {
-	otp: string;
-	email: string;
+  otp: string;
+  email: string;
 }

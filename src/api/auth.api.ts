@@ -27,5 +27,8 @@ export const googleAuth = (payload: IGoogleLoginPayload) => {
 };
 
 export const verifyAccount = (payload: IVerifyEmailPayload) => {
-  return apiClient("/api/v1/auth/verify-email", { method: "POST", body: payload });
+  return apiClient("/api/v1/auth/verify-email", {
+    method: "POST",
+    body: payload,
+  });
 };

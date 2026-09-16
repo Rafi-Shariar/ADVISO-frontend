@@ -53,8 +53,12 @@ export default function SignUpPage() {
                 <Compass className="size-5" />
               </div>
               <div className="text-left">
-                <p className="text-xs font-semibold text-foreground">Accelerate Growth</p>
-                <p className="text-[11px] text-muted-foreground">Expert sessions tailored for you</p>
+                <p className="text-xs font-semibold text-foreground">
+                  Accelerate Growth
+                </p>
+                <p className="text-[11px] text-muted-foreground">
+                  Expert sessions tailored for you
+                </p>
               </div>
             </div>
 
@@ -64,8 +68,12 @@ export default function SignUpPage() {
                 <ShieldCheck className="size-5" />
               </div>
               <div className="text-left">
-                <p className="text-xs font-semibold text-foreground">Seamless Onboarding</p>
-                <p className="text-[11px] text-muted-foreground">Instant access upon OTP confirmation</p>
+                <p className="text-xs font-semibold text-foreground">
+                  Seamless Onboarding
+                </p>
+                <p className="text-[11px] text-muted-foreground">
+                  Instant access upon OTP confirmation
+                </p>
               </div>
             </div>
           </div>
@@ -77,7 +85,8 @@ export default function SignUpPage() {
             Take the driver&apos;s seat in your career path.
           </h2>
           <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
-            Gain direct access to proven mentors across 20+ specialized domains and achieve your target breakthroughs.
+            Gain direct access to proven mentors across 20+ specialized domains
+            and achieve your target breakthroughs.
           </p>
         </div>
       </div>

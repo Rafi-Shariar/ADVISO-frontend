@@ -40,7 +40,6 @@ export function useGoogleOAuth() {
   });
 }
 
-
 export function useVerifyAccount() {
   return useMutation({
     mutationFn: verifyAccount,

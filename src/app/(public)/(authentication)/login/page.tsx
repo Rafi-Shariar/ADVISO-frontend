@@ -7,11 +7,11 @@ export default function LoginPage() {
   return (
     <main className="min-h-svh w-full grid lg:grid-cols-12 bg-background relative overflow-hidden selection:bg-orange-500/20 selection:text-orange-600">
       {/* Background Micro-Dot Grid Pattern */}
-      <div 
-        className="absolute inset-0 opacity-[0.03] dark:opacity-[0.05] pointer-events-none" 
+      <div
+        className="absolute inset-0 opacity-[0.03] dark:opacity-[0.05] pointer-events-none"
         style={{
           backgroundImage: "radial-gradient(#ea580c 1px, transparent 1px)",
-          backgroundSize: "24px 24px"
+          backgroundSize: "24px 24px",
         }}
       />
 
@@ -53,8 +53,12 @@ export default function LoginPage() {
                 <Compass className="size-5" />
               </div>
               <div className="text-left">
-                <p className="text-xs font-semibold text-foreground">Strategic Guidance</p>
-                <p className="text-[11px] text-muted-foreground">1-on-1 Personalized Roadmaps</p>
+                <p className="text-xs font-semibold text-foreground">
+                  Strategic Guidance
+                </p>
+                <p className="text-[11px] text-muted-foreground">
+                  1-on-1 Personalized Roadmaps
+                </p>
               </div>
             </div>
 
@@ -64,8 +68,12 @@ export default function LoginPage() {
                 <ShieldCheck className="size-5" />
               </div>
               <div className="text-left">
-                <p className="text-xs font-semibold text-foreground">Secure Consultations</p>
-                <p className="text-[11px] text-muted-foreground">End-to-End Encrypted Sessions</p>
+                <p className="text-xs font-semibold text-foreground">
+                  Secure Consultations
+                </p>
+                <p className="text-[11px] text-muted-foreground">
+                  End-to-End Encrypted Sessions
+                </p>
               </div>
             </div>
           </div>
@@ -77,7 +85,8 @@ export default function LoginPage() {
             Empower your trajectory with expert perspective.
           </h2>
           <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
-            Gain clear, actionable guidance from industry authorities across 20+ specialized domains on Adviso.
+            Gain clear, actionable guidance from industry authorities across 20+
+            specialized domains on Adviso.
           </p>
         </div>
       </div>

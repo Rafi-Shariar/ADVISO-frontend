@@ -88,7 +88,7 @@ const LoginForm = () => {
             position: "top-right",
           });
         },
-      }
+      },
     );
   };
 
@@ -108,7 +108,8 @@ const LoginForm = () => {
             Welcome back
           </h1>
           <p className="text-xs text-muted-foreground max-w-xs mx-auto">
-            Log in to continue your mentorship journey and manage your consultations.
+            Log in to continue your mentorship journey and manage your
+            consultations.
           </p>
         </div>
       </div>

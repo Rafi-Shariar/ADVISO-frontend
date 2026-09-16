@@ -3,13 +3,13 @@
 import { useRouter, useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import { 
-  KeyRound, 
-  Clock, 
-  AlertTriangle, 
-  ArrowRight, 
-  UserPlus, 
-  MailCheck 
+import {
+  KeyRound,
+  Clock,
+  AlertTriangle,
+  ArrowRight,
+  UserPlus,
+  MailCheck,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -114,7 +114,7 @@ const VerifyAccountForm = () => {
           });
           setIsInvalid(true);
         },
-      }
+      },
     );
   };
 
@@ -152,7 +152,8 @@ const VerifyAccountForm = () => {
                 Code Expired
               </p>
               <p className="text-xs text-muted-foreground">
-                Your 5-minute validity window has lapsed. Please register again to generate a new verification code.
+                Your 5-minute validity window has lapsed. Please register again
+                to generate a new verification code.
               </p>
             </div>
             <Link href="/register" className="block pt-1">
@@ -171,7 +172,7 @@ const VerifyAccountForm = () => {
                 "inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border text-xs font-semibold backdrop-blur-md transition-colors",
                 timeLeft <= 60
                   ? "border-destructive/30 bg-destructive/5 text-destructive animate-pulse"
-                  : "border-orange-500/20 bg-orange-500/5 text-orange-600 dark:text-orange-400"
+                  : "border-orange-500/20 bg-orange-500/5 text-orange-600 dark:text-orange-400",
               )}
             >
               <Clock className="size-3.5" />
@@ -245,7 +246,10 @@ const VerifyAccountForm = () => {
                 <div className="text-center">
                   <FieldError
                     errors={[
-                      { message: "Please enter a valid 6-digit verification code." },
+                      {
+                        message:
+                          "Please enter a valid 6-digit verification code.",
+                      },
                     ]}
                   />
                 </div>
