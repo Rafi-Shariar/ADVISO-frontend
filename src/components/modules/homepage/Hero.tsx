@@ -30,9 +30,9 @@ const defaultAnalytics = {
 };
 
 const mentors = [
-  { name: "Alex R.", role: "Staff Eng @ Meta", bg: "bg-orange-500" },
-  { name: "Sarah K.", role: "VP of Product", bg: "bg-zinc-800" },
-  { name: "Tariq M.", role: "Solutions Architect", bg: "bg-amber-600" },
+  { id:1, name: "Alex R.", role: "Staff Eng @ Meta", bg: "bg-orange-500" },
+  { id:2, name: "Sarah K.", role: "VP of Product", bg: "bg-zinc-800" },
+  { id:3, name: "Tariq M.", role: "Solutions Architect", bg: "bg-amber-600" },
 ];
 
 export default function HeroBanner() {
@@ -173,7 +173,7 @@ export default function HeroBanner() {
           {/* Right Stacked Cards */}
           <div className="lg:col-span-4 flex flex-col gap-5 sm:gap-6">
             {/* Orange Trajectory Card */}
-            <div className="hero-side-card rounded-[12px] bg-gradient-to-br from-orange-500 to-orange-600 text-white p-8 sm:p-10 flex flex-col justify-between min-h-[310px] shadow-lg shadow-orange-500/20 relative overflow-hidden">
+            <div className="hero-side-card rounded-[12px] bg-linear-to-br from-orange-500 to-orange-600 text-white p-8 sm:p-10 flex flex-col justify-between min-h-[310px] shadow-lg shadow-orange-500/20 relative overflow-hidden">
               <div className="flex items-center justify-between z-10">
                 <h3 className="text-2xl font-bold tracking-tight leading-snug max-w-[180px]">
                   Book your 1-on-1 strategy call
@@ -258,7 +258,7 @@ export default function HeroBanner() {
             </div>
 
             {/* Dark Roster Card */}
-            <div className="hero-side-card rounded-[12px] bg-zinc-950 dark:bg-zinc-900 border border-zinc-800/80 p-8 sm:p-9 flex flex-col justify-between min-h-[20px] text-white shadow-sm relative overflow-hidden">
+            <div className="hero-side-card rounded-[12px] bg-zinc-950 dark:bg-zinc-900 border border-zinc-800/80 p-8 sm:p-9 flex flex-col justify-between min-h-55 text-white shadow-sm relative overflow-hidden">
               <div>
                 <h4 className="text-lg font-bold tracking-tight">
                   Consult with leaders
@@ -272,7 +272,7 @@ export default function HeroBanner() {
                 <div className="flex -space-x-3 overflow-hidden p-1">
                   {mentors.map((m, idx) => (
                     <div
-                      key={idx}
+                      key={m.id}
                       className={`size-10 rounded-full ${m.bg} border-2 border-zinc-950 flex items-center justify-center font-bold text-xs text-white shadow-md`}
                       title={`${m.name} - ${m.role}`}
                     >

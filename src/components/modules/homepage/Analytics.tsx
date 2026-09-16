@@ -20,6 +20,7 @@ export const PlatformAnalytics = ({ analytics }: AnalyticsProps) => {
 
   const stats = [
     {
+        id : 1,
       label: "Active Members",
       value: data?.totalUsers ?? analytics?.totalUsers ?? 2,
       suffix: "+",
@@ -27,6 +28,7 @@ export const PlatformAnalytics = ({ analytics }: AnalyticsProps) => {
       isFloat: false,
     },
     {
+        id : 2,
       label: "Verified Mentors",
       value: data?.totalMentors ?? analytics?.totalMentors ?? 5,
       suffix: "+",
@@ -34,6 +36,7 @@ export const PlatformAnalytics = ({ analytics }: AnalyticsProps) => {
       isFloat: false,
     },
     {
+        id : 3,
       label: "Session Hours",
       value: data?.totalSessionHours ?? analytics?.totalSessionHours ?? 0,
       suffix: "h",
@@ -41,6 +44,7 @@ export const PlatformAnalytics = ({ analytics }: AnalyticsProps) => {
       isFloat: false,
     },
     {
+        id : 4,
       label: "Satisfaction Score",
       value: data?.averageReview ?? analytics?.averageReview ?? 0.0,
       suffix: "/5.0",
@@ -80,7 +84,7 @@ export const PlatformAnalytics = ({ analytics }: AnalyticsProps) => {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-0 md:divide-x md:divide-border/40">
           {stats.map((stat, idx) => (
             <div
-              key={idx}
+              key={stat.id}
               className={`analytic-metric-box group flex flex-col justify-between ${
                 idx === 0
                   ? "md:pr-6"
