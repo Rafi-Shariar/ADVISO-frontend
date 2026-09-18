@@ -102,14 +102,22 @@ const Header = () => {
               </Link>
             );
           })}
-          {
-            currentUser && currentUser.role === "USER" ? 
+          {currentUser && currentUser.role === "USER" ? (
             <>
-            <Link key={1} href={'/apply-as-mentor'}>
-             <Button className="text-orange-600 rounded-full font-bold hover:bg-orange-600 hover:text-white px-4" variant={"outline"} size={'lg'}> Become a mentor</Button>
-            </Link>
-            </> : <></>
-          }
+              <Link key={1} href={"/apply-as-mentor"}>
+                <Button
+                  className="text-orange-600 rounded-full font-bold hover:bg-orange-600 hover:text-white px-4"
+                  variant={"outline"}
+                  size={"lg"}
+                >
+                  {" "}
+                  Become a mentor
+                </Button>
+              </Link>
+            </>
+          ) : (
+            <></>
+          )}
         </nav>
 
         {/* Right: Theme Toggle & User Profile / Login */}

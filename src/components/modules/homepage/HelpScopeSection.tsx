@@ -1,16 +1,8 @@
 "use client";
 
-import React from "react";
 import Link from "next/link";
-import {
-  ArrowUpRight,
-  Sparkles,
-  Compass,
-  Rocket,
-  CheckCircle2,
-  Layers,
-} from "lucide-react";
-import { Badge } from "@/components/ui/badge";
+import { ArrowUpRight, CheckCircle2 } from "lucide-react";
+
 import { Button } from "@/components/ui/button";
 
 // ডোমেন এনামের সাথে সম্পর্কিত স্ট্যাটিক ফিল্টার ট্যাগ
@@ -27,6 +19,7 @@ const popularDomains = [
 
 const helpCards = [
   {
+    id: 1,
     badge: "Career Advice",
     title: "Break through career plateaus & land target offers",
     description:
@@ -44,6 +37,7 @@ const helpCards = [
     },
   },
   {
+    id: 2,
     badge: "Global Migration",
     title: "Relocate abroad & crack international admissions",
     description:
@@ -61,6 +55,7 @@ const helpCards = [
     },
   },
   {
+    id: 3,
     badge: "Growth Marketing",
     title: "Scale customer acquisition & performance funnels",
     description:
@@ -98,7 +93,7 @@ export default function HelpScopeSection() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
           {helpCards.map((card, idx) => (
             <div
-              key={idx}
+              key={card.id}
               className={`rounded-[12px] ${card.cardBg} border border-border/40 p-7 sm:p-9 flex flex-col justify-between transition-all duration-300 hover:shadow-lg hover:-translate-y-1`}
             >
               {/* Card Header & Texts */}

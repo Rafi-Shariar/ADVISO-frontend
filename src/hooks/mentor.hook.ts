@@ -1,4 +1,3 @@
-
 import { getFeaturedMentors } from "@/api/mentor.api";
 import { useMutation, useQuery } from "@tanstack/react-query";
 
