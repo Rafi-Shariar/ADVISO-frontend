@@ -51,7 +51,7 @@ const Header = () => {
         profileURL:
           userData?.profileURL ||
           `https://ui-avatars.com/api/?name=${encodeURIComponent(
-            userData.name || "User"
+            userData.name || "User",
           )}&background=ea580c&color=fff&bold=true`,
       };
       setUser(stateData);
@@ -78,7 +78,6 @@ const Header = () => {
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="max-w-7xl mx-auto flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8 relative">
-        
         {/* Left: Brand Logo */}
         <div className="flex items-center">
           <Logo size="md" />
@@ -96,13 +95,21 @@ const Header = () => {
                   "text-sm font-medium transition-colors hover:text-orange-600 dark:hover:text-orange-400",
                   isActive
                     ? "text-orange-600 dark:text-orange-400 font-semibold"
-                    : "text-muted-foreground"
+                    : "text-muted-foreground",
                 )}
               >
                 {route.name}
               </Link>
             );
           })}
+          {
+            currentUser && currentUser.role === "USER" ? 
+            <>
+            <Link key={1} href={'/apply-as-mentor'}>
+             <Button className="text-orange-600 rounded-full font-bold hover:bg-orange-600 hover:text-white px-4" variant={"outline"} size={'lg'}> Become a mentor</Button>
+            </Link>
+            </> : <></>
+          }
         </nav>
 
         {/* Right: Theme Toggle & User Profile / Login */}
@@ -133,7 +140,7 @@ const Header = () => {
                       src={
                         activeUser.profileURL ||
                         `https://ui-avatars.com/api/?name=${encodeURIComponent(
-                          activeUser.name || "User"
+                          activeUser.name || "User",
                         )}&background=ea580c&color=fff&bold=true`
                       }
                       alt={activeUser.name || "User"}
@@ -165,7 +172,10 @@ const Header = () => {
                 <DropdownMenuSeparator className="bg-border/50" />
 
                 {/* Dashboard Option */}
-                <DropdownMenuItem asChild className="rounded-[8px] cursor-pointer">
+                <DropdownMenuItem
+                  asChild
+                  className="rounded-[8px] cursor-pointer"
+                >
                   <Link
                     href={activeUser.role === "ADMIN" ? "/admin" : "/dashboard"}
                     className="flex items-center gap-2 px-2.5 py-2 text-xs font-medium hover:text-orange-600 dark:hover:text-orange-400"
@@ -190,7 +200,6 @@ const Header = () => {
             </DropdownMenu>
           )}
         </div>
-
       </div>
     </header>
   );

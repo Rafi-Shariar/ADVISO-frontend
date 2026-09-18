@@ -61,15 +61,14 @@ export default function FAQSection() {
   return (
     <section className="w-full py-16 px-4 sm:px-6 lg:px-8  dark:bg-zinc-950 selection:bg-orange-500/20 selection:text-orange-600">
       <div className="max-w-4xl mx-auto space-y-10">
-        
         {/* Section Header */}
         <div className="text-center space-y-2 max-w-2xl mx-auto">
-          
           <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-foreground">
             Frequently Asked Questions
           </h2>
           <p className="text-xs sm:text-sm text-muted-foreground">
-            Everything you need to know about booking, sessions, and vetted mentorship standards.
+            Everything you need to know about booking, sessions, and vetted
+            mentorship standards.
           </p>
         </div>
 
@@ -147,7 +146,8 @@ export default function FAQSection() {
                 Have a unique query not covered here?
               </h4>
               <p className="text-[11px] text-muted-foreground">
-                Reach out directly to our team for platform or enterprise advisory setups.
+                Reach out directly to our team for platform or enterprise
+                advisory setups.
               </p>
             </div>
           </div>
@@ -163,7 +163,6 @@ export default function FAQSection() {
             </Button>
           </Link>
         </div>
-
       </div>
     </section>
   );

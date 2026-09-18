@@ -111,16 +111,15 @@ export default function BlogSection() {
       <div className="absolute top-0 right-1/4 w-96 h-96 bg-orange-500/[0.04] rounded-full blur-3xl pointer-events-none" />
 
       <div className="max-w-7xl mx-auto space-y-10 relative z-10">
-        
         {/* Section Header */}
         <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-4 border-b border-border/50 pb-5">
           <div className="space-y-2 max-w-xl">
-            
             <h2 className="text-2xl sm:text-4xl font-black tracking-tight text-foreground font-sans">
               Blogs from our expert
             </h2>
             <p className="text-xs sm:text-sm text-muted-foreground">
-              Deep-dive breakdowns, industry field manuals, and engineering leadership perspectives.
+              Deep-dive breakdowns, industry field manuals, and engineering
+              leadership perspectives.
             </p>
           </div>
 
@@ -165,8 +164,7 @@ export default function BlogSection() {
                     </span>
                     <span className="size-1 rounded-full bg-border" />
                     <span className="inline-flex items-center gap-1">
-                      <Clock className="size-3 text-orange-500" />
-                      5 min read
+                      <Clock className="size-3 text-orange-500" />5 min read
                     </span>
                   </div>
 
@@ -203,7 +201,6 @@ export default function BlogSection() {
             </Link>
           ))}
         </div>
-
       </div>
     </section>
   );

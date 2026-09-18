@@ -13,9 +13,9 @@ export default function Home() {
       <HeroBanner />
       <HelpScopeSection />
       <FeaturedMentors />
-      <ProblemSolvingSteps/>
-      <BlogSection/>
-      <FAQSection/>
+      <ProblemSolvingSteps />
+      <BlogSection />
+      <FAQSection />
     </div>
   );
 }

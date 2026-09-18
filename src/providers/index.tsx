@@ -8,10 +8,8 @@ const Providers = ({ children }: { children: ReactNode }) => {
   return (
     <GoogleAuthProvider>
       <QueryProvider>
-        <ThemeProvider>
-          {children}
-        </ThemeProvider>
-        </QueryProvider>
+        <ThemeProvider>{children}</ThemeProvider>
+      </QueryProvider>
     </GoogleAuthProvider>
   );
 };

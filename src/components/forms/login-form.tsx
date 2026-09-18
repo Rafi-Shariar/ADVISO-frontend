@@ -40,8 +40,6 @@ const LoginForm = () => {
             description: "Welcome back to ADVISO",
             position: "top-right",
           });
-
-
         },
 
         onError: (err: any) => {

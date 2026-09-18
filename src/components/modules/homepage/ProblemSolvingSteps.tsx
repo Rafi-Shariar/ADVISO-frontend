@@ -5,12 +5,12 @@ import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
-import { 
-  Search, 
-  CalendarCheck, 
-  Video, 
-  FileCheck2, 
-  ArrowRight 
+import {
+  Search,
+  CalendarCheck,
+  Video,
+  FileCheck2,
+  ArrowRight,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -35,7 +35,8 @@ const steps = [
     icon: CalendarCheck,
     title: "Book slot with upfront agenda",
     tagline: "Scheduling",
-    description: "Pick a time synced with their calendar and attach your problem brief.",
+    description:
+      "Pick a time synced with their calendar and attach your problem brief.",
     metric: "Instant Sync",
   },
   {
@@ -44,7 +45,8 @@ const steps = [
     icon: Video,
     title: "1-on-1 tactical deep dive",
     tagline: "Live Execution",
-    description: "30-min focused session for code audits, system design, or mock loops.",
+    description:
+      "30-min focused session for code audits, system design, or mock loops.",
     metric: "Real Takeaways",
   },
   {
@@ -53,7 +55,8 @@ const steps = [
     icon: FileCheck2,
     title: "Execute with crystal clarity",
     tagline: "Action Plan",
-    description: "Leave with actionable notes and a focused roadmap to remove blockers.",
+    description:
+      "Leave with actionable notes and a focused roadmap to remove blockers.",
     metric: "Measurable Impact",
   },
 ];
@@ -111,7 +114,7 @@ export default function ProblemSolvingSteps() {
         });
       });
     },
-    { scope: sectionRef }
+    { scope: sectionRef },
   );
 
   return (
@@ -120,10 +123,8 @@ export default function ProblemSolvingSteps() {
       className="w-full py-14 px-4 sm:px-6 lg:px-8 bg-[#FBFBFB] dark:bg-zinc-950 selection:bg-orange-500/20 selection:text-orange-600 relative overflow-hidden"
     >
       <div className="max-w-4xl mx-auto space-y-10">
-        
         {/* Section Header */}
         <div className="text-center space-y-2 mx-auto">
-        
           <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-foreground">
             One step to solve your problem
           </h2>
@@ -134,7 +135,6 @@ export default function ProblemSolvingSteps() {
 
         {/* Timeline Grid */}
         <div className="relative">
-          
           {/* Central Progress Line */}
           <div className="hidden md:block absolute left-1/2 -translate-x-1/2 top-2 bottom-4 w-[2px] bg-border/40">
             <div
@@ -191,12 +191,17 @@ export default function ProblemSolvingSteps() {
                   </div>
 
                   {/* Empty Counterpart Spacer */}
-                  <div className={isLeft ? "hidden md:block md:order-2" : "hidden md:block md:order-1"} />
+                  <div
+                    className={
+                      isLeft
+                        ? "hidden md:block md:order-2"
+                        : "hidden md:block md:order-1"
+                    }
+                  />
                 </div>
               );
             })}
           </div>
-
         </div>
 
         {/* CTA */}
@@ -211,7 +216,6 @@ export default function ProblemSolvingSteps() {
             </Button>
           </Link>
         </div>
-
       </div>
     </section>
   );
