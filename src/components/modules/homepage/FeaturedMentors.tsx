@@ -15,163 +15,18 @@ import {
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { useFeaturedMentors } from "@/hooks/mentor.hook";
+import { IMentorProfile } from "@/types/mentor.type";
+import { MentorCardSkeleton } from "../mentor/MentorCardSkeleton";
 
-const PROFILE_IMG =
-  "https://res.cloudinary.com/ps64ygxj/image/upload/v1785322858/zaov3mdclr3soa9opakt.jpg";
-
-export interface MentorData {
-  mentorId: string;
-  headline: string;
-  bio: string;
-  yearOfExperience: number;
-  expertiseTags: string[];
-  linkedinURL: string;
-  professionalDomain: string;
-  sessionCharge: string;
-  averageRatings: string;
-  totalReviews: number;
-  user: {
-    name: string;
-    profileURL: string;
-  };
-}
-
-const mockMentors: MentorData[] = [
-  {
-    mentorId: "1",
-    headline: "Lead Architect & Cloud Consultant",
-    bio: "10+ years architecting fault-tolerant cloud infrastructures on AWS and GCP.",
-    yearOfExperience: 10,
-    expertiseTags: ["AWS", "System Design", "Microservices"],
-    linkedinURL: "https://linkedin.com",
-    professionalDomain: "Software Engineering",
-    sessionCharge: "50",
-    averageRatings: "4.95",
-    totalReviews: 42,
-    user: { name: "Tahmid Rahman", profileURL: PROFILE_IMG },
-  },
-  {
-    mentorId: "2",
-    headline: "Principal Product Manager @ FinTech",
-    bio: "Ex-Stripe PM helping early and mid-level product managers crack product sense.",
-    yearOfExperience: 8,
-    expertiseTags: ["Product Sense", "Roadmapping", "Growth"],
-    linkedinURL: "https://linkedin.com",
-    professionalDomain: "Product Management",
-    sessionCharge: "65",
-    averageRatings: "5.00",
-    totalReviews: 31,
-    user: { name: "Sabrina Hossain", profileURL: PROFILE_IMG },
-  },
-  {
-    mentorId: "3",
-    headline: "Staff Frontend Engineer & Systems",
-    bio: "Specialized in scalable Next.js architectures and design systems.",
-    yearOfExperience: 9,
-    expertiseTags: ["Next.js", "TypeScript", "Performance"],
-    linkedinURL: "https://linkedin.com",
-    professionalDomain: "Software Engineering",
-    sessionCharge: "55",
-    averageRatings: "4.92",
-    totalReviews: 54,
-    user: { name: "Zubair Al Mahmud", profileURL: PROFILE_IMG },
-  },
-  {
-    mentorId: "4",
-    headline: "Senior UX Designer & Strategist",
-    bio: "Portfolio reviews and design interview readiness for global agencies.",
-    yearOfExperience: 6,
-    expertiseTags: ["Figma", "UX Research", "Prototyping"],
-    linkedinURL: "https://linkedin.com",
-    professionalDomain: "UI/UX Design",
-    sessionCharge: "40",
-    averageRatings: "4.88",
-    totalReviews: 24,
-    user: { name: "Ayesha Anika", profileURL: PROFILE_IMG },
-  },
-  {
-    mentorId: "5",
-    headline: "AI Research Scientist & MLOps Lead",
-    bio: "Guiding ML practitioners from model exploration to production LLMs.",
-    yearOfExperience: 7,
-    expertiseTags: ["LLMs", "PyTorch", "MLOps"],
-    linkedinURL: "https://linkedin.com",
-    professionalDomain: "Data Science & AI",
-    sessionCharge: "70",
-    averageRatings: "4.98",
-    totalReviews: 29,
-    user: { name: "Dr. Farhan Tanvir", profileURL: PROFILE_IMG },
-  },
-  {
-    mentorId: "6",
-    headline: "VP of Growth & Performance Marketing",
-    bio: "Helping startups build high-efficiency performance marketing channels.",
-    yearOfExperience: 11,
-    expertiseTags: ["Paid Ads", "SEO", "Attribution"],
-    linkedinURL: "https://linkedin.com",
-    professionalDomain: "Digital Marketing",
-    sessionCharge: "60",
-    averageRatings: "4.90",
-    totalReviews: 44,
-    user: { name: "Nabila Karim", profileURL: PROFILE_IMG },
-  },
-  {
-    mentorId: "7",
-    headline: "Head of Talent & Tech Recruiter",
-    bio: "Resume positioning and compensation negotiation tactics.",
-    yearOfExperience: 8,
-    expertiseTags: ["Hiring", "Resume Audit", "Negotiation"],
-    linkedinURL: "https://linkedin.com",
-    professionalDomain: "Career & Job Search",
-    sessionCharge: "45",
-    averageRatings: "4.97",
-    totalReviews: 68,
-    user: { name: "Kamrul Hasan", profileURL: PROFILE_IMG },
-  },
-  {
-    mentorId: "8",
-    headline: "Senior Engineering Manager",
-    bio: "Mentoring engineers navigating management tracks and high-impact OKRs.",
-    yearOfExperience: 12,
-    expertiseTags: ["Leadership", "Strategy", "1-on-1s"],
-    linkedinURL: "https://linkedin.com",
-    professionalDomain: "Leadership & Management",
-    sessionCharge: "75",
-    averageRatings: "4.94",
-    totalReviews: 36,
-    user: { name: "Sajid Imtiaz", profileURL: PROFILE_IMG },
-  },
-  {
-    mentorId: "9",
-    headline: "Immigration Advisor & Admissions",
-    bio: "Guiding students and professionals on grad admissions and EU visas.",
-    yearOfExperience: 6,
-    expertiseTags: ["Scholarships", "SOP Review", "EU Visas"],
-    linkedinURL: "https://linkedin.com",
-    professionalDomain: "Higher Education",
-    sessionCharge: "35",
-    averageRatings: "4.89",
-    totalReviews: 50,
-    user: { name: "Tasneem Ahmed", profileURL: PROFILE_IMG },
-  },
-  {
-    mentorId: "10",
-    headline: "Cybersecurity Lead & SecOps",
-    bio: "Advising engineers on cloud compliance and defensive security architecture.",
-    yearOfExperience: 9,
-    expertiseTags: ["AppSec", "Cloud Security", "Penetration"],
-    linkedinURL: "https://linkedin.com",
-    professionalDomain: "Cybersecurity",
-    sessionCharge: "60",
-    averageRatings: "4.96",
-    totalReviews: 28,
-    user: { name: "Mahir Faysal", profileURL: PROFILE_IMG },
-  },
-];
 
 export default function FeaturedMentors() {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [isPaused, setIsPaused] = useState(false);
+
+  const {data, isPending} = useFeaturedMentors();
+
+  const mentors : IMentorProfile[] = data?.data || []
 
   const scroll = useCallback((direction: "left" | "right") => {
     const container = scrollContainerRef.current;
@@ -196,7 +51,6 @@ export default function FeaturedMentors() {
     }
   }, []);
 
-  // প্রতি ২.৫ সেকেন্ড পরপর অটো-স্লাইড (ইউজার হোভার করলে পজ থাকবে)
   useEffect(() => {
     if (isPaused) return;
 
@@ -246,14 +100,25 @@ export default function FeaturedMentors() {
         </div>
 
         {/* Horizontal Carousel (Single Line Row) */}
-        <div
+        <div>
+          {
+            isPending ? 
+            <div  className="flex gap-4 overflow-x-auto scrollbar-none scroll-smooth pb-4 pt-1 snap-x snap-mandatory">
+              {
+                [1,2,3,4,5].map((i)=> {
+                  return <div key={i}><MentorCardSkeleton/></div>
+                })
+              }
+            </div>
+            :
+             <div
           ref={scrollContainerRef}
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
           className="flex gap-4 overflow-x-auto scrollbar-none scroll-smooth pb-4 pt-1 snap-x snap-mandatory"
           style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
         >
-          {mockMentors.map((mentor) => (
+          {mentors.map((mentor) => (
             <Link
               key={mentor.mentorId}
               href={`/mentors/${mentor.mentorId}`}
@@ -312,6 +177,9 @@ export default function FeaturedMentors() {
             </Link>
           ))}
         </div>
+          }
+        </div>
+
 
         {/* Bottom CTA Button */}
         <div className="flex justify-center pt-2">
