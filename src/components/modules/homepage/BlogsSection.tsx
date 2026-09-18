@@ -5,25 +5,14 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight, Calendar, Clock } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import { useFeaturedBlogs } from "@/hooks";
+import { BlogItem } from "@/types/blog.types";
+import { BlogCardSkeleton } from "../blog/BlogCardSkeleton";
 
 const BANNER_IMAGE =
   "https://res.cloudinary.com/ps64ygxj/image/upload/v1788634719/blogs/foshd3gmuoooe7dsdunz.jpg";
 
-export interface BlogItem {
-  blogId: string;
-  title: string;
-  content: string;
-  bannerImage: string;
-  createdAt: string;
-  mentor: {
-    mentorId: string;
-    headline: string;
-    user: {
-      name: string;
-      profileURL: string;
-    };
-  };
-}
+
 
 const mockBlogs: BlogItem[] = [
   {
@@ -97,6 +86,14 @@ const mockBlogs: BlogItem[] = [
 ];
 
 export default function BlogSection() {
+
+  const {data, isPending} = useFeaturedBlogs()
+
+  const blogs : BlogItem[]= data?.data || []
+
+  console.log(blogs);
+  
+    
   const formatDate = (isoString: string) => {
     return new Date(isoString).toLocaleDateString("en-US", {
       month: "short",
@@ -127,14 +124,21 @@ export default function BlogSection() {
             href="/blogs"
             className="group inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-muted-foreground hover:text-orange-600 dark:hover:text-orange-400 transition-colors self-end sm:self-auto"
           >
-            <span>Read All Posts</span>
+            <span>More Blogs</span>
             <ArrowUpRight className="size-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
           </Link>
         </div>
 
-        {/* 2x2 Clean Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 lg:gap-6">
-          {mockBlogs.map((blog) => (
+        <div>
+          {
+            isPending ? 
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5 lg:gap-6">
+              <BlogCardSkeleton/>
+              <BlogCardSkeleton/>
+
+            </div> : 
+             <div className="grid grid-cols-1 md:grid-cols-2 gap-5 lg:gap-6">
+          {blogs.map((blog) => (
             <Link
               key={blog.blogId}
               href={`/blogs/${blog.blogId}`}
@@ -201,6 +205,10 @@ export default function BlogSection() {
             </Link>
           ))}
         </div>
+          }
+        </div>
+
+       
       </div>
     </section>
   );
