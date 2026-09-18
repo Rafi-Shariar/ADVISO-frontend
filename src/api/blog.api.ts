@@ -7,3 +7,7 @@ export const getFeaturedBlogs = () => {
 export const getAllBlogsPublic = () => {
   return apiClient("/api/v1/blog");
 };
+
+export const getBlogDetails = (id: string) => {
+  return apiClient(`/api/v1/blog/${id}`);
+};

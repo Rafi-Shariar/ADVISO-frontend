@@ -3,7 +3,7 @@ import React from "react";
 
 const BlogsPage = () => {
   return (
-    <div className="max-w-7xl mx-auto mt-16">
+    <div className="max-w-7xl mx-auto mt-16 px-2">
       {/* header */}
       <div className="text-center space-y-3 max-w-2xl mx-auto">
         <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-foreground ">
