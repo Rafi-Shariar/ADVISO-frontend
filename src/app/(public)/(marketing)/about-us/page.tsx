@@ -58,7 +58,8 @@ export default function AboutPage() {
       {/* ১. Hero Section */}
       <section className="space-y-8 text-center max-w-3xl mx-auto">
         <h1 className="text-3xl sm:text-5xl font-extrabold text-foreground tracking-tight leading-tight">
-          Empowering <span className="text-orange-500">Ambition</span> Through Dedicated <span className="text-orange-500">Guidance.</span>
+          Empowering <span className="text-orange-500">Ambition</span> Through
+          Dedicated <span className="text-orange-500">Guidance.</span>
         </h1>
 
         <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">

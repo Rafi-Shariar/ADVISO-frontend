@@ -38,7 +38,8 @@ export const PlatformAnalytics = ({ analytics }: AnalyticsProps) => {
     {
       id: 3,
       label: "Session Hours",
-      value: data?.data.totalSessionHours ?? data?.data.totalSessionHours ?? 133,
+      value:
+        data?.data.totalSessionHours ?? data?.data.totalSessionHours ?? 133,
       suffix: "h",
       code: "ENG_TIME",
       isFloat: false,

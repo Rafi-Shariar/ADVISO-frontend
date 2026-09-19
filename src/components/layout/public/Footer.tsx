@@ -103,7 +103,7 @@ export default function Footer() {
                   ADVISO
                 </span>
               </Link> */}
-              <Logo textClassName="text-white text-2xl font-semibold"/>
+              <Logo textClassName="text-white text-2xl font-semibold" />
               <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed max-w-sm">
                 A modern mentorship and career engineering ecosystem. Connect
                 1-on-1 with industry practitioners for tactical guidance.

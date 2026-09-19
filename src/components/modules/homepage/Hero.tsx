@@ -7,6 +7,7 @@ import { useGSAP } from "@gsap/react";
 import { ArrowRight, TrendingUp, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import PlatformAnalytics from "./Analytics";
+import Image from "next/image";
 
 interface HeroBannerProps {
   analytics?: {
@@ -25,9 +26,30 @@ const defaultAnalytics = {
 };
 
 const mentors = [
-  { id: 1, name: "Alex R.", role: "Staff Eng @ Meta", bg: "bg-orange-500" },
-  { id: 2, name: "Sarah K.", role: "VP of Product", bg: "bg-zinc-800" },
-  { id: 3, name: "Tariq M.", role: "Solutions Architect", bg: "bg-amber-600" },
+  {
+    id: 1,
+    name: "Alex R.",
+    role: "Staff Eng @ Meta",
+    bg: "bg-orange-500",
+    profile:
+      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=400&q=80",
+  },
+  {
+    id: 2,
+    name: "Sarah K.",
+    role: "VP of Product",
+    bg: "bg-zinc-800",
+    profile:
+      "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=400&q=80",
+  },
+  {
+    id: 3,
+    name: "Tariq M.",
+    role: "Solutions Architect",
+    bg: "bg-amber-600",
+    profile:
+      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&q=80",
+  },
 ];
 
 export default function HeroBanner() {
@@ -253,7 +275,7 @@ export default function HeroBanner() {
             </div>
 
             {/* Dark Roster Card */}
-            <div className="hero-side-card rounded-[12px] bg-zinc-950 dark:bg-zinc-900 border border-zinc-800/80 p-8 sm:p-9 flex flex-col justify-between min-h-55 text-white shadow-sm relative overflow-hidden">
+            <div className="hero-side-card rounded-[12px] bg-zinc-800 dark:bg-zinc-900 border border-zinc-800/80 p-8 sm:p-9 flex flex-col justify-between min-h-55 text-white shadow-sm relative overflow-hidden">
               <div>
                 <h4 className="text-lg font-bold tracking-tight">
                   Consult with leaders
@@ -265,17 +287,27 @@ export default function HeroBanner() {
 
               <div className="flex items-center gap-4 mt-6">
                 <div className="flex -space-x-3 overflow-hidden p-1">
-                  {mentors.map((m, idx) => (
+                  {mentors.map((m) => (
                     <div
                       key={m.id}
-                      className={`size-10 rounded-full ${m.bg} border-2 border-zinc-950 flex items-center justify-center font-bold text-xs text-white shadow-md`}
-                      title={`${m.name} - ${m.role}`}
+                      className="relative size-10 rounded-full overflow-hidden bg-muted border border-border/60"
                     >
-                      {m.name.charAt(0)}
+                      <Image
+                        src={
+                          m.profile ||
+                          `https://ui-avatars.com/api/?name=${encodeURIComponent(
+                            m.name || "User",
+                          )}&background=ea580c&color=fff&bold=true`
+                        }
+                        alt={m.name || "User"}
+                        fill
+                        sizes="32px"
+                        className="object-cover"
+                      />
                     </div>
                   ))}
-                  <div className="size-10 rounded-full bg-zinc-800 border-2 border-zinc-950 flex items-center justify-center text-[11px] font-bold text-zinc-300">
-                    +500
+                  <div className="size-10 rounded-full bg-orange-500 border-2 border-zinc-950 flex items-center justify-center text-[11px] font-bold text-zinc-300">
+                    <span className="ml-2 font-semibold">10+</span>
                   </div>
                 </div>
 
