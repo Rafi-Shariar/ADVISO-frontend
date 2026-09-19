@@ -4,6 +4,7 @@ import React from "react";
 import Link from "next/link";
 import { ArrowUpRight, Send, Sparkles, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import Logo from "./Logo";
 
 const navigationLinks = {
   platform: [
@@ -94,14 +95,15 @@ export default function Footer() {
           {/* Brand Column & Newsletter */}
           <div className="md:col-span-4 space-y-6">
             <div className="space-y-3">
-              <Link href="/" className="inline-flex items-center gap-2">
+              {/* <Link href="/" className="inline-flex items-center gap-2">
                 <span className="size-8 rounded-[8px] bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center text-white font-black text-base shadow-sm">
                   A
                 </span>
                 <span className="text-xl font-black tracking-tight text-white font-sans">
                   ADVISO
                 </span>
-              </Link>
+              </Link> */}
+              <Logo textClassName="text-white text-2xl font-semibold"/>
               <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed max-w-sm">
                 A modern mentorship and career engineering ecosystem. Connect
                 1-on-1 with industry practitioners for tactical guidance.

@@ -22,7 +22,7 @@ export const PlatformAnalytics = ({ analytics }: AnalyticsProps) => {
     {
       id: 1,
       label: "Active Members",
-      value: data?.totalUsers ?? analytics?.totalUsers ?? 2,
+      value: data?.data.totalUsers ?? data?.data.totalUsers ?? 100,
       suffix: "+",
       code: "ACT_MEM",
       isFloat: false,
@@ -30,7 +30,7 @@ export const PlatformAnalytics = ({ analytics }: AnalyticsProps) => {
     {
       id: 2,
       label: "Verified Mentors",
-      value: data?.totalMentors ?? analytics?.totalMentors ?? 5,
+      value: data?.data.totalMentors ?? data?.data.totalMentors ?? 60,
       suffix: "+",
       code: "EXP_VET",
       isFloat: false,
@@ -38,7 +38,7 @@ export const PlatformAnalytics = ({ analytics }: AnalyticsProps) => {
     {
       id: 3,
       label: "Session Hours",
-      value: data?.totalSessionHours ?? analytics?.totalSessionHours ?? 0,
+      value: data?.data.totalSessionHours ?? data?.data.totalSessionHours ?? 133,
       suffix: "h",
       code: "ENG_TIME",
       isFloat: false,
@@ -46,7 +46,7 @@ export const PlatformAnalytics = ({ analytics }: AnalyticsProps) => {
     {
       id: 4,
       label: "Satisfaction Score",
-      value: data?.averageReview ?? analytics?.averageReview ?? 0.0,
+      value: data?.data.averageReview ?? data?.data.averageReview ?? 0.0,
       suffix: "/5.0",
       code: "AVG_SAT",
       isFloat: true,

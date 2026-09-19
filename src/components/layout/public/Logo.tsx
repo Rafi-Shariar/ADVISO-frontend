@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils";
 interface LogoProps {
   className?: string;
   imageClassName?: string;
+  textClassName?: string; // নতুন prop যোগ করা হলো
   showText?: boolean;
   size?: "sm" | "md" | "lg";
 }
@@ -20,6 +21,7 @@ const sizeMap = {
 const Logo = ({
   className,
   imageClassName,
+  textClassName, // এখানে রিসিভ করুন
   showText = true,
   size = "lg",
 }: LogoProps) => {
@@ -47,6 +49,7 @@ const Logo = ({
           className={cn(
             "font-extrabold tracking-tight text-foreground font-sans",
             currentSize.text,
+            textClassName, // cn ফাংশনের ভেতরে এটি পাস করে দিন
           )}
         >
           ADVISO

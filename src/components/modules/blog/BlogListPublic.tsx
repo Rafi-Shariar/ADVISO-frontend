@@ -12,7 +12,7 @@ const BlogListPublic = () => {
   const blogs: BlogItem[] = data?.data?.data || [];
 
   return (
-    <div className="mt-6 bg-orange-50 p-3 lg:p-6 rounded-[12px]">
+    <div className="mt-6 bg-orange-50 dark:bg-zinc-900 p-3 lg:p-6 rounded-[12px]">
       <div>
         {isPending ? (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5 lg:gap-6">

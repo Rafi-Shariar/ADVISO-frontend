@@ -16,7 +16,7 @@ const BlogsPage = () => {
         </p>
       </div>
 
-      <div>
+      <div className="pb-16">
         <BlogListPublic />
       </div>
     </div>
