@@ -8,7 +8,7 @@ export const ReviewCardSkeleton = () => {
         {/* Rating Stars Skeleton */}
         <div className="flex items-center gap-1.5">
           <div className="flex gap-1">
-            {[1,2,3,4,5].map((n, i) => (
+            {[1, 2, 3, 4, 5].map((n, i) => (
               <Skeleton key={n} className="size-3.5 rounded-[4px]" />
             ))}
           </div>

@@ -19,3 +19,5 @@ export interface IVerifyEmailPayload {
   otp: string;
   email: string;
 }
+
+export type UserRole = "ADMIN" | "USER" | "MENTOR" | "SUPER_ADMIN";

@@ -1,7 +1,8 @@
-import React from "react";
+import AuthGuard from '@/components/auth/auth-guard';
+import React, { ReactNode } from 'react';
 
-const DashbaordLayout = () => {
-  return <div>this is dashbaord layout</div>;
+const layout = ({children} : {children : ReactNode}) => {
+  return <AuthGuard> {children}</AuthGuard>
 };
 
-export default DashbaordLayout;
+export default layout;

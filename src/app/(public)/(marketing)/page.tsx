@@ -15,9 +15,8 @@ export default function Home() {
       <HelpScopeSection />
       <FeaturedMentors />
       <ProblemSolvingSteps />
-      <ReviewSection/>
+      <ReviewSection />
       <BlogSection />
-      
       <FAQSection />
     </div>
   );

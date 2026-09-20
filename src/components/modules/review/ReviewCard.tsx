@@ -2,9 +2,8 @@ import { IReview } from "@/types/review.type";
 import { Star } from "lucide-react";
 import Image from "next/image";
 
-
 interface ReviewCardProps {
-    review : IReview
+  review: IReview;
 }
 export const ReviewCard = ({ review }: ReviewCardProps) => {
   const ratingValue = parseFloat(review.ratings) || 5;
@@ -15,7 +14,7 @@ export const ReviewCard = ({ review }: ReviewCardProps) => {
         {/* Rating Stars & Numeric Value */}
         <div className="flex items-center gap-1.5">
           <div className="flex items-center gap-0.5">
-            {[1,2,3,4,5].map((n, i) => (
+            {[1, 2, 3, 4, 5].map((n, i) => (
               <Star
                 key={n}
                 className={`size-3.5 ${
@@ -44,7 +43,7 @@ export const ReviewCard = ({ review }: ReviewCardProps) => {
             src={
               review.session?.user?.profileURL ||
               `https://ui-avatars.com/api/?name=${encodeURIComponent(
-                review.session?.user?.name || "User"
+                review.session?.user?.name || "User",
               )}&background=ea580c&color=fff&bold=true`
             }
             alt={review.session?.user?.name || "User"}
