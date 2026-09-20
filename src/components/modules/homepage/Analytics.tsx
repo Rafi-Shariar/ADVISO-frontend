@@ -3,7 +3,7 @@
 import React, { useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-import { usePublicStats } from "@/hooks/public.hook";
+import { usePublicStats } from "@/hooks/analytics.hook";
 
 interface AnalyticsProps {
   analytics?: {
