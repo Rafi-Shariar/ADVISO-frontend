@@ -75,6 +75,7 @@ const Header = () => {
 
   const activeUser = currentUser || user?.data;
 
+
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="max-w-7xl mx-auto flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8 relative">
@@ -185,7 +186,7 @@ const Header = () => {
                   className="rounded-[8px] cursor-pointer"
                 >
                   <Link
-                    href={activeUser.role === "ADMIN" ? "/admin" : "/dashboard"}
+                    href={'/admin'}
                     className="flex items-center gap-2 px-2.5 py-2 text-xs font-medium hover:text-orange-600 dark:hover:text-orange-400"
                   >
                     <LayoutDashboard className="size-3.5" />

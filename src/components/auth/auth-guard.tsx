@@ -9,7 +9,7 @@ const AuthGuard = ({ children }: { children: ReactNode }) => {
 
   const { data, isPending, isError } = useGetMe();
 
-  const user = data?.user;
+  const user = data?.data;
 
   useEffect(() => {
     if (isPending) {

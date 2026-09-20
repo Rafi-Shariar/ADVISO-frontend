@@ -1,7 +1,7 @@
 import RoleGuard from '@/components/auth/role-guard';
 import React, { ReactNode } from 'react';
 
-const UserLayout = ({children} : {children : ReactNode}) => {
+const layout = ({children} : {children : ReactNode}) => {
     return (
         <RoleGuard roles={["USER"]}>
             {children}
@@ -9,4 +9,4 @@ const UserLayout = ({children} : {children : ReactNode}) => {
     );
 };
 
-export default UserLayout;
+export default layout;

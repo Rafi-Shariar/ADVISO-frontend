@@ -4,6 +4,7 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 import Providers from "@/providers";
 import { Toaster } from "sonner";
+import { TooltipProvider } from "@/components/ui/tooltip";
 
 const josefin = Nunito({
   subsets: ["latin"],
@@ -28,8 +29,10 @@ export default function RootLayout({
         suppressHydrationWarning
       >
         <Providers>
+          <TooltipProvider>
           {children}
           <Toaster />
+          </TooltipProvider>
         </Providers>
       </body>
     </html>
