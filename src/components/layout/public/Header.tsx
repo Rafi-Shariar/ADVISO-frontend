@@ -186,7 +186,7 @@ const Header = () => {
                   className="rounded-[8px] cursor-pointer"
                 >
                   <Link
-                    href={'/admin'}
+                    href={'/user'}
                     className="flex items-center gap-2 px-2.5 py-2 text-xs font-medium hover:text-orange-600 dark:hover:text-orange-400"
                   >
                     <LayoutDashboard className="size-3.5" />

@@ -16,6 +16,7 @@ import Logo from "../layout/public/Logo"
 import { UserRole } from "@/types/auth.type"
 import { adminRoutes, mentorRoutes, userRoutes } from "@/routes"
 import { SidebarItems } from "@/types/sidebar.type"
+import { usePathname } from "next/navigation"
 
 
 
@@ -29,6 +30,7 @@ const sidebarRoutes : Record<UserRole, SidebarItems> = {
 export function DashbaordSidebar({role} : {role : UserRole}) {
 
   const routes : SidebarItems = sidebarRoutes[role]
+  const pathname = usePathname()
   return (
     <Sidebar >
       <SidebarHeader>
@@ -43,9 +45,9 @@ export function DashbaordSidebar({role} : {role : UserRole}) {
               <SidebarMenu>
                 {item.items.map((item) => (
                   <SidebarMenuItem key={item.title}>
-                    {/* <SidebarMenuButton asChild isActive={item.isActive}>
+                    <SidebarMenuButton asChild isActive={item.url === pathname}>
                       <a href={item.url}>{item.title}</a>
-                    </SidebarMenuButton> */}
+                    </SidebarMenuButton>
                   </SidebarMenuItem>
                 ))}
               </SidebarMenu>

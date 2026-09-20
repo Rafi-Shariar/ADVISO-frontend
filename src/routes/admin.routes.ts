@@ -18,7 +18,7 @@ export const adminRoutes = [
       ],
     },
     {
-      title: "Profile",
+      title: "Settings",
       url: "#",
       items: [
         {
