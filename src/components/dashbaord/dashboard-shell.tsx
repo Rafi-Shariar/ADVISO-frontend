@@ -1,38 +1,39 @@
-
-
-import { Separator } from "@/components/ui/separator"
+import { Separator } from "@/components/ui/separator";
 import {
   SidebarInset,
   SidebarProvider,
   SidebarTrigger,
-} from "@/components/ui/sidebar"
-import { DashbaordSidebar } from "./dashboard-sidebar"
-import { ReactNode } from "react"
-import { UserRole } from "@/types/auth.type"
+} from "@/components/ui/sidebar";
+import { DashbaordSidebar } from "./dashboard-sidebar";
+import { ReactNode } from "react";
+import { UserRole } from "@/types/auth.type";
+import UserInfoContainer from "../layout/private/UserInfoContainer";
 
 interface Props {
-  children : ReactNode,
-  role : UserRole
+  children: ReactNode;
+  role: UserRole;
 }
 
-export default function DashbaordShell({children, role} : Props) {
+export default function DashbaordShell({ children, role }: Props) {
   return (
     <SidebarProvider>
-      <DashbaordSidebar role={role}/>
+      <DashbaordSidebar role={role} />
       <SidebarInset>
-        <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4">
-          <SidebarTrigger className="-ml-1" />
-          <Separator
-            orientation="vertical"
-            className="mr-2 data-[orientation=vertical]:h-4"
-          />
-         
+        <header className="flex justify-between h-16 shrink-0 items-center gap-2 border-b px-4">
+          <div>
+            <SidebarTrigger className="-ml-1" />
+            {/* <Separator
+              orientation="vertical"
+              className="mr-2 data-[orientation=vertical]:h-4"
+            /> */}
+          </div>
+          <div>
+            <UserInfoContainer />
+          </div>
         </header>
-       
-        <div className="mx-16 my-6">
-          {children}
-        </div>
+
+        <div className="mx-16 my-6">{children}</div>
       </SidebarInset>
     </SidebarProvider>
-  )
+  );
 }

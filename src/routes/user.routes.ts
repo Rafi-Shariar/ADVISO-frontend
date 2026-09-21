@@ -13,7 +13,6 @@ export const userRoutes = [
     title: "Bookings & Finance",
     url: "#",
     items: [
-
       {
         title: "My Sessions",
         url: "/user/sessions",

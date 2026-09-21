@@ -32,25 +32,29 @@ const getStatusBadge = (status: string) => {
       return {
         label: "Confirmed",
         icon: CheckCircle2,
-        className: "text-blue-600 dark:text-blue-400 bg-blue-500/10 border-blue-500/20",
+        className:
+          "text-blue-600 dark:text-blue-400 bg-blue-500/10 border-blue-500/20",
       };
     case "COMPLETED":
       return {
         label: "Completed",
         icon: CheckCircle2,
-        className: "text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 border-emerald-500/20",
+        className:
+          "text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 border-emerald-500/20",
       };
     case "CANCELLED":
       return {
         label: "Cancelled",
         icon: XCircle,
-        className: "text-rose-600 dark:text-rose-400 bg-rose-500/10 border-rose-500/20",
+        className:
+          "text-rose-600 dark:text-rose-400 bg-rose-500/10 border-rose-500/20",
       };
     default:
       return {
         label: status || "Pending",
         icon: AlertCircle,
-        className: "text-amber-600 dark:text-amber-400 bg-amber-500/10 border-amber-500/20",
+        className:
+          "text-amber-600 dark:text-amber-400 bg-amber-500/10 border-amber-500/20",
       };
   }
 };
@@ -117,7 +121,9 @@ export const RecentActivityCards = ({ recentActivities = [] }: Props) => {
                 {/* User & Mentor details */}
                 <div className="flex items-center gap-3 min-w-0">
                   <div className="flex size-8 shrink-0 items-center justify-center rounded-full bg-muted border border-border/60 text-xs font-bold font-mono text-foreground">
-                    {activity.userName ? activity.userName.charAt(0).toUpperCase() : "U"}
+                    {activity.userName
+                      ? activity.userName.charAt(0).toUpperCase()
+                      : "U"}
                   </div>
 
                   <div className="min-w-0 space-y-0.5">

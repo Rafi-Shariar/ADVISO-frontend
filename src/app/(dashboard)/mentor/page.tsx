@@ -1,11 +1,7 @@
-import React from 'react';
+import React from "react";
 
 const MentorPage = () => {
-    return (
-        <div>
-            Mentor page
-        </div>
-    );
+  return <div>Mentor page</div>;
 };
 
 export default MentorPage;

@@ -97,7 +97,9 @@ export const SessionCards = ({ sessions }: SessionCardsProps) => {
             {/* Top Bar: Subdued Icon Container + Badge */}
             <div className="relative z-10 flex items-center justify-between">
               <div className="flex size-9 items-center justify-center rounded-[8px] border border-border/60 bg-muted/30 transition-colors duration-200">
-                <Icon className={`size-4 stroke-[1.75] transition-colors ${card.iconColor}`} />
+                <Icon
+                  className={`size-4 stroke-[1.75] transition-colors ${card.iconColor}`}
+                />
               </div>
 
               <span

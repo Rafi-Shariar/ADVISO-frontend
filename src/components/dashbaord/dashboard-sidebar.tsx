@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import {
   Sidebar,
@@ -11,30 +11,27 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarRail,
-} from "@/components/ui/sidebar"
-import Logo from "../layout/public/Logo"
-import { UserRole } from "@/types/auth.type"
-import { adminRoutes, mentorRoutes, userRoutes } from "@/routes"
-import { SidebarItems } from "@/types/sidebar.type"
-import { usePathname } from "next/navigation"
+} from "@/components/ui/sidebar";
+import Logo from "../layout/public/Logo";
+import { UserRole } from "@/types/auth.type";
+import { adminRoutes, mentorRoutes, userRoutes } from "@/routes";
+import { SidebarItems } from "@/types/sidebar.type";
+import { usePathname } from "next/navigation";
 
-
-
-const sidebarRoutes : Record<UserRole, SidebarItems> = {
-  SUPER_ADMIN : adminRoutes,
-  ADMIN : adminRoutes,
+const sidebarRoutes: Record<UserRole, SidebarItems> = {
+  SUPER_ADMIN: adminRoutes,
+  ADMIN: adminRoutes,
   MENTOR: mentorRoutes,
-  USER: userRoutes
-}
+  USER: userRoutes,
+};
 
-export function DashbaordSidebar({role} : {role : UserRole}) {
-
-  const routes : SidebarItems = sidebarRoutes[role]
-  const pathname = usePathname()
+export function DashbaordSidebar({ role }: { role: UserRole }) {
+  const routes: SidebarItems = sidebarRoutes[role];
+  const pathname = usePathname();
   return (
     <Sidebar className="bg-orange-300">
       <SidebarHeader>
-        <Logo/>
+        <Logo />
       </SidebarHeader>
       <SidebarContent>
         {/* We create a SidebarGroup for each parent. */}
@@ -57,5 +54,5 @@ export function DashbaordSidebar({role} : {role : UserRole}) {
       </SidebarContent>
       <SidebarRail />
     </Sidebar>
-  )
+  );
 }

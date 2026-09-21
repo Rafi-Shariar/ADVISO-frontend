@@ -71,7 +71,8 @@ export const FeedbackCards = ({ feedback }: Props) => {
               Community Consensus
             </span>
             <p className="text-[11px] text-muted-foreground leading-relaxed">
-              Calculated across all completed and evaluated booking interactions.
+              Calculated across all completed and evaluated booking
+              interactions.
             </p>
           </div>
         </div>

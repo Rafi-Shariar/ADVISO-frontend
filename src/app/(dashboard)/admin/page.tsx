@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import DashboardOverviewSkeleton from "@/components/layout/private/DashbaordOverviewSkeleton";
 import FeedbackCards from "@/components/modules/admin/overview/FeedbackCards";
@@ -8,37 +8,30 @@ import SessionCards from "@/components/modules/admin/overview/SessionCards";
 import UserCards from "@/components/modules/admin/overview/UserCards";
 import { useAdminStats } from "@/hooks/analytics.hook";
 
-
 const AdminPage = () => {
+  const { data, isPending } = useAdminStats();
 
-    const {data, isPending} = useAdminStats()
+  const analytics = data?.data || {};
 
-    const analytics = data?.data || {};
+  if (isPending) {
+    return <DashboardOverviewSkeleton />;
+  }
 
-    console.log(analytics);
-    
+  return (
+    <div>
+      <div className="mb-6">
+        <h1 className="text-2xl font-semibold ">Platform Performance </h1>
+      </div>
 
-    if(isPending){
-        return <DashboardOverviewSkeleton/>
-    }
-
-
-    return (
-        <div>
-            <div className="mb-6">
-                <h1 className="text-2xl font-semibold ">Platform Performance </h1>
-            </div>
-
-            <div className="space-y-6">
-                <SessionCards sessions={analytics?.sessions}/>
-                <FinancialCards financials={analytics?.financials}/>
-                <UserCards users={analytics?.users}/>
-                <FeedbackCards feedback={analytics?.feedback}/>
-                <RecentActivityCards recentActivities={analytics?.recentActivities}/>
-            </div>
-
-        </div>
-    );
+      <div className="space-y-6">
+        <SessionCards sessions={analytics?.sessions} />
+        <FinancialCards financials={analytics?.financials} />
+        <UserCards users={analytics?.users} />
+        <FeedbackCards feedback={analytics?.feedback} />
+        <RecentActivityCards recentActivities={analytics?.recentActivities} />
+      </div>
+    </div>
+  );
 };
 
 export default AdminPage;

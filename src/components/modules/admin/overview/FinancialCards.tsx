@@ -1,10 +1,10 @@
 import React from "react";
-import { 
-  DollarSign, 
-  Wallet, 
-  ArrowDownRight, 
-  ArrowUpRight, 
-  PieChart 
+import {
+  DollarSign,
+  Wallet,
+  ArrowDownRight,
+  ArrowUpRight,
+  PieChart,
 } from "lucide-react";
 
 export interface IFinancialOverview {
@@ -54,7 +54,9 @@ export const FinancialCards = ({ financials }: Props) => {
 
         <div className="pt-6 mt-4 border-t border-border/50 flex items-center justify-between text-xs text-muted-foreground">
           <span>Gross transaction value</span>
-          <span className="font-mono text-foreground font-semibold">100% Inflow</span>
+          <span className="font-mono text-foreground font-semibold">
+            100% Inflow
+          </span>
         </div>
       </div>
 

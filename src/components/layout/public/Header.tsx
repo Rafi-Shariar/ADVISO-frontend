@@ -58,20 +58,15 @@ const Header = () => {
       };
       setUser(stateData);
 
-      if(userData.role === "USER"){
-        dashboardRoute="/user"
-      }
-      else if(userData.role === "MENTOR"){
-        dashboardRoute="/mentor"
-      }
-      else{
-        dashboardRoute="/admin"
+      if (userData.role === "USER") {
+        dashboardRoute = "/user";
+      } else if (userData.role === "MENTOR") {
+        dashboardRoute = "/mentor";
+      } else {
+        dashboardRoute = "/admin";
       }
     }
   }, [user, setUser]);
-
-  
-  
 
   const handleLogout = () => {
     logout(undefined, {
@@ -89,7 +84,6 @@ const Header = () => {
   };
 
   const activeUser = currentUser || user?.data;
-
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -201,9 +195,15 @@ const Header = () => {
                   className="rounded-[8px] cursor-pointer"
                 >
                   <Link
-                    href={currentUser ? 
-                      currentUser.role === "USER" ? "/user" : 
-                      currentUser.role === "MENTOR" ? "/mentor" : "/admin" : "/"}  
+                    href={
+                      currentUser
+                        ? currentUser.role === "USER"
+                          ? "/user"
+                          : currentUser.role === "MENTOR"
+                            ? "/mentor"
+                            : "/admin"
+                        : "/"
+                    }
                     className="flex items-center gap-2 px-2.5 py-2 text-xs font-medium hover:text-orange-600 dark:hover:text-orange-400"
                   >
                     <LayoutDashboard className="size-3.5" />

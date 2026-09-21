@@ -38,11 +38,11 @@ const RoleGuard = ({ children, roles }: IProps) => {
     return <AuthLoading label="Redirecting..." />;
   }
 
-  if(isAuthorized){
-    return <>{children}</>
+  if (isAuthorized) {
+    return <>{children}</>;
   }
 
-  return <AccessDenied/>;
+  return <AccessDenied />;
 };
 
 export default RoleGuard;
