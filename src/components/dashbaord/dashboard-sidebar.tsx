@@ -32,7 +32,7 @@ export function DashbaordSidebar({role} : {role : UserRole}) {
   const routes : SidebarItems = sidebarRoutes[role]
   const pathname = usePathname()
   return (
-    <Sidebar >
+    <Sidebar className="bg-orange-300">
       <SidebarHeader>
         <Logo/>
       </SidebarHeader>

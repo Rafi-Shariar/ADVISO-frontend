@@ -1,5 +1,6 @@
 "use client"
 
+import DashboardOverviewSkeleton from "@/components/layout/private/DashbaordOverviewSkeleton";
 import FeedbackCards from "@/components/modules/admin/overview/FeedbackCards";
 import FinancialCards from "@/components/modules/admin/overview/FinancialCards";
 import RecentActivityCards from "@/components/modules/admin/overview/RecentActivityCards";
@@ -18,7 +19,7 @@ const AdminPage = () => {
     
 
     if(isPending){
-        return <div>Loading</div>
+        return <DashboardOverviewSkeleton/>
     }
 
 
