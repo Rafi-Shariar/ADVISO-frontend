@@ -39,6 +39,8 @@ const Header = () => {
   const { data: user, isLoading } = useGetMe();
   const { mutate: logout, isPending: isLoggingOut } = useLogout();
 
+  let dashboardRoute = "";
+
   useEffect(() => {
     const userData = user?.data;
 
@@ -55,8 +57,21 @@ const Header = () => {
           )}&background=ea580c&color=fff&bold=true`,
       };
       setUser(stateData);
+
+      if(userData.role === "USER"){
+        dashboardRoute="/user"
+      }
+      else if(userData.role === "MENTOR"){
+        dashboardRoute="/mentor"
+      }
+      else{
+        dashboardRoute="/admin"
+      }
     }
   }, [user, setUser]);
+
+  
+  
 
   const handleLogout = () => {
     logout(undefined, {
@@ -186,7 +201,9 @@ const Header = () => {
                   className="rounded-[8px] cursor-pointer"
                 >
                   <Link
-                    href={'/user'}
+                    href={currentUser ? 
+                      currentUser.role === "USER" ? "/user" : 
+                      currentUser.role === "MENTOR" ? "/mentor" : "/admin" : "/"}  
                     className="flex items-center gap-2 px-2.5 py-2 text-xs font-medium hover:text-orange-600 dark:hover:text-orange-400"
                   >
                     <LayoutDashboard className="size-3.5" />

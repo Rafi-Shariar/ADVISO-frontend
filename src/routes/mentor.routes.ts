@@ -1,30 +1,62 @@
 export const mentorRoutes = [
-    {
-      title: "Management",
-      url: "#",
-      items: [
-        {
-          title: "Overview",
-          url: "/admin",
-        },
-        {
-          title: "Mentors",
-          url: "/admin/mentors",
-        },
-         {
-          title: "Users",
-          url: "/admin/users",
-        },
-      ],
-    },
-    {
-      title: "Profile",
-      url: "#",
-      items: [
-        {
-          title: "Routing",
-          url: "#",
-        }
-      ],
-    }
-]
+  {
+    title: "Analytics",
+    url: "#",
+    items: [
+      {
+        title: "Overview",
+        url: "/mentor",
+      },
+    ],
+  },
+  {
+    title: "Bookings & Finance",
+    url: "#",
+    items: [
+      {
+        title: "My Schedules",
+        url: "/mentor/schedules",
+      },
+      {
+        title: "My Sessions",
+        url: "/mentor/sessions",
+      },
+      {
+        title: "Earnings",
+        url: "/mentor/payments",
+      },
+    ],
+  },
+  {
+    title: "Content & Feedback",
+    url: "#",
+    items: [
+      {
+        title: "Blogs",
+        url: "/mentor/blogs",
+      },
+      {
+        title: "Reviews",
+        url: "/mentor/reviews",
+      },
+    ],
+  },
+  {
+    title: "Account Settings",
+    url: "#",
+    items: [
+      {
+        title: "Mentor Profile",
+        url: "/mentor/mentor-profile",
+      },
+      {
+        title: "Update Profile",
+        url: "/mentor/profile",
+      },
+      {
+        title: "Change Password",
+        url: "/password",
+      },
+    ],
+  },
+];
