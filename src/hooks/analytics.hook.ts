@@ -4,7 +4,7 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 export function usePublicStats() {
   return useQuery({
     queryKey: ["user-stats"],
-    queryFn: getAdminStats,
+    queryFn: getPublicStats,
     staleTime: 0,
     refetchOnWindowFocus: "always",
   });

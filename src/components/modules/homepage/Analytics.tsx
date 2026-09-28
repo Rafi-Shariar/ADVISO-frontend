@@ -18,6 +18,9 @@ export const PlatformAnalytics = ({ analytics }: AnalyticsProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const { data, isLoading } = usePublicStats();
 
+  console.log(data);
+  
+
   const stats = [
     {
       id: 1,

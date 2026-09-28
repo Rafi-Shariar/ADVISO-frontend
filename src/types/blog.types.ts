@@ -13,3 +13,10 @@ export interface BlogItem {
     };
   };
 }
+
+export interface BlogItemInMentorDetails {
+  blogId : string;
+  bannerImage : string;
+  title : string;
+  createdAt : string;
+}
