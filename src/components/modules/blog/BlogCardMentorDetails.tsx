@@ -53,11 +53,7 @@ const BlogCardMentorDetails = ({ blog }: BlogCardProps) => {
           <h3 className="text-base sm:text-lg font-bold text-foreground tracking-tight leading-snug group-hover:text-orange-600 dark:group-hover:text-orange-400 transition-colors line-clamp-2">
             {blog.title}
           </h3>
-
-         
         </div>
-
-       
       </div>
     </Link>
   );

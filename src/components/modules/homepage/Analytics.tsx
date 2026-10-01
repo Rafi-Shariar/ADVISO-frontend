@@ -19,7 +19,6 @@ export const PlatformAnalytics = ({ analytics }: AnalyticsProps) => {
   const { data, isLoading } = usePublicStats();
 
   console.log(data);
-  
 
   const stats = [
     {

@@ -37,42 +37,41 @@ export interface User {
   profileURL: string;
 }
 
-
 export interface IMentorDetails {
   user: {
-    name : string;
-    timezone : string;
-    profileURL : string
-  }
-  headline: string
-  bio: string
-  yearOfExperience: number
-  expertiseTags: string[]
-  linkedinURL: string
-  professionalDomain: string
+    name: string;
+    timezone: string;
+    profileURL: string;
+  };
+  headline: string;
+  bio: string;
+  yearOfExperience: number;
+  expertiseTags: string[];
+  linkedinURL: string;
+  professionalDomain: string;
   portfolioURL: string | null;
-  sessionCharge: string
-  totalSessionsCompleted: number
-  averageRatings: string
-  totalReviews: number
-  blogs: Blog[]
-  reviews: Review[]
+  sessionCharge: string;
+  totalSessionsCompleted: number;
+  averageRatings: string;
+  totalReviews: number;
+  blogs: Blog[];
+  reviews: Review[];
 }
 
 export interface Blog {
-  blogId : string;
-  bannerImage: string
-  title: string
-  createdAt: string
+  blogId: string;
+  bannerImage: string;
+  title: string;
+  createdAt: string;
 }
 
 export interface Review {
-  ratings: string
-  comment: string
+  ratings: string;
+  comment: string;
   session: {
-    user : {
-      name : string;
-      profileURL : string;
-    }
-  }
+    user: {
+      name: string;
+      profileURL: string;
+    };
+  };
 }

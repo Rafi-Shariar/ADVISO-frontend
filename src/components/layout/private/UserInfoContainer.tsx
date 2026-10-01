@@ -9,12 +9,15 @@ const UserInfoContainer = () => {
 
   const activeUser = data?.data;
 
-
   return (
     <div className="flex items-center gap-2">
       <div className="text-right">
-        <h1 className="text-sm font-semibold text-gray-500">{activeUser.name}</h1>
-        <h1 className="text-xs font-semibold text-gray-400">{activeUser.email}</h1>
+        <h1 className="text-sm font-semibold text-gray-500">
+          {activeUser.name}
+        </h1>
+        <h1 className="text-xs font-semibold text-gray-400">
+          {activeUser.email}
+        </h1>
       </div>
       <div>
         <div className="relative size-10 rounded-full overflow-hidden bg-muted border border-border/60">
