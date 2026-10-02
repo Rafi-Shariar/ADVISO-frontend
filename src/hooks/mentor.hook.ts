@@ -3,7 +3,7 @@ import {
   getFeaturedMentors,
   getMentorDetails,
 } from "@/api/mentor.api";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useSuspenseQuery } from "@tanstack/react-query";
 
 export function useFeaturedMentors() {
   return useQuery({
@@ -22,6 +22,13 @@ export function useMentorDetails(id: string) {
 
 export function useGetAllMentorsAdmin() {
   return useQuery({
+    queryKey: ["all-mentors"],
+    queryFn: getAllMentorsAdmin,
+  });
+}
+
+export function useSuspenseGetAllMentorsAdmin() {
+  return useSuspenseQuery({
     queryKey: ["all-mentors"],
     queryFn: getAllMentorsAdmin,
   });

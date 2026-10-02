@@ -1,5 +1,5 @@
 "use client";
-import { useGetAllMentorsAdmin } from "@/hooks/mentor.hook";
+import { useGetAllMentorsAdmin, useSuspenseGetAllMentorsAdmin } from "@/hooks/mentor.hook";
 import { log } from "console";
 import React from "react";
 import { MoreHorizontalIcon } from "lucide-react";
@@ -22,13 +22,10 @@ import {
 import { IMentorProfile } from "@/types/mentor.type";
 
 const MentorApprovalTable = () => {
-  const { data, isPending } = useGetAllMentorsAdmin();
+  const { data } = useSuspenseGetAllMentorsAdmin();
 
   const mentors: IMentorProfile[] = data?.data || [];
 
-  if (isPending) {
-    return <h1>Loading mentors....</h1>;
-  }
 
   return (
     <div>
