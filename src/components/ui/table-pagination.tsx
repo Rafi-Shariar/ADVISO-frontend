@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { Dispatch, SetStateAction, useState } from "react";
 import {
   Pagination,
   PaginationItem,
@@ -64,13 +64,19 @@ const getPaginationRange = (
   return items;
 };
 
-const TablePagination = () => {
-  const [page, setPage] = useState(1);
-  const totalPages = 7;
+interface Props {
+    totalPages : number;
+    handlePageChange : Dispatch<SetStateAction<number>>,
+    page: number
+}
 
+
+
+const TablePagination = ({totalPages, handlePageChange, page} : Props) => {
+ 
   const gotoPage = (newPage: number) => {
     if (newPage >= 1 && newPage <= totalPages) {
-      setPage(newPage);
+      handlePageChange(newPage);
     }
   };
 
@@ -91,7 +97,7 @@ const TablePagination = () => {
         {paginationRange.map((item, index) => {
           if (typeof item === "string") {
             return (
-              <PaginationItem key={`${item}-${index}`}>
+              <PaginationItem key={item}>
                 <PaginationEllipsis />
               </PaginationItem>
             );

@@ -1,7 +1,7 @@
 "use client";
 import { useSuspenseGetAllMentorsAdmin } from "@/hooks/mentor.hook";
 import { log } from "console";
-import React from "react";
+import React, { Dispatch, SetStateAction } from "react";
 import { MoreHorizontalIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -24,10 +24,13 @@ import {
   MentorParams,
   MentorVerificationStatus,
 } from "@/types/mentor.type";
+import TablePagination from "@/components/ui/table-pagination";
 
-interface Props extends MentorParams {}
+interface Props extends MentorParams {
+  handlePageChange: Dispatch<SetStateAction<number>>
+}
 
-const MentorApprovalTable = ({ ...params }: Props) => {
+const MentorApprovalTable = ({ handlePageChange, ...params }: Props) => {
   const { data } = useSuspenseGetAllMentorsAdmin(params);
 
   const mentors: IMentorProfile[] = data?.data || [];
@@ -80,6 +83,10 @@ const MentorApprovalTable = ({ ...params }: Props) => {
           ))}
         </TableBody>
       </Table>
+
+       <div className="my-5">
+         <TablePagination totalPages={data?.meta?.totalPages ?? 0} handlePageChange={handlePageChange} page={params.page ?? 0}/>
+     </div>
     </div>
   );
 };

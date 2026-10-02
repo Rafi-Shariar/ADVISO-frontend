@@ -1,19 +1,13 @@
 "use client";
 import React, { Suspense, useState } from "react";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import MentorApprovalTable from "./mentor-approval-table";
 import MentorApprovalTableSkeleton from "./mentor-approval-table-sketon";
 import { MentorParams, MentorVerificationStatus } from "@/types/mentor.type";
 import { Input } from "@/components/ui/input";
 import useDebounce from "@/hooks/debounce.hook";
-import TablePagination from "@/components/ui/table-pagination";
+
 
 const verificationStatus: ["ALL" | MentorVerificationStatus, string][] = [
   ["ALL", "All"],
@@ -27,8 +21,22 @@ const MentorApprovalTabs = () => {
   const [searchInput, setSearchInput] = useState("");
   const debouncedSearch = useDebounce(searchInput);
 
+   const [page, setPage] = useState(1);
+
+   const handleSearch = (e) => {
+    setSearchInput(e.target.value);
+    setPage(1);
+   }
+
+   const handleTabSwitch = (value : string) => {
+    setTab(value as MentorVerificationStatus | "ALL")
+    setPage(1);
+   }
+
+
+
   const queryParams: MentorParams = {
-    page: 1,
+    page: page,
     limit: 10,
     ...(tab === "ALL" ? {} : { verificationStatus: tab }),
     ...(debouncedSearch ? { searchTerm: debouncedSearch } : {}),
@@ -42,13 +50,12 @@ const MentorApprovalTabs = () => {
             type="search"
             placeholder="Search by name or email..."
             className=" md:min-w-lg"
-            onChange={(e) => setSearchInput(e.target.value)}
+            onChange={(e) => handleSearch(e)}
           />
         </div>
         <Tabs
           value={tab}
-          onValueChange={(value) =>
-            setTab(value as MentorVerificationStatus | "ALL")
+          onValueChange={(value) => handleTabSwitch(value)
           }
         >
           <TabsList>
@@ -62,12 +69,10 @@ const MentorApprovalTabs = () => {
       </div>
 
       <Suspense fallback={<MentorApprovalTableSkeleton />}>
-        <MentorApprovalTable {...queryParams} />
+        <MentorApprovalTable {...queryParams}  handlePageChange={setPage}/>
       </Suspense>
 
-     <div className="mt-6">
-         <TablePagination></TablePagination>
-     </div>
+    
     </div>
   );
 };
