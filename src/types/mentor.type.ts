@@ -35,6 +35,7 @@ export interface Document {
 export interface User {
   name: string;
   profileURL: string;
+  email : string;
 }
 
 export interface IMentorDetails {
@@ -75,3 +76,4 @@ export interface Review {
     };
   };
 }
+

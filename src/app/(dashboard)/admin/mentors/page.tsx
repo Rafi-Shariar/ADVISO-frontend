@@ -1,14 +1,15 @@
-"use client";
-import { useGetAllMentorsAdmin } from "@/hooks/mentor.hook";
-import React from "react";
+import MentorApprovalTable from '@/components/modules/mentor-approval/mentor-approval-table';
+import React from 'react';
 
-const MentorsPage = () => {
-  const { data: mentors, isPending } = useGetAllMentorsAdmin();
-
-  if (isPending) {
-    return <h1>Loading...</h1>;
-  }
-  return <div>this is mentors MentorsPage</div>;
+const MentorsPageAdmin = () => {
+  return (
+    <div>
+       <h1>All Mentors Table</h1>
+       <div>
+        <MentorApprovalTable/>
+       </div>
+    </div>
+  );
 };
 
-export default MentorsPage;
+export default MentorsPageAdmin;
