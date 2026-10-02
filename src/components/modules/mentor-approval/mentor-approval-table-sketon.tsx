@@ -1,5 +1,5 @@
-"use client"
-import React from 'react';
+"use client";
+import React from "react";
 import {
   Table,
   TableBody,
@@ -8,11 +8,11 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Skeleton } from '@/components/ui/skeleton';
+import { Skeleton } from "@/components/ui/skeleton";
 const MentorApprovalTableSkeleton = () => {
-    return (
-        <div>
-             <Table>
+  return (
+    <div>
+      <Table>
         <TableHeader>
           <TableRow>
             <TableHead>Name</TableHead>
@@ -25,35 +25,35 @@ const MentorApprovalTableSkeleton = () => {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {[1,2,3].map((mentor) => (
-            <TableRow key={mentor} >
-                <TableCell>
-                    <Skeleton className='h-6 w-20'></Skeleton>
-                </TableCell>
-                <TableCell>
-                    <Skeleton className='h-6 w-20'></Skeleton>
-                </TableCell>
-                <TableCell>
-                    <Skeleton className='h-6 w-20'></Skeleton>
-                </TableCell>
-                <TableCell>
-                    <Skeleton className='h-6 w-20'></Skeleton>
-                </TableCell>
-                <TableCell>
-                    <Skeleton className='h-6 w-10'></Skeleton>
-                </TableCell>
-                <TableCell>
-                    <Skeleton className='h-6 w-10'></Skeleton>
-                </TableCell>
-                <TableCell>
-                    <Skeleton className='h-6 w-10'></Skeleton>
-                </TableCell>
+          {[1, 2, 3].map((mentor) => (
+            <TableRow key={mentor}>
+              <TableCell>
+                <Skeleton className="h-6 w-20"></Skeleton>
+              </TableCell>
+              <TableCell>
+                <Skeleton className="h-6 w-20"></Skeleton>
+              </TableCell>
+              <TableCell>
+                <Skeleton className="h-6 w-20"></Skeleton>
+              </TableCell>
+              <TableCell>
+                <Skeleton className="h-6 w-20"></Skeleton>
+              </TableCell>
+              <TableCell>
+                <Skeleton className="h-6 w-10"></Skeleton>
+              </TableCell>
+              <TableCell>
+                <Skeleton className="h-6 w-10"></Skeleton>
+              </TableCell>
+              <TableCell>
+                <Skeleton className="h-6 w-10"></Skeleton>
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>
       </Table>
-        </div>
-    );
+    </div>
+  );
 };
 
 export default MentorApprovalTableSkeleton;

@@ -3,6 +3,7 @@ import {
   getFeaturedMentors,
   getMentorDetails,
 } from "@/api/mentor.api";
+import { MentorParams } from "@/types/mentor.type";
 import { useMutation, useQuery, useSuspenseQuery } from "@tanstack/react-query";
 
 export function useFeaturedMentors() {
@@ -20,16 +21,16 @@ export function useMentorDetails(id: string) {
   });
 }
 
-export function useGetAllMentorsAdmin() {
-  return useQuery({
-    queryKey: ["all-mentors"],
-    queryFn: getAllMentorsAdmin,
-  });
-}
+// export function useGetAllMentorsAdmin() {
+//   return useQuery({
+//     queryKey: ["all-mentors"],
+//     queryFn: getAllMentorsAdmin,
+//   });
+// }
 
-export function useSuspenseGetAllMentorsAdmin() {
+export function useSuspenseGetAllMentorsAdmin(params : MentorParams) {
   return useSuspenseQuery({
-    queryKey: ["all-mentors"],
-    queryFn: getAllMentorsAdmin,
+    queryKey: [`mentors`, params],
+    queryFn: () => getAllMentorsAdmin(params),
   });
 }

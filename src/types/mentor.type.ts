@@ -1,3 +1,9 @@
+import { BlogItem, BlogItemInMentorDetails } from "./blog.types";
+import { IReview } from "./review.type";
+
+export type MentorVerificationStatus = "PENDING" | "APPROVED" | "REJECTED";
+
+
 export interface IMentorProfile {
   mentorId: string;
   headline: string;
@@ -35,7 +41,7 @@ export interface Document {
 export interface User {
   name: string;
   profileURL: string;
-  email : string;
+  email: string;
 }
 
 export interface IMentorDetails {
@@ -55,25 +61,14 @@ export interface IMentorDetails {
   totalSessionsCompleted: number;
   averageRatings: string;
   totalReviews: number;
-  blogs: Blog[];
-  reviews: Review[];
+  blogs: BlogItemInMentorDetails[];
+  reviews: IReview[];
 }
 
-export interface Blog {
-  blogId: string;
-  bannerImage: string;
-  title: string;
-  createdAt: string;
-}
 
-export interface Review {
-  ratings: string;
-  comment: string;
-  session: {
-    user: {
-      name: string;
-      profileURL: string;
-    };
-  };
+export interface MentorParams {
+  verificationStatus ?: MentorVerificationStatus,
+  searchTerm ?: string,
+  page ?: number,
+  limit ?: number
 }
-

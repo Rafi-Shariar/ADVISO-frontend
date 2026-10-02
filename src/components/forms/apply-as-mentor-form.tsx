@@ -20,7 +20,11 @@ import {
   ProfessionDomain,
 } from "@/constants/professionDomain.constant";
 import { Button } from "../ui/button";
-import { isAcceptedFileSize, isAcceptedFileType, MAX_FILE_SIZE } from "@/validation/mentor-application.validation";
+import {
+  isAcceptedFileSize,
+  isAcceptedFileType,
+  MAX_FILE_SIZE,
+} from "@/validation/mentor-application.validation";
 
 const ApplyAsMentorForm = () => {
   const [inputValue, setInputValue] = useState("");
@@ -344,7 +348,7 @@ const ApplyAsMentorForm = () => {
           {(field) => {
             const isInvalid =
               field.state.meta.isTouched && !field.state.meta.isValid;
-              const file = field.state.value;
+            const file = field.state.value;
             return (
               <Field data-invalid={isInvalid}>
                 <FieldLabel>Resume</FieldLabel>
@@ -352,27 +356,43 @@ const ApplyAsMentorForm = () => {
                   <Button>
                     <label htmlFor="resume-field"> Upload Resume</label>
                   </Button>
-                  <input id="resume-field" type="file" className="sr-only" name={field.name} onChange={(e) => {
-                    const selected = e.target.files?.[0] ?? null;
+                  <input
+                    id="resume-field"
+                    type="file"
+                    className="sr-only"
+                    name={field.name}
+                    onChange={(e) => {
+                      const selected = e.target.files?.[0] ?? null;
 
-                    if( selected && (!isAcceptedFileSize(selected?.size) || !isAcceptedFileType(selected.type))){
-                      field.handleChange(null);
-                      field.handleBlur();
-                      return;
-                    }
-                    field.handleChange(selected);
-                    e.target.value = ""
-                  }}/>
-                  {
-                    file ? (
-
-                      <div>
-                        <span>{file.name}</span>
-                        <Button onClick={() => field.handleChange(null)} variant={"outline"}><X/></Button>
-
-                      </div>
-                    ) : <span>Suppored File: .pdf, .doc, .png, .jpg and size {MAX_FILE_SIZE} MB</span>
-                  }
+                      if (
+                        selected &&
+                        (!isAcceptedFileSize(selected?.size) ||
+                          !isAcceptedFileType(selected.type))
+                      ) {
+                        field.handleChange(null);
+                        field.handleBlur();
+                        return;
+                      }
+                      field.handleChange(selected);
+                      e.target.value = "";
+                    }}
+                  />
+                  {file ? (
+                    <div>
+                      <span>{file.name}</span>
+                      <Button
+                        onClick={() => field.handleChange(null)}
+                        variant={"outline"}
+                      >
+                        <X />
+                      </Button>
+                    </div>
+                  ) : (
+                    <span>
+                      Suppored File: .pdf, .doc, .png, .jpg and size{" "}
+                      {MAX_FILE_SIZE} MB
+                    </span>
+                  )}
                 </div>
               </Field>
             );
