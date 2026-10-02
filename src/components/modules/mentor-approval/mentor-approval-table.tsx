@@ -1,7 +1,5 @@
 "use client";
-import {
-  useSuspenseGetAllMentorsAdmin,
-} from "@/hooks/mentor.hook";
+import { useSuspenseGetAllMentorsAdmin } from "@/hooks/mentor.hook";
 import { log } from "console";
 import React from "react";
 import { MoreHorizontalIcon } from "lucide-react";
@@ -21,11 +19,15 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { IMentorProfile, MentorParams, MentorVerificationStatus } from "@/types/mentor.type";
+import {
+  IMentorProfile,
+  MentorParams,
+  MentorVerificationStatus,
+} from "@/types/mentor.type";
 
-interface Props extends MentorParams {};
+interface Props extends MentorParams {}
 
-const MentorApprovalTable = ( {...params} : Props) => {
+const MentorApprovalTable = ({ ...params }: Props) => {
   const { data } = useSuspenseGetAllMentorsAdmin(params);
 
   const mentors: IMentorProfile[] = data?.data || [];

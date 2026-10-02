@@ -9,6 +9,6 @@ export const getMentorDetails = (id: string) => {
   return apiClient(`/api/v1/mentor/${id}`);
 };
 
-export const getAllMentorsAdmin = (params : MentorParams) => {
-  return apiClient(`api/v1/mentor/admin/all-mentors`, {params});
+export const getAllMentorsAdmin = (params: MentorParams) => {
+  return apiClient(`api/v1/mentor/admin/all-mentors`, { params });
 };

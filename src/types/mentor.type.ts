@@ -3,7 +3,6 @@ import { IReview } from "./review.type";
 
 export type MentorVerificationStatus = "PENDING" | "APPROVED" | "REJECTED";
 
-
 export interface IMentorProfile {
   mentorId: string;
   headline: string;
@@ -65,10 +64,9 @@ export interface IMentorDetails {
   reviews: IReview[];
 }
 
-
 export interface MentorParams {
-  verificationStatus ?: MentorVerificationStatus,
-  searchTerm ?: string,
-  page ?: number,
-  limit ?: number
+  verificationStatus?: MentorVerificationStatus;
+  searchTerm?: string;
+  page?: number;
+  limit?: number;
 }

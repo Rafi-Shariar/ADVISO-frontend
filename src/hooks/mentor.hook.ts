@@ -28,7 +28,7 @@ export function useMentorDetails(id: string) {
 //   });
 // }
 
-export function useSuspenseGetAllMentorsAdmin(params : MentorParams) {
+export function useSuspenseGetAllMentorsAdmin(params: MentorParams) {
   return useSuspenseQuery({
     queryKey: [`mentors`, params],
     queryFn: () => getAllMentorsAdmin(params),
