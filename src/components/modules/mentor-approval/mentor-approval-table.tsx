@@ -19,15 +19,17 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   IMentorProfile,
   MentorParams,
   MentorVerificationStatus,
 } from "@/types/mentor.type";
 import TablePagination from "@/components/ui/table-pagination";
+import Link from "next/link";
 
 interface Props extends MentorParams {
-  handlePageChange: Dispatch<SetStateAction<number>>
+  handlePageChange: Dispatch<SetStateAction<number>>;
 }
 
 const MentorApprovalTable = ({ handlePageChange, ...params }: Props) => {
@@ -53,7 +55,16 @@ const MentorApprovalTable = ({ handlePageChange, ...params }: Props) => {
         <TableBody>
           {mentors.map((mentor) => (
             <TableRow key={mentor.mentorId}>
-              <TableCell className="font-medium">{mentor.user.name}</TableCell>
+              <TableCell className="font-medium flex items-center gap-3">
+                <Avatar>
+                  <AvatarImage
+                    src={mentor.user.profileURL}
+                    alt={mentor.user.name}
+                  />
+                  <AvatarFallback>CN</AvatarFallback>
+                </Avatar>
+                <Link href={`/admin/${mentor.mentorId}`}>{mentor.user.name}</Link>
+              </TableCell>
               <TableCell>{mentor.user.email}</TableCell>
               <TableCell>{mentor.professionalDomain}</TableCell>
               <TableCell>{mentor.yearOfExperience}</TableCell>
@@ -70,7 +81,7 @@ const MentorApprovalTable = ({ handlePageChange, ...params }: Props) => {
                     </Button>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="end">
-                    <DropdownMenuItem>Show Details</DropdownMenuItem>
+                    <DropdownMenuItem>Mentor Profile</DropdownMenuItem>
                     <DropdownMenuItem>Mentorship Status</DropdownMenuItem>
                     <DropdownMenuSeparator />
                     <DropdownMenuItem variant="destructive">
@@ -84,9 +95,13 @@ const MentorApprovalTable = ({ handlePageChange, ...params }: Props) => {
         </TableBody>
       </Table>
 
-       <div className="my-5">
-         <TablePagination totalPages={data?.meta?.totalPages ?? 0} handlePageChange={handlePageChange} page={params.page ?? 0}/>
-     </div>
+      <div className="my-5">
+        <TablePagination
+          totalPages={data?.meta?.totalPages ?? 0}
+          handlePageChange={handlePageChange}
+          page={params.page ?? 0}
+        />
+      </div>
     </div>
   );
 };
