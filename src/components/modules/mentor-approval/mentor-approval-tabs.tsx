@@ -58,10 +58,10 @@ const MentorApprovalTabs = () => {
           onValueChange={(value) => handleTabSwitch(value)
           }
         >
-          <TabsList>
+          <TabsList className="">
             {verificationStatus.map(([value, label]) => (
               <TabsTrigger key={value} value={value}>
-                {label}
+                <span className={tab === value ? "text-orange-500 font-bold" : undefined}>{label}</span>
               </TabsTrigger>
             ))}
           </TabsList>

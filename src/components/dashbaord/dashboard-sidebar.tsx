@@ -17,6 +17,7 @@ import { UserRole } from "@/types/auth.type";
 import { adminRoutes, mentorRoutes, userRoutes } from "@/routes";
 import { SidebarItems } from "@/types/sidebar.type";
 import { usePathname } from "next/navigation";
+import Link from "next/link";
 
 const sidebarRoutes: Record<UserRole, SidebarItems> = {
   SUPER_ADMIN: adminRoutes,
@@ -26,7 +27,7 @@ const sidebarRoutes: Record<UserRole, SidebarItems> = {
 };
 
 export function DashbaordSidebar({ role }: { role: UserRole }) {
-  const routes: SidebarItems = sidebarRoutes[role];
+  const routes: SidebarItems = sidebarRoutes[role] || [];
   const pathname = usePathname();
   return (
     <Sidebar className="bg-orange-300">
@@ -42,8 +43,9 @@ export function DashbaordSidebar({ role }: { role: UserRole }) {
               <SidebarMenu>
                 {item.items.map((item) => (
                   <SidebarMenuItem key={item.title}>
-                    <SidebarMenuButton asChild isActive={item.url === pathname}>
-                      <a href={item.url}>{item.title}</a>
+                    <SidebarMenuButton asChild isActive={item.url === pathname} className={item.url === pathname ? "bg-orange-50 text-orange-600 font-medium" : undefined}>
+                      <Link href={item.url}>{item.title}</Link>
+                      
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                 ))}
