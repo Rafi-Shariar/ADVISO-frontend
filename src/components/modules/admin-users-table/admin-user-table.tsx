@@ -1,7 +1,7 @@
 "use client";
 import { useSuspenseGetAllMentorsAdmin } from "@/hooks/mentor.hook";
 import { log } from "console";
-import React, { Dispatch, SetStateAction } from "react";
+import React, { Dispatch, SetStateAction, useState } from "react";
 import { Divide, MoreHorizontalIcon, ShieldAlert } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -31,15 +31,24 @@ import { Badge } from "@/components/ui/badge";
 import EmptyTableUI from "@/components/layout/private/empty-table-ui";
 import { useSuspenseGetAllUsersAdmin } from "@/hooks/user.hook";
 import { UserProfileAdmin } from "@/types/user.type";
+import { AdminUserAccountStatusModal } from "./account-status-modal";
 
 interface Props extends MentorParams {
   handlePageChange: Dispatch<SetStateAction<number>>;
 }
 
 const AdminUsersTable = ({ handlePageChange, ...params }: Props) => {
+
+   const [selectedUser, setSelectedUser] = useState<UserProfileAdmin | null>(null);
+   const [openStatusModal, setOpenStatusModal] = useState(false)
+
+   const handleOpenModal = (user : UserProfileAdmin) => {
+    setSelectedUser(user);
+    setOpenStatusModal(true)
+   }
+  
   const { data } = useSuspenseGetAllUsersAdmin(params);
 
-  console.log(data?.data);
   
 
   const users: UserProfileAdmin[] = data?.data?.data || [];
@@ -100,7 +109,9 @@ const AdminUsersTable = ({ handlePageChange, ...params }: Props) => {
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="end">
                     <DropdownMenuItem>User Profile</DropdownMenuItem>
-                    <DropdownMenuItem>Account Status</DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => handleOpenModal(user)}>
+                       Account Status
+                      </DropdownMenuItem>
                     <DropdownMenuSeparator />
                     <DropdownMenuItem variant="destructive">
                       Delete User
@@ -112,6 +123,8 @@ const AdminUsersTable = ({ handlePageChange, ...params }: Props) => {
           ))}
         </TableBody>
       </Table>
+
+     {selectedUser &&  <AdminUserAccountStatusModal open={openStatusModal} onOpenChange={setOpenStatusModal} user={selectedUser}/>}
 
       <div className="my-5">
         <TablePagination
