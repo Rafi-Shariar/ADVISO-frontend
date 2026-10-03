@@ -1,11 +1,13 @@
+export type UserAccountStatus = "ACTIVE" | "BLOCKED" | "SUSPENDED";
+export type UserAccountRole = "USER" | "MENTOR" | "ADMIN" | "SUPER_ADMIN";
+
 export interface UserParams {
-//   verificationStatus?: MentorVerificationStatus;
+  role ?: UserAccountRole,
+  accountStatus?: UserAccountStatus;
   searchTerm?: string;
-  professionalDomain?: string;
   page?: number;
   limit?: number;
-  sortBy?: string;
-  sortOrder?: string;
+
 }
 
 export interface UserProfileAdmin {

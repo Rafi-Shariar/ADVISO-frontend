@@ -21,9 +21,8 @@ import {
 } from "@/components/ui/table";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
-  IMentorProfile,
   MentorParams,
-  MentorVerificationStatus,
+
 } from "@/types/mentor.type";
 ShieldAlert;
 import TablePagination from "@/components/ui/table-pagination";
@@ -39,6 +38,9 @@ interface Props extends MentorParams {
 
 const AdminUsersTable = ({ handlePageChange, ...params }: Props) => {
   const { data } = useSuspenseGetAllUsersAdmin(params);
+
+  console.log(data?.data);
+  
 
   const users: UserProfileAdmin[] = data?.data?.data || [];
 
@@ -113,7 +115,7 @@ const AdminUsersTable = ({ handlePageChange, ...params }: Props) => {
 
       <div className="my-5">
         <TablePagination
-          totalPages={data?.meta?.totalPages ?? 0}
+          totalPages={data?.data?.meta?.totalPages ?? 0}
           handlePageChange={handlePageChange}
           page={params.page ?? 0}
         />
