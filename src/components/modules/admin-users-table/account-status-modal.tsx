@@ -147,7 +147,7 @@ export function AdminUserAccountStatusModal({ open, onOpenChange, user }: Props)
                       onClick={() => setSelectedStatus(status as UserAccountStatus)}
                       className={`relative py-2 text-xs font-medium rounded-lg transition-all duration-200 capitalize outline-none ${
                         isSelected
-                          ? "bg-background text-foreground shadow-xs font-semibold"
+                          ? "bg-orange-500 text-white shadow-xs font-semibold"
                           : "text-muted-foreground hover:text-foreground"
                       }`}
                     >
@@ -182,7 +182,7 @@ export function AdminUserAccountStatusModal({ open, onOpenChange, user }: Props)
               type="submit"
               size="sm"
               disabled={selectedStatus === user.accountStatus}
-              className="text-xs h-9 px-4 rounded-lg shadow-xs"
+              className="text-xs h-9 px-4 rounded-lg shadow-xs bg-orange-500 font-semibold hover:bg-orange-100 hover:text-orange-500 hover:border border-orange-300"
             >
               Update Status
             </Button>
