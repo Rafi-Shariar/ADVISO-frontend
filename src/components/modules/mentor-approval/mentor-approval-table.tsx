@@ -27,6 +27,7 @@ import {
 } from "@/types/mentor.type";
 import TablePagination from "@/components/ui/table-pagination";
 import Link from "next/link";
+import { Badge } from "@/components/ui/badge";
 
 interface Props extends MentorParams {
   handlePageChange: Dispatch<SetStateAction<number>>;
@@ -49,6 +50,8 @@ const MentorApprovalTable = ({ handlePageChange, ...params }: Props) => {
             <TableHead>Charge</TableHead>
             <TableHead>Sessions</TableHead>
             <TableHead>Rattings</TableHead>
+            <TableHead>Mentorship Status</TableHead>
+
             <TableHead className="text-right">Actions</TableHead>
           </TableRow>
         </TableHeader>
@@ -73,6 +76,17 @@ const MentorApprovalTable = ({ handlePageChange, ...params }: Props) => {
               <TableCell>${mentor.sessionCharge}</TableCell>
               <TableCell>{mentor.totalSessionsCompleted}</TableCell>
               <TableCell>{mentor.averageRatings}</TableCell>
+              <TableCell>
+                {mentor.mentorshipStatus === "OPEN" ? (
+                  <Badge className="bg-green-50 text-green-700 dark:bg-green-950 dark:text-green-300 text-xs">
+                    Open
+                  </Badge>
+                ) : (
+                  <Badge className="bg-red-50 text-red-700 dark:bg-red-950 dark:text-red-300 text-xs">
+                    Green
+                  </Badge>
+                )}
+              </TableCell>
 
               <TableCell className="text-right">
                 <DropdownMenu>

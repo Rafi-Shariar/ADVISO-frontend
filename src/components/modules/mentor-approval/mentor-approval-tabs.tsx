@@ -37,6 +37,9 @@ const MentorApprovalTabs = () => {
 
   const [domain, setDomain] = useState("");
 
+  const [sortBy, setSortBy] = useState("");
+  const [sortOrder, setSortOrder] = useState("");
+
   const handleSearch = (e: any) => {
     setSearchInput(e.target.value);
     setPage(1);
@@ -57,26 +60,38 @@ const MentorApprovalTabs = () => {
     setPage(1);
   };
 
+  const handleFilter = (value: string) => {
+    const parts = value.split("-");
+    const sortOn = parts[0];
+    const sortingOrder = parts[1];
+
+    setSortBy(sortOn)
+    setSortOrder(sortingOrder)    
+    
+  }
+
   const queryParams: MentorParams = {
     page: page,
     limit: 10,
     ...(domain === "" ? {} : { professionalDomain: domain }),
     ...(tab === "ALL" ? {} : { verificationStatus: tab }),
     ...(debouncedSearch ? { searchTerm: debouncedSearch } : {}),
+    ...(sortBy ? { sortBy: sortBy } : {}),
+    ...(sortOrder ? { sortOrder: sortOrder } : {}),
   };
 
   return (
     <div>
       <div className="flex flex-col gap-3 md:flex-row justify-between my-6">
-        <div>
+        <div className="flex gap-3 items-center">
           <Input
             type="search"
             placeholder="Search by name or email..."
-            className=" md:min-w-lg"
+            className=" md:min-w-70"
             onChange={(e) => handleSearch(e)}
           />
 
-          <div className="mt-3 flex items-center gap-2">
+          <div className=" flex items-center gap-2">
             <Select
               value={domain || ""}
               onValueChange={(val) => handleDomainFilter(val)}
@@ -110,7 +125,29 @@ const MentorApprovalTabs = () => {
               </Button>
             )}
           </div>
+
+          <div>
+            <Select onValueChange={(val) => handleFilter(val)}>
+              <SelectTrigger className="w-full min-w-40">
+                <SelectValue placeholder="Sort By" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  <SelectLabel>Sort By</SelectLabel>
+                  <SelectItem value="yearOfExperience-asc">Experience - ASC</SelectItem>
+                  <SelectItem value="yearOfExperience-desc">Experience - DESC</SelectItem>
+                  <SelectItem value="sessionCharge-asc">Session Charge - ASC</SelectItem>
+                  <SelectItem value="sessionCharge-desc">Session Charge - DESC</SelectItem>
+                  <SelectItem value="averageRatings-asc">Ratting - ASC</SelectItem>
+                  <SelectItem value="averageRatings-desc">Ratting - DESC</SelectItem>
+                  <SelectItem value="totalSessionsCompleted-asc">Sessions - ASC</SelectItem>
+                  <SelectItem value="totalSessionsCompleted-desc">Sessions - DESC</SelectItem>
+                </SelectGroup>
+              </SelectContent>
+            </Select>
+          </div>
         </div>
+
         <Tabs value={tab} onValueChange={(value) => handleTabSwitch(value)}>
           <TabsList className="">
             {verificationStatus.map(([value, label]) => (

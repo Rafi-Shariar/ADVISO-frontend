@@ -70,4 +70,6 @@ export interface MentorParams {
   professionalDomain ?: string;
   page?: number;
   limit?: number;
+  sortBy ?: string;
+  sortOrder ?: string;
 }
