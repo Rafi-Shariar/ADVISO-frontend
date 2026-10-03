@@ -81,80 +81,91 @@ const MentorApprovalTabs = () => {
   };
 
   return (
-    <div>
-      <div className="flex flex-col gap-3 md:flex-row justify-between my-6">
-        <div className="flex gap-3 items-center">
+  <div className="w-full">
+    {/* Main Controls Header */}
+    <div className="my-6 flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+      
+      {/* Search, Filter, and Sort Controls */}
+      <div className="flex flex-1 flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
+        {/* Search Input */}
+        <div className="w-full sm:w-64 md:w-72">
           <Input
             type="search"
             placeholder="Search by name or email..."
-            className=" md:min-w-70"
+            className="w-full"
             onChange={(e) => handleSearch(e)}
           />
-
-          <div className=" flex items-center gap-2">
-            <Select
-              value={domain || ""}
-              onValueChange={(val) => handleDomainFilter(val)}
-            >
-              <SelectTrigger className="w-full">
-                <SelectValue placeholder="Filter by Professional Domain" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectGroup>
-                  <SelectLabel>Select Your Domain</SelectLabel>
-                  {Object.entries(PROFESSION_DOMAINS).map(
-                    ([key, domainName]) => (
-                      <SelectItem key={key} value={key}>
-                        {domainName}
-                      </SelectItem>
-                    ),
-                  )}
-                </SelectGroup>
-              </SelectContent>
-            </Select>
-
-            {domain && (
-              <Button
-                variant="outline"
-                size="icon"
-                onClick={handleClearDomain}
-                title="Clear filter"
-                aria-label="Clear filter"
-              >
-                <X className="h-4 w-4" />
-              </Button>
-            )}
-          </div>
-
-          <div>
-            <Select onValueChange={(val) => handleFilter(val)}>
-              <SelectTrigger className="w-full min-w-40">
-                <SelectValue placeholder="Sort By" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectGroup>
-                  <SelectLabel>Sort By</SelectLabel>
-                  <SelectItem value="yearOfExperience-asc">Experience - ASC</SelectItem>
-                  <SelectItem value="yearOfExperience-desc">Experience - DESC</SelectItem>
-                  <SelectItem value="sessionCharge-asc">Session Charge - ASC</SelectItem>
-                  <SelectItem value="sessionCharge-desc">Session Charge - DESC</SelectItem>
-                  <SelectItem value="averageRatings-asc">Ratting - ASC</SelectItem>
-                  <SelectItem value="averageRatings-desc">Ratting - DESC</SelectItem>
-                  <SelectItem value="totalSessionsCompleted-asc">Sessions - ASC</SelectItem>
-                  <SelectItem value="totalSessionsCompleted-desc">Sessions - DESC</SelectItem>
-                </SelectGroup>
-              </SelectContent>
-            </Select>
-          </div>
         </div>
 
+        {/* Domain Select + Clear Button */}
+        <div className="flex w-full items-center gap-2 sm:w-auto sm:min-w-[220px]">
+          <Select
+            value={domain || ""}
+            onValueChange={(val) => handleDomainFilter(val)}
+          >
+            <SelectTrigger className="w-full">
+              <SelectValue placeholder="Filter by Domain" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectGroup>
+                <SelectLabel>Select Your Domain</SelectLabel>
+                {Object.entries(PROFESSION_DOMAINS).map(
+                  ([key, domainName]) => (
+                    <SelectItem key={key} value={key}>
+                      {domainName}
+                    </SelectItem>
+                  ),
+                )}
+              </SelectGroup>
+            </SelectContent>
+          </Select>
+
+          {domain && (
+            <Button
+              variant="outline"
+              size="icon"
+              className="shrink-0"
+              onClick={handleClearDomain}
+              title="Clear filter"
+              aria-label="Clear filter"
+            >
+              <X className="h-4 w-4" />
+            </Button>
+          )}
+        </div>
+
+        {/* Sort Select */}
+        <div className="w-full sm:w-44">
+          <Select onValueChange={(val) => handleFilter(val)}>
+            <SelectTrigger className="w-full">
+              <SelectValue placeholder="Sort By" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectGroup>
+                <SelectLabel>Sort By</SelectLabel>
+                <SelectItem value="yearOfExperience-asc">Experience - ASC</SelectItem>
+                <SelectItem value="yearOfExperience-desc">Experience - DESC</SelectItem>
+                <SelectItem value="sessionCharge-asc">Session Charge - ASC</SelectItem>
+                <SelectItem value="sessionCharge-desc">Session Charge - DESC</SelectItem>
+                <SelectItem value="averageRatings-asc">Rating - ASC</SelectItem>
+                <SelectItem value="averageRatings-desc">Rating - DESC</SelectItem>
+                <SelectItem value="totalSessionsCompleted-asc">Sessions - ASC</SelectItem>
+                <SelectItem value="totalSessionsCompleted-desc">Sessions - DESC</SelectItem>
+              </SelectGroup>
+            </SelectContent>
+          </Select>
+        </div>
+      </div>
+
+      {/* Tabs with Horizontal Scroll for Mobile */}
+      <div className="w-full overflow-x-auto pb-1 lg:w-auto lg:pb-0">
         <Tabs value={tab} onValueChange={(value) => handleTabSwitch(value)}>
-          <TabsList className="">
+          <TabsList className="flex w-max lg:w-auto">
             {verificationStatus.map(([value, label]) => (
-              <TabsTrigger key={value} value={value}>
+              <TabsTrigger key={value} value={value} className="whitespace-nowrap">
                 <span
                   className={
-                    tab === value ? "text-orange-500 font-bold" : undefined
+                    tab === value ? "font-bold text-orange-500" : undefined
                   }
                 >
                   {label}
@@ -164,12 +175,14 @@ const MentorApprovalTabs = () => {
           </TabsList>
         </Tabs>
       </div>
-
-      <Suspense fallback={<MentorApprovalTableSkeleton />}>
-        <MentorApprovalTable {...queryParams} handlePageChange={setPage} />
-      </Suspense>
     </div>
-  );
+
+    {/* Table / Skeleton View */}
+    <Suspense fallback={<MentorApprovalTableSkeleton />}>
+      <MentorApprovalTable {...queryParams} handlePageChange={setPage} />
+    </Suspense>
+  </div>
+);
 };
 
 export default MentorApprovalTabs;

@@ -2,7 +2,7 @@
 import { useSuspenseGetAllMentorsAdmin } from "@/hooks/mentor.hook";
 import { log } from "console";
 import React, { Dispatch, SetStateAction } from "react";
-import { MoreHorizontalIcon } from "lucide-react";
+import { Divide, MoreHorizontalIcon, ShieldAlert } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -25,6 +25,7 @@ import {
   MentorParams,
   MentorVerificationStatus,
 } from "@/types/mentor.type";
+ShieldAlert
 import TablePagination from "@/components/ui/table-pagination";
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
@@ -55,6 +56,20 @@ const MentorApprovalTable = ({ handlePageChange, ...params }: Props) => {
             <TableHead className="text-right">Actions</TableHead>
           </TableRow>
         </TableHeader>
+
+        {mentors.length === 0 && (
+  <TableRow>
+    <TableCell
+      colSpan={9}
+      className="h-16 text-center font-medium text-amber-700"
+    >
+      <div className="flex items-center justify-center gap-2">
+        <ShieldAlert className="h-5 w-5 text-amber-500 shrink-0" />
+        <span>No information available</span>
+      </div>
+    </TableCell>
+  </TableRow>
+)}
         <TableBody>
           {mentors.map((mentor) => (
             <TableRow key={mentor.mentorId}>
