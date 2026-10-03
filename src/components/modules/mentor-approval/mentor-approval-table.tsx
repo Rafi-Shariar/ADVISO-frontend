@@ -63,7 +63,9 @@ const MentorApprovalTable = ({ handlePageChange, ...params }: Props) => {
                   />
                   <AvatarFallback>CN</AvatarFallback>
                 </Avatar>
-                <Link href={`/admin/${mentor.mentorId}`}>{mentor.user.name}</Link>
+                <Link href={`/admin/${mentor.mentorId}`}>
+                  <span className="hover:underline">{mentor.user.name}</span>
+                </Link>
               </TableCell>
               <TableCell>{mentor.user.email}</TableCell>
               <TableCell>{mentor.professionalDomain}</TableCell>

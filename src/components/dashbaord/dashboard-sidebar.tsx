@@ -43,9 +43,16 @@ export function DashbaordSidebar({ role }: { role: UserRole }) {
               <SidebarMenu>
                 {item.items.map((item) => (
                   <SidebarMenuItem key={item.title}>
-                    <SidebarMenuButton asChild isActive={item.url === pathname} className={item.url === pathname ? "bg-orange-50 text-orange-600 font-medium" : undefined}>
+                    <SidebarMenuButton
+                      asChild
+                      isActive={item.url === pathname}
+                      className={
+                        item.url === pathname
+                          ? "bg-orange-50 text-orange-600 font-medium"
+                          : undefined
+                      }
+                    >
                       <Link href={item.url}>{item.title}</Link>
-                      
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                 ))}

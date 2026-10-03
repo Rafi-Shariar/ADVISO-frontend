@@ -18,7 +18,7 @@ import {
 const getPaginationRange = (
   currentPage: number,
   totalPages: number,
-  siblingCount: number = 1 // how many pages around the current page to show
+  siblingCount: number = 1, // how many pages around the current page to show
 ): (number | string)[] => {
   // If the total pages is small, just show all pages
   if (totalPages <= 7) {
@@ -65,15 +65,12 @@ const getPaginationRange = (
 };
 
 interface Props {
-    totalPages : number;
-    handlePageChange : Dispatch<SetStateAction<number>>,
-    page: number
+  totalPages: number;
+  handlePageChange: Dispatch<SetStateAction<number>>;
+  page: number;
 }
 
-
-
-const TablePagination = ({totalPages, handlePageChange, page} : Props) => {
- 
+const TablePagination = ({ totalPages, handlePageChange, page }: Props) => {
   const gotoPage = (newPage: number) => {
     if (newPage >= 1 && newPage <= totalPages) {
       handlePageChange(newPage);
@@ -89,7 +86,9 @@ const TablePagination = ({totalPages, handlePageChange, page} : Props) => {
         <PaginationItem>
           <PaginationPrevious
             onClick={() => gotoPage(page - 1)}
-            className={page === 1 ? "pointer-events-none opacity-50" : "cursor-pointer"}
+            className={
+              page === 1 ? "pointer-events-none opacity-50" : "cursor-pointer"
+            }
           />
         </PaginationItem>
 
@@ -124,7 +123,11 @@ const TablePagination = ({totalPages, handlePageChange, page} : Props) => {
         <PaginationItem>
           <PaginationNext
             onClick={() => gotoPage(page + 1)}
-            className={page === totalPages ? "pointer-events-none opacity-50" : "cursor-pointer"}
+            className={
+              page === totalPages
+                ? "pointer-events-none opacity-50"
+                : "cursor-pointer"
+            }
           />
         </PaginationItem>
       </PaginationContent>

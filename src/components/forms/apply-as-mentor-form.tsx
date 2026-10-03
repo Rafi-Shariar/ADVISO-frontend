@@ -5,7 +5,7 @@ import { Field, FieldLabel } from "../ui/field";
 import { Input } from "../ui/input";
 import { file } from "zod";
 import { Badge } from "../ui/badge";
-import { FileUp, X } from "lucide-react";
+import { FileUp, Key, X } from "lucide-react";
 import {
   Select,
   SelectContent,
@@ -284,11 +284,13 @@ const ApplyAsMentorForm = () => {
                   <SelectContent>
                     <SelectGroup>
                       <SelectLabel>Select Your Domain</SelectLabel>
-                      {Object.values(PROFESSION_DOMAINS).map((domain) => (
-                        <SelectItem key={domain} value={domain}>
-                          {domain}
-                        </SelectItem>
-                      ))}
+                      {Object.values(PROFESSION_DOMAINS).map(
+                        ([key, domain]) => (
+                          <SelectItem key={key} value={key}>
+                            {domain}
+                          </SelectItem>
+                        ),
+                      )}
                     </SelectGroup>
                   </SelectContent>
                 </Select>

@@ -67,6 +67,7 @@ export interface IMentorDetails {
 export interface MentorParams {
   verificationStatus?: MentorVerificationStatus;
   searchTerm?: string;
+  professionalDomain ?: string;
   page?: number;
   limit?: number;
 }
