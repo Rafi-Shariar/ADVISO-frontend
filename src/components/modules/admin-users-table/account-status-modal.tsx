@@ -10,13 +10,17 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { CheckCircle2, Ban, AlertTriangle, ShieldCheck } from "lucide-react";
+import { CheckCircle2, Ban, AlertTriangle, ShieldCheck, Loader2 } from "lucide-react";
+import { useChangeAccountStatus } from "@/hooks/user.hook";
+import { toast } from "sonner";
 
 interface Props {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   user: UserProfileAdmin;
 }
+
+const statusOptions: UserAccountStatus[] = ["ACTIVE", "SUSPENDED", "BLOCKED"];
 
 const statusConfig: Record<
   UserAccountStatus,
@@ -33,27 +37,33 @@ const statusConfig: Record<
     description: "Account is active with full access to sessions and bookings.",
     icon: CheckCircle2,
     activeRing: "ring-emerald-500",
-    badgeStyle: "bg-emerald-50 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-400 border-emerald-200/60 dark:border-emerald-800/40",
+    badgeStyle:
+      "bg-emerald-50 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-400 border-emerald-200/60 dark:border-emerald-800/40",
   },
   SUSPENDED: {
     label: "Suspended",
-    description: "User is temporarily restricted from logging in and scheduling.",
+    description:
+      "User is temporarily restricted from logging in and scheduling.",
     icon: AlertTriangle,
     activeRing: "ring-amber-500",
-    badgeStyle: "bg-amber-50 text-amber-700 dark:bg-amber-950/40 dark:text-amber-400 border-amber-200/60 dark:border-amber-800/40",
+    badgeStyle:
+      "bg-amber-50 text-amber-700 dark:bg-amber-950/40 dark:text-amber-400 border-amber-200/60 dark:border-amber-800/40",
   },
   BLOCKED: {
     label: "Blocked",
-    description: "Access revoked indefinitely. All ongoing activities are frozen.",
+    description:
+      "Access revoked indefinitely. All ongoing activities are frozen.",
     icon: Ban,
     activeRing: "ring-rose-500",
-    badgeStyle: "bg-rose-50 text-rose-700 dark:bg-rose-950/40 dark:text-rose-400 border-rose-200/60 dark:border-rose-800/40",
+    badgeStyle:
+      "bg-rose-50 text-rose-700 dark:bg-rose-950/40 dark:text-rose-400 border-rose-200/60 dark:border-rose-800/40",
   },
 };
 
 export function AdminUserAccountStatusModal({ open, onOpenChange, user }: Props) {
   const [selectedStatus, setSelectedStatus] = useState<UserAccountStatus>(user.accountStatus);
   const [imageError, setImageError] = useState(false);
+  const { mutate: updateStatus, isPending } = useChangeAccountStatus();
 
   const getInitials = (name?: string) => {
     if (!name) return "U";
@@ -68,8 +78,27 @@ export function AdminUserAccountStatusModal({ open, onOpenChange, user }: Props)
 
   const handleSave = (e: React.FormEvent) => {
     e.preventDefault();
-    // Connect mutation hook here: { userId: user.userId, accountStatus: selectedStatus }
-    onOpenChange(false);
+
+    updateStatus(
+      { id: user.userId, payload: { status: selectedStatus } },
+      {
+        onSuccess: () => {
+          toast.success("Account status updated successfully", { position: "top-left" });
+          onOpenChange(false);
+        },
+        onError: (err: any) => {
+          const errorDescription =
+            err?.data?.message ||
+            err?.message ||
+            "Something went wrong. Please try again";
+
+          toast.error("Login Failed.", {
+            description: errorDescription,
+            position: "top-right",
+          });
+        },
+      }
+    );
   };
 
   const activeMeta = statusConfig[selectedStatus];
@@ -115,7 +144,7 @@ export function AdminUserAccountStatusModal({ open, onOpenChange, user }: Props)
               {user.email}
             </p>
 
-            {/* Role & Timezone pills */}
+            {/* Role & Timezone */}
             <div className="flex items-center gap-1.5 mt-3">
               <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-medium bg-secondary text-secondary-foreground border border-border/50">
                 <ShieldCheck className="h-3 w-3 text-muted-foreground" />
@@ -129,22 +158,22 @@ export function AdminUserAccountStatusModal({ open, onOpenChange, user }: Props)
             </div>
           </div>
 
-          {/* Status Segmented Toggle & State Preview */}
+          {/* Status Selection & Feedback */}
           <div className="p-6 space-y-4">
             <div className="space-y-2">
-              <h1 className="text-[11px] font-medium tracking-wider text-muted-foreground uppercase">
+              <h3 className="text-[11px] font-medium tracking-wider text-muted-foreground uppercase">
                 Account Status
-              </h1>
+              </h3>
 
               {/* Segmented Controller */}
               <div className="grid grid-cols-3 gap-1 p-1 bg-muted/60 rounded-xl border border-border/50">
-                {(["ACTIVE", "SUSPENDED", "BLOCKED"] as UserAccountStatus[]).map((status) => {
+                {statusOptions.map((status) => {
                   const isSelected = selectedStatus === status;
                   return (
                     <button
                       key={status}
                       type="button"
-                      onClick={() => setSelectedStatus(status as UserAccountStatus)}
+                      onClick={() => setSelectedStatus(status)}
                       className={`relative py-2 text-xs font-medium rounded-lg transition-all duration-200 capitalize outline-none ${
                         isSelected
                           ? "bg-orange-500 text-white shadow-xs font-semibold"
@@ -173,6 +202,7 @@ export function AdminUserAccountStatusModal({ open, onOpenChange, user }: Props)
               type="button"
               variant="ghost"
               size="sm"
+              disabled={isPending}
               className="text-xs h-9 px-4 rounded-lg"
               onClick={() => onOpenChange(false)}
             >
@@ -181,10 +211,11 @@ export function AdminUserAccountStatusModal({ open, onOpenChange, user }: Props)
             <Button
               type="submit"
               size="sm"
-              disabled={selectedStatus === user.accountStatus}
-              className="text-xs h-9 px-4 rounded-lg shadow-xs bg-orange-500 font-semibold hover:bg-orange-100 hover:text-orange-500 hover:border border-orange-300"
+              disabled={selectedStatus === user.accountStatus || isPending}
+              className="text-xs h-9 px-4 rounded-lg shadow-xs bg-orange-500 font-semibold text-white hover:bg-orange-600 border border-transparent disabled:opacity-50"
             >
-              Update Status
+              {isPending && <Loader2 className="mr-1.5 h-3.5 w-3.5 animate-spin" />}
+              {isPending ? "Updating..." : "Update Status"}
             </Button>
           </div>
         </form>

@@ -58,7 +58,7 @@ const MentorApprovalTable = ({ handlePageChange, ...params }: Props) => {
           </TableRow>
         </TableHeader>
 
-        {mentors.length === 0 && <EmptyTableUI/>}
+        {mentors.length === 0 && <EmptyTableUI />}
         <TableBody>
           {mentors.map((mentor) => (
             <TableRow key={mentor.mentorId}>

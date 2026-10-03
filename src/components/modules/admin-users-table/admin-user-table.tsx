@@ -20,10 +20,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import {
-  MentorParams,
-
-} from "@/types/mentor.type";
+import { MentorParams } from "@/types/mentor.type";
 ShieldAlert;
 import TablePagination from "@/components/ui/table-pagination";
 import Link from "next/link";
@@ -38,18 +35,17 @@ interface Props extends MentorParams {
 }
 
 const AdminUsersTable = ({ handlePageChange, ...params }: Props) => {
+  const [selectedUser, setSelectedUser] = useState<UserProfileAdmin | null>(
+    null,
+  );
+  const [openStatusModal, setOpenStatusModal] = useState(false);
 
-   const [selectedUser, setSelectedUser] = useState<UserProfileAdmin | null>(null);
-   const [openStatusModal, setOpenStatusModal] = useState(false)
-
-   const handleOpenModal = (user : UserProfileAdmin) => {
+  const handleOpenModal = (user: UserProfileAdmin) => {
     setSelectedUser(user);
-    setOpenStatusModal(true)
-   }
-  
-  const { data } = useSuspenseGetAllUsersAdmin(params);
+    setOpenStatusModal(true);
+  };
 
-  
+  const { data } = useSuspenseGetAllUsersAdmin(params);
 
   const users: UserProfileAdmin[] = data?.data?.data || [];
 
@@ -63,41 +59,29 @@ const AdminUsersTable = ({ handlePageChange, ...params }: Props) => {
             <TableHead>Timezone</TableHead>
             <TableHead>Account</TableHead>
             <TableHead>Role</TableHead>
-    
+
             <TableHead className="text-right">Actions</TableHead>
           </TableRow>
         </TableHeader>
 
-        {users.length === 0 && <EmptyTableUI/>}
+        {users.length === 0 && <EmptyTableUI />}
         <TableBody>
           {users.map((user) => (
             <TableRow key={user.userId}>
               <TableCell className="font-medium flex items-center gap-3">
                 <Avatar>
-                  <AvatarImage
-                    src={user.profileURL}
-                    alt={user.name}
-                  />
+                  <AvatarImage src={user.profileURL} alt={user.name} />
                   <AvatarFallback>CN</AvatarFallback>
                 </Avatar>
                 <Link href={`/admin/${user.userId}`}>
                   <span className="hover:underline">{user.name}</span>
                 </Link>
               </TableCell>
-              <TableCell>
-                {user.email}
-              </TableCell>
-              <TableCell>
-                {user.timezone}
-              </TableCell>
-              <TableCell>
-                {user.accountStatus}
-              </TableCell>
+              <TableCell>{user.email}</TableCell>
+              <TableCell>{user.timezone}</TableCell>
+              <TableCell>{user.accountStatus}</TableCell>
 
-              <TableCell>
-                {user.role}
-              </TableCell>
-
+              <TableCell>{user.role}</TableCell>
 
               <TableCell className="text-right">
                 <DropdownMenu>
@@ -110,8 +94,8 @@ const AdminUsersTable = ({ handlePageChange, ...params }: Props) => {
                   <DropdownMenuContent align="end">
                     <DropdownMenuItem>User Profile</DropdownMenuItem>
                     <DropdownMenuItem onClick={() => handleOpenModal(user)}>
-                       Account Status
-                      </DropdownMenuItem>
+                      Account Status
+                    </DropdownMenuItem>
                     <DropdownMenuSeparator />
                     <DropdownMenuItem variant="destructive">
                       Delete User
@@ -124,7 +108,13 @@ const AdminUsersTable = ({ handlePageChange, ...params }: Props) => {
         </TableBody>
       </Table>
 
-     {selectedUser &&  <AdminUserAccountStatusModal open={openStatusModal} onOpenChange={setOpenStatusModal} user={selectedUser}/>}
+      {selectedUser && (
+        <AdminUserAccountStatusModal
+          open={openStatusModal}
+          onOpenChange={setOpenStatusModal}
+          user={selectedUser}
+        />
+      )}
 
       <div className="my-5">
         <TablePagination
