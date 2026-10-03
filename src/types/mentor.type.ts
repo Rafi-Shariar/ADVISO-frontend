@@ -67,9 +67,9 @@ export interface IMentorDetails {
 export interface MentorParams {
   verificationStatus?: MentorVerificationStatus;
   searchTerm?: string;
-  professionalDomain ?: string;
+  professionalDomain?: string;
   page?: number;
   limit?: number;
-  sortBy ?: string;
-  sortOrder ?: string;
+  sortBy?: string;
+  sortOrder?: string;
 }
