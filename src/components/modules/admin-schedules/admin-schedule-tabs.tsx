@@ -11,6 +11,7 @@ import {
 import { Input } from "@/components/ui/input";
 import React, { useState } from "react";
 import useDebounce from "@/hooks/debounce.hook";
+import AdminScheduleTable from "./admin-schedule-table";
 
 const AdminScheduleTabs = () => {
   const [date, setDate] = React.useState<Date>();
@@ -24,7 +25,7 @@ const AdminScheduleTabs = () => {
   
   return (
     <div className="max-w-7xl mx-auto">
-      <div className="flex justify-between mt-6">
+      <div className="flex justify-between my-6">
         <div className="w-full sm:w-64 md:w-100">
           <Input
             type="search"
@@ -57,6 +58,8 @@ const AdminScheduleTabs = () => {
           </Popover>
         </div>
       </div>
+
+      <AdminScheduleTable/>
     </div>
   );
 };
