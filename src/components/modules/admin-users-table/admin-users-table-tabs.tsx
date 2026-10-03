@@ -23,7 +23,11 @@ import MentorApprovalTableSkeleton from "../mentor-approval/mentor-approval-tabl
 import MentorApprovalTable from "../mentor-approval/mentor-approval-table";
 import AdminUsersTable from "./admin-user-table";
 import AdminUsersTableSkeleton from "./admin-users-table-skeleton";
-import { UserAccountRole, UserAccountStatus, UserParams } from "@/types/user.type";
+import {
+  UserAccountRole,
+  UserAccountStatus,
+  UserParams,
+} from "@/types/user.type";
 
 const verificationStatus: ["ALL" | UserAccountRole, string][] = [
   ["ALL", "All"],
@@ -55,7 +59,7 @@ const UsersTableTabs = () => {
   const handleFilter = (value: string) => {
     setFilter(value);
     console.log(value);
-    
+
     setPage(1);
   };
 
@@ -64,15 +68,12 @@ const UsersTableTabs = () => {
     setPage(1);
   };
 
-
-
   const queryParams: UserParams = {
     page: page,
     limit: 10,
-    ...(tab === "ALL" ? {} : { "role": tab }),
-    ...(filter === "" ? {} : {"accountStatus" : filter as UserAccountStatus}),
+    ...(tab === "ALL" ? {} : { role: tab }),
+    ...(filter === "" ? {} : { accountStatus: filter as UserAccountStatus }),
     ...(debouncedSearch ? { searchTerm: debouncedSearch } : {}),
-
   };
 
   return (
@@ -103,16 +104,10 @@ const UsersTableTabs = () => {
               <SelectContent>
                 <SelectGroup>
                   <SelectLabel>Account Status</SelectLabel>
-                  
-                  <SelectItem  value={"ACTIVE"}>
-                        Active
-                  </SelectItem>
-                  <SelectItem  value={"BLOCKED"}>
-                        Blocked
-                  </SelectItem>
-                  <SelectItem  value={"SUSPENDED"}>
-                        Suspended
-                  </SelectItem>
+
+                  <SelectItem value={"ACTIVE"}>Active</SelectItem>
+                  <SelectItem value={"BLOCKED"}>Blocked</SelectItem>
+                  <SelectItem value={"SUSPENDED"}>Suspended</SelectItem>
                 </SelectGroup>
               </SelectContent>
             </Select>
@@ -130,8 +125,6 @@ const UsersTableTabs = () => {
               </Button>
             )}
           </div>
-
-         
         </div>
 
         {/* Tabs with Horizontal Scroll for Mobile */}
