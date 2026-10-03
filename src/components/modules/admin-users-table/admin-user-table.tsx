@@ -21,24 +21,28 @@ import {
 } from "@/components/ui/table";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
-  IMentorProfile,
   MentorParams,
-  MentorVerificationStatus,
+
 } from "@/types/mentor.type";
 ShieldAlert;
 import TablePagination from "@/components/ui/table-pagination";
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 import EmptyTableUI from "@/components/layout/private/empty-table-ui";
+import { useSuspenseGetAllUsersAdmin } from "@/hooks/user.hook";
+import { UserProfileAdmin } from "@/types/user.type";
 
 interface Props extends MentorParams {
   handlePageChange: Dispatch<SetStateAction<number>>;
 }
 
-const MentorApprovalTable = ({ handlePageChange, ...params }: Props) => {
-  const { data } = useSuspenseGetAllMentorsAdmin(params);
+const AdminUsersTable = ({ handlePageChange, ...params }: Props) => {
+  const { data } = useSuspenseGetAllUsersAdmin(params);
 
-  const mentors: IMentorProfile[] = data?.data || [];
+  console.log(data?.data);
+  
+
+  const users: UserProfileAdmin[] = data?.data?.data || [];
 
   return (
     <div>
@@ -47,50 +51,44 @@ const MentorApprovalTable = ({ handlePageChange, ...params }: Props) => {
           <TableRow>
             <TableHead>Name</TableHead>
             <TableHead>Email</TableHead>
-            <TableHead>Professional Domain</TableHead>
-            <TableHead>Experience</TableHead>
-            <TableHead>Charge</TableHead>
-            <TableHead>Sessions</TableHead>
-            <TableHead>Rattings</TableHead>
-            <TableHead>Mentorship Status</TableHead>
-
+            <TableHead>Timezone</TableHead>
+            <TableHead>Account</TableHead>
+            <TableHead>Role</TableHead>
+    
             <TableHead className="text-right">Actions</TableHead>
           </TableRow>
         </TableHeader>
 
-        {mentors.length === 0 && <EmptyTableUI/>}
+        {users.length === 0 && <EmptyTableUI/>}
         <TableBody>
-          {mentors.map((mentor) => (
-            <TableRow key={mentor.mentorId}>
+          {users.map((user) => (
+            <TableRow key={user.userId}>
               <TableCell className="font-medium flex items-center gap-3">
                 <Avatar>
                   <AvatarImage
-                    src={mentor.user.profileURL}
-                    alt={mentor.user.name}
+                    src={user.profileURL}
+                    alt={user.name}
                   />
                   <AvatarFallback>CN</AvatarFallback>
                 </Avatar>
-                <Link href={`/admin/${mentor.mentorId}`}>
-                  <span className="hover:underline">{mentor.user.name}</span>
+                <Link href={`/admin/${user.userId}`}>
+                  <span className="hover:underline">{user.name}</span>
                 </Link>
               </TableCell>
-              <TableCell>{mentor.user.email}</TableCell>
-              <TableCell>{mentor.professionalDomain}</TableCell>
-              <TableCell>{mentor.yearOfExperience}</TableCell>
-              <TableCell>${mentor.sessionCharge}</TableCell>
-              <TableCell>{mentor.totalSessionsCompleted}</TableCell>
-              <TableCell>{mentor.averageRatings}</TableCell>
               <TableCell>
-                {mentor.mentorshipStatus === "OPEN" ? (
-                  <Badge className="bg-green-50 text-green-700 dark:bg-green-950 dark:text-green-300 text-xs">
-                    Open
-                  </Badge>
-                ) : (
-                  <Badge className="bg-red-50 text-red-700 dark:bg-red-950 dark:text-red-300 text-xs">
-                    Green
-                  </Badge>
-                )}
+                {user.email}
               </TableCell>
+              <TableCell>
+                {user.timezone}
+              </TableCell>
+              <TableCell>
+                {user.accountStatus}
+              </TableCell>
+
+              <TableCell>
+                {user.role}
+              </TableCell>
+
 
               <TableCell className="text-right">
                 <DropdownMenu>
@@ -101,11 +99,11 @@ const MentorApprovalTable = ({ handlePageChange, ...params }: Props) => {
                     </Button>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="end">
-                    <DropdownMenuItem>Mentor Profile</DropdownMenuItem>
-                    <DropdownMenuItem>Mentorship Status</DropdownMenuItem>
+                    <DropdownMenuItem>User Profile</DropdownMenuItem>
+                    <DropdownMenuItem>Account Status</DropdownMenuItem>
                     <DropdownMenuSeparator />
                     <DropdownMenuItem variant="destructive">
-                      Delete
+                      Delete User
                     </DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
@@ -117,7 +115,7 @@ const MentorApprovalTable = ({ handlePageChange, ...params }: Props) => {
 
       <div className="my-5">
         <TablePagination
-          totalPages={data?.meta?.totalPages ?? 0}
+          totalPages={data?.data?.meta?.totalPages ?? 0}
           handlePageChange={handlePageChange}
           page={params.page ?? 0}
         />
@@ -126,4 +124,4 @@ const MentorApprovalTable = ({ handlePageChange, ...params }: Props) => {
   );
 };
 
-export default MentorApprovalTable;
+export default AdminUsersTable;

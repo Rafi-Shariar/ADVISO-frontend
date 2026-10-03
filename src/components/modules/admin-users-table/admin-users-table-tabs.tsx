@@ -2,8 +2,7 @@
 import React, { Suspense, useState } from "react";
 
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import MentorApprovalTable from "./mentor-approval-table";
-import MentorApprovalTableSkeleton from "./mentor-approval-table-sketon";
+
 import { MentorParams, MentorVerificationStatus } from "@/types/mentor.type";
 import { Input } from "@/components/ui/input";
 import useDebounce from "@/hooks/debounce.hook";
@@ -20,25 +19,28 @@ import {
 import { PROFESSION_DOMAINS } from "@/constants/professionDomain.constant";
 import { X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import MentorApprovalTableSkeleton from "../mentor-approval/mentor-approval-table-sketon";
+import MentorApprovalTable from "../mentor-approval/mentor-approval-table";
+import AdminUsersTable from "./admin-user-table";
+import AdminUsersTableSkeleton from "./admin-users-table-skeleton";
+import { UserAccountRole, UserAccountStatus, UserParams } from "@/types/user.type";
 
-const verificationStatus: ["ALL" | MentorVerificationStatus, string][] = [
+const verificationStatus: ["ALL" | UserAccountRole, string][] = [
   ["ALL", "All"],
-  ["APPROVED", "Approved"],
-  ["PENDING", "Pending"],
-  ["REJECTED", "Rejected"],
+  ["USER", "Users"],
+  ["MENTOR", "Mentors"],
+  ["ADMIN", "Admins"],
+  ["SUPER_ADMIN", "Super Admin"],
 ];
-const MentorApprovalTabs = () => {
-  const [tab, setTab] = useState<"ALL" | MentorVerificationStatus>("ALL");
+const UsersTableTabs = () => {
+  const [tab, setTab] = useState<"ALL" | UserAccountRole>("ALL");
 
   const [searchInput, setSearchInput] = useState("");
   const debouncedSearch = useDebounce(searchInput);
 
   const [page, setPage] = useState(1);
 
-  const [domain, setDomain] = useState("");
-
-  const [sortBy, setSortBy] = useState("");
-  const [sortOrder, setSortOrder] = useState("");
+  const [filter, setFilter] = useState("");
 
   const handleSearch = (e: any) => {
     setSearchInput(e.target.value);
@@ -46,37 +48,31 @@ const MentorApprovalTabs = () => {
   };
 
   const handleTabSwitch = (value: string) => {
-    setTab(value as MentorVerificationStatus | "ALL");
-    setPage(1);
-  };
-
-  const handleDomainFilter = (value: string) => {
-    setDomain(value);
-    setPage(1);
-  };
-
-  const handleClearDomain = () => {
-    setDomain("");
+    setTab(value as UserAccountRole | "ALL");
     setPage(1);
   };
 
   const handleFilter = (value: string) => {
-    const parts = value.split("-");
-    const sortOn = parts[0];
-    const sortingOrder = parts[1];
-
-    setSortBy(sortOn);
-    setSortOrder(sortingOrder);
+    setFilter(value);
+    console.log(value);
+    
+    setPage(1);
   };
 
-  const queryParams: MentorParams = {
+  const handleClearDomain = () => {
+    setFilter("");
+    setPage(1);
+  };
+
+
+
+  const queryParams: UserParams = {
     page: page,
     limit: 10,
-    ...(domain === "" ? {} : { professionalDomain: domain }),
-    ...(tab === "ALL" ? {} : { verificationStatus: tab }),
+    ...(tab === "ALL" ? {} : { "role": tab }),
+    ...(filter === "" ? {} : {"accountStatus" : filter as UserAccountStatus}),
     ...(debouncedSearch ? { searchTerm: debouncedSearch } : {}),
-    ...(sortBy ? { sortBy: sortBy } : {}),
-    ...(sortOrder ? { sortOrder: sortOrder } : {}),
+
   };
 
   return (
@@ -98,27 +94,30 @@ const MentorApprovalTabs = () => {
           {/* Domain Select + Clear Button */}
           <div className="flex w-full items-center gap-2 sm:w-auto sm:min-w-[220px]">
             <Select
-              value={domain || ""}
-              onValueChange={(val) => handleDomainFilter(val)}
+              value={filter || ""}
+              onValueChange={(val) => handleFilter(val)}
             >
               <SelectTrigger className="w-full">
-                <SelectValue placeholder="Filter by Domain" />
+                <SelectValue placeholder="Account Status" />
               </SelectTrigger>
               <SelectContent>
                 <SelectGroup>
-                  <SelectLabel>Select Your Domain</SelectLabel>
-                  {Object.entries(PROFESSION_DOMAINS).map(
-                    ([key, domainName]) => (
-                      <SelectItem key={key} value={key}>
-                        {domainName}
-                      </SelectItem>
-                    ),
-                  )}
+                  <SelectLabel>Account Status</SelectLabel>
+                  
+                  <SelectItem  value={"ACTIVE"}>
+                        Active
+                  </SelectItem>
+                  <SelectItem  value={"BLOCKED"}>
+                        Blocked
+                  </SelectItem>
+                  <SelectItem  value={"SUSPENDED"}>
+                        Suspended
+                  </SelectItem>
                 </SelectGroup>
               </SelectContent>
             </Select>
 
-            {domain && (
+            {filter && (
               <Button
                 variant="outline"
                 size="icon"
@@ -132,43 +131,7 @@ const MentorApprovalTabs = () => {
             )}
           </div>
 
-          {/* Sort Select */}
-          <div className="w-full sm:w-44">
-            <Select onValueChange={(val) => handleFilter(val)}>
-              <SelectTrigger className="w-full">
-                <SelectValue placeholder="Sort By" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectGroup>
-                  <SelectLabel>Sort By</SelectLabel>
-                  <SelectItem value="yearOfExperience-asc">
-                    Experience - ASC
-                  </SelectItem>
-                  <SelectItem value="yearOfExperience-desc">
-                    Experience - DESC
-                  </SelectItem>
-                  <SelectItem value="sessionCharge-asc">
-                    Session Charge - ASC
-                  </SelectItem>
-                  <SelectItem value="sessionCharge-desc">
-                    Session Charge - DESC
-                  </SelectItem>
-                  <SelectItem value="averageRatings-asc">
-                    Rating - ASC
-                  </SelectItem>
-                  <SelectItem value="averageRatings-desc">
-                    Rating - DESC
-                  </SelectItem>
-                  <SelectItem value="totalSessionsCompleted-asc">
-                    Sessions - ASC
-                  </SelectItem>
-                  <SelectItem value="totalSessionsCompleted-desc">
-                    Sessions - DESC
-                  </SelectItem>
-                </SelectGroup>
-              </SelectContent>
-            </Select>
-          </div>
+         
         </div>
 
         {/* Tabs with Horizontal Scroll for Mobile */}
@@ -196,11 +159,11 @@ const MentorApprovalTabs = () => {
       </div>
 
       {/* Table / Skeleton View */}
-      <Suspense fallback={<MentorApprovalTableSkeleton />}>
-        <MentorApprovalTable {...queryParams} handlePageChange={setPage} />
+      <Suspense fallback={<AdminUsersTableSkeleton />}>
+        <AdminUsersTable {...queryParams} handlePageChange={setPage} />
       </Suspense>
     </div>
   );
 };
 
-export default MentorApprovalTabs;
+export default UsersTableTabs;
