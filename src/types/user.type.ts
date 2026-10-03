@@ -28,11 +28,10 @@ export interface UserProfileAdmin {
 }
 
 export interface ChangeAccountStatusPayload {
-  status : string
+  status: string;
 }
 
-
 export interface updateStatusArgs {
-  id : string;
-  payload : ChangeAccountStatusPayload
+  id: string;
+  payload: ChangeAccountStatusPayload;
 }

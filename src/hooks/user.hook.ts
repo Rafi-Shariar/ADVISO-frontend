@@ -1,6 +1,14 @@
-import { changeAccountStatus, getAllUsersAdmin } from "@/api/user.api";
+import {
+  changeAccountStatus,
+  deleteUserAccount,
+  getAllUsersAdmin,
+} from "@/api/user.api";
 import { updateStatusArgs, UserParams } from "@/types/user.type";
-import { useMutation, useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
+import {
+  useMutation,
+  useQueryClient,
+  useSuspenseQuery,
+} from "@tanstack/react-query";
 
 export function useSuspenseGetAllUsersAdmin(params: UserParams) {
   return useSuspenseQuery({
@@ -9,15 +17,25 @@ export function useSuspenseGetAllUsersAdmin(params: UserParams) {
   });
 }
 
-
-export function useChangeAccountStatus(){
+export function useChangeAccountStatus() {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn : ({id,payload} : updateStatusArgs) => changeAccountStatus({id,payload}),
+    mutationFn: ({ id, payload }: updateStatusArgs) =>
+      changeAccountStatus({ id, payload }),
     onSuccess: () => {
-      queryClient.invalidateQueries({queryKey: ["users"]})
-    }
+      queryClient.invalidateQueries({ queryKey: ["users"] });
+    },
+  });
+}
 
-  })
+export function useDeleteAccount() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: (id: string) => deleteUserAccount(id),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["users"] });
+    },
+  });
 }

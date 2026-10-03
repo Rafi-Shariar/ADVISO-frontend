@@ -29,6 +29,7 @@ import EmptyTableUI from "@/components/layout/private/empty-table-ui";
 import { useSuspenseGetAllUsersAdmin } from "@/hooks/user.hook";
 import { UserProfileAdmin } from "@/types/user.type";
 import { AdminUserAccountStatusModal } from "./account-status-modal";
+import { AccountDeleteModal } from "./account-delete-modal";
 
 interface Props extends MentorParams {
   handlePageChange: Dispatch<SetStateAction<number>>;
@@ -39,10 +40,16 @@ const AdminUsersTable = ({ handlePageChange, ...params }: Props) => {
     null,
   );
   const [openStatusModal, setOpenStatusModal] = useState(false);
+  const [openDeleteModal, setOpenDeleteModal] = useState(false);
 
   const handleOpenModal = (user: UserProfileAdmin) => {
     setSelectedUser(user);
     setOpenStatusModal(true);
+  };
+
+  const handleDeleteModal = (user: UserProfileAdmin) => {
+    setSelectedUser(user);
+    setOpenDeleteModal(true);
   };
 
   const { data } = useSuspenseGetAllUsersAdmin(params);
@@ -64,8 +71,8 @@ const AdminUsersTable = ({ handlePageChange, ...params }: Props) => {
           </TableRow>
         </TableHeader>
 
-        {users.length === 0 && <EmptyTableUI />}
         <TableBody>
+          {users.length === 0 && <EmptyTableUI />}
           {users.map((user) => (
             <TableRow key={user.userId}>
               <TableCell className="font-medium flex items-center gap-3">
@@ -92,12 +99,14 @@ const AdminUsersTable = ({ handlePageChange, ...params }: Props) => {
                     </Button>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="end">
-                    <DropdownMenuItem>User Profile</DropdownMenuItem>
                     <DropdownMenuItem onClick={() => handleOpenModal(user)}>
                       Account Status
                     </DropdownMenuItem>
                     <DropdownMenuSeparator />
-                    <DropdownMenuItem variant="destructive">
+                    <DropdownMenuItem
+                      variant="destructive"
+                      onClick={() => handleDeleteModal(user)}
+                    >
                       Delete User
                     </DropdownMenuItem>
                   </DropdownMenuContent>
@@ -112,6 +121,14 @@ const AdminUsersTable = ({ handlePageChange, ...params }: Props) => {
         <AdminUserAccountStatusModal
           open={openStatusModal}
           onOpenChange={setOpenStatusModal}
+          user={selectedUser}
+        />
+      )}
+
+      {selectedUser && (
+        <AccountDeleteModal
+          open={openDeleteModal}
+          onOpenChange={setOpenDeleteModal}
           user={selectedUser}
         />
       )}

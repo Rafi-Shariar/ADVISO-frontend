@@ -10,7 +10,13 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { CheckCircle2, Ban, AlertTriangle, ShieldCheck, Loader2 } from "lucide-react";
+import {
+  CheckCircle2,
+  Ban,
+  AlertTriangle,
+  ShieldCheck,
+  Loader2,
+} from "lucide-react";
 import { useChangeAccountStatus } from "@/hooks/user.hook";
 import { toast } from "sonner";
 
@@ -60,8 +66,14 @@ const statusConfig: Record<
   },
 };
 
-export function AdminUserAccountStatusModal({ open, onOpenChange, user }: Props) {
-  const [selectedStatus, setSelectedStatus] = useState<UserAccountStatus>(user.accountStatus);
+export function AdminUserAccountStatusModal({
+  open,
+  onOpenChange,
+  user,
+}: Props) {
+  const [selectedStatus, setSelectedStatus] = useState<UserAccountStatus>(
+    user.accountStatus,
+  );
   const [imageError, setImageError] = useState(false);
   const { mutate: updateStatus, isPending } = useChangeAccountStatus();
 
@@ -83,7 +95,9 @@ export function AdminUserAccountStatusModal({ open, onOpenChange, user }: Props)
       { id: user.userId, payload: { status: selectedStatus } },
       {
         onSuccess: () => {
-          toast.success("Account status updated successfully", { position: "top-left" });
+          toast.success("Account status updated successfully", {
+            position: "top-left",
+          });
           onOpenChange(false);
         },
         onError: (err: any) => {
@@ -97,7 +111,7 @@ export function AdminUserAccountStatusModal({ open, onOpenChange, user }: Props)
             position: "top-right",
           });
         },
-      }
+      },
     );
   };
 
@@ -214,7 +228,9 @@ export function AdminUserAccountStatusModal({ open, onOpenChange, user }: Props)
               disabled={selectedStatus === user.accountStatus || isPending}
               className="text-xs h-9 px-4 rounded-lg shadow-xs bg-orange-500 font-semibold text-white hover:bg-orange-600 border border-transparent disabled:opacity-50"
             >
-              {isPending && <Loader2 className="mr-1.5 h-3.5 w-3.5 animate-spin" />}
+              {isPending && (
+                <Loader2 className="mr-1.5 h-3.5 w-3.5 animate-spin" />
+              )}
               {isPending ? "Updating..." : "Update Status"}
             </Button>
           </div>
