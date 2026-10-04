@@ -1,6 +1,6 @@
 "use client";
 import { format } from "date-fns";
-import { ChevronDownIcon } from "lucide-react";
+import { ChevronDownIcon, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import {
@@ -32,7 +32,7 @@ const AdminScheduleTabs = () => {
 
   return (
     <div className="max-w-7xl mx-auto">
-      <div className="flex justify-between my-6">
+      <div className="flex flex-col gap-2 items-center md:flex-row justify-between my-6">
         <div className="w-full sm:w-64 md:w-100">
           <Input
             type="search"
@@ -53,16 +53,26 @@ const AdminScheduleTabs = () => {
                 {date ? format(date, "PPP") : <span>Pick a date</span>}
 
                 {date ? (
-                  <Button
-                    size={"sm"}
-                    className=""
-                    variant={"ghost"}
-                    onClick={() => setDate(undefined)}
+                  // biome-ignore lint/a11y/useSemanticElements: <explanation>
+                  <span
+                    role="button"
+                    tabIndex={0}
+                    className="rounded-full p-0.5 hover:bg-muted text-muted-foreground hover:text-foreground transition-colors"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setDate(undefined);
+                    }}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" || e.key === " ") {
+                        e.stopPropagation();
+                        setDate(undefined);
+                      }
+                    }}
                   >
-                    X
-                  </Button>
+                    <X className="h-4 w-4" />
+                  </span>
                 ) : (
-                  <ChevronDownIcon />
+                  <ChevronDownIcon className="h-4 w-4 opacity-50" />
                 )}
               </Button>
             </PopoverTrigger>
@@ -72,6 +82,8 @@ const AdminScheduleTabs = () => {
                 selected={date}
                 onSelect={setDate}
                 defaultMonth={date}
+                
+                
               />
             </PopoverContent>
           </Popover>

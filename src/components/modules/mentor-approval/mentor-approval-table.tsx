@@ -87,7 +87,7 @@ const MentorApprovalTable = ({ handlePageChange, ...params }: Props) => {
                   </Badge>
                 ) : (
                   <Badge className="bg-red-50 text-red-700 dark:bg-red-950 dark:text-red-300 text-xs">
-                    Green
+                    Blocked
                   </Badge>
                 )}
               </TableCell>
@@ -100,13 +100,17 @@ const MentorApprovalTable = ({ handlePageChange, ...params }: Props) => {
                       <span className="sr-only">Open menu</span>
                     </Button>
                   </DropdownMenuTrigger>
-                  <DropdownMenuContent align="end">
+                  <DropdownMenuContent align="end" className="w-36">
                     <DropdownMenuItem>Mentor Profile</DropdownMenuItem>
-                    <DropdownMenuItem>Mentorship Status</DropdownMenuItem>
-                    <DropdownMenuSeparator />
-                    <DropdownMenuItem variant="destructive">
-                      Delete
-                    </DropdownMenuItem>
+                    {mentor.verificationStatus === "PENDING" ? (
+                      <DropdownMenuItem>Review Application</DropdownMenuItem>
+                    ) : (
+                      <DropdownMenuItem>Reviewed</DropdownMenuItem>
+                    )}
+
+                    {mentor.verificationStatus === "APPROVED" ? (
+                      <DropdownMenuItem>Mentorship Status</DropdownMenuItem>
+                    ) : undefined}
                   </DropdownMenuContent>
                 </DropdownMenu>
               </TableCell>
