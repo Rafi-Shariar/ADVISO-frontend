@@ -10,5 +10,5 @@ export const getMentorDetails = (id: string) => {
 };
 
 export const getAllMentorsAdmin = (params: MentorParams) => {
-  return apiClient(`api/v1/mentor/admin/all-mentors`, { params });
+  return apiClient(`/api/v1/mentor/admin/all-mentors`, { params });
 };
