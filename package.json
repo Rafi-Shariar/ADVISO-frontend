@@ -12,6 +12,7 @@
     "format": "biome format --write"
   },
   "dependencies": {
+    "@date-fns/utc": "^2.1.1",
     "@gsap/react": "^2.1.2",
     "@react-oauth/google": "^0.13.5",
     "@tanstack/react-form": "^1.33.5",

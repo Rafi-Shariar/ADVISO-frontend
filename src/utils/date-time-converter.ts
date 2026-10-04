@@ -1,10 +1,8 @@
-import { isValid , format} from "date-fns";
+import { isValid, format } from "date-fns";
 
-export function formatScheduleDate(dateString : string){
-
-    const date = new Date(dateString)
-    return isValid(date) ? format(date, "EEE do MMM, yyyy") : "Invalid Date";
-
+export function formatScheduleDate(dateString: string) {
+  const date = new Date(dateString);
+  return isValid(date) ? format(date, "EEE do MMM, yyyy") : "Invalid Date";
 }
 
 export const formatSlotTime = (isoString?: string) => {

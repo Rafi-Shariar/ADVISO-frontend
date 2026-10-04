@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Table,
   TableBody,
@@ -13,15 +13,20 @@ import EmptyTableUI from "@/components/layout/private/empty-table-ui";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { formatScheduleDate, formatSlotTime } from "@/utils/date-time-converter";
+import {
+  formatScheduleDate,
+  formatSlotTime,
+} from "@/utils/date-time-converter";
 import { ArrowUpRight, X } from "lucide-react";
+import { AdminScheduleSheet } from "./admin-session-sheet";
 
-const AdminScheduleTable = (params : ScheduleParams) => {
+const AdminScheduleTable = (params: ScheduleParams) => {
+  const [selectedSchedule, setSelectedSchedule] = useState<Schedules | null>(
+    null,
+  );
 
-    const { data } = useSuspenseGetAllSchedules(params);
-
-    const schedules : Schedules[] = data?.data || [];
-
+  const { data } = useSuspenseGetAllSchedules(params);
+  const schedules: Schedules[] = data?.data || [];
 
   return (
     <div>
@@ -34,7 +39,7 @@ const AdminScheduleTable = (params : ScheduleParams) => {
             <TableHead>Time Slot</TableHead>
             <TableHead>Schedule Created</TableHead>
 
-            <TableHead ></TableHead>
+            <TableHead></TableHead>
           </TableRow>
         </TableHeader>
 
@@ -44,27 +49,47 @@ const AdminScheduleTable = (params : ScheduleParams) => {
             <TableRow key={schedule.scheduleId}>
               <TableCell className="font-medium flex items-center gap-3">
                 <Avatar>
-                  <AvatarImage src={schedule.mentor.user.profileURL} alt={schedule.mentor.user.name} />
+                  <AvatarImage
+                    src={schedule.mentor.user.profileURL}
+                    alt={schedule.mentor.user.name}
+                  />
                   <AvatarFallback>CN</AvatarFallback>
                 </Avatar>
                 <Link href={`/admin/${schedule.mentorId}`}>
-                  <span className="hover:underline">{schedule.mentor.user.name}</span>
+                  <span className="hover:underline">
+                    {schedule.mentor.user.name}
+                  </span>
                 </Link>
-                
               </TableCell>
               <TableCell>{schedule.mentor.user.email}</TableCell>
               <TableCell>{formatScheduleDate(schedule.date)}</TableCell>
-              <TableCell>{formatSlotTime(schedule.startTime) } - { formatSlotTime(schedule.endTime)}</TableCell>
+              <TableCell>
+                {formatSlotTime(schedule.startTime)} -{" "}
+                {formatSlotTime(schedule.endTime)}
+              </TableCell>
 
               <TableCell>{formatScheduleDate(schedule.createdAt)}</TableCell>
 
               <TableCell className="text-right">
-                <Button className="" variant={"outline"} size={"lg"}>Sessions <ArrowUpRight/></Button>
+                <Button
+                  className=""
+                  variant={"outline"}
+                  size={"lg"}
+                  onClick={() => setSelectedSchedule(schedule)}
+                >
+                  Sessions <ArrowUpRight />
+                </Button>
               </TableCell>
             </TableRow>
           ))}
         </TableBody>
       </Table>
+
+      <AdminScheduleSheet
+        data={selectedSchedule}
+        isOpen={!!selectedSchedule}
+        onClose={() => setSelectedSchedule(null)}
+      />
     </div>
   );
 };

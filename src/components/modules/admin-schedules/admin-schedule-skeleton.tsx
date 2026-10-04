@@ -37,7 +37,7 @@ const AdminScheduleTableSkeleton = () => {
               <TableCell>
                 <Skeleton className="h-6 w-20"></Skeleton>
               </TableCell>
-               <TableCell>
+              <TableCell>
                 <Skeleton className="h-6 w-20"></Skeleton>
               </TableCell>
             </TableRow>
