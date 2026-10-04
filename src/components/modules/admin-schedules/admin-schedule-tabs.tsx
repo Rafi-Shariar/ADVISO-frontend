@@ -14,6 +14,7 @@ import useDebounce from "@/hooks/debounce.hook";
 import AdminScheduleTable from "./admin-schedule-table";
 import { ScheduleParams } from "@/types/schedule.type";
 import AdminUsersTableSkeleton from "../admin-users-table/admin-users-table-skeleton";
+import AdminScheduleTableSkeleton from "./admin-schedule-skeleton";
 
 const AdminScheduleTabs = () => {
   const [date, setDate] = React.useState<Date>();
@@ -26,7 +27,8 @@ const AdminScheduleTabs = () => {
   }
 
   const queryParams : ScheduleParams = {
-    ...(debouncedSearch ? { searchTerm: debouncedSearch } : {})
+    ...(debouncedSearch ? { searchTerm: debouncedSearch } : {}),
+    ...(date ? { date: format(date, "yyyy-MM-dd") } : {}),
 
   }
   
@@ -42,7 +44,7 @@ const AdminScheduleTabs = () => {
           />
         </div>
 
-        <div>
+        <div className="flex gap-1">
           <Popover>
             <PopoverTrigger asChild>
               <Button
@@ -51,7 +53,8 @@ const AdminScheduleTabs = () => {
                 className="w-[212px] justify-between text-left font-normal data-[empty=true]:text-muted-foreground"
               >
                 {date ? format(date, "PPP") : <span>Pick a date</span>}
-                <ChevronDownIcon />
+               
+                 {date ? (<Button size={"sm"} className="" variant={"ghost"} onClick={()=> setDate(undefined)}>X</Button>) :  <ChevronDownIcon />}
               </Button>
             </PopoverTrigger>
             <PopoverContent className="w-auto p-0" align="start">
@@ -63,10 +66,12 @@ const AdminScheduleTabs = () => {
               />
             </PopoverContent>
           </Popover>
+
+         
         </div>
       </div>
 
-      <Suspense fallback={<AdminUsersTableSkeleton/>}>
+      <Suspense fallback={<AdminScheduleTableSkeleton/>}>
          <AdminScheduleTable {...queryParams}/>
       </Suspense>
 
