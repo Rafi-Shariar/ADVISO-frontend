@@ -9,9 +9,11 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { Input } from "@/components/ui/input";
-import React, { useState } from "react";
+import React, { Suspense, useState } from "react";
 import useDebounce from "@/hooks/debounce.hook";
 import AdminScheduleTable from "./admin-schedule-table";
+import { ScheduleParams } from "@/types/schedule.type";
+import AdminUsersTableSkeleton from "../admin-users-table/admin-users-table-skeleton";
 
 const AdminScheduleTabs = () => {
   const [date, setDate] = React.useState<Date>();
@@ -20,6 +22,11 @@ const AdminScheduleTabs = () => {
 
   const handleSearch = (e:any) => {
     setSearchInput(e.target.value)
+
+  }
+
+  const queryParams : ScheduleParams = {
+    ...(debouncedSearch ? { searchTerm: debouncedSearch } : {})
 
   }
   
@@ -59,7 +66,11 @@ const AdminScheduleTabs = () => {
         </div>
       </div>
 
-      <AdminScheduleTable/>
+      <Suspense fallback={<AdminUsersTableSkeleton/>}>
+         <AdminScheduleTable {...queryParams}/>
+      </Suspense>
+
+     
     </div>
   );
 };

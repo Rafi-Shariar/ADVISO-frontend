@@ -58,8 +58,6 @@ const UsersTableTabs = () => {
 
   const handleFilter = (value: string) => {
     setFilter(value);
-    console.log(value);
-
     setPage(1);
   };
 

@@ -8,7 +8,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { useSuspenseGetAllSchedules } from "@/hooks/schedule.hook";
-import { Schedules } from "@/types/schedule.type";
+import { ScheduleParams, Schedules } from "@/types/schedule.type";
 import EmptyTableUI from "@/components/layout/private/empty-table-ui";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Link from "next/link";
@@ -16,18 +16,19 @@ import { Button } from "@/components/ui/button";
 import { formatScheduleDate, formatSlotTime } from "@/utils/date-time-converter";
 import { ArrowUpRight, X } from "lucide-react";
 
-const AdminScheduleTable = (...params : any) => {
+const AdminScheduleTable = (params : ScheduleParams) => {
 
     const { data } = useSuspenseGetAllSchedules(params);
 
     const schedules : Schedules[] = data?.data || [];
+
 
   return (
     <div>
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead>Name</TableHead>
+            <TableHead>Mentor</TableHead>
             <TableHead>Email</TableHead>
             <TableHead>Schedule Date</TableHead>
             <TableHead>Time Slot</TableHead>
