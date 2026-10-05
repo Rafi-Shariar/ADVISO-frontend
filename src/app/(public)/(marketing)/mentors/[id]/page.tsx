@@ -1,27 +1,24 @@
-import { getAllBlogsPublic, getAllMentorsPublic } from "@/api";
-import BlogDetailsView from "@/components/modules/blog/blog-details-view";
+import { getAllMentorsPublic } from "@/api";
 import MentorDetailsView from "@/components/modules/mentor/mentor-details-view";
-import { BlogItem } from "@/types/blog.types";
 import { IMentorProfile } from "@/types/mentor.type";
-import { id } from "date-fns/locale";
 
 export async function generateStaticParams() {
- 
-    const limit = 50;
-  const first = await getAllMentorsPublic({limit, page:1});
+  try {
+    const res = await getAllMentorsPublic({ limit: 50, page: 1 });
+    const mentors: IMentorProfile[] = res?.data || [];
 
-  const totalPages = first.meta.totalPages ?? 1;
-
-  const all = [...first.data]
-
-  for (let page = 2; page <= totalPages; page++) {
-    const data = await getAllMentorsPublic({page, limit})
-    all.push(...data.data);
-    
+    return mentors.map((mentor) => ({
+      id: mentor.mentorId,
+    }));
+  } catch (error) {
+    console.error("Error generating static params for mentors:", error);
+    return [];
   }
-
-  return all.map((mentor) => ({id: mentor.mentorId}))
 }
+
+export const revalidate = 3600;
+
+export const dynamicParams = true;
 
 interface PageProps {
   params: Promise<{ id: string }>;
