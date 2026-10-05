@@ -19,6 +19,7 @@ import { IMentorDetails } from "@/types/mentor.type";
 import { Button } from "@/components/ui/button";
 import bannerImg from "@/assets/shared/mentor-details-banner.jpg";
 import { FaLinkedinIn } from "react-icons/fa";
+import { ReviewCard } from "../review/ReviewCard";
 
 const MentorDetailsView = ({ id }: { id: string }) => {
   const { data, isPending } = useMentorDetails(id);
@@ -155,6 +156,7 @@ const MentorDetailsView = ({ id }: { id: string }) => {
           <h2 className="text-lg font-bold text-foreground">
             Student Reviews ({mentor.reviews?.length ?? 0})
           </h2>
+         
         </div>
         {mentor.reviews?.length === 0 && (
           <p className="text-xs text-muted-foreground">No reviews yet.</p>
