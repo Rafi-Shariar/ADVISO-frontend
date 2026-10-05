@@ -10,7 +10,6 @@ import BlogDetailsSkeleton from "@/components/modules/blog/BlogDetailsSkeleton";
 import BlogNotFoundCard from "@/components/modules/blog/BlogNotFoundCard";
 
 export default function BlogDetailsView({ id }: { id: string }) {
-    
   const { data: response, isPending } = useBlogDetails(id);
   const blog: BlogItem | undefined = response?.data;
 

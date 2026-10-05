@@ -1,5 +1,6 @@
 import {
   getAllMentorsAdmin,
+  getAllMentorsPublic,
   getFeaturedMentors,
   getMentorDetails,
 } from "@/api/mentor.api";
@@ -13,6 +14,13 @@ export function useFeaturedMentors() {
   });
 }
 
+export function useSuspenseGetAllMentorsPublic(params: MentorParams) {
+  return useSuspenseQuery({
+    queryKey: [`mentors`, params],
+    queryFn: () => getAllMentorsPublic(params),
+  });
+}
+
 export function useMentorDetails(id: string) {
   return useQuery({
     queryKey: [`mentor-${id}`],
@@ -20,13 +28,6 @@ export function useMentorDetails(id: string) {
     enabled: Boolean(id),
   });
 }
-
-// export function useGetAllMentorsAdmin() {
-//   return useQuery({
-//     queryKey: ["all-mentors"],
-//     queryFn: getAllMentorsAdmin,
-//   });
-// }
 
 export function useSuspenseGetAllMentorsAdmin(params: MentorParams) {
   return useSuspenseQuery({

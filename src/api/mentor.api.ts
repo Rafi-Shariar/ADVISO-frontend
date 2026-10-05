@@ -5,6 +5,10 @@ export const getFeaturedMentors = () => {
   return apiClient("/api/v1/mentor/featured");
 };
 
+export const getAllMentorsPublic = (params: MentorParams) => {
+  return apiClient(`/api/v1/mentor`, { params });
+};
+
 export const getMentorDetails = (id: string) => {
   return apiClient(`/api/v1/mentor/${id}`);
 };
