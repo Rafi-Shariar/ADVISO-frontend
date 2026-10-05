@@ -3,3 +3,4 @@ export * from "./analytics.api";
 export * from "./blog.api";
 export * from "./mentor.api";
 export * from "./schedule.api";
+export * from "./session.api"

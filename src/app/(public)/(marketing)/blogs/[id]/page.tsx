@@ -2,7 +2,6 @@ import { getAllBlogsPublic } from "@/api";
 import BlogDetailsView from "@/components/modules/blog/blog-details-view";
 import { BlogItem } from "@/types/blog.types";
 
-
 export async function generateStaticParams() {
   const data = await getAllBlogsPublic();
 

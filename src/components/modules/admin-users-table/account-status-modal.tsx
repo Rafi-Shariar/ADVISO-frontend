@@ -187,7 +187,9 @@ export function AdminUserAccountStatusModal({
                     <button
                       key={status}
                       type="button"
-                      onClick={() => setSelectedStatus(status as UserAccountStatus)}
+                      onClick={() =>
+                        setSelectedStatus(status as UserAccountStatus)
+                      }
                       className={`relative py-2 text-xs font-medium rounded-lg transition-all duration-200 capitalize outline-none ${
                         isSelected
                           ? "bg-orange-500 text-white shadow-xs font-semibold"
