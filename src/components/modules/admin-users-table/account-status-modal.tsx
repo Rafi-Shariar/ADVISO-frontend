@@ -72,7 +72,7 @@ export function AdminUserAccountStatusModal({
   user,
 }: Props) {
   const [selectedStatus, setSelectedStatus] = useState<UserAccountStatus>(
-    user.accountStatus,
+    user.accountStatus as UserAccountStatus,
   );
   const [imageError, setImageError] = useState(false);
   const { mutate: updateStatus, isPending } = useChangeAccountStatus();
@@ -187,7 +187,7 @@ export function AdminUserAccountStatusModal({
                     <button
                       key={status}
                       type="button"
-                      onClick={() => setSelectedStatus(status)}
+                      onClick={() => setSelectedStatus(status as UserAccountStatus)}
                       className={`relative py-2 text-xs font-medium rounded-lg transition-all duration-200 capitalize outline-none ${
                         isSelected
                           ? "bg-orange-500 text-white shadow-xs font-semibold"

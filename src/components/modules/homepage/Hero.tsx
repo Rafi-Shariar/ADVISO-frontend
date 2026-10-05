@@ -203,7 +203,6 @@ export default function HeroBanner() {
               <div className="relative my-4 z-10">
                 <svg
                   viewBox="0 0 280 90"
-                  alt="whatisthis"
                   fill="none"
                   className="w-full h-20 overflow-visible"
                 >
