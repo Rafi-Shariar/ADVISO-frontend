@@ -136,26 +136,27 @@ const MentorTabs = () => {
               </SelectTrigger>
               <SelectContent>
                 <SelectGroup>
-                  <SelectLabel>Sort By</SelectLabel>
+                  <SelectLabel>Experience</SelectLabel>
                   <SelectItem value="yearOfExperience-asc">
                     <Briefcase className="size-3.5 " />{" "}
-                    <span>Experience: Most to Least</span>
+                    <span>Most to Least</span>
                   </SelectItem>
                   <SelectItem value="yearOfExperience-desc">
                     <Briefcase className="size-3.5 text-muted-foreground" />
-                    <span>Experience: Least to Most</span>
+                    <span>Least to Most</span>
                   </SelectItem>
                   <DropdownMenuSeparator className="my-1.5" />
+                   <SelectLabel>Session Charge</SelectLabel>
                   <SelectItem value="sessionCharge-asc">
                     <DollarSign className="size-3.5 " />
-                    <span>Price: Low to High</span>
+                    <span>Low to High</span>
                   </SelectItem>
                   <SelectItem value="sessionCharge-desc">
                     <DollarSign className="size-3.5 text-muted-foreground" />
-                    <span>Price: High to Low</span>
+                    <span>High to Low</span>
                   </SelectItem>
                    <DropdownMenuSeparator className="my-1.5" />
-                 
+                  <SelectLabel>Ratings</SelectLabel>
                   <SelectItem value="averageRatings-desc">
                     <Star className="size-3.5 " />
                     <span>Top Rated First </span>
