@@ -1,12 +1,20 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
-import { LogIn, LogOut, LayoutDashboard, ChevronDown } from "lucide-react";
+import {
+  LogIn,
+  LogOut,
+  LayoutDashboard,
+  ChevronDown,
+  Menu,
+  Sparkles,
+  ArrowRight,
+} from "lucide-react";
 
 import Logo from "./Logo";
 import { Button } from "@/components/ui/button";
@@ -19,6 +27,13 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 import { useGetMe, useLogout } from "@/hooks";
 import { cn } from "@/lib/utils";
 import { ThemeToggleButton } from "./ThemeToggleButton";
@@ -35,11 +50,10 @@ const Header = () => {
   const pathname = usePathname();
   const queryClient = useQueryClient();
   const { removeUser, setUser, user: currentUser } = useUserStore();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const { data: user, isLoading } = useGetMe();
   const { mutate: logout, isPending: isLoggingOut } = useLogout();
-
-  let dashboardRoute = "";
 
   useEffect(() => {
     const userData = user?.data;
@@ -57,14 +71,6 @@ const Header = () => {
           )}&background=ea580c&color=fff&bold=true`,
       };
       setUser(stateData);
-
-      if (userData.role === "USER") {
-        dashboardRoute = "/user";
-      } else if (userData.role === "MENTOR") {
-        dashboardRoute = "/mentor";
-      } else {
-        dashboardRoute = "/admin";
-      }
     }
   }, [user, setUser]);
 
@@ -76,6 +82,7 @@ const Header = () => {
         queryClient.removeQueries({ queryKey: ["currentUser"] });
         queryClient.clear();
         removeUser();
+        setMobileMenuOpen(false);
       },
       onError: () => {
         toast.error("Something went wrong. Try again.");
@@ -85,16 +92,184 @@ const Header = () => {
 
   const activeUser = currentUser || user?.data;
 
+  const dashboardRoute = currentUser
+    ? currentUser.role === "USER"
+      ? "/user"
+      : currentUser.role === "MENTOR"
+        ? "/mentor"
+        : "/admin"
+    : "/";
+
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/80 backdrop-blur-xl supports-[backdrop-filter]:bg-background/60 transition-all ">
       <div className="max-w-7xl mx-auto flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8 relative">
-        {/* Left: Brand Logo */}
-        <div className="flex items-center">
+        {/* Left: Mobile Slider Trigger & Brand Logo */}
+        <div className="flex items-center gap-2.5">
+          <div className="md:hidden">
+            <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
+              <SheetTrigger asChild>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="rounded-xl text-foreground hover:bg-muted/80"
+                  aria-label="Toggle navigation menu"
+                >
+                  <Menu className="size-5" />
+                </Button>
+              </SheetTrigger>
+
+              {/* 75% Width Slide-over Drawer */}
+              <SheetContent
+                side="left"
+                className="w-[75vw] max-w-[320px] p-0 flex flex-col justify-between border-r border-border/60 bg-background/95 backdrop-blur-2xl"
+              >
+                {/* Top Half: Logo & Navlinks */}
+                <div className="flex flex-col overflow-y-auto">
+                  <SheetHeader className="p-5 border-b border-border/40 text-left">
+                    <SheetTitle>
+                      <Logo size="md" />
+                    </SheetTitle>
+                  </SheetHeader>
+
+                  <div className="p-4 space-y-1">
+                    <p className="px-3 pb-2 text-[10px] font-bold uppercase tracking-wider text-muted-foreground">
+                      Navigation
+                    </p>
+
+                    {routes.map((route) => {
+                      const isActive = pathname === route.url;
+                      return (
+                        <Link
+                          key={route.name}
+                          href={route.url}
+                          onClick={() => setMobileMenuOpen(false)}
+                          className={cn(
+                            "flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all",
+                            isActive
+                              ? "bg-orange-500/10 text-orange-600 dark:text-orange-400 font-semibold"
+                              : "text-muted-foreground hover:bg-muted/70 hover:text-foreground",
+                          )}
+                        >
+                          <span>{route.name}</span>
+                          {isActive && (
+                            <span className="size-1.5 rounded-full bg-orange-500" />
+                          )}
+                        </Link>
+                      );
+                    })}
+
+                    {currentUser && currentUser.role === "USER" && (
+                      <div className="pt-3">
+                        <Link
+                          href="/apply-as-mentor"
+                          onClick={() => setMobileMenuOpen(false)}
+                        >
+                          <Button
+                            variant="outline"
+                            className="w-full justify-between rounded-xl border-orange-500/40 text-orange-600 hover:bg-orange-500 hover:text-white dark:text-orange-400 text-xs font-bold px-3.5"
+                          >
+                            <span className="flex items-center gap-2">
+                              <Sparkles className="size-3.5" />
+                              Become a mentor
+                            </span>
+                            <ArrowRight className="size-3.5" />
+                          </Button>
+                        </Link>
+                      </div>
+                    )}
+                  </div>
+                </div>
+
+                {/* Bottom Half: User Info, Dashboard & Auth Actions */}
+                <div className="p-4 border-t border-border/40 bg-muted/20 space-y-3">
+                  {isLoading ? (
+                    <div className="flex items-center gap-3 p-2">
+                      <Skeleton className="size-10 rounded-full" />
+                      <div className="space-y-1.5 flex-1">
+                        <Skeleton className="h-3 w-24" />
+                        <Skeleton className="h-2 w-32" />
+                      </div>
+                    </div>
+                  ) : activeUser ? (
+                    <div className="space-y-3">
+                      {/* User Profile Tile */}
+                      <div className="flex items-center gap-3 p-2.5 rounded-2xl bg-card border border-border/60 shadow-xs">
+                        <div className="relative size-10 rounded-full overflow-hidden bg-muted border border-border/60 shrink-0">
+                          <Image
+                            src={
+                              activeUser.profileURL ||
+                              `https://ui-avatars.com/api/?name=${encodeURIComponent(
+                                activeUser.name || "User",
+                              )}&background=ea580c&color=fff&bold=true`
+                            }
+                            alt={activeUser.name || "User"}
+                            fill
+                            sizes="40px"
+                            className="object-cover"
+                          />
+                        </div>
+                        <div className="min-w-0 flex-1">
+                          <p className="text-xs font-bold text-foreground truncate">
+                            {activeUser.name}
+                          </p>
+                          <p className="text-[11px] text-muted-foreground truncate">
+                            {activeUser.email}
+                          </p>
+                        </div>
+                      </div>
+
+                      {/* Action Links */}
+                      <div className="space-y-1.5">
+                        <Link
+                          href={dashboardRoute}
+                          onClick={() => setMobileMenuOpen(false)}
+                        >
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            className="w-full justify-start rounded-xl gap-2 text-xs font-medium border-border/60"
+                          >
+                            <LayoutDashboard className="size-3.5 text-orange-500" />
+                            <span>Go to Dashboard</span>
+                          </Button>
+                        </Link>
+
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          onClick={handleLogout}
+                          disabled={isLoggingOut}
+                          className="w-full justify-start rounded-xl gap-2 text-xs font-medium text-destructive hover:bg-destructive/10 hover:text-destructive"
+                        >
+                          <LogOut className="size-3.5" />
+                          <span>
+                            {isLoggingOut ? "Logging out..." : "Log out"}
+                          </span>
+                        </Button>
+                      </div>
+                    </div>
+                  ) : (
+                    <Link
+                      href="/login"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="block"
+                    >
+                      <Button className="w-full rounded-xl bg-orange-500 hover:bg-orange-600 text-white font-semibold text-xs shadow-md shadow-orange-500/20 gap-2">
+                        <LogIn className="size-4" />
+                        <span>Sign In</span>
+                      </Button>
+                    </Link>
+                  )}
+                </div>
+              </SheetContent>
+            </Sheet>
+          </div>
+
           <Logo size="md" />
         </div>
 
-        {/* Center: Absolute Centered Navigation Links */}
-        <nav className="hidden md:flex items-center gap-8 absolute left-1/2 -translate-x-1/2">
+        {/* Center: Desktop Navigation Bar */}
+        <nav className="hidden md:flex items-center gap-1 absolute left-1/2 -translate-x-1/2 px-3 py-1.5 rounded-full border border-border/50 bg-background/50 backdrop-blur-md shadow-xs">
           {routes.map((route) => {
             const isActive = pathname === route.url;
             return (
@@ -102,47 +277,43 @@ const Header = () => {
                 key={route.name}
                 href={route.url}
                 className={cn(
-                  "text-sm font-medium transition-colors hover:text-orange-600 dark:hover:text-orange-400",
+                  "px-3.5 py-1.5 rounded-full text-xs font-medium transition-all duration-200",
                   isActive
-                    ? "text-orange-600 dark:text-orange-400 font-semibold"
-                    : "text-muted-foreground",
+                    ? "bg-orange-500/10 text-orange-600 dark:text-orange-400 font-bold"
+                    : "text-muted-foreground hover:text-foreground hover:bg-muted/60",
                 )}
               >
                 {route.name}
               </Link>
             );
           })}
-          {currentUser && currentUser.role === "USER" ? (
-            <>
-              <Link key={1} href={"/apply-as-mentor"}>
-                <Button
-                  className="text-orange-600 rounded-full font-bold hover:bg-orange-600 hover:text-white px-4"
-                  variant={"outline"}
-                  size={"lg"}
-                >
-                  {" "}
-                  Become a mentor
-                </Button>
-              </Link>
-            </>
-          ) : (
-            <></>
+
+          {currentUser && currentUser.role === "USER" && (
+            <Link href="/apply-as-mentor">
+              <Button
+                variant="ghost"
+                size="sm"
+                className="h-7 text-xs font-bold text-orange-600 dark:text-orange-400 hover:bg-orange-500/10 rounded-full px-3 ml-1"
+              >
+                Become a mentor
+              </Button>
+            </Link>
           )}
         </nav>
 
-        {/* Right: Theme Toggle & User Profile / Login */}
-        <div className="flex items-center gap-3 sm:gap-4">
+        {/* Right: Theme Toggle & Desktop Auth/Profile Trigger */}
+        <div className="flex items-center gap-2.5 sm:gap-3">
           <ThemeToggleButton />
 
           {isLoading ? (
-            <Skeleton className="size-9 rounded-[12px] bg-muted" />
+            <Skeleton className="size-9 rounded-full bg-muted" />
           ) : !activeUser ? (
             <Link href="/login">
               <Button
                 size="sm"
-                className="rounded-full px-4 py-2 gap-2 bg-orange-500 hover:bg-orange-600 text-white shadow-sm transition-all dark:bg-orange-600 dark:hover:bg-orange-700 cursor-pointer"
+                className="rounded-full px-4 h-9 gap-1.5 bg-orange-500 hover:bg-orange-600 text-white shadow-md shadow-orange-500/20 transition-all font-semibold text-xs cursor-pointer"
               >
-                <LogIn className="size-4" />
+                <LogIn className="size-3.5" />
                 <span>Login</span>
               </Button>
             </Link>
@@ -151,9 +322,9 @@ const Header = () => {
               <DropdownMenuTrigger asChild>
                 <button
                   type="button"
-                  className="flex items-center gap-2 p-1 rounded-[12px] hover:bg-muted/80 border border-transparent hover:border-border/60 transition-all outline-none cursor-pointer select-none"
+                  className="flex items-center gap-2 p-0.5 rounded-full hover:ring-2 hover:ring-orange-500/30 transition-all outline-none cursor-pointer select-none"
                 >
-                  <div className="relative size-10 rounded-full overflow-hidden bg-muted border border-border/60">
+                  <div className="relative size-9 rounded-full overflow-hidden bg-muted border border-border/80 shadow-xs">
                     <Image
                       src={
                         activeUser.profileURL ||
@@ -163,19 +334,18 @@ const Header = () => {
                       }
                       alt={activeUser.name || "User"}
                       fill
-                      sizes="32px"
+                      sizes="36px"
                       className="object-cover"
                     />
                   </div>
-                  <ChevronDown className="size-3.5 text-muted-foreground" />
+                  <ChevronDown className="size-3 text-muted-foreground hidden sm:block" />
                 </button>
               </DropdownMenuTrigger>
 
               <DropdownMenuContent
                 align="end"
-                className="w-56 rounded-[12px] p-1.5 border-border/60 shadow-lg bg-popover"
+                className="w-56 rounded-2xl p-1.5 border-border/60 shadow-xl bg-popover"
               >
-                {/* User Details */}
                 <DropdownMenuLabel className="font-normal px-2.5 py-2">
                   <div className="flex flex-col space-y-0.5">
                     <p className="text-xs font-bold text-foreground truncate">
@@ -189,21 +359,9 @@ const Header = () => {
 
                 <DropdownMenuSeparator className="bg-border/50" />
 
-                {/* Dashboard Option */}
-                <DropdownMenuItem
-                  asChild
-                  className="rounded-[8px] cursor-pointer"
-                >
+                <DropdownMenuItem asChild className="rounded-xl cursor-pointer">
                   <Link
-                    href={
-                      currentUser
-                        ? currentUser.role === "USER"
-                          ? "/user"
-                          : currentUser.role === "MENTOR"
-                            ? "/mentor"
-                            : "/admin"
-                        : "/"
-                    }
+                    href={dashboardRoute}
                     className="flex items-center gap-2 px-2.5 py-2 text-xs font-medium hover:text-orange-600 dark:hover:text-orange-400"
                   >
                     <LayoutDashboard className="size-3.5" />
@@ -213,11 +371,10 @@ const Header = () => {
 
                 <DropdownMenuSeparator className="bg-border/50" />
 
-                {/* Logout Option */}
                 <DropdownMenuItem
                   onClick={handleLogout}
                   disabled={isLoggingOut}
-                  className="rounded-[8px] cursor-pointer flex items-center gap-2 px-2.5 py-2 text-xs font-medium text-destructive hover:bg-destructive/10 focus:bg-destructive/10 focus:text-destructive"
+                  className="rounded-xl cursor-pointer flex items-center gap-2 px-2.5 py-2 text-xs font-medium text-destructive hover:bg-destructive/10 focus:bg-destructive/10 focus:text-destructive"
                 >
                   <LogOut className="size-3.5" />
                   <span>{isLoggingOut ? "Logging out..." : "Logout"}</span>

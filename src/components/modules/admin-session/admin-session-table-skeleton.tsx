@@ -15,7 +15,7 @@ const AdminSessionsTableSkeleton = () => {
       <Table>
         <TableHeader>
           <TableRow>
-             <TableHead>User Name</TableHead>
+            <TableHead>User Name</TableHead>
             <TableHead>User Email</TableHead>
             <TableHead>Mentor Email</TableHead>
             <TableHead>Date</TableHead>
@@ -52,7 +52,6 @@ const AdminSessionsTableSkeleton = () => {
               <TableCell>
                 <Skeleton className="h-6 w-20"></Skeleton>
               </TableCell>
-             
             </TableRow>
           ))}
         </TableBody>

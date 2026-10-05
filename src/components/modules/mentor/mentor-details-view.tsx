@@ -3,15 +3,14 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { 
-  Star, 
-  BriefcaseBusiness, 
-  ShieldCheck, 
-  Globe, 
- 
-  CalendarCheck, 
-  Clock, 
-  CheckCircle2 
+import {
+  Star,
+  BriefcaseBusiness,
+  ShieldCheck,
+  Globe,
+  CalendarCheck,
+  Clock,
+  CheckCircle2,
 } from "lucide-react";
 
 import { useMentorDetails } from "@/hooks/mentor.hook";
@@ -94,7 +93,6 @@ const MentorDetailsView = ({ id }: { id: string }) => {
             {mentor.professionalDomain?.replace(/_/g, " ")}
           </span>
         </div>
-
       </div>
 
       {/* Key Stats & Pricing Box */}
@@ -108,7 +106,9 @@ const MentorDetailsView = ({ id }: { id: string }) => {
         </div>
 
         <div className="flex items-center justify-between sm:justify-center sm:flex-col gap-1 sm:border-r border-border/50">
-          <span className="text-xs text-muted-foreground">Sessions Completed</span>
+          <span className="text-xs text-muted-foreground">
+            Sessions Completed
+          </span>
           <span className="text-lg font-bold flex items-center gap-1">
             <CalendarCheck className="size-4 text-orange-500" />
             {mentor.totalSessionsCompleted}
@@ -119,7 +119,9 @@ const MentorDetailsView = ({ id }: { id: string }) => {
           <span className="text-xs text-muted-foreground">Session Fee</span>
           <span className="text-xl sm:text-2xl font-black text-orange-500">
             ${mentor.sessionCharge}
-            <span className="text-xs font-normal text-muted-foreground ml-1">/session</span>
+            <span className="text-xs font-normal text-muted-foreground ml-1">
+              /session
+            </span>
           </span>
         </div>
       </div>
@@ -135,7 +137,9 @@ const MentorDetailsView = ({ id }: { id: string }) => {
       {/* Expertise Tags */}
       {mentor.expertiseTags?.length > 0 && (
         <div className="space-y-3 p-6 rounded-2xl bg-card border border-border/60">
-          <h2 className="text-base font-bold text-foreground">Areas of Expertise</h2>
+          <h2 className="text-base font-bold text-foreground">
+            Areas of Expertise
+          </h2>
           <div className="flex flex-wrap gap-2">
             {mentor.expertiseTags.map((tag, idx) => (
               <span
@@ -156,7 +160,6 @@ const MentorDetailsView = ({ id }: { id: string }) => {
           <h2 className="text-lg font-bold text-foreground">
             Student Reviews ({mentor.reviews?.length ?? 0})
           </h2>
-         
         </div>
         {mentor.reviews?.length === 0 && (
           <p className="text-xs text-muted-foreground">No reviews yet.</p>
@@ -171,7 +174,9 @@ const MentorDetailsView = ({ id }: { id: string }) => {
           </h2>
         </div>
         {mentor.blogs?.length === 0 && (
-          <p className="text-xs text-muted-foreground">No published blogs yet.</p>
+          <p className="text-xs text-muted-foreground">
+            No published blogs yet.
+          </p>
         )}
       </section>
     </div>
