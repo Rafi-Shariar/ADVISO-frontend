@@ -1,4 +1,5 @@
 import {
+  applyAsMentor,
   getAllMentorsAdmin,
   getAllMentorsPublic,
   getFeaturedMentors,
@@ -33,5 +34,12 @@ export function useSuspenseGetAllMentorsAdmin(params: MentorParams) {
   return useSuspenseQuery({
     queryKey: [`mentors`, params],
     queryFn: () => getAllMentorsAdmin(params),
+  });
+}
+
+
+export function useApplyAsMentor() {
+  return useMutation({
+    mutationFn: applyAsMentor,
   });
 }
