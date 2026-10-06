@@ -127,7 +127,7 @@ const MentorApprovalTable = ({ handlePageChange, ...params }: Props) => {
                     ) : mentor.verificationStatus === "PENDING" ? (
                       <DropdownMenuItem>
                         <FileUser />
-                        Review Application
+                       <Link href={`/admin/review/${mentor.mentorId}`}> Review Application</Link>
                       </DropdownMenuItem>
                     ) : (
                       <DropdownMenuItem>

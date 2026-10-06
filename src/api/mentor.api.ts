@@ -29,3 +29,8 @@ export const applyAsMentor = (paylaod: MentorApplicationPayload) => {
     body: formData,
   });
 };
+
+
+export const getMentorDetailsAdmin = (id: string) => {
+  return apiClient(`/api/v1/mentor/admin/all-mentors/${id}`);
+};

@@ -4,6 +4,7 @@ import {
   getAllMentorsPublic,
   getFeaturedMentors,
   getMentorDetails,
+  getMentorDetailsAdmin,
 } from "@/api/mentor.api";
 import { MentorParams } from "@/types/mentor.type";
 import {
@@ -51,5 +52,13 @@ export function useApplyAsMentor() {
       await queryClient.invalidateQueries({ queryKey: ["mentors"] });
       await queryClient.invalidateQueries({ queryKey: ["application-status"] });
     },
+  });
+}
+
+export function useMentorDetailsAdmin(id: string) {
+  return useQuery({
+    queryKey: [`mentorDetails-${id}`],
+    queryFn: () => getMentorDetailsAdmin(id),
+    enabled: Boolean(id),
   });
 }

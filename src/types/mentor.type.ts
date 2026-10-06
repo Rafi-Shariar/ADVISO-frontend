@@ -91,3 +91,43 @@ export interface MentorApplicationPayload {
   resume: File;
   documents: File;
 }
+
+
+export interface ApplicationReview {
+  mentorId: string
+  headline: string
+  bio: string
+  yearOfExperience: number
+  expertiseTags: string[]
+  linkedinURL: string
+  professionalDomain: string
+  portfolioURL: string
+  resume: string
+  sessionCharge: number
+  documents: Document[]
+  verificationStatus: string
+  createdAt: string
+  user: User
+}
+
+export interface Document {
+  url: string
+  publicId: string
+}
+
+export interface User {
+  userId: string
+  name: string
+  email: string
+  timezone: string
+  isEmailVerified: boolean
+  profileURL: string
+  imagePublicId: any
+  googleId: any
+  authProvider: string
+  accountStatus: string
+  isDeleted: boolean
+  deletedAt: any
+  createdAt: string
+  updatedAt: string
+}
