@@ -2,7 +2,16 @@
 import { useSuspenseGetAllMentorsAdmin } from "@/hooks/mentor.hook";
 import { log } from "console";
 import React, { Dispatch, SetStateAction } from "react";
-import { Divide, MoreHorizontalIcon, ShieldAlert } from "lucide-react";
+import {
+  CircleX,
+  Divide,
+  FileUser,
+  MoreHorizontalIcon,
+  PenOff,
+  ShieldAlert,
+  User,
+  UserRoundX,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -60,7 +69,7 @@ const MentorApprovalTable = ({ handlePageChange, ...params }: Props) => {
 
         <TableBody>
           {mentors.length === 0 && <EmptyTableUI />}
-          {mentors.map((mentor) => (
+          {mentors.map((mentor: IMentorProfile) => (
             <TableRow key={mentor.mentorId}>
               <TableCell className="font-medium flex items-center gap-3">
                 <Avatar>
@@ -87,7 +96,7 @@ const MentorApprovalTable = ({ handlePageChange, ...params }: Props) => {
                   </Badge>
                 ) : (
                   <Badge className="bg-red-50 text-red-700 dark:bg-red-950 dark:text-red-300 text-xs">
-                    Green
+                    Blocked
                   </Badge>
                 )}
               </TableCell>
@@ -100,13 +109,33 @@ const MentorApprovalTable = ({ handlePageChange, ...params }: Props) => {
                       <span className="sr-only">Open menu</span>
                     </Button>
                   </DropdownMenuTrigger>
-                  <DropdownMenuContent align="end">
-                    <DropdownMenuItem>Mentor Profile</DropdownMenuItem>
-                    <DropdownMenuItem>Mentorship Status</DropdownMenuItem>
-                    <DropdownMenuSeparator />
-                    <DropdownMenuItem variant="destructive">
-                      Delete
-                    </DropdownMenuItem>
+                  <DropdownMenuContent align="end" className="w-[180px]">
+                    {mentor.verificationStatus === "APPROVED" ? (
+                      <>
+                        <DropdownMenuItem>
+                          <User /> Mentor Profile
+                        </DropdownMenuItem>
+                        <DropdownMenuItem>
+                          {" "}
+                          <PenOff />
+                          {mentor.mentorshipStatus === "OPEN"
+                            ? "Block "
+                            : "Open "}{" "}
+                          Mentorship Status
+                        </DropdownMenuItem>
+                      </>
+                    ) : mentor.verificationStatus === "PENDING" ? (
+                      <DropdownMenuItem>
+                        <FileUser />
+                        Review Application
+                      </DropdownMenuItem>
+                    ) : (
+                      <DropdownMenuItem>
+                        {" "}
+                        <UserRoundX />
+                        Rejected Profile
+                      </DropdownMenuItem>
+                    )}
                   </DropdownMenuContent>
                 </DropdownMenu>
               </TableCell>

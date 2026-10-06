@@ -21,11 +21,9 @@ const ApplyAsMentorPage = () => {
   const application = data?.data;
   const status = application?.verificationStatus;
 
-
   if (!status) {
     return <ApplyAsMentorForm />;
   }
-
 
   switch (status) {
     case "PENDING":

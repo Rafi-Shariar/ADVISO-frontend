@@ -41,10 +41,9 @@ export function useDeleteAccount() {
   });
 }
 
-
 export function useGetApplicationStatus() {
   return useSuspenseQuery({
-    queryKey: ['application-status'],
+    queryKey: ["application-status"],
     queryFn: () => getApplicationStatus(),
   });
 }

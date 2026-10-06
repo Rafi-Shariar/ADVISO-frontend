@@ -6,9 +6,12 @@ export const ApplicationApprovedCard = () => {
       <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-emerald-100 text-emerald-600">
         <CheckCircle2 className="h-6 w-6" />
       </div>
-      <h3 className="text-lg font-semibold text-zinc-900">You are a Verified Mentor</h3>
+      <h3 className="text-lg font-semibold text-zinc-900">
+        You are a Verified Mentor
+      </h3>
       <p className="mt-2 text-sm text-zinc-600">
-        Your application has already been accepted. Head over to your mentor dashboard to manage sessions.
+        Your application has already been accepted. Head over to your mentor
+        dashboard to manage sessions.
       </p>
     </div>
   );
