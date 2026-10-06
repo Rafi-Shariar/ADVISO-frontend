@@ -242,7 +242,9 @@ const Header = () => {
                           className="w-full justify-start rounded-xl gap-2 text-xs font-medium text-destructive hover:bg-destructive/10 hover:text-destructive"
                         >
                           <LogOut className="size-3.5" />
-                          <span>{isLoggingOut ? "Logging out..." : "Log out"}</span>
+                          <span>
+                            {isLoggingOut ? "Logging out..." : "Log out"}
+                          </span>
                         </Button>
                       </div>
                     </div>
