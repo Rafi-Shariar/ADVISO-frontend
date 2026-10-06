@@ -17,3 +17,9 @@ export const deleteUserAccount = (id: string) => {
     method: "DELETE",
   });
 };
+
+
+export const getApplicationStatus = () => {
+  return apiClient(`api/v1/user/application-status`);
+};
+

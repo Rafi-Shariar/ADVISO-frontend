@@ -82,50 +82,50 @@ const MentorTabs = () => {
           {/* Search Input */}
           <div className="flex gap-6">
             <div className="w-full sm:w-64 md:w-92">
-            <Input
-              type="search"
-              placeholder="Search by name or email..."
-              className="w-full"
-              onChange={(e) => handleSearch(e)}
-            />
-          </div>
+              <Input
+                type="search"
+                placeholder="Search by name or email..."
+                className="w-full"
+                onChange={(e) => handleSearch(e)}
+              />
+            </div>
 
-          {/* Domain Select + Clear Button */}
-          <div className="flex w-full items-center gap-2 sm:w-auto sm:min-w-[220px]">
-            <Select
-              value={domain || ""}
-              onValueChange={(val) => handleDomainFilter(val)}
-            >
-              <SelectTrigger className="w-full">
-                <SelectValue placeholder="Filter by Domain" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectGroup>
-                  <SelectLabel>Select Your Domain</SelectLabel>
-                  {Object.entries(PROFESSION_DOMAINS).map(
-                    ([key, domainName]) => (
-                      <SelectItem key={key} value={key}>
-                        {domainName}
-                      </SelectItem>
-                    ),
-                  )}
-                </SelectGroup>
-              </SelectContent>
-            </Select>
-
-            {domain && (
-              <Button
-                variant="outline"
-                size="icon"
-                className="shrink-0"
-                onClick={handleClearDomain}
-                title="Clear filter"
-                aria-label="Clear filter"
+            {/* Domain Select + Clear Button */}
+            <div className="flex w-full items-center gap-2 sm:w-auto sm:min-w-[220px]">
+              <Select
+                value={domain || ""}
+                onValueChange={(val) => handleDomainFilter(val)}
               >
-                <X className="h-4 w-4" />
-              </Button>
-            )}
-          </div>
+                <SelectTrigger className="w-full">
+                  <SelectValue placeholder="Filter by Domain" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectGroup>
+                    <SelectLabel>Select Your Domain</SelectLabel>
+                    {Object.entries(PROFESSION_DOMAINS).map(
+                      ([key, domainName]) => (
+                        <SelectItem key={key} value={key}>
+                          {domainName}
+                        </SelectItem>
+                      ),
+                    )}
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
+
+              {domain && (
+                <Button
+                  variant="outline"
+                  size="icon"
+                  className="shrink-0"
+                  onClick={handleClearDomain}
+                  title="Clear filter"
+                  aria-label="Clear filter"
+                >
+                  <X className="h-4 w-4" />
+                </Button>
+              )}
+            </div>
           </div>
 
           {/* Sort Select */}
@@ -146,7 +146,7 @@ const MentorTabs = () => {
                     <span>Least to Most</span>
                   </SelectItem>
                   <DropdownMenuSeparator className="my-1.5" />
-                   <SelectLabel>Session Charge</SelectLabel>
+                  <SelectLabel>Session Charge</SelectLabel>
                   <SelectItem value="sessionCharge-asc">
                     <DollarSign className="size-3.5 " />
                     <span>Low to High</span>
@@ -155,13 +155,13 @@ const MentorTabs = () => {
                     <DollarSign className="size-3.5 text-muted-foreground" />
                     <span>High to Low</span>
                   </SelectItem>
-                   <DropdownMenuSeparator className="my-1.5" />
+                  <DropdownMenuSeparator className="my-1.5" />
                   <SelectLabel>Ratings</SelectLabel>
                   <SelectItem value="averageRatings-desc">
                     <Star className="size-3.5 " />
                     <span>Top Rated First </span>
                   </SelectItem>
-                   <SelectItem value="averageRatings-asc">
+                  <SelectItem value="averageRatings-asc">
                     <Star className="size-3.5" />
                     <span>Moderate Rated First</span>
                   </SelectItem>

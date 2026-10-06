@@ -1,11 +1,12 @@
 import {
+  applyAsMentor,
   getAllMentorsAdmin,
   getAllMentorsPublic,
   getFeaturedMentors,
   getMentorDetails,
 } from "@/api/mentor.api";
 import { MentorParams } from "@/types/mentor.type";
-import { useMutation, useQuery, useSuspenseQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
 
 export function useFeaturedMentors() {
   return useQuery({
@@ -33,5 +34,19 @@ export function useSuspenseGetAllMentorsAdmin(params: MentorParams) {
   return useSuspenseQuery({
     queryKey: [`mentors`, params],
     queryFn: () => getAllMentorsAdmin(params),
+  });
+}
+
+
+export function useApplyAsMentor() {
+
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: applyAsMentor,
+    onSuccess : async () => {
+      await queryClient.invalidateQueries({queryKey: ["mentors"]})
+      await queryClient.invalidateQueries({queryKey: ["application-status"]})
+    }
   });
 }

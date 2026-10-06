@@ -2,6 +2,7 @@ import {
   changeAccountStatus,
   deleteUserAccount,
   getAllUsersAdmin,
+  getApplicationStatus,
 } from "@/api/user.api";
 import { updateStatusArgs, UserParams } from "@/types/user.type";
 import {
@@ -37,5 +38,13 @@ export function useDeleteAccount() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["users"] });
     },
+  });
+}
+
+
+export function useGetApplicationStatus() {
+  return useSuspenseQuery({
+    queryKey: ['application-status'],
+    queryFn: () => getApplicationStatus(),
   });
 }

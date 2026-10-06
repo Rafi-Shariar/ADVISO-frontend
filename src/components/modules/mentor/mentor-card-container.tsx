@@ -13,29 +13,27 @@ const MentorCardContainer = ({ handlePageChange, ...params }: Props) => {
 
   const mentors: IMentorProfile[] = data?.data || [];
 
-  if(mentors.length === 0){
-    return <MentorNotFound/>
+  if (mentors.length === 0) {
+    return <MentorNotFound />;
   }
 
-  return <>
-   
-    <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 my-6 items-stretch">
-      
-      {mentors.map((mentor) => (
-        <MentorCard mentor={mentor} key={mentor.mentorId} />
-      ))}
-    </div>
+  return (
+    <>
+      <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 my-6 items-stretch">
+        {mentors.map((mentor) => (
+          <MentorCard mentor={mentor} key={mentor.mentorId} />
+        ))}
+      </div>
 
-     <div className="my-6">
+      <div className="my-6">
         <TablePagination
           totalPages={data?.meta?.totalPages ?? 0}
           handlePageChange={handlePageChange}
           page={params.page ?? 0}
         />
       </div>
-
-    
-  </>;
+    </>
+  );
 };
 
 export default MentorCardContainer;

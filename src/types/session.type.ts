@@ -37,7 +37,7 @@ export interface ISessionDetailsAdmin {
   user: User;
   mentor: Mentor;
   slot: Slot;
-  payment ?: Payment;
+  payment?: Payment;
   review: Review;
 }
 

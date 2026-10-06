@@ -29,8 +29,10 @@ import {
 } from "@/components/ui/dialog";
 import { useSessionDetails } from "@/hooks/session.hook";
 import { ISessionDetailsAdmin } from "@/types/session.type";
-import { formatScheduleDate, formatSlotTime } from "@/utils/date-time-converter";
-
+import {
+  formatScheduleDate,
+  formatSlotTime,
+} from "@/utils/date-time-converter";
 
 interface Props {
   open: boolean;
@@ -95,7 +97,8 @@ const AdminSessionDetailsModal = ({ onOpenChange, open, id }: Props) => {
               {details && getStatusBadge(details.status)}
             </div>
             <DialogDescription className="text-xs text-muted-foreground">
-              Detailed breakdown of schedule, attendees, payment verification, and notes.
+              Detailed breakdown of schedule, attendees, payment verification,
+              and notes.
             </DialogDescription>
           </DialogHeader>
         </div>
@@ -104,7 +107,9 @@ const AdminSessionDetailsModal = ({ onOpenChange, open, id }: Props) => {
         {isPending ? (
           <div className="py-24 flex flex-col items-center justify-center gap-3">
             <div className="size-9 rounded-full border-2 border-orange-500 border-t-transparent animate-spin" />
-            <p className="text-xs font-mono text-muted-foreground tracking-wide">Loading session details...</p>
+            <p className="text-xs font-mono text-muted-foreground tracking-wide">
+              Loading session details...
+            </p>
           </div>
         ) : !details ? (
           <div className="py-16 text-center text-sm text-muted-foreground">
@@ -119,9 +124,13 @@ const AdminSessionDetailsModal = ({ onOpenChange, open, id }: Props) => {
                   <Calendar className="size-4" />
                 </div>
                 <div>
-                  <p className="text-[10px] uppercase font-semibold text-muted-foreground tracking-wider">Date</p>
+                  <p className="text-[10px] uppercase font-semibold text-muted-foreground tracking-wider">
+                    Date
+                  </p>
                   <p className="text-xs font-bold text-foreground">
-                    {formatScheduleDate(details.sessionDate || details.slot?.schedule?.date)}
+                    {formatScheduleDate(
+                      details.sessionDate || details.slot?.schedule?.date,
+                    )}
                   </p>
                 </div>
               </div>
@@ -131,9 +140,12 @@ const AdminSessionDetailsModal = ({ onOpenChange, open, id }: Props) => {
                   <Clock className="size-4" />
                 </div>
                 <div>
-                  <p className="text-[10px] uppercase font-semibold text-muted-foreground tracking-wider">Slot Time</p>
+                  <p className="text-[10px] uppercase font-semibold text-muted-foreground tracking-wider">
+                    Slot Time
+                  </p>
                   <p className="text-xs font-bold text-foreground">
-                    {formatSlotTime(details.slot?.startTime)} - {formatSlotTime(details.slot?.endTime)}
+                    {formatSlotTime(details.slot?.startTime)} -{" "}
+                    {formatSlotTime(details.slot?.endTime)}
                   </p>
                 </div>
               </div>
@@ -143,7 +155,9 @@ const AdminSessionDetailsModal = ({ onOpenChange, open, id }: Props) => {
                   <Video className="size-4" />
                 </div>
                 <div className="min-w-0">
-                  <p className="text-[10px] uppercase font-semibold text-muted-foreground tracking-wider">Meeting Link</p>
+                  <p className="text-[10px] uppercase font-semibold text-muted-foreground tracking-wider">
+                    Meeting Link
+                  </p>
                   {details.meetingLink ? (
                     <Link
                       href={details.meetingLink}
@@ -155,7 +169,9 @@ const AdminSessionDetailsModal = ({ onOpenChange, open, id }: Props) => {
                       <ExternalLink className="size-3 shrink-0" />
                     </Link>
                   ) : (
-                    <p className="text-xs text-muted-foreground">Not provided</p>
+                    <p className="text-xs text-muted-foreground">
+                      Not provided
+                    </p>
                   )}
                 </div>
               </div>
@@ -185,8 +201,12 @@ const AdminSessionDetailsModal = ({ onOpenChange, open, id }: Props) => {
                     />
                   </div>
                   <div className="min-w-0">
-                    <h4 className="text-sm font-bold text-foreground truncate">{details.user?.name}</h4>
-                    <p className="text-xs text-muted-foreground truncate">{details.user?.email}</p>
+                    <h4 className="text-sm font-bold text-foreground truncate">
+                      {details.user?.name}
+                    </h4>
+                    <p className="text-xs text-muted-foreground truncate">
+                      {details.user?.email}
+                    </p>
                     <p className="text-[11px] font-mono text-muted-foreground/70 mt-0.5">
                       ID: {details.user?.userId?.slice(0, 10)}...
                     </p>
@@ -209,7 +229,10 @@ const AdminSessionDetailsModal = ({ onOpenChange, open, id }: Props) => {
                 <div className="flex items-center gap-3">
                   <div className="relative size-12 rounded-full overflow-hidden bg-muted border border-border shrink-0">
                     <Image
-                      src={details.mentor?.user?.profileURL || "/default-avatar.png"}
+                      src={
+                        details.mentor?.user?.profileURL ||
+                        "/default-avatar.png"
+                      }
                       alt={details.mentor?.user?.name || "Mentor"}
                       fill
                       className="object-cover"
@@ -236,7 +259,8 @@ const AdminSessionDetailsModal = ({ onOpenChange, open, id }: Props) => {
                 Session Purpose & Agenda
               </p>
               <p className="text-xs sm:text-sm text-foreground/90 whitespace-pre-line leading-relaxed">
-                {details.purpose || "No specific goal specified for this session."}
+                {details.purpose ||
+                  "No specific goal specified for this session."}
               </p>
             </div>
 
@@ -247,7 +271,9 @@ const AdminSessionDetailsModal = ({ onOpenChange, open, id }: Props) => {
                   <AlertCircle className="size-3.5" />
                   Cancellation Reason
                 </div>
-                <p className="text-xs leading-relaxed">{details.cancellationReason}</p>
+                <p className="text-xs leading-relaxed">
+                  {details.cancellationReason}
+                </p>
                 {details.cancelledAt && (
                   <p className="text-[10px] font-mono opacity-80 pt-1">
                     Cancelled on: {formatScheduleDate(details.cancelledAt)}
@@ -265,34 +291,45 @@ const AdminSessionDetailsModal = ({ onOpenChange, open, id }: Props) => {
                 </div>
                 {details.payment ? (
                   <span className="text-[11px] font-bold text-emerald-600 dark:text-emerald-400 uppercase">
-                    Paid via {details.payment.bkashPaymentId ? "bKash" : "Gateway"}
+                    Paid via{" "}
+                    {details.payment.bkashPaymentId ? "bKash" : "Gateway"}
                   </span>
                 ) : (
-                  <span className="text-[11px] font-bold text-amber-500">Unpaid / Manual</span>
+                  <span className="text-[11px] font-bold text-amber-500">
+                    Unpaid / Manual
+                  </span>
                 )}
               </div>
 
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center">
                 <div className="p-2.5 rounded-lg bg-muted/50 border border-border/50">
-                  <p className="text-[10px] text-muted-foreground uppercase font-semibold">Total Fee</p>
+                  <p className="text-[10px] text-muted-foreground uppercase font-semibold">
+                    Total Fee
+                  </p>
                   <p className="text-base font-extrabold text-foreground mt-0.5">
                     ${details.sessionFees || details.payment?.amount || 0}
                   </p>
                 </div>
                 <div className="p-2.5 rounded-lg bg-muted/50 border border-border/50">
-                  <p className="text-[10px] text-muted-foreground uppercase font-semibold">Platform Fee</p>
+                  <p className="text-[10px] text-muted-foreground uppercase font-semibold">
+                    Platform Fee
+                  </p>
                   <p className="text-base font-extrabold text-muted-foreground mt-0.5">
                     ${details.payment?.platformCharge ?? 0}
                   </p>
                 </div>
                 <div className="p-2.5 rounded-lg bg-muted/50 border border-border/50">
-                  <p className="text-[10px] text-muted-foreground uppercase font-semibold">Mentor Payout</p>
+                  <p className="text-[10px] text-muted-foreground uppercase font-semibold">
+                    Mentor Payout
+                  </p>
                   <p className="text-base font-extrabold text-emerald-500 mt-0.5">
                     ${details.payment?.mentorEarnings ?? 0}
                   </p>
                 </div>
                 <div className="p-2.5 rounded-lg bg-muted/50 border border-border/50">
-                  <p className="text-[10px] text-muted-foreground uppercase font-semibold">Transaction ID</p>
+                  <p className="text-[10px] text-muted-foreground uppercase font-semibold">
+                    Transaction ID
+                  </p>
                   <p className="text-xs font-mono font-bold text-foreground truncate mt-1">
                     {details.payment?.transactionId || "N/A"}
                   </p>

@@ -1,3 +1,4 @@
+import { exitCode } from "process";
 import { BlogItem, BlogItemInMentorDetails } from "./blog.types";
 import { IReview } from "./review.type";
 
@@ -73,3 +74,22 @@ export interface MentorParams {
   sortBy?: string;
   sortOrder?: string;
 }
+
+export interface ApplicationData {
+  headline: string;
+  bio: string;
+  yearOfExperience: number;
+  expertiseTags: string[];
+  linkedinURL: string;
+  professionalDomain: string;
+  portfolioURL: string;
+  sessionCharge: number;
+}
+
+
+export interface MentorApplicationPayload {
+  data: ApplicationData;
+  resume: File;
+  documents: File;
+}
+
