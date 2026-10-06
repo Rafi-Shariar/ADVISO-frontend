@@ -31,10 +31,12 @@ import { useApplyAsMentor } from "@/hooks/mentor.hook";
 import { toast } from "sonner";
 import { title } from "process";
 import { useQueryClient } from "@tanstack/react-query";
+import { useRouter } from "next/navigation";
 
 const ApplyAsMentorForm = () => {
   const [inputValue, setInputValue] = useState("");
   const {mutate:applyAsMentor, isPending} = useApplyAsMentor()
+  const router = useRouter();
 
   const form = useForm({
     defaultValues: {
@@ -85,7 +87,8 @@ const ApplyAsMentorForm = () => {
             position: "top-right",
           });
 
-          form.reset()
+          form.reset();
+          router.push('/')
         },
 
          onError: (err: any) => {
@@ -644,9 +647,9 @@ const ApplyAsMentorForm = () => {
           <div className="pt-4">
             <Button
               type="submit"
-              className="w-full h-11 text-sm font-medium rounded-xl shadow-xs transition-transform active:scale-[0.99]"
+              className="w-full h-11 text-sm font-medium rounded-xl shadow-xs transition-transform active:scale-[0.99] bg-orange-500 hover:bg-orange-200 hover:text-orange-500"
             >
-              Submit Application
+              {isPending ? "Submitting..." : "Submit Application"}
             </Button>
           </div>
         </form>

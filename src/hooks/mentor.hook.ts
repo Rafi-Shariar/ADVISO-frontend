@@ -44,8 +44,9 @@ export function useApplyAsMentor() {
 
   return useMutation({
     mutationFn: applyAsMentor,
-    onSuccess : () => {
-      queryClient.invalidateQueries({queryKey: ["mentors"]})
+    onSuccess : async () => {
+      await queryClient.invalidateQueries({queryKey: ["mentors"]})
+      await queryClient.invalidateQueries({queryKey: ["application-status"]})
     }
   });
 }
