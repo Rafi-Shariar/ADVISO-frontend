@@ -21,9 +21,15 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 import { FaLinkedin } from "react-icons/fa6";
+import { RejectApplicationDialog } from "./reject-application-modal";
+import { ApproveApplicationDialog } from "./confirm-applicatin-modal";
 
 const ApplicationReviewView = ({ id }: { id: string }) => {
+  const [isRejectOpen, setIsRejectOpen] = useState(false);
+const [isApproveOpen, setIsApproveOpen] = useState(false);
+
   const { data, isPending } = useMentorDetailsAdmin(id);
   const application: ApplicationReview = data?.data;
 
@@ -120,6 +126,7 @@ const ApplicationReviewView = ({ id }: { id: string }) => {
           {/* Quick Review Actions */}
           <div className="flex items-center gap-3 shrink-0 pt-2 sm:pt-0">
             <button
+              onClick={() => setIsRejectOpen(true)}
               type="button"
               className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl border border-rose-200 dark:border-rose-900/50 bg-rose-50/70 dark:bg-rose-950/20 text-rose-600 dark:text-rose-400 hover:bg-rose-100 dark:hover:bg-rose-900/30 text-xs sm:text-sm font-semibold transition-all active:scale-[0.98]"
             >
@@ -128,6 +135,7 @@ const ApplicationReviewView = ({ id }: { id: string }) => {
             </button>
             <button
               type="button"
+               onClick={() => setIsApproveOpen(true)}
               className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-xl bg-orange-600 hover:bg-orange-700 text-white text-xs sm:text-sm font-semibold shadow-lg shadow-orange-500/25 hover:shadow-orange-500/35 transition-all active:scale-[0.98]"
             >
               <CheckCircle2 className="size-4" />
@@ -334,6 +342,23 @@ const ApplicationReviewView = ({ id }: { id: string }) => {
         </div>
 
       </div>
+
+      <RejectApplicationDialog
+  open={isRejectOpen}
+  onOpenChange={setIsRejectOpen}
+  applicantName={user.name}
+ 
+/>
+
+<ApproveApplicationDialog
+  open={isApproveOpen}
+  onOpenChange={setIsApproveOpen}
+  applicantName={user.name}
+  yearOfExperience={application.yearOfExperience}
+  sessionCharge={application.sessionCharge}
+  professionalDomain={application.professionalDomain}
+
+/>
 
     </div>
   );
