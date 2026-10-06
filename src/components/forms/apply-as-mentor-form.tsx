@@ -26,9 +26,16 @@ import {
   MAX_FILE_SIZE,
   mentorApplicationSchema,
 } from "@/validation/mentor-application.validation";
+import { ApplicationData } from "@/types/mentor.type";
+import { useApplyAsMentor } from "@/hooks/mentor.hook";
+import { toast } from "sonner";
+import { title } from "process";
+import { useQueryClient } from "@tanstack/react-query";
 
 const ApplyAsMentorForm = () => {
   const [inputValue, setInputValue] = useState("");
+  const {mutate:applyAsMentor, isPending} = useApplyAsMentor()
+
   const form = useForm({
     defaultValues: {
       headline: "",
@@ -46,7 +53,53 @@ const ApplyAsMentorForm = () => {
       onSubmit: mentorApplicationSchema,
     },
     onSubmit: async ({ value }) => {
-      console.log(value);
+      
+      const applicationData : ApplicationData = {
+        headline : value.headline.trim(),
+        bio : value.bio.trim(),
+        yearOfExperience : Number(value.yearOfExperience),
+        expertiseTags : value.expertiseTags,
+        linkedinURL : value.linkedinURL.trim(),
+        professionalDomain : value.professionalDomain.trim(),
+        portfolioURL : value.portfolioURL.trim(),
+        sessionCharge : Number(value.sessionCharge),
+      }
+
+      applyAsMentor({
+        data : applicationData,
+        resume : value.resume as File,
+        documents : value.documents as File
+      }, {
+        onSuccess: (res) => {
+          
+          if(!res.success){
+            toast.error("Server Failure.", {
+            description: "Something went wrong. Please try again",
+            position: "top-right",
+          });
+          return
+          }
+
+          toast.success("Application Submitted.", {
+            description: "Application submitted successfully. Please wait for review.",
+            position: "top-right",
+          });
+
+          form.reset()
+        },
+
+         onError: (err: any) => {
+          const errorDescription =
+            err?.data?.message ||
+            err?.message ||
+            "Something went wrong. Please try again";
+
+          toast.error("Failed to submit application", {
+            description: errorDescription,
+            position: "top-right",
+          });
+        }
+      })
     },
   });
 

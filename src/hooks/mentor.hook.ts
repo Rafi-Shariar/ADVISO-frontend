@@ -6,7 +6,7 @@ import {
   getMentorDetails,
 } from "@/api/mentor.api";
 import { MentorParams } from "@/types/mentor.type";
-import { useMutation, useQuery, useSuspenseQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
 
 export function useFeaturedMentors() {
   return useQuery({
@@ -39,7 +39,13 @@ export function useSuspenseGetAllMentorsAdmin(params: MentorParams) {
 
 
 export function useApplyAsMentor() {
+
+  const queryClient = useQueryClient();
+
   return useMutation({
     mutationFn: applyAsMentor,
+    onSuccess : () => {
+      queryClient.invalidateQueries({queryKey: ["mentors"]})
+    }
   });
 }
