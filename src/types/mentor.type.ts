@@ -18,7 +18,7 @@ export interface IMentorProfile {
   sessionCharge: string;
   documents: Document[];
   mentorshipStatus: string;
-  verificationStatus: string;
+  verificationStatus: MentorVerificationStatus;
   rejectionReason: string | null;
   reviewedBy: string | null;
   reviewedAt: string | null;
@@ -86,10 +86,8 @@ export interface ApplicationData {
   sessionCharge: number;
 }
 
-
 export interface MentorApplicationPayload {
   data: ApplicationData;
   resume: File;
   documents: File;
 }
-

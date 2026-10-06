@@ -35,7 +35,7 @@ import { useRouter } from "next/navigation";
 
 const ApplyAsMentorForm = () => {
   const [inputValue, setInputValue] = useState("");
-  const {mutate:applyAsMentor, isPending} = useApplyAsMentor()
+  const { mutate: applyAsMentor, isPending } = useApplyAsMentor();
   const router = useRouter();
 
   const form = useForm({
@@ -55,54 +55,56 @@ const ApplyAsMentorForm = () => {
       onSubmit: mentorApplicationSchema,
     },
     onSubmit: async ({ value }) => {
-      
-      const applicationData : ApplicationData = {
-        headline : value.headline.trim(),
-        bio : value.bio.trim(),
-        yearOfExperience : Number(value.yearOfExperience),
-        expertiseTags : value.expertiseTags,
-        linkedinURL : value.linkedinURL.trim(),
-        professionalDomain : value.professionalDomain.trim(),
-        portfolioURL : value.portfolioURL.trim(),
-        sessionCharge : Number(value.sessionCharge),
-      }
+      const applicationData: ApplicationData = {
+        headline: value.headline.trim(),
+        bio: value.bio.trim(),
+        yearOfExperience: Number(value.yearOfExperience),
+        expertiseTags: value.expertiseTags,
+        linkedinURL: value.linkedinURL.trim(),
+        professionalDomain: value.professionalDomain.trim(),
+        portfolioURL: value.portfolioURL.trim(),
+        sessionCharge: Number(value.sessionCharge),
+      };
 
-      applyAsMentor({
-        data : applicationData,
-        resume : value.resume as File,
-        documents : value.documents as File
-      }, {
-        onSuccess: (res) => {
-          
-          if(!res.success){
-            toast.error("Server Failure.", {
-            description: "Something went wrong. Please try again",
-            position: "top-right",
-          });
-          return
-          }
-
-          toast.success("Application Submitted.", {
-            description: "Application submitted successfully. Please wait for review.",
-            position: "top-right",
-          });
-
-          form.reset();
-          router.push('/')
+      applyAsMentor(
+        {
+          data: applicationData,
+          resume: value.resume as File,
+          documents: value.documents as File,
         },
+        {
+          onSuccess: (res) => {
+            if (!res.success) {
+              toast.error("Server Failure.", {
+                description: "Something went wrong. Please try again",
+                position: "top-right",
+              });
+              return;
+            }
 
-         onError: (err: any) => {
-          const errorDescription =
-            err?.data?.message ||
-            err?.message ||
-            "Something went wrong. Please try again";
+            toast.success("Application Submitted.", {
+              description:
+                "Application submitted successfully. Please wait for review.",
+              position: "top-right",
+            });
 
-          toast.error("Failed to submit application", {
-            description: errorDescription,
-            position: "top-right",
-          });
-        }
-      })
+            form.reset();
+            router.push("/");
+          },
+
+          onError: (err: any) => {
+            const errorDescription =
+              err?.data?.message ||
+              err?.message ||
+              "Something went wrong. Please try again";
+
+            toast.error("Failed to submit application", {
+              description: errorDescription,
+              position: "top-right",
+            });
+          },
+        },
+      );
     },
   });
 

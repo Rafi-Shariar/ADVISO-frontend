@@ -21,7 +21,9 @@ export const ApplicationRejectedCard = ({ reason }: Props) => {
           <AlertCircle className="h-5 w-5" />
         </div>
         <div className="flex-1">
-          <h3 className="text-lg font-semibold text-zinc-900">Application Rejected</h3>
+          <h3 className="text-lg font-semibold text-zinc-900">
+            Application Rejected
+          </h3>
           <p className="mt-1 text-sm text-zinc-600">
             Unfortunately, your application was not approved at this time.
           </p>
@@ -42,7 +44,6 @@ export const ApplicationRejectedCard = ({ reason }: Props) => {
             <RotateCcw className="h-4 w-4" />
             Re-apply as Mentor
           </Button>
-          
         </div>
       </div>
     </div>

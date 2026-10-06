@@ -18,8 +18,6 @@ export const deleteUserAccount = (id: string) => {
   });
 };
 
-
 export const getApplicationStatus = () => {
   return apiClient(`api/v1/user/application-status`);
 };
-

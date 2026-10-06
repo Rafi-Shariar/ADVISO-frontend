@@ -17,15 +17,15 @@ export const getAllMentorsAdmin = (params: MentorParams) => {
   return apiClient(`/api/v1/mentor/admin/all-mentors`, { params });
 };
 
-export const applyAsMentor = (paylaod : MentorApplicationPayload) => {
+export const applyAsMentor = (paylaod: MentorApplicationPayload) => {
   const formData = new FormData();
 
   formData.append("data", JSON.stringify(paylaod.data));
-  formData.append("resume", paylaod.resume)
-  formData.append("documents", paylaod.documents)
+  formData.append("resume", paylaod.resume);
+  formData.append("documents", paylaod.documents);
 
-  return apiClient('/api/v1/mentor/applications/apply', {
-    method : "POST",
-    body: formData
-  })
-}
+  return apiClient("/api/v1/mentor/applications/apply", {
+    method: "POST",
+    body: formData,
+  });
+};
