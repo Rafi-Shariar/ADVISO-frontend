@@ -63,7 +63,7 @@ const MyScheduleTable = (params: ScheduleParams) => {
               <TableCell>
                 <Button
                   className=""
-                  variant={"outline"}
+                  variant={"ghost"}
                   size={"lg"}
                   onClick={() => setSelectedSchedule(schedule)}
                 >

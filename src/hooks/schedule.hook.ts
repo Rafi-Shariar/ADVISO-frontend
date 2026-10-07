@@ -1,10 +1,10 @@
-import { getAllSchedules, getMentorSchedules } from "@/api";
+import { createSchedule, getAllSchedules, getMentorSchedules } from "@/api";
 import { ScheduleParams } from "@/types/schedule.type";
-import { useSuspenseQuery } from "@tanstack/react-query";
+import { useMutation, useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
 
 export function useSuspenseGetAllSchedules(params: ScheduleParams) {
   return useSuspenseQuery({
-    queryKey: [`users`, params],
+    queryKey: [`schedules`, params],
     queryFn: () => getAllSchedules(params),
   });
 }
@@ -13,5 +13,18 @@ export function useSuspenseGetMentorSchedules(params: ScheduleParams) {
   return useSuspenseQuery({
     queryKey: [`my-schedules`, params],
     queryFn: () => getMentorSchedules(params),
+  });
+}
+
+
+
+export function useCreateSchedule() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: createSchedule,
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey: ["my-schedules"] });
+      await queryClient.invalidateQueries({ queryKey: ["schedules"] });
+    }, 
   });
 }
