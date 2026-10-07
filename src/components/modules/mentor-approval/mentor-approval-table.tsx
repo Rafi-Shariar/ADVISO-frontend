@@ -113,7 +113,7 @@ const MentorApprovalTable = ({ handlePageChange, ...params }: Props) => {
                     {mentor.verificationStatus === "APPROVED" ? (
                       <>
                         <DropdownMenuItem>
-                          <User /> Mentor Profile
+                         <User /><Link href={`/admin/mentors/${mentor.mentorId}`}> Mentor Profile </Link> 
                         </DropdownMenuItem>
                         <DropdownMenuItem>
                           {" "}

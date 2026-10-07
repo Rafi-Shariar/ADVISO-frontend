@@ -125,12 +125,12 @@ export interface User {
   timezone: string
   isEmailVerified: boolean
   profileURL: string
-  imagePublicId: any
-  googleId: any
+  imagePublicId: string
+  googleId: string
   authProvider: string
   accountStatus: string
   isDeleted: boolean
-  deletedAt: any
+  deletedAt: string
   createdAt: string
   updatedAt: string
 }
@@ -139,4 +139,9 @@ export interface ReviewApplicationPaylaod {
   mentorId: string;
 	verificationStatus: MentorVerificationStatus;
 	rejectionReason?: string;
+}
+
+export interface MentorProfileAdmin extends ApplicationReview {
+  blogs : BlogItemInMentorDetails[],
+  reviews: IReview[]
 }
