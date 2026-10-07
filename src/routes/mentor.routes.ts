@@ -21,24 +21,18 @@ export const mentorRoutes = [
         title: "My Sessions",
         url: "/mentor/sessions",
       },
-      {
-        title: "Earnings",
-        url: "/mentor/payments",
-      },
+      
     ],
   },
   {
-    title: "Content & Feedback",
+    title: "Content & Blogs",
     url: "#",
     items: [
       {
         title: "Blogs",
         url: "/mentor/blogs",
       },
-      {
-        title: "Reviews",
-        url: "/mentor/reviews",
-      },
+      
     ],
   },
   {

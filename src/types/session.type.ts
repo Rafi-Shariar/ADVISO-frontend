@@ -95,3 +95,19 @@ export interface Payment {
   gatewayResponse: string;
   createdAt: string;
 }
+
+export interface MentorSessions {
+  sessionId: string;
+  meetingLink: string;
+  user: {
+    name: string;
+    profileURL: string;
+  };
+  slot: {
+    startTime: string;
+    endTime: string;
+    schedule: {
+      date: string;
+    };
+  };
+}
