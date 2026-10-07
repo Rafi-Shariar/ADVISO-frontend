@@ -10,7 +10,10 @@ import {
 } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { useSessionDetailsMentor } from "@/hooks/session.hook";
-import { formatScheduleDate, formatSlotTime } from "@/utils/date-time-converter";
+import {
+  formatScheduleDate,
+  formatSlotTime,
+} from "@/utils/date-time-converter";
 import {
   Calendar,
   Clock,
@@ -41,7 +44,8 @@ export const MentorSessionDetailsSheet = ({
   const session = data?.data;
 
   const isCompleted = session?.completedSession;
-  const isConfirmed = session?.status === "COMFIRMED" || session?.status === "CONFIRMED";
+  const isConfirmed =
+    session?.status === "COMFIRMED" || session?.status === "CONFIRMED";
   const isCancelled = session?.status === "CANCELLED";
 
   return (
@@ -60,15 +64,19 @@ export const MentorSessionDetailsSheet = ({
                     isCompleted
                       ? "bg-purple-500/10 text-purple-600 dark:text-purple-400 border-purple-500/20"
                       : isConfirmed
-                      ? "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/20"
-                      : isCancelled
-                      ? "bg-rose-500/10 text-rose-600 dark:text-rose-400 border-rose-500/20"
-                      : "bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-500/20"
+                        ? "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/20"
+                        : isCancelled
+                          ? "bg-rose-500/10 text-rose-600 dark:text-rose-400 border-rose-500/20"
+                          : "bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-500/20"
                   }`}
                 >
                   <span
                     className={`size-1.5 rounded-full ${
-                      isCompleted ? "bg-purple-500" : isConfirmed ? "bg-emerald-500" : "bg-rose-500"
+                      isCompleted
+                        ? "bg-purple-500"
+                        : isConfirmed
+                          ? "bg-emerald-500"
+                          : "bg-rose-500"
                     }`}
                   />
                   {isCompleted ? "Completed" : session.status}
@@ -88,7 +96,9 @@ export const MentorSessionDetailsSheet = ({
         {isPending ? (
           <div className="flex-1 flex flex-col items-center justify-center gap-3 p-8 text-muted-foreground">
             <Loader2 className="size-7 animate-spin text-orange-500" />
-            <p className="text-xs font-medium tracking-wide">Loading session details...</p>
+            <p className="text-xs font-medium tracking-wide">
+              Loading session details...
+            </p>
           </div>
         ) : session ? (
           <div className="flex-1 p-6 space-y-6">
@@ -104,7 +114,9 @@ export const MentorSessionDetailsSheet = ({
                   />
                 ) : (
                   <div className="size-full flex items-center justify-center font-bold text-base text-orange-600 bg-orange-50 dark:bg-orange-950/30">
-                    {session.user?.name ? session.user.name.slice(0, 2).toUpperCase() : "ST"}
+                    {session.user?.name
+                      ? session.user.name.slice(0, 2).toUpperCase()
+                      : "ST"}
                   </div>
                 )}
               </div>
@@ -135,7 +147,8 @@ export const MentorSessionDetailsSheet = ({
 
               <div className="p-3 rounded-2xl bg-card border border-border/70 shadow-2xs space-y-1">
                 <span className="text-[11px] font-medium text-muted-foreground flex items-center gap-1.5">
-                  <CheckCircle2 className="size-3.5 text-sky-500" /> Session Status
+                  <CheckCircle2 className="size-3.5 text-sky-500" /> Session
+                  Status
                 </span>
                 <p className="text-xs font-bold text-foreground truncate mt-1">
                   {isCompleted ? "Marked Complete" : "Upcoming Slot"}
@@ -153,8 +166,8 @@ export const MentorSessionDetailsSheet = ({
                   {session.slot?.schedule?.date
                     ? formatScheduleDate(session.slot.schedule.date)
                     : session.sessionDate
-                    ? formatScheduleDate(session.sessionDate)
-                    : "Not specified"}
+                      ? formatScheduleDate(session.sessionDate)
+                      : "Not specified"}
                 </span>
               </div>
 
@@ -163,8 +176,13 @@ export const MentorSessionDetailsSheet = ({
                   <Clock className="size-4 text-sky-500" /> Slot Time
                 </span>
                 <span className="font-semibold text-foreground">
-                  {session.slot?.startTime ? formatSlotTime(session.slot.startTime) : formatSlotTime(session.startUTC)} -{" "}
-                  {session.slot?.endTime ? formatSlotTime(session.slot.endTime) : formatSlotTime(session.endUTC)}
+                  {session.slot?.startTime
+                    ? formatSlotTime(session.slot.startTime)
+                    : formatSlotTime(session.startUTC)}{" "}
+                  -{" "}
+                  {session.slot?.endTime
+                    ? formatSlotTime(session.slot.endTime)
+                    : formatSlotTime(session.endUTC)}
                 </span>
               </div>
             </div>
@@ -172,10 +190,12 @@ export const MentorSessionDetailsSheet = ({
             {/* Purpose / Agenda */}
             <div className="space-y-2">
               <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
-                <Target className="size-3.5 text-orange-500" /> Purpose & Discussion Agenda
+                <Target className="size-3.5 text-orange-500" /> Purpose &
+                Discussion Agenda
               </span>
               <div className="p-3.5 rounded-2xl bg-muted/20 border border-border/60 text-xs sm:text-sm leading-relaxed text-foreground whitespace-pre-line">
-                {session.purpose || "No specific purpose stated for this booking."}
+                {session.purpose ||
+                  "No specific purpose stated for this booking."}
               </div>
             </div>
 
@@ -184,7 +204,8 @@ export const MentorSessionDetailsSheet = ({
               <div className="rounded-2xl border border-amber-500/20 bg-amber-500/5 dark:bg-amber-950/10 p-4 space-y-2.5">
                 <div className="flex items-center justify-between">
                   <span className="text-xs font-bold text-amber-700 dark:text-amber-400 flex items-center gap-1.5">
-                    <Star className="size-3.5 fill-amber-500 text-amber-500" /> Mentee Rating
+                    <Star className="size-3.5 fill-amber-500 text-amber-500" />{" "}
+                    Mentee Rating
                   </span>
                   <span className="px-2 py-0.5 rounded-md bg-amber-500/20 text-amber-800 dark:text-amber-300 font-extrabold text-xs">
                     {session.review.ratings} / 5.0
@@ -214,7 +235,11 @@ export const MentorSessionDetailsSheet = ({
                   size="lg"
                   className="w-full rounded-2xl bg-orange-600 hover:bg-orange-700 text-white font-semibold shadow-md shadow-orange-500/20 text-xs sm:text-sm active:scale-[0.98] transition-all"
                 >
-                  <a href={session.meetingLink} target="_blank" rel="noreferrer">
+                  <a
+                    href={session.meetingLink}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
                     <Video className="size-4" />
                     <span>Join Video Call</span>
                     <ExternalLink className="size-3.5 ml-1 opacity-70" />

@@ -13,7 +13,10 @@ import {
 } from "@/components/ui/table";
 import { useSessionsMentor } from "@/hooks/session.hook";
 import { MentorSessions } from "@/types/session.type";
-import { formatScheduleDate, formatSlotTime } from "@/utils/date-time-converter";
+import {
+  formatScheduleDate,
+  formatSlotTime,
+} from "@/utils/date-time-converter";
 import { MentorSessionDetailsSheet } from "./mentor-session-details-sheet";
 import { CircleArrowRight, ExternalLink, Video } from "lucide-react";
 
@@ -22,7 +25,9 @@ const MentorSessionsTable = () => {
   const sessions: MentorSessions[] = data?.data || [];
 
   // Sheet ওপেন রাখা ও সিলেক্টেড সেশনের স্টেট
-  const [selectedSessionId, setSelectedSessionId] = useState<string | null>(null);
+  const [selectedSessionId, setSelectedSessionId] = useState<string | null>(
+    null,
+  );
   const [isSheetOpen, setIsSheetOpen] = useState(false);
 
   const handleOpenDetails = (sessionId: string) => {
@@ -33,7 +38,9 @@ const MentorSessionsTable = () => {
   if (isPending) {
     return (
       <div className="min-h-[250px] flex items-center justify-center">
-        <p className="text-xs text-muted-foreground animate-pulse">Loading sessions...</p>
+        <p className="text-xs text-muted-foreground animate-pulse">
+          Loading sessions...
+        </p>
       </div>
     );
   }
@@ -44,20 +51,37 @@ const MentorSessionsTable = () => {
         <Table>
           <TableHeader>
             <TableRow className="bg-muted/40 hover:bg-muted/40">
-              <TableHead className="font-bold text-xs uppercase">#Session</TableHead>
-              <TableHead className="font-bold text-xs uppercase">Date</TableHead>
-              <TableHead className="font-bold text-xs uppercase">Start Time</TableHead>
-              <TableHead className="font-bold text-xs uppercase">End Time</TableHead>
-              <TableHead className="font-bold text-xs uppercase">User</TableHead>
-              <TableHead className="font-bold text-xs uppercase">Meeting</TableHead>
-              <TableHead className="font-bold text-xs uppercase text-right">Action</TableHead>
+              <TableHead className="font-bold text-xs uppercase">
+                #Session
+              </TableHead>
+              <TableHead className="font-bold text-xs uppercase">
+                Date
+              </TableHead>
+              <TableHead className="font-bold text-xs uppercase">
+                Start Time
+              </TableHead>
+              <TableHead className="font-bold text-xs uppercase">
+                End Time
+              </TableHead>
+              <TableHead className="font-bold text-xs uppercase">
+                User
+              </TableHead>
+              <TableHead className="font-bold text-xs uppercase">
+                Meeting
+              </TableHead>
+              <TableHead className="font-bold text-xs uppercase text-right">
+                Action
+              </TableHead>
             </TableRow>
           </TableHeader>
 
           <TableBody>
             {sessions.length === 0 ? (
               <TableRow>
-                <TableCell colSpan={7} className="h-28 text-center text-xs text-muted-foreground">
+                <TableCell
+                  colSpan={7}
+                  className="h-28 text-center text-xs text-muted-foreground"
+                >
                   No sessions booked yet.
                 </TableCell>
               </TableRow>
@@ -96,7 +120,9 @@ const MentorSessionsTable = () => {
                           </div>
                         )}
                       </div>
-                      <span className="text-xs font-medium text-foreground">{session.user.name}</span>
+                      <span className="text-xs font-medium text-foreground">
+                        {session.user.name}
+                      </span>
                     </div>
                   </TableCell>
 
@@ -108,7 +134,11 @@ const MentorSessionsTable = () => {
                       variant="outline"
                       className="h-8 rounded-lg text-xs gap-1.5 border-border/80 hover:bg-orange-500/10 hover:text-orange-600 transition-colors"
                     >
-                      <a href={session.meetingLink} target="_blank" rel="noreferrer">
+                      <a
+                        href={session.meetingLink}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
                         <Video className="size-3.5 text-orange-500" />
                         Join
                         <ExternalLink className="size-3 text-muted-foreground" />
@@ -124,7 +154,7 @@ const MentorSessionsTable = () => {
                       className="h-8 text-xs font-semibold hover:bg-muted"
                       onClick={() => handleOpenDetails(session.sessionId)}
                     >
-                      Details <CircleArrowRight/>
+                      Details <CircleArrowRight />
                     </Button>
                   </TableCell>
                 </TableRow>

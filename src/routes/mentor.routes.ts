@@ -21,20 +21,19 @@ export const mentorRoutes = [
         title: "My Sessions",
         url: "/mentor/sessions",
       },
-      
     ],
   },
-  {
-    title: "Content & Blogs",
-    url: "#",
-    items: [
-      {
-        title: "Blogs",
-        url: "/mentor/blogs",
-      },
-      
-    ],
-  },
+  // {
+  //   title: "Content & Blogs",
+  //   url: "#",
+  //   items: [
+  //     {
+  //       title: "Blogs",
+  //       url: "/mentor/blogs",
+  //     },
+
+  //   ],
+  // },
   {
     title: "Account Settings",
     url: "#",

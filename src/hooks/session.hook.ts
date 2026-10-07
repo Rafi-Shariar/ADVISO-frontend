@@ -1,4 +1,9 @@
-import { getAllSessionsAdmin, getAllSessionsMentor, getSessionsAdminDetails, getSessionsDetailsMentor } from "@/api";
+import {
+  getAllSessionsAdmin,
+  getAllSessionsMentor,
+  getSessionsAdminDetails,
+  getSessionsDetailsMentor,
+} from "@/api";
 import { useQuery } from "@tanstack/react-query";
 
 export function useSessionsAdmin() {
@@ -15,7 +20,6 @@ export function useSessionDetails(id: string) {
     enabled: Boolean(id),
   });
 }
-
 
 export function useSessionsMentor() {
   return useQuery({
