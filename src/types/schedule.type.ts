@@ -36,3 +36,5 @@ export interface Slot {
   createdAt: string;
   updatedAt: string;
 }
+
+
