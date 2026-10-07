@@ -1,10 +1,12 @@
-import { getAllMentorsPublic } from "@/api";
+import { getAllMentorsAdmin, getAllMentorsPublic } from "@/api";
+import MentorProfileView from "@/components/modules/admin/mentor-profile/mentor-profile-view";
 import MentorDetailsView from "@/components/modules/mentor/mentor-details-public/mentor-details-view";
+import ApplicationReviewView from "@/components/modules/review-application/review-application-view";
 import { IMentorProfile } from "@/types/mentor.type";
 
 export async function generateStaticParams() {
   try {
-    const res = await getAllMentorsPublic({ limit: 50, page: 1 });
+    const res = await getAllMentorsAdmin({ limit: 50, page: 1 });
     const mentors: IMentorProfile[] = res?.data || [];
 
     return mentors.map((mentor) => ({
@@ -24,8 +26,8 @@ interface PageProps {
   params: Promise<{ id: string }>;
 }
 
-export default async function MentorDetailsPage({ params }: PageProps) {
+export default async function MentorProfileAdminPage({ params }: PageProps) {
   const { id } = await params;
 
-  return <MentorDetailsView id={id} />;
+  return <MentorProfileView id={id} />;
 }

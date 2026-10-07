@@ -113,7 +113,7 @@ const MentorApprovalTable = ({ handlePageChange, ...params }: Props) => {
                     {mentor.verificationStatus === "APPROVED" ? (
                       <>
                         <DropdownMenuItem>
-                          <User /> Mentor Profile
+                         <User /><Link href={`/admin/mentors/${mentor.mentorId}`}> Mentor Profile </Link> 
                         </DropdownMenuItem>
                         <DropdownMenuItem>
                           {" "}
@@ -127,13 +127,13 @@ const MentorApprovalTable = ({ handlePageChange, ...params }: Props) => {
                     ) : mentor.verificationStatus === "PENDING" ? (
                       <DropdownMenuItem>
                         <FileUser />
-                        Review Application
+                       <Link href={`/admin/review/${mentor.mentorId}`}> Review Application</Link>
                       </DropdownMenuItem>
                     ) : (
                       <DropdownMenuItem>
                         {" "}
                         <UserRoundX />
-                        Rejected Profile
+                        <Link href={`/admin/review/${mentor.mentorId}`}>Rejected Profile</Link>
                       </DropdownMenuItem>
                     )}
                   </DropdownMenuContent>

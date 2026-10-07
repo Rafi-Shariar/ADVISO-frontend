@@ -1,5 +1,5 @@
 import apiClient from "@/lib/apiClient";
-import { MentorApplicationPayload, MentorParams } from "@/types/mentor.type";
+import { MentorApplicationPayload, MentorParams, ReviewApplicationPaylaod } from "@/types/mentor.type";
 
 export const getFeaturedMentors = () => {
   return apiClient("/api/v1/mentor/featured");
@@ -28,4 +28,13 @@ export const applyAsMentor = (paylaod: MentorApplicationPayload) => {
     method: "POST",
     body: formData,
   });
+};
+
+
+export const getMentorDetailsAdmin = (id: string) => {
+  return apiClient(`/api/v1/mentor/admin/all-mentors/${id}`);
+};
+
+export const reviewApplication = (payload: ReviewApplicationPaylaod) => {
+  return apiClient("/api/v1/mentor/applications/approve", { method: "POST", body: payload });
 };
