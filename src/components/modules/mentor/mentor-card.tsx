@@ -7,9 +7,8 @@ interface Props {
   mentor: IMentorProfile;
 }
 const MentorCard = ({ mentor }: Props) => {
-
   const profileImage = mentor.user?.profileURL?.trim();
-  
+
   return (
     <Link
       key={mentor.mentorId}

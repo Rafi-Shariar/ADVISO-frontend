@@ -36,3 +36,13 @@ export interface Slot {
   createdAt: string;
   updatedAt: string;
 }
+
+export interface CreateSchedulePayload {
+  date: string;
+  startTime: string;
+  endTime: string;
+}
+
+export interface DeleteSchedulePayload {
+  scheduleId: string;
+}

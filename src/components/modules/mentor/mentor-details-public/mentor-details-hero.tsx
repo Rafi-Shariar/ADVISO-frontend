@@ -34,7 +34,9 @@ export const MentorHeroBanner = ({ mentor }: { mentor: IMentorDetails }) => {
               />
             ) : (
               <div className="size-full flex items-center justify-center font-bold text-3xl text-orange-600 bg-orange-500/10">
-                {mentor.user.name ? mentor.user.name.slice(0, 2).toUpperCase() : "M"}
+                {mentor.user.name
+                  ? mentor.user.name.slice(0, 2).toUpperCase()
+                  : "M"}
               </div>
             )}
           </div>
@@ -57,7 +59,8 @@ export const MentorHeroBanner = ({ mentor }: { mentor: IMentorDetails }) => {
         <div className="flex flex-wrap items-center gap-2 pt-1 text-xs text-muted-foreground">
           <span className="inline-flex items-center gap-1.5 font-semibold text-foreground bg-muted/60 border border-border/50 px-3 py-1 rounded-xl">
             <Star className="size-3.5 fill-amber-400 text-amber-400" />
-            {mentor.averageRatings || "0.0"} ({mentor.totalReviews || 0} reviews)
+            {mentor.averageRatings || "0.0"} ({mentor.totalReviews || 0}{" "}
+            reviews)
           </span>
 
           <span className="inline-flex items-center gap-1.5 bg-muted/60 border border-border/50 px-3 py-1 rounded-xl">

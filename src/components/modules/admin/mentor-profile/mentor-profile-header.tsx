@@ -1,14 +1,14 @@
 import Image from "next/image";
-import { 
-  Mail, 
-  Calendar, 
-  Clock, 
-  DollarSign, 
-  Briefcase, 
-  Star, 
-  CheckCircle2, 
+import {
+  Mail,
+  Calendar,
+  Clock,
+  DollarSign,
+  Briefcase,
+  Star,
+  CheckCircle2,
   Sparkles,
-  ShieldAlert
+  ShieldAlert,
 } from "lucide-react";
 
 interface ProfileHeroHeaderProps {
@@ -71,7 +71,9 @@ export const ProfileHeroHeader = ({ profile }: ProfileHeroHeaderProps) => {
                     : "bg-muted text-muted-foreground border-border"
                 }`}
               >
-                <span className={`size-1.5 rounded-full ${isOpen ? "bg-sky-500 animate-pulse" : "bg-muted-foreground"}`} />
+                <span
+                  className={`size-1.5 rounded-full ${isOpen ? "bg-sky-500 animate-pulse" : "bg-muted-foreground"}`}
+                />
                 {profile.mentorshipStatus}
               </span>
             </div>
@@ -84,7 +86,11 @@ export const ProfileHeroHeader = ({ profile }: ProfileHeroHeaderProps) => {
               <span className="inline-block size-1 rounded-full bg-border" />
               <span className="flex items-center gap-1.5">
                 <Calendar className="size-3.5 text-orange-500" />
-                Joined {new Date(profile.createdAt).toLocaleDateString("en-US", { month: "short", year: "numeric" })}
+                Joined{" "}
+                {new Date(profile.createdAt).toLocaleDateString("en-US", {
+                  month: "short",
+                  year: "numeric",
+                })}
               </span>
             </div>
           </div>
@@ -98,10 +104,14 @@ export const ProfileHeroHeader = ({ profile }: ProfileHeroHeaderProps) => {
             </div>
             <div>
               <div className="flex items-baseline gap-1">
-                <span className="text-xl font-extrabold text-foreground">{profile.averageRatings || "0.0"}</span>
+                <span className="text-xl font-extrabold text-foreground">
+                  {profile.averageRatings || "0.0"}
+                </span>
                 <span className="text-xs text-muted-foreground">/ 5.0</span>
               </div>
-              <p className="text-[11px] text-muted-foreground">{profile.totalReviews || 0} Mentee Reviews</p>
+              <p className="text-[11px] text-muted-foreground">
+                {profile.totalReviews || 0} Mentee Reviews
+              </p>
             </div>
           </div>
         </div>
@@ -114,8 +124,12 @@ export const ProfileHeroHeader = ({ profile }: ProfileHeroHeaderProps) => {
             <Clock className="size-4" />
           </div>
           <div>
-            <p className="text-[11px] font-medium uppercase tracking-wider text-muted-foreground">Experience</p>
-            <p className="text-base font-bold text-foreground">{profile.yearOfExperience} Years</p>
+            <p className="text-[11px] font-medium uppercase tracking-wider text-muted-foreground">
+              Experience
+            </p>
+            <p className="text-base font-bold text-foreground">
+              {profile.yearOfExperience} Years
+            </p>
           </div>
         </div>
 
@@ -124,8 +138,12 @@ export const ProfileHeroHeader = ({ profile }: ProfileHeroHeaderProps) => {
             <DollarSign className="size-4" />
           </div>
           <div>
-            <p className="text-[11px] font-medium uppercase tracking-wider text-muted-foreground">Session Charge</p>
-            <p className="text-base font-bold text-foreground">${profile.sessionCharge}</p>
+            <p className="text-[11px] font-medium uppercase tracking-wider text-muted-foreground">
+              Session Charge
+            </p>
+            <p className="text-base font-bold text-foreground">
+              ${profile.sessionCharge}
+            </p>
           </div>
         </div>
 
@@ -134,8 +152,12 @@ export const ProfileHeroHeader = ({ profile }: ProfileHeroHeaderProps) => {
             <Sparkles className="size-4" />
           </div>
           <div>
-            <p className="text-[11px] font-medium uppercase tracking-wider text-muted-foreground">Completed Sessions</p>
-            <p className="text-base font-bold text-foreground">{profile.totalSessionsCompleted || 0}</p>
+            <p className="text-[11px] font-medium uppercase tracking-wider text-muted-foreground">
+              Completed Sessions
+            </p>
+            <p className="text-base font-bold text-foreground">
+              {profile.totalSessionsCompleted || 0}
+            </p>
           </div>
         </div>
 
@@ -144,7 +166,9 @@ export const ProfileHeroHeader = ({ profile }: ProfileHeroHeaderProps) => {
             <Briefcase className="size-4" />
           </div>
           <div className="truncate">
-            <p className="text-[11px] font-medium uppercase tracking-wider text-muted-foreground">Domain</p>
+            <p className="text-[11px] font-medium uppercase tracking-wider text-muted-foreground">
+              Domain
+            </p>
             <p className="text-sm font-bold text-foreground truncate capitalize">
               {profile.professionalDomain?.toLowerCase().replace(/_/g, " ")}
             </p>

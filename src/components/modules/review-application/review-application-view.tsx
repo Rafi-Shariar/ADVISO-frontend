@@ -2,15 +2,15 @@
 
 import { useMentorDetailsAdmin } from "@/hooks/mentor.hook";
 import { ApplicationReview } from "@/types/mentor.type";
-import { 
-  Briefcase, 
-  ExternalLink, 
-  FileText, 
-  Globe, 
-  Mail, 
-  CheckCircle2, 
-  XCircle, 
-  DollarSign, 
+import {
+  Briefcase,
+  ExternalLink,
+  FileText,
+  Globe,
+  Mail,
+  CheckCircle2,
+  XCircle,
+  DollarSign,
   Clock,
   Sparkles,
   Calendar,
@@ -19,7 +19,7 @@ import {
   ShieldCheck,
   UserCheck,
   AlertTriangle,
-  UserX
+  UserX,
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -50,8 +50,12 @@ const ApplicationReviewView = ({ id }: { id: string }) => {
     return (
       <div className="max-w-2xl mx-auto my-24 p-8 rounded-3xl border border-dashed border-border text-center space-y-3 bg-muted/10">
         <UserCheck className="size-10 mx-auto text-muted-foreground/60" />
-        <h3 className="text-lg font-semibold text-foreground">Application Not Found</h3>
-        <p className="text-sm text-muted-foreground">The mentor profile record might have been removed or does not exist.</p>
+        <h3 className="text-lg font-semibold text-foreground">
+          Application Not Found
+        </h3>
+        <p className="text-sm text-muted-foreground">
+          The mentor profile record might have been removed or does not exist.
+        </p>
       </div>
     );
   }
@@ -63,12 +67,11 @@ const ApplicationReviewView = ({ id }: { id: string }) => {
 
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-6 py-6 space-y-6">
-      
       {/* 🌟 1. Top Executive Profile & Header Banner */}
       <div className="relative overflow-hidden rounded-3xl border border-border/70 bg-gradient-to-br from-card via-card to-orange-500/5 p-6 sm:p-8 shadow-xs">
         {/* Ambient background glow */}
         <div className="pointer-events-none absolute -right-16 -top-16 size-64 rounded-full bg-orange-500/10 blur-3xl" />
-        
+
         <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-5">
             {/* Avatar with Glow Ring */}
@@ -100,13 +103,17 @@ const ApplicationReviewView = ({ id }: { id: string }) => {
                     isPendingStatus
                       ? "bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-500/30"
                       : isApproved
-                      ? "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/30"
-                      : "bg-rose-500/10 text-rose-600 dark:text-rose-400 border-rose-500/30"
+                        ? "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/30"
+                        : "bg-rose-500/10 text-rose-600 dark:text-rose-400 border-rose-500/30"
                   }`}
                 >
                   <span
                     className={`size-1.5 rounded-full ${
-                      isPendingStatus ? "bg-amber-500 animate-ping" : isApproved ? "bg-emerald-500" : "bg-rose-500"
+                      isPendingStatus
+                        ? "bg-amber-500 animate-ping"
+                        : isApproved
+                          ? "bg-emerald-500"
+                          : "bg-rose-500"
                     }`}
                   />
                   {application.verificationStatus}
@@ -120,7 +127,12 @@ const ApplicationReviewView = ({ id }: { id: string }) => {
                 <span className="inline-block size-1 rounded-full bg-border" />
                 <span className="flex items-center gap-1.5">
                   <Calendar className="size-3.5 text-orange-500" />
-                  Applied {new Date(application.createdAt).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}
+                  Applied{" "}
+                  {new Date(application.createdAt).toLocaleDateString("en-US", {
+                    month: "short",
+                    day: "numeric",
+                    year: "numeric",
+                  })}
                 </span>
               </div>
             </div>
@@ -156,8 +168,12 @@ const ApplicationReviewView = ({ id }: { id: string }) => {
               <Clock className="size-4" />
             </div>
             <div>
-              <p className="text-[11px] font-medium uppercase tracking-wider text-muted-foreground">Experience</p>
-              <p className="text-base font-bold text-foreground">{application.yearOfExperience} Years</p>
+              <p className="text-[11px] font-medium uppercase tracking-wider text-muted-foreground">
+                Experience
+              </p>
+              <p className="text-base font-bold text-foreground">
+                {application.yearOfExperience} Years
+              </p>
             </div>
           </div>
 
@@ -166,8 +182,12 @@ const ApplicationReviewView = ({ id }: { id: string }) => {
               <DollarSign className="size-4" />
             </div>
             <div>
-              <p className="text-[11px] font-medium uppercase tracking-wider text-muted-foreground">Charge / Session</p>
-              <p className="text-base font-bold text-foreground">${application.sessionCharge}</p>
+              <p className="text-[11px] font-medium uppercase tracking-wider text-muted-foreground">
+                Charge / Session
+              </p>
+              <p className="text-base font-bold text-foreground">
+                ${application.sessionCharge}
+              </p>
             </div>
           </div>
 
@@ -176,9 +196,15 @@ const ApplicationReviewView = ({ id }: { id: string }) => {
               <Briefcase className="size-4" />
             </div>
             <div className="truncate">
-              <p className="text-[11px] font-medium uppercase tracking-wider text-muted-foreground">Domain</p>
+              <p className="text-[11px] font-medium uppercase tracking-wider text-muted-foreground">
+                Domain
+              </p>
               <p className="text-base font-bold text-foreground truncate capitalize">
-                {application.professionalDomain ? application.professionalDomain.toLowerCase().replace(/_/g, " ") : "Not specified"}
+                {application.professionalDomain
+                  ? application.professionalDomain
+                      .toLowerCase()
+                      .replace(/_/g, " ")
+                  : "Not specified"}
               </p>
             </div>
           </div>
@@ -208,20 +234,26 @@ const ApplicationReviewView = ({ id }: { id: string }) => {
               {application.reviewedBy && (
                 <span className="flex items-center gap-1.5">
                   <UserX className="size-3.5" />
-                  Reviewed by: <strong className="font-semibold text-rose-900 dark:text-rose-200">{application.reviewedBy}</strong>
+                  Reviewed by:{" "}
+                  <strong className="font-semibold text-rose-900 dark:text-rose-200">
+                    {application.reviewedBy}
+                  </strong>
                 </span>
               )}
               {application.reviewedAt && (
                 <>
                   <span className="inline-block size-1 rounded-full bg-rose-400" />
                   <span>
-                    {new Date(application.reviewedAt).toLocaleDateString("en-US", {
-                      month: "short",
-                      day: "numeric",
-                      year: "numeric",
-                      hour: "2-digit",
-                      minute: "2-digit",
-                    })}
+                    {new Date(application.reviewedAt).toLocaleDateString(
+                      "en-US",
+                      {
+                        month: "short",
+                        day: "numeric",
+                        year: "numeric",
+                        hour: "2-digit",
+                        minute: "2-digit",
+                      },
+                    )}
                   </span>
                 </>
               )}
@@ -233,7 +265,8 @@ const ApplicationReviewView = ({ id }: { id: string }) => {
               Stated Reason for Rejection
             </span>
             <div className="p-4 rounded-2xl bg-background/80 dark:bg-card/70 border border-rose-500/20 text-sm leading-relaxed text-foreground whitespace-pre-line">
-              {application.rejectionReason || "No explicit reason was documented."}
+              {application.rejectionReason ||
+                "No explicit reason was documented."}
             </div>
           </div>
         </div>
@@ -241,7 +274,6 @@ const ApplicationReviewView = ({ id }: { id: string }) => {
 
       {/* 🍱 3. Balanced 2-Column Bento Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
-        
         {/* Left Bento: Professional Dossier (7 Cols) */}
         <div className="lg:col-span-7 flex flex-col gap-6">
           {/* Headline & Statement */}
@@ -270,7 +302,8 @@ const ApplicationReviewView = ({ id }: { id: string }) => {
             {/* Core Skills & Expertise */}
             <div className="space-y-3 pt-3 border-t border-border/50">
               <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground flex items-center gap-2">
-                <Layers className="size-3.5 text-orange-500" /> Verified Expertise
+                <Layers className="size-3.5 text-orange-500" /> Verified
+                Expertise
               </span>
               <div className="flex flex-wrap gap-2">
                 {application.expertiseTags?.map((tag) => (
@@ -288,7 +321,6 @@ const ApplicationReviewView = ({ id }: { id: string }) => {
 
         {/* Right Bento: Verification Assets & Profiles (5 Cols) */}
         <div className="lg:col-span-5 flex flex-col gap-6">
-          
           {/* Documents Section */}
           <div className="rounded-3xl border border-border/70 bg-card p-6 shadow-xs space-y-4">
             <div className="flex items-center justify-between pb-3 border-b border-border/50">
@@ -297,7 +329,9 @@ const ApplicationReviewView = ({ id }: { id: string }) => {
                 Submitted Documents
               </span>
               <span className="text-[11px] font-medium text-orange-600 dark:text-orange-400 bg-orange-500/10 px-2 py-0.5 rounded-md">
-                {(application.resume ? 1 : 0) + (application.documents?.length || 0)} Files
+                {(application.resume ? 1 : 0) +
+                  (application.documents?.length || 0)}{" "}
+                Files
               </span>
             </div>
 
@@ -318,7 +352,9 @@ const ApplicationReviewView = ({ id }: { id: string }) => {
                       <p className="text-sm font-semibold text-foreground group-hover:text-orange-600 transition-colors">
                         Candidate Resume
                       </p>
-                      <p className="text-[11px] text-muted-foreground">Primary Curriculum Vitae (PDF)</p>
+                      <p className="text-[11px] text-muted-foreground">
+                        Primary Curriculum Vitae (PDF)
+                      </p>
                     </div>
                   </div>
                   <ExternalLink className="size-4 text-muted-foreground group-hover:text-orange-600 transition-colors" />
@@ -346,7 +382,9 @@ const ApplicationReviewView = ({ id }: { id: string }) => {
                         <p className="text-sm font-semibold text-foreground group-hover:text-sky-600 transition-colors line-clamp-1">
                           {doc.title || `Credential Document #${idx + 1}`}
                         </p>
-                        <p className="text-[11px] text-muted-foreground">Certificate / Identity File</p>
+                        <p className="text-[11px] text-muted-foreground">
+                          Certificate / Identity File
+                        </p>
                       </div>
                     </div>
                     <ExternalLink className="size-4 text-muted-foreground group-hover:text-sky-600 transition-colors" />
@@ -397,9 +435,7 @@ const ApplicationReviewView = ({ id }: { id: string }) => {
               )}
             </div>
           </div>
-
         </div>
-
       </div>
 
       {/* 🛑 Dialog Modals */}
@@ -410,7 +446,6 @@ const ApplicationReviewView = ({ id }: { id: string }) => {
             onOpenChange={setIsRejectOpen}
             applicantName={user.name}
             applicantId={application.mentorId}
-            
           />
 
           <ApproveApplicationDialog
@@ -421,11 +456,9 @@ const ApplicationReviewView = ({ id }: { id: string }) => {
             sessionCharge={application.sessionCharge}
             professionalDomain={application.professionalDomain}
             applicantId={application.mentorId}
-           
           />
         </>
       )}
-
     </div>
   );
 };

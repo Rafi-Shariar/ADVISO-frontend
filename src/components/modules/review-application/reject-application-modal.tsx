@@ -18,7 +18,7 @@ interface RejectApplicationDialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   applicantName: string;
-applicantId : string
+  applicantId: string;
   isLoading?: boolean;
 }
 
@@ -32,9 +32,8 @@ export const RejectApplicationDialog = ({
   const [reason, setReason] = useState("");
   const [error, setError] = useState("");
 
-   const {mutate : rejectApplication, isPending} = useReviewApplication();
-  const router = useRouter()
-
+  const { mutate: rejectApplication, isPending } = useReviewApplication();
+  const router = useRouter();
 
   const handleClose = (value: boolean) => {
     if (!isLoading) {
@@ -44,49 +43,46 @@ export const RejectApplicationDialog = ({
     }
   };
 
-
   const handleRejectApplication = (e: React.FormEvent) => {
-
-     e.preventDefault();
+    e.preventDefault();
     if (!reason.trim()) {
       setError("Please provide a reason for the rejection.");
       return;
     }
     setError("");
-   
+
     setReason("");
 
     const payload = {
       mentorId: applicantId,
-      verificationStatus : "REJECTED" as const,
-      rejectionReason : reason
-    }
+      verificationStatus: "REJECTED" as const,
+      rejectionReason: reason,
+    };
 
     rejectApplication(payload, {
-       onSuccess: (_res) => {
-          
-          toast.success("Rejected Application.", {
-            description: "The Application has been rejected successfully",
-            position: "top-right",
-          });
+      onSuccess: (_res) => {
+        toast.success("Rejected Application.", {
+          description: "The Application has been rejected successfully",
+          position: "top-right",
+        });
 
-          router.push("/admin/mentors");
-          onOpenChange(false)
-        },
+        router.push("/admin/mentors");
+        onOpenChange(false);
+      },
 
-        onError: (err: any) => {
-          const errorDescription =
-            err?.data?.message ||
-            err?.message ||
-            "Something went wrong. Please try again";
+      onError: (err: any) => {
+        const errorDescription =
+          err?.data?.message ||
+          err?.message ||
+          "Something went wrong. Please try again";
 
-          toast.error("Action Failed", {
-            description: errorDescription,
-            position: "top-right",
-          });
-        },
-    })
-  }
+        toast.error("Action Failed", {
+          description: errorDescription,
+          position: "top-right",
+        });
+      },
+    });
+  };
   return (
     <Dialog open={open} onOpenChange={handleClose}>
       <DialogContent className="sm:max-w-[480px] p-6 rounded-2xl">
@@ -99,7 +95,12 @@ export const RejectApplicationDialog = ({
               Reject Application
             </DialogTitle>
             <DialogDescription className="text-sm text-muted-foreground leading-relaxed">
-              Are you sure you want to reject <span className="font-semibold text-foreground">{applicantName}</span>'s mentor application? Please specify the reason so they can improve.
+              Are you sure you want to reject{" "}
+              <span className="font-semibold text-foreground">
+                {applicantName}
+              </span>
+              's mentor application? Please specify the reason so they can
+              improve.
             </DialogDescription>
           </DialogHeader>
 
