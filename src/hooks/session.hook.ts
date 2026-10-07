@@ -1,10 +1,13 @@
 import {
+  bookSchedule,
   getAllSessionsAdmin,
   getAllSessionsMentor,
   getSessionsAdminDetails,
   getSessionsDetailsMentor,
+  getSessionsOfMentor,
+  PaySchedule,
 } from "@/api";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 export function useSessionsAdmin() {
   return useQuery({
@@ -15,7 +18,7 @@ export function useSessionsAdmin() {
 
 export function useSessionDetails(id: string) {
   return useQuery({
-    queryKey: [`session-${id}`],
+    queryKey: [`session-`, id],
     queryFn: () => getSessionsAdminDetails(id),
     enabled: Boolean(id),
   });
@@ -30,8 +33,37 @@ export function useSessionsMentor() {
 
 export function useSessionDetailsMentor(id: string) {
   return useQuery({
-    queryKey: [`mentor-session-${id}`],
+    queryKey: [`mentor-session`, id],
     queryFn: () => getSessionsDetailsMentor(id),
     enabled: Boolean(id),
+  });
+}
+
+export function useSessionsOfMentor(id: string) {
+  return useQuery({
+    queryKey: [`mentor-session`, id],
+    queryFn: () => getSessionsOfMentor(id),
+    enabled: Boolean(id),
+  });
+}
+
+export function useBookSchedule() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: bookSchedule,
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey: ["mentor-session"] });
+    },
+  });
+}
+
+export function usePaySchedule() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: PaySchedule,
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey: ["mentor-session"] });
+      await queryClient.invalidateQueries({ queryKey: ["mentor-sessions"] });
+    },
   });
 }

@@ -3,13 +3,17 @@
 import { useMentorDetails } from "@/hooks/mentor.hook";
 import { IMentorDetails } from "@/types/mentor.type";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { CalendarDays, MessageSquare, BookOpen, UserX, Loader2 } from "lucide-react";
+import {
+  CalendarDays,
+  MessageSquare,
+  BookOpen,
+  UserX,
+  Loader2,
+} from "lucide-react";
 import { MentorStickySidebar } from "./mentor-sticky-sidebar";
 import { BookScheduleTab } from "./book-schedule-tab";
 import { MentorReviewsTab } from "./mentor-review-tab";
 import { MentorBlogsTab } from "./mentor-blog-tab";
-
-
 
 interface MentorDetailsViewProps {
   id: string;
@@ -38,7 +42,8 @@ const MentorDetailsView = ({ id }: MentorDetailsViewProps) => {
           Mentor Not Found
         </h3>
         <p className="text-xs text-zinc-500">
-          The requested mentor profile could not be found or has been deactivated.
+          The requested mentor profile could not be found or has been
+          deactivated.
         </p>
       </div>
     );
@@ -48,7 +53,6 @@ const MentorDetailsView = ({ id }: MentorDetailsViewProps) => {
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
       {/* 2-Column Split: Sticky Details on Left, Tabs on Right */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
-        
         {/* 👈 Left Column: Sticky Profile Dossier (4.5 Cols) */}
         <div className="lg:col-span-5 xl:col-span-4 lg:sticky lg:top-8">
           <MentorStickySidebar mentor={mentor} />
@@ -57,11 +61,9 @@ const MentorDetailsView = ({ id }: MentorDetailsViewProps) => {
         {/* 👉 Right Column: Interactive Content Tabs (7.5 Cols) */}
         <div className="lg:col-span-7 xl:col-span-8 space-y-6">
           <Tabs defaultValue="schedule" className="space-y-6">
-            
             {/* Minimal & Sharp Tabs Header (ADVISO Style) */}
             <div className="border-b border-zinc-200 dark:border-zinc-800 pb-3">
               <TabsList className="bg-transparent h-auto p-0 flex gap-2 sm:gap-3 w-full justify-start overflow-x-auto">
-                
                 {/* 1. Book a Schedule */}
                 <TabsTrigger
                   value="schedule"
@@ -81,7 +83,10 @@ const MentorDetailsView = ({ id }: MentorDetailsViewProps) => {
                   data-[state=inactive]:bg-zinc-100 dark:data-[state=inactive]:bg-zinc-800/60 data-[state=inactive]:text-zinc-600 dark:data-[state=inactive]:text-zinc-400 hover:text-zinc-900 gap-2"
                 >
                   <MessageSquare className="size-4 text-orange-500" />
-                  <span>Reviews ({mentor.reviews?.length ?? mentor.totalReviews ?? 0})</span>
+                  <span>
+                    Reviews (
+                    {mentor.reviews?.length ?? mentor.totalReviews ?? 0})
+                  </span>
                 </TabsTrigger>
 
                 {/* 3. Blogs */}
@@ -98,12 +103,18 @@ const MentorDetailsView = ({ id }: MentorDetailsViewProps) => {
             </div>
 
             {/* Tab 1: Book a Schedule Slot */}
-            <TabsContent value="schedule" className="mt-0 focus-visible:outline-none">
+            <TabsContent
+              value="schedule"
+              className="mt-0 focus-visible:outline-none"
+            >
               <BookScheduleTab mentorId={id} timezone={mentor.user.timezone} />
             </TabsContent>
 
             {/* Tab 2: Reviews */}
-            <TabsContent value="reviews" className="mt-0 focus-visible:outline-none">
+            <TabsContent
+              value="reviews"
+              className="mt-0 focus-visible:outline-none"
+            >
               <MentorReviewsTab
                 reviews={mentor.reviews || []}
                 averageRatings={mentor.averageRatings}
@@ -112,12 +123,14 @@ const MentorDetailsView = ({ id }: MentorDetailsViewProps) => {
             </TabsContent>
 
             {/* Tab 3: Blogs */}
-            <TabsContent value="blogs" className="mt-0 focus-visible:outline-none">
+            <TabsContent
+              value="blogs"
+              className="mt-0 focus-visible:outline-none"
+            >
               <MentorBlogsTab blogs={mentor.blogs || []} />
             </TabsContent>
           </Tabs>
         </div>
-
       </div>
     </div>
   );

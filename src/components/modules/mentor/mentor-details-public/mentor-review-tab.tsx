@@ -15,7 +15,6 @@ export const MentorReviewsTab = ({
 }: MentorReviewsTabProps) => {
   return (
     <div className="rounded-[12px] border border-zinc-200/90 dark:border-zinc-800 bg-white dark:bg-zinc-900/60 p-6 sm:p-8 shadow-sm space-y-6">
-      
       {/* Header with Stats */}
       <div className="flex items-center justify-between pb-5 border-b border-zinc-100 dark:border-zinc-800/80">
         <div>
@@ -29,8 +28,12 @@ export const MentorReviewsTab = ({
 
         <div className="flex items-center gap-2 px-3 py-1.5 rounded-[12px] bg-zinc-100 dark:bg-zinc-800 border border-zinc-200/60 dark:border-zinc-700/60">
           <Star className="size-3.5 fill-amber-400 text-amber-400" />
-          <span className="text-xs font-bold text-zinc-900 dark:text-zinc-100">{averageRatings || "5.0"}</span>
-          <span className="text-[11px] text-zinc-400">({totalReviews} total)</span>
+          <span className="text-xs font-bold text-zinc-900 dark:text-zinc-100">
+            {averageRatings || "5.0"}
+          </span>
+          <span className="text-[11px] text-zinc-400">
+            ({totalReviews} total)
+          </span>
         </div>
       </div>
 
@@ -53,7 +56,12 @@ export const MentorReviewsTab = ({
                   <div className="flex items-center gap-3">
                     <div className="relative size-8 rounded-[12px] overflow-hidden bg-zinc-200 dark:bg-zinc-800">
                       {avatar ? (
-                        <Image src={avatar} alt={studentName} fill className="object-cover" />
+                        <Image
+                          src={avatar}
+                          alt={studentName}
+                          fill
+                          className="object-cover"
+                        />
                       ) : (
                         <div className="size-full flex items-center justify-center font-bold text-xs text-zinc-500">
                           {studentName.slice(0, 1)}

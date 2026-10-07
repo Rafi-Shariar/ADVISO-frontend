@@ -111,3 +111,13 @@ export interface MentorSessions {
     };
   };
 }
+
+
+export interface BookSchedule {
+  slotId : string;
+  purpose : string;
+}
+
+export interface PaySchedulePayload {
+  sessionId : string
+}

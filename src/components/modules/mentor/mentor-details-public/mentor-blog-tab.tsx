@@ -3,10 +3,13 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { BlogItemInMentorDetails } from "@/types/mentor.type";
 
-export const MentorBlogsTab = ({ blogs }: { blogs: BlogItemInMentorDetails[] }) => {
+export const MentorBlogsTab = ({
+  blogs,
+}: {
+  blogs: BlogItemInMentorDetails[];
+}) => {
   return (
     <div className="rounded-[12px] border border-zinc-200/90 dark:border-zinc-800 bg-white dark:bg-zinc-900/60 p-6 sm:p-8 shadow-sm space-y-6">
-      
       <div className="pb-5 border-b border-zinc-100 dark:border-zinc-800/80">
         <h2 className="text-lg font-black tracking-tight text-zinc-900 dark:text-zinc-100">
           Articles & Publications

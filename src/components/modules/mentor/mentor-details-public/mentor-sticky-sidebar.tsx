@@ -1,6 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Star, ShieldCheck, Briefcase, Clock, Globe, ArrowUpRight } from "lucide-react";
+import {
+  Star,
+  ShieldCheck,
+  Briefcase,
+  Clock,
+  Globe,
+  ArrowUpRight,
+} from "lucide-react";
 import { FaLinkedinIn } from "react-icons/fa6";
 import { IMentorDetails } from "@/types/mentor.type";
 
@@ -9,7 +16,6 @@ export const MentorStickySidebar = ({ mentor }: { mentor: IMentorDetails }) => {
 
   return (
     <div className="rounded-[12px] border border-zinc-200/90 dark:border-zinc-800 bg-white dark:bg-zinc-900/60 p-5 sm:p-6 shadow-sm space-y-6">
-      
       {/* 1. Portrait Image (Matches ADVISO Card Style) */}
       <div className="relative w-full aspect-square sm:aspect-[4/4.2] rounded-[12px] overflow-hidden bg-zinc-100 dark:bg-zinc-800 border border-zinc-200/70 dark:border-zinc-700/60">
         {profileImage ? (
@@ -30,7 +36,9 @@ export const MentorStickySidebar = ({ mentor }: { mentor: IMentorDetails }) => {
         <div className="absolute bottom-3 left-3 flex items-center gap-1.5 px-2.5 py-1 rounded-[12px] bg-zinc-900/85 backdrop-blur-xs text-white text-[11px] font-bold border border-zinc-800 shadow-sm">
           <Star className="size-3 fill-amber-400 text-amber-400" />
           <span>{mentor.averageRatings || "5.0"}</span>
-          <span className="text-zinc-400 font-normal">({mentor.totalReviews || 0})</span>
+          <span className="text-zinc-400 font-normal">
+            ({mentor.totalReviews || 0})
+          </span>
         </div>
       </div>
 
@@ -47,7 +55,9 @@ export const MentorStickySidebar = ({ mentor }: { mentor: IMentorDetails }) => {
       {/* 3. Essential Metrics Strip */}
       <div className="grid grid-cols-2 gap-3 py-3 border-y border-zinc-100 dark:border-zinc-800/80">
         <div className="space-y-0.5">
-          <span className="text-[11px] font-semibold text-zinc-400 uppercase tracking-wider">Experience</span>
+          <span className="text-[11px] font-semibold text-zinc-400 uppercase tracking-wider">
+            Experience
+          </span>
           <p className="text-sm font-bold text-zinc-900 dark:text-zinc-100 flex items-center gap-1.5">
             <ShieldCheck className="size-3.5 text-orange-500" />
             {mentor.yearOfExperience}+ Years
@@ -55,7 +65,9 @@ export const MentorStickySidebar = ({ mentor }: { mentor: IMentorDetails }) => {
         </div>
 
         <div className="space-y-0.5 text-right">
-          <span className="text-[11px] font-semibold text-zinc-400 uppercase tracking-wider">Fee / Session</span>
+          <span className="text-[11px] font-semibold text-zinc-400 uppercase tracking-wider">
+            Fee / Session
+          </span>
           <p className="text-base font-black text-orange-600 dark:text-orange-500">
             ${mentor.sessionCharge}
           </p>
@@ -66,7 +78,9 @@ export const MentorStickySidebar = ({ mentor }: { mentor: IMentorDetails }) => {
       <div className="flex flex-wrap gap-2 text-xs font-semibold">
         <span className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-[12px] bg-zinc-100 dark:bg-zinc-800/70 text-zinc-700 dark:text-zinc-300 capitalize">
           <Briefcase className="size-3 text-zinc-400" />
-          {mentor.professionalDomain ? mentor.professionalDomain.toLowerCase().replace(/_/g, " ") : "Specialist"}
+          {mentor.professionalDomain
+            ? mentor.professionalDomain.toLowerCase().replace(/_/g, " ")
+            : "Specialist"}
         </span>
         <span className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-[12px] bg-zinc-100 dark:bg-zinc-800/70 text-zinc-700 dark:text-zinc-300">
           <Clock className="size-3 text-zinc-400" />
