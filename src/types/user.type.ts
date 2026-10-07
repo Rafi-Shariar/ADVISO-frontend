@@ -35,3 +35,8 @@ export interface updateStatusArgs {
   id: string;
   payload: ChangeAccountStatusPayload;
 }
+
+export interface profileImagePayload {
+  profileImage : File
+}
+

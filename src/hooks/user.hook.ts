@@ -1,5 +1,6 @@
 import {
   changeAccountStatus,
+  changeProfilePhoto,
   deleteUserAccount,
   getAllUsersAdmin,
   getApplicationStatus,
@@ -45,5 +46,17 @@ export function useGetApplicationStatus() {
   return useSuspenseQuery({
     queryKey: ["application-status"],
     queryFn: () => getApplicationStatus(),
+  });
+}
+
+
+export function useChangeProfilePhoto() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: changeProfilePhoto,
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey: ["user"] });
+    },
   });
 }

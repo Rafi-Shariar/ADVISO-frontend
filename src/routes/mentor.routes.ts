@@ -43,8 +43,8 @@ export const mentorRoutes = [
         url: "/mentor/mentor-profile",
       },
       {
-        title: "Update Profile",
-        url: "/mentor/profile",
+        title: "Change Profile Picture",
+        url: "/mentor/profile-picture",
       },
       {
         title: "Change Password",

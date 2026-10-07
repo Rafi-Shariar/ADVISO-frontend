@@ -18,6 +18,7 @@ import { adminRoutes, mentorRoutes, userRoutes } from "@/routes";
 import { SidebarItems } from "@/types/sidebar.type";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
+import { Separator } from "../ui/separator";
 
 const sidebarRoutes: Record<UserRole, SidebarItems> = {
   SUPER_ADMIN: adminRoutes,
@@ -34,6 +35,7 @@ export function DashbaordSidebar({ role }: { role: UserRole }) {
       <SidebarHeader>
         <Logo />
       </SidebarHeader>
+      <Separator/>
       <SidebarContent>
         {/* We create a SidebarGroup for each parent. */}
         {routes.map((item) => (
