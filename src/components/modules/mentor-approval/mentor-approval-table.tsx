@@ -133,7 +133,7 @@ const MentorApprovalTable = ({ handlePageChange, ...params }: Props) => {
                       <DropdownMenuItem>
                         {" "}
                         <UserRoundX />
-                        Rejected Profile
+                        <Link href={`/admin/review/${mentor.mentorId}`}>Rejected Profile</Link>
                       </DropdownMenuItem>
                     )}
                   </DropdownMenuContent>

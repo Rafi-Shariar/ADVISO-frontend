@@ -10,12 +10,15 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { AlertTriangle, Loader2 } from "lucide-react";
+import { useReviewApplication } from "@/hooks/mentor.hook";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 interface RejectApplicationDialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   applicantName: string;
-
+applicantId : string
   isLoading?: boolean;
 }
 
@@ -23,21 +26,15 @@ export const RejectApplicationDialog = ({
   open,
   onOpenChange,
   applicantName,
+  applicantId,
   isLoading = false,
 }: RejectApplicationDialogProps) => {
   const [reason, setReason] = useState("");
   const [error, setError] = useState("");
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!reason.trim()) {
-      setError("Please provide a reason for the rejection.");
-      return;
-    }
-    setError("");
-   
-    setReason("");
-  };
+   const {mutate : rejectApplication, isPending} = useReviewApplication();
+  const router = useRouter()
+
 
   const handleClose = (value: boolean) => {
     if (!isLoading) {
@@ -47,10 +44,53 @@ export const RejectApplicationDialog = ({
     }
   };
 
+
+  const handleRejectApplication = (e: React.FormEvent) => {
+
+     e.preventDefault();
+    if (!reason.trim()) {
+      setError("Please provide a reason for the rejection.");
+      return;
+    }
+    setError("");
+   
+    setReason("");
+
+    const payload = {
+      mentorId: applicantId,
+      verificationStatus : "REJECTED" as const,
+      rejectionReason : reason
+    }
+
+    rejectApplication(payload, {
+       onSuccess: (_res) => {
+          
+          toast.success("Rejected Application.", {
+            description: "The Application has been rejected successfully",
+            position: "top-right",
+          });
+
+          router.push("/admin/mentors");
+          onOpenChange(false)
+        },
+
+        onError: (err: any) => {
+          const errorDescription =
+            err?.data?.message ||
+            err?.message ||
+            "Something went wrong. Please try again";
+
+          toast.error("Action Failed", {
+            description: errorDescription,
+            position: "top-right",
+          });
+        },
+    })
+  }
   return (
     <Dialog open={open} onOpenChange={handleClose}>
       <DialogContent className="sm:max-w-[480px] p-6 rounded-2xl">
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleRejectApplication} className="space-y-4">
           <DialogHeader className="space-y-2">
             <div className="size-11 rounded-2xl bg-rose-500/10 border border-rose-500/20 text-rose-600 flex items-center justify-center mb-1">
               <AlertTriangle className="size-5" />
@@ -100,10 +140,10 @@ export const RejectApplicationDialog = ({
             </button>
             <button
               type="submit"
-              disabled={isLoading}
+              disabled={isPending}
               className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-rose-600 hover:bg-rose-700 text-white text-sm font-semibold shadow-md shadow-rose-600/20 transition-all disabled:opacity-50 active:scale-[0.98]"
             >
-              {isLoading ? (
+              {isPending ? (
                 <>
                   <Loader2 className="size-4 animate-spin" />
                   <span>Rejecting...</span>

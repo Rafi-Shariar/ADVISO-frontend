@@ -5,6 +5,7 @@ import {
   getFeaturedMentors,
   getMentorDetails,
   getMentorDetailsAdmin,
+  reviewApplication,
 } from "@/api/mentor.api";
 import { MentorParams } from "@/types/mentor.type";
 import {
@@ -60,5 +61,17 @@ export function useMentorDetailsAdmin(id: string) {
     queryKey: [`mentorDetails-${id}`],
     queryFn: () => getMentorDetailsAdmin(id),
     enabled: Boolean(id),
+  });
+}
+
+
+export function useReviewApplication() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: reviewApplication,
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey: ["mentors"] });
+      await queryClient.invalidateQueries({ queryKey: ["application-status"] });
+    }, 
   });
 }

@@ -17,18 +17,20 @@ import {
   Layers,
   ArrowUpRight,
   ShieldCheck,
-  UserCheck
+  UserCheck,
+  AlertTriangle,
+  UserX
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { FaLinkedin } from "react-icons/fa6";
 import { RejectApplicationDialog } from "./reject-application-modal";
-import { ApproveApplicationDialog } from "./confirm-applicatin-modal";
+import { ApproveApplicationDialog } from "./confirm-application-modal";
 
 const ApplicationReviewView = ({ id }: { id: string }) => {
   const [isRejectOpen, setIsRejectOpen] = useState(false);
-const [isApproveOpen, setIsApproveOpen] = useState(false);
+  const [isApproveOpen, setIsApproveOpen] = useState(false);
 
   const { data, isPending } = useMentorDetailsAdmin(id);
   const application: ApplicationReview = data?.data;
@@ -57,12 +59,13 @@ const [isApproveOpen, setIsApproveOpen] = useState(false);
   const { user } = application;
   const isPendingStatus = application.verificationStatus === "PENDING";
   const isApproved = application.verificationStatus === "APPROVED";
+  const isRejected = application.verificationStatus === "REJECTED";
 
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-6 py-6 space-y-6">
       
-      {/* 🌟 1. Top Executive Profile & Action Banner (Hero Card) */}
-      <div className="relative overflow-hidden rounded-3xl border border-border/70 bg-gradient-to-br from-card via-card to-orange-500/5 p-6 sm:p-8 shadow-sm">
+      {/* 🌟 1. Top Executive Profile & Header Banner */}
+      <div className="relative overflow-hidden rounded-3xl border border-border/70 bg-gradient-to-br from-card via-card to-orange-500/5 p-6 sm:p-8 shadow-xs">
         {/* Ambient background glow */}
         <div className="pointer-events-none absolute -right-16 -top-16 size-64 rounded-full bg-orange-500/10 blur-3xl" />
         
@@ -123,25 +126,27 @@ const [isApproveOpen, setIsApproveOpen] = useState(false);
             </div>
           </div>
 
-          {/* Quick Review Actions */}
-          <div className="flex items-center gap-3 shrink-0 pt-2 sm:pt-0">
-            <button
-              onClick={() => setIsRejectOpen(true)}
-              type="button"
-              className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl border border-rose-200 dark:border-rose-900/50 bg-rose-50/70 dark:bg-rose-950/20 text-rose-600 dark:text-rose-400 hover:bg-rose-100 dark:hover:bg-rose-900/30 text-xs sm:text-sm font-semibold transition-all active:scale-[0.98]"
-            >
-              <XCircle className="size-4" />
-              Reject
-            </button>
-            <button
-              type="button"
-               onClick={() => setIsApproveOpen(true)}
-              className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-xl bg-orange-600 hover:bg-orange-700 text-white text-xs sm:text-sm font-semibold shadow-lg shadow-orange-500/25 hover:shadow-orange-500/35 transition-all active:scale-[0.98]"
-            >
-              <CheckCircle2 className="size-4" />
-              Approve Mentor
-            </button>
-          </div>
+          {/* ⚡ Conditional Action Buttons (Only when PENDING) */}
+          {isPendingStatus && (
+            <div className="flex items-center gap-3 shrink-0 pt-2 sm:pt-0">
+              <button
+                onClick={() => setIsRejectOpen(true)}
+                type="button"
+                className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl border border-rose-200 dark:border-rose-900/50 bg-rose-50/70 dark:bg-rose-950/20 text-rose-600 dark:text-rose-400 hover:bg-rose-100 dark:hover:bg-rose-900/30 text-xs sm:text-sm font-semibold transition-all active:scale-[0.98] cursor-pointer"
+              >
+                <XCircle className="size-4" />
+                Reject
+              </button>
+              <button
+                type="button"
+                onClick={() => setIsApproveOpen(true)}
+                className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-xl bg-orange-600 hover:bg-orange-700 text-white text-xs sm:text-sm font-semibold shadow-lg shadow-orange-500/25 hover:shadow-orange-500/35 transition-all active:scale-[0.98] cursor-pointer"
+              >
+                <CheckCircle2 className="size-4" />
+                Approve Mentor
+              </button>
+            </div>
+          )}
         </div>
 
         {/* 📊 Integrated Mini Stats Bar */}
@@ -180,7 +185,61 @@ const [isApproveOpen, setIsApproveOpen] = useState(false);
         </div>
       </div>
 
-      {/* 🍱 2. Balanced 2-Column Bento Grid */}
+      {/* 🔴 2. Dedicated Rejection Reason & Audit Card (Shows only when REJECTED) */}
+      {isRejected && (
+        <div className="relative overflow-hidden rounded-3xl border border-rose-500/20 bg-rose-500/5 dark:bg-rose-950/10 p-6 sm:p-7 shadow-xs">
+          <div className="flex flex-col sm:flex-row items-start justify-between gap-4 pb-4 border-b border-rose-500/15">
+            <div className="flex items-center gap-3">
+              <div className="size-10 rounded-2xl bg-rose-500/10 border border-rose-500/20 text-rose-600 dark:text-rose-400 flex items-center justify-center shrink-0">
+                <AlertTriangle className="size-5" />
+              </div>
+              <div>
+                <h3 className="text-base font-bold text-rose-900 dark:text-rose-200">
+                  Application Rejection Record
+                </h3>
+                <p className="text-xs text-rose-700/80 dark:text-rose-400/80">
+                  This dossier was reviewed and declined by the moderation team.
+                </p>
+              </div>
+            </div>
+
+            {/* Rejection Audit Meta */}
+            <div className="flex flex-wrap items-center gap-3 text-xs text-rose-800/80 dark:text-rose-300/80 bg-rose-500/10 px-3.5 py-1.5 rounded-xl border border-rose-500/20">
+              {application.reviewedBy && (
+                <span className="flex items-center gap-1.5">
+                  <UserX className="size-3.5" />
+                  Reviewed by: <strong className="font-semibold text-rose-900 dark:text-rose-200">{application.reviewedBy}</strong>
+                </span>
+              )}
+              {application.reviewedAt && (
+                <>
+                  <span className="inline-block size-1 rounded-full bg-rose-400" />
+                  <span>
+                    {new Date(application.reviewedAt).toLocaleDateString("en-US", {
+                      month: "short",
+                      day: "numeric",
+                      year: "numeric",
+                      hour: "2-digit",
+                      minute: "2-digit",
+                    })}
+                  </span>
+                </>
+              )}
+            </div>
+          </div>
+
+          <div className="mt-4 space-y-1.5">
+            <span className="text-[11px] font-bold uppercase tracking-wider text-rose-600 dark:text-rose-400">
+              Stated Reason for Rejection
+            </span>
+            <div className="p-4 rounded-2xl bg-background/80 dark:bg-card/70 border border-rose-500/20 text-sm leading-relaxed text-foreground whitespace-pre-line">
+              {application.rejectionReason || "No explicit reason was documented."}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* 🍱 3. Balanced 2-Column Bento Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
         
         {/* Left Bento: Professional Dossier (7 Cols) */}
@@ -273,7 +332,7 @@ const [isApproveOpen, setIsApproveOpen] = useState(false);
 
                 return (
                   <Link
-                    key={doc.publicId}
+                    key={doc.publicId || idx}
                     href={docUrl}
                     target="_blank"
                     rel="noreferrer"
@@ -343,22 +402,29 @@ const [isApproveOpen, setIsApproveOpen] = useState(false);
 
       </div>
 
-      <RejectApplicationDialog
-  open={isRejectOpen}
-  onOpenChange={setIsRejectOpen}
-  applicantName={user.name}
- 
-/>
+      {/* 🛑 Dialog Modals */}
+      {isPendingStatus && (
+        <>
+          <RejectApplicationDialog
+            open={isRejectOpen}
+            onOpenChange={setIsRejectOpen}
+            applicantName={user.name}
+            applicantId={application.mentorId}
+            
+          />
 
-<ApproveApplicationDialog
-  open={isApproveOpen}
-  onOpenChange={setIsApproveOpen}
-  applicantName={user.name}
-  yearOfExperience={application.yearOfExperience}
-  sessionCharge={application.sessionCharge}
-  professionalDomain={application.professionalDomain}
-
-/>
+          <ApproveApplicationDialog
+            open={isApproveOpen}
+            onOpenChange={setIsApproveOpen}
+            applicantName={user.name}
+            yearOfExperience={application.yearOfExperience}
+            sessionCharge={application.sessionCharge}
+            professionalDomain={application.professionalDomain}
+            applicantId={application.mentorId}
+           
+          />
+        </>
+      )}
 
     </div>
   );

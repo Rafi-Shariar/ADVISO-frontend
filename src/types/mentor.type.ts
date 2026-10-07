@@ -108,6 +108,9 @@ export interface ApplicationReview {
   verificationStatus: string
   createdAt: string
   user: User
+  rejectionReason: string
+  reviewedBy: string
+  reviewedAt: string
 }
 
 export interface Document {
@@ -130,4 +133,10 @@ export interface User {
   deletedAt: any
   createdAt: string
   updatedAt: string
+}
+
+export interface ReviewApplicationPaylaod {
+  mentorId: string;
+	verificationStatus: MentorVerificationStatus;
+	rejectionReason?: string;
 }

@@ -8,7 +8,10 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import { useReviewApplication } from "@/hooks/mentor.hook";
 import { CheckCircle2, Clock, DollarSign, Briefcase, Loader2, UserCheck } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 interface ApproveApplicationDialogProps {
   open: boolean;
@@ -18,17 +21,60 @@ interface ApproveApplicationDialogProps {
   sessionCharge: string | number;
   professionalDomain: string;
   isLoading?: boolean;
+  applicantId: string
 }
 
 export const ApproveApplicationDialog = ({
   open,
   onOpenChange,
   applicantName,
+  applicantId,
   yearOfExperience,
   sessionCharge,
   professionalDomain,
   isLoading = false,
 }: ApproveApplicationDialogProps) => {
+
+  const {mutate : ApproveApplication, isPending} = useReviewApplication();
+  const router = useRouter()
+
+  const handleConfirmApplication = () => {
+    const payload = {
+      mentorId: applicantId,
+      verificationStatus : "APPROVED" as const
+    }
+
+    ApproveApplication(payload, {
+       onSuccess: (_res) => {
+          
+          toast.success("Approved Application.", {
+            description: "The Application has been approved successfully",
+            position: "top-right",
+          });
+
+          router.push("/admin/mentors");
+          onOpenChange(false)
+        },
+
+        onError: (err: any) => {
+          const errorDescription =
+            err?.data?.message ||
+            err?.message ||
+            "Something went wrong. Please try again";
+
+          toast.error("Action Failed", {
+            description: errorDescription,
+            position: "top-right",
+          });
+        },
+    })
+
+
+    
+  }
+
+
+
   return (
     <Dialog open={open} onOpenChange={isLoading ? () => {} : onOpenChange}>
       <DialogContent className="sm:max-w-[480px] p-6 rounded-2xl">
@@ -89,11 +135,11 @@ export const ApproveApplicationDialog = ({
           </button>
           <button
             type="button"
-            // onClick={onConfirmApprove}
+            onClick={()=> handleConfirmApplication()}
             disabled={isLoading}
             className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-orange-500 to-amber-600 hover:from-orange-600 hover:to-amber-700 text-white text-sm font-semibold shadow-md shadow-orange-500/25 transition-all disabled:opacity-50 active:scale-[0.98]"
           >
-            {isLoading ? (
+            {isPending ? (
               <>
                 <Loader2 className="size-4 animate-spin" />
                 <span>Approving...</span>
