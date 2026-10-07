@@ -23,8 +23,12 @@ export const MentorBookingCard = ({
             Investment
           </span>
           <div className="flex items-baseline gap-1">
-            <span className="text-3xl font-extrabold text-foreground">${sessionCharge}</span>
-            <span className="text-xs text-muted-foreground">/ 1:1 mentorship call</span>
+            <span className="text-3xl font-extrabold text-foreground">
+              ${sessionCharge}
+            </span>
+            <span className="text-xs text-muted-foreground">
+              / 1:1 mentorship call
+            </span>
           </div>
         </div>
 

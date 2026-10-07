@@ -92,56 +92,55 @@ export interface MentorApplicationPayload {
   documents: File;
 }
 
-
 export interface ApplicationReview {
-  mentorId: string
-  headline: string
-  bio: string
-  yearOfExperience: number
-  expertiseTags: string[]
-  linkedinURL: string
-  professionalDomain: string
-  portfolioURL: string
-  resume: string
-  sessionCharge: number
-  documents: Document[]
-  verificationStatus: string
-  createdAt: string
-  user: User
-  rejectionReason: string
-  reviewedBy: string
-  reviewedAt: string
+  mentorId: string;
+  headline: string;
+  bio: string;
+  yearOfExperience: number;
+  expertiseTags: string[];
+  linkedinURL: string;
+  professionalDomain: string;
+  portfolioURL: string;
+  resume: string;
+  sessionCharge: number;
+  documents: Document[];
+  verificationStatus: string;
+  createdAt: string;
+  user: User;
+  rejectionReason: string;
+  reviewedBy: string;
+  reviewedAt: string;
 }
 
 export interface Document {
-  url: string
-  publicId: string
+  url: string;
+  publicId: string;
 }
 
 export interface User {
-  userId: string
-  name: string
-  email: string
-  timezone: string
-  isEmailVerified: boolean
-  profileURL: string
-  imagePublicId: string
-  googleId: string
-  authProvider: string
-  accountStatus: string
-  isDeleted: boolean
-  deletedAt: string
-  createdAt: string
-  updatedAt: string
+  userId: string;
+  name: string;
+  email: string;
+  timezone: string;
+  isEmailVerified: boolean;
+  profileURL: string;
+  imagePublicId: string;
+  googleId: string;
+  authProvider: string;
+  accountStatus: string;
+  isDeleted: boolean;
+  deletedAt: string;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface ReviewApplicationPaylaod {
   mentorId: string;
-	verificationStatus: MentorVerificationStatus;
-	rejectionReason?: string;
+  verificationStatus: MentorVerificationStatus;
+  rejectionReason?: string;
 }
 
 export interface MentorProfileAdmin extends ApplicationReview {
-  blogs : BlogItemInMentorDetails[],
-  reviews: IReview[]
+  blogs: BlogItemInMentorDetails[];
+  reviews: IReview[];
 }

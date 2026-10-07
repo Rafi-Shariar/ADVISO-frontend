@@ -2,7 +2,12 @@
 
 import React, { useState } from "react";
 import { format } from "date-fns";
-import { Calendar as CalendarIcon, Clock, Loader2, Sparkles } from "lucide-react";
+import {
+  Calendar as CalendarIcon,
+  Clock,
+  Loader2,
+  Sparkles,
+} from "lucide-react";
 import { toast } from "sonner";
 
 import {
@@ -29,8 +34,11 @@ import {
 } from "@/components/ui/select";
 
 import { useCreateSchedule } from "@/hooks/schedule.hook";
-import { convertToUtcEpochIso, getTimeDifferenceInMinutes, TIME_SLOTS } from "@/utils/schedule.helper";
-
+import {
+  convertToUtcEpochIso,
+  getTimeDifferenceInMinutes,
+  TIME_SLOTS,
+} from "@/utils/schedule.helper";
 
 interface CreateScheduleModalProps {
   open: boolean;
@@ -168,25 +176,34 @@ export const CreateScheduleModal = ({
                     } ${!selectedDate ? "text-muted-foreground" : "text-foreground font-medium"}`}
                   >
                     <CalendarIcon className="mr-2 size-4 text-orange-500" />
-                    {selectedDate ? format(selectedDate, "PPP") : <span>Select date</span>}
+                    {selectedDate ? (
+                      format(selectedDate, "PPP")
+                    ) : (
+                      <span>Select date</span>
+                    )}
                   </Button>
                 </PopoverTrigger>
-                <PopoverContent className="w-auto p-0 rounded-2xl shadow-xl" align="start">
+                <PopoverContent
+                  className="w-auto p-0 rounded-2xl shadow-xl"
+                  align="start"
+                >
                   <Calendar
                     mode="single"
                     selected={selectedDate}
                     onSelect={(d) => {
                       setSelectedDate(d);
-                      if (errors.date) setErrors((prev) => ({ ...prev, date: undefined }));
+                      if (errors.date)
+                        setErrors((prev) => ({ ...prev, date: undefined }));
                     }}
                     disabled={(d) => d < today}
-                  
                   />
                 </PopoverContent>
               </Popover>
 
               {errors.date && (
-                <p className="text-[11px] font-medium text-rose-500 pl-1">{errors.date}</p>
+                <p className="text-[11px] font-medium text-rose-500 pl-1">
+                  {errors.date}
+                </p>
               )}
             </div>
 
@@ -219,7 +236,11 @@ export const CreateScheduleModal = ({
                   </SelectTrigger>
                   <SelectContent className="max-h-60 rounded-xl">
                     {TIME_SLOTS.map((slot) => (
-                      <SelectItem key={slot.value} value={slot.value} className="text-xs font-medium">
+                      <SelectItem
+                        key={slot.value}
+                        value={slot.value}
+                        className="text-xs font-medium"
+                      >
                         {slot.label}
                       </SelectItem>
                     ))}
@@ -227,7 +248,9 @@ export const CreateScheduleModal = ({
                 </Select>
 
                 {errors.startTime && (
-                  <p className="text-[11px] font-medium text-rose-500 pl-1">{errors.startTime}</p>
+                  <p className="text-[11px] font-medium text-rose-500 pl-1">
+                    {errors.startTime}
+                  </p>
                 )}
               </div>
 
@@ -258,7 +281,11 @@ export const CreateScheduleModal = ({
                   </SelectTrigger>
                   <SelectContent className="max-h-60 rounded-xl">
                     {TIME_SLOTS.map((slot) => (
-                      <SelectItem key={slot.value} value={slot.value} className="text-xs font-medium">
+                      <SelectItem
+                        key={slot.value}
+                        value={slot.value}
+                        className="text-xs font-medium"
+                      >
                         {slot.label}
                       </SelectItem>
                     ))}
@@ -266,7 +293,9 @@ export const CreateScheduleModal = ({
                 </Select>
 
                 {errors.endTime && (
-                  <p className="text-[11px] font-medium text-rose-500 pl-1">{errors.endTime}</p>
+                  <p className="text-[11px] font-medium text-rose-500 pl-1">
+                    {errors.endTime}
+                  </p>
                 )}
               </div>
             </div>

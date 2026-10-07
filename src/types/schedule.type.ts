@@ -42,3 +42,7 @@ export interface CreateSchedulePayload {
   startTime: string;
   endTime: string;
 }
+
+export interface DeleteSchedulePayload {
+  scheduleId: string;
+}

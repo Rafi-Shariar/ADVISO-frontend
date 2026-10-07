@@ -32,8 +32,12 @@ const MentorProfileView = ({ id }: MentorProfileViewProps) => {
     return (
       <div className="max-w-2xl mx-auto my-24 p-8 rounded-3xl border border-dashed border-border text-center space-y-3 bg-muted/10">
         <UserCheck className="size-10 mx-auto text-muted-foreground/60" />
-        <h3 className="text-lg font-semibold text-foreground">Mentor Not Found</h3>
-        <p className="text-sm text-muted-foreground">The mentor profile does not exist or may have been deactivated.</p>
+        <h3 className="text-lg font-semibold text-foreground">
+          Mentor Not Found
+        </h3>
+        <p className="text-sm text-muted-foreground">
+          The mentor profile does not exist or may have been deactivated.
+        </p>
       </div>
     );
   }
@@ -60,7 +64,9 @@ const MentorProfileView = ({ id }: MentorProfileViewProps) => {
               className="flex items-center gap-2 px-4 py-2 text-xs sm:text-sm font-semibold rounded-xl data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-xs transition-all"
             >
               <Star className="size-3.5 text-amber-500" />
-              <span>Reviews ({profile.reviews?.length ?? profile.totalReviews ?? 0})</span>
+              <span>
+                Reviews ({profile.reviews?.length ?? profile.totalReviews ?? 0})
+              </span>
             </TabsTrigger>
 
             <TabsTrigger
@@ -79,7 +85,10 @@ const MentorProfileView = ({ id }: MentorProfileViewProps) => {
         </TabsContent>
 
         {/* Tab 2: Reviews */}
-        <TabsContent value="reviews" className="mt-0 focus-visible:outline-hidden">
+        <TabsContent
+          value="reviews"
+          className="mt-0 focus-visible:outline-hidden"
+        >
           <MentorReviewsTab
             reviews={profile.reviews || []}
             averageRatings={profile.averageRatings}
@@ -89,7 +98,10 @@ const MentorProfileView = ({ id }: MentorProfileViewProps) => {
         </TabsContent>
 
         {/* Tab 3: Blogs */}
-        <TabsContent value="blogs" className="mt-0 focus-visible:outline-hidden">
+        <TabsContent
+          value="blogs"
+          className="mt-0 focus-visible:outline-hidden"
+        >
           <MentorBlogsTab blogs={profile.blogs || []} />
         </TabsContent>
       </Tabs>

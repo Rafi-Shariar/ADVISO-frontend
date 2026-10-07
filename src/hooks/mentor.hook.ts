@@ -64,7 +64,6 @@ export function useMentorDetailsAdmin(id: string) {
   });
 }
 
-
 export function useReviewApplication() {
   const queryClient = useQueryClient();
   return useMutation({
@@ -72,6 +71,6 @@ export function useReviewApplication() {
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: ["mentors"] });
       await queryClient.invalidateQueries({ queryKey: ["application-status"] });
-    }, 
+    },
   });
 }

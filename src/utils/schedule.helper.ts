@@ -4,16 +4,19 @@ import { format } from "date-fns";
 // schedule.helper.ts
 export const convertToUtcEpochIso = (timeStr: string): string => {
   const [hours, minutes] = timeStr.split(":").map(Number);
-  
+
   // লোকাল টাইম হিসেবে সেট করা
   const date = new Date(1970, 0, 1, hours, minutes, 0, 0);
-  
+
   // toISOString() স্বয়ংক্রিয়ভাবে লোকাল সময়কে সমতুল্য UTC তে কনভার্ট করবে
   return date.toISOString();
 };
 
 // "HH:mm" ফরম্যাটে দুই সময়ের মিনিটের ব্যবধান বের করা
-export const getTimeDifferenceInMinutes = (start: string, end: string): number => {
+export const getTimeDifferenceInMinutes = (
+  start: string,
+  end: string,
+): number => {
   const [startH, startM] = start.split(":").map(Number);
   const [endH, endM] = end.split(":").map(Number);
   return endH * 60 + endM - (startH * 60 + startM);

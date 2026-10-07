@@ -15,8 +15,12 @@ export const MentorBlogsTab = ({ blogs }: { blogs: Blog[] }) => {
       {blogs.length === 0 ? (
         <div className="rounded-3xl border border-border/70 bg-card p-12 text-center space-y-2">
           <BookOpen className="size-8 mx-auto text-muted-foreground/60" />
-          <h4 className="text-base font-semibold text-foreground">No Published Articles</h4>
-          <p className="text-sm text-muted-foreground">This mentor hasn't authored any publications on the platform.</p>
+          <h4 className="text-base font-semibold text-foreground">
+            No Published Articles
+          </h4>
+          <p className="text-sm text-muted-foreground">
+            This mentor hasn't authored any publications on the platform.
+          </p>
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

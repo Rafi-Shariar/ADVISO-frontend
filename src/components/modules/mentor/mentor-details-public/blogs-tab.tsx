@@ -7,8 +7,12 @@ export const BlogsTab = ({ blogs }: { blogs: BlogItemInMentorDetails[] }) => {
   return (
     <div className="rounded-3xl border border-border/70 bg-card p-6 sm:p-7 shadow-xs space-y-5">
       <div className="flex items-center justify-between pb-3 border-b border-border/50">
-        <h3 className="text-base font-bold text-foreground">Authored Publications</h3>
-        <span className="text-xs text-muted-foreground font-semibold">{blogs.length} Articles</span>
+        <h3 className="text-base font-bold text-foreground">
+          Authored Publications
+        </h3>
+        <span className="text-xs text-muted-foreground font-semibold">
+          {blogs.length} Articles
+        </span>
       </div>
 
       {blogs.length === 0 ? (

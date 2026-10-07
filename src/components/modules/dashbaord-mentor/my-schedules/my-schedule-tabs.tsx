@@ -14,9 +14,7 @@ import { ScheduleParams } from "@/types/schedule.type";
 
 import MyScheduleTable from "./my-schedule-table";
 import AdminScheduleTableSkeleton from "../../admin-schedules/admin-schedule-skeleton";
-import {
-  CreateScheduleModal
-} from "./create-schedule-modal";
+import { CreateScheduleModal } from "./create-schedule-modal";
 
 const MySchedulesTab = () => {
   const [date, setDate] = useState<Date>();
@@ -30,7 +28,6 @@ const MySchedulesTab = () => {
     e.stopPropagation();
     setDate(undefined);
   };
-
 
   return (
     <div className="max-w-7xl mx-auto space-y-6">
@@ -56,7 +53,9 @@ const MySchedulesTab = () => {
                   role="button"
                   tabIndex={0}
                   onClick={handleClearDate}
-                  onKeyDown={(e) => e.key === "Enter" && handleClearDate(e as any)}
+                  onKeyDown={(e) =>
+                    e.key === "Enter" && handleClearDate(e as any)
+                  }
                   className="ml-2 rounded-full p-0.5 hover:bg-muted text-muted-foreground hover:text-foreground transition-colors"
                 >
                   <X className="size-3.5" />
@@ -64,13 +63,15 @@ const MySchedulesTab = () => {
               )}
             </Button>
           </PopoverTrigger>
-          <PopoverContent className="w-auto p-0 rounded-2xl shadow-xl" align="end">
+          <PopoverContent
+            className="w-auto p-0 rounded-2xl shadow-xl"
+            align="end"
+          >
             <Calendar
               mode="single"
               selected={date}
               onSelect={setDate}
               defaultMonth={date}
-  
             />
           </PopoverContent>
         </Popover>
@@ -91,10 +92,7 @@ const MySchedulesTab = () => {
       </Suspense>
 
       {/* Creation Modal Component */}
-      <CreateScheduleModal
-        open={isCreateOpen}
-        onOpenChange={setIsCreateOpen}
-      />
+      <CreateScheduleModal open={isCreateOpen} onOpenChange={setIsCreateOpen} />
     </div>
   );
 };

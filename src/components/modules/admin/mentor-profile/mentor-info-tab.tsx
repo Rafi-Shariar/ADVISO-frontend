@@ -1,5 +1,13 @@
 import Link from "next/link";
-import { Sparkles, Layers, ShieldCheck, FileText, ExternalLink, Globe, ArrowUpRight } from "lucide-react";
+import {
+  Sparkles,
+  Layers,
+  ShieldCheck,
+  FileText,
+  ExternalLink,
+  Globe,
+  ArrowUpRight,
+} from "lucide-react";
 import { FaLinkedin } from "react-icons/fa6";
 
 export const MentorInfoTab = ({ profile }: { profile: any }) => {
@@ -32,7 +40,8 @@ export const MentorInfoTab = ({ profile }: { profile: any }) => {
           {/* Core Expertise Tags */}
           <div className="space-y-3 pt-3 border-t border-border/50">
             <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground flex items-center gap-2">
-              <Layers className="size-3.5 text-orange-500" /> Core Skills & Competencies
+              <Layers className="size-3.5 text-orange-500" /> Core Skills &
+              Competencies
             </span>
             <div className="flex flex-wrap gap-2">
               {profile.expertiseTags?.map((tag: string) => (
@@ -75,7 +84,9 @@ export const MentorInfoTab = ({ profile }: { profile: any }) => {
                     <p className="text-sm font-semibold text-foreground group-hover:text-orange-600 transition-colors">
                       Candidate Resume
                     </p>
-                    <p className="text-[11px] text-muted-foreground">Curriculum Vitae (PDF)</p>
+                    <p className="text-[11px] text-muted-foreground">
+                      Curriculum Vitae (PDF)
+                    </p>
                   </div>
                 </div>
                 <ExternalLink className="size-4 text-muted-foreground group-hover:text-orange-600 transition-colors" />
@@ -102,7 +113,9 @@ export const MentorInfoTab = ({ profile }: { profile: any }) => {
                       <p className="text-sm font-semibold text-foreground group-hover:text-sky-600 transition-colors line-clamp-1">
                         {doc.title || `Credential Document #${idx + 1}`}
                       </p>
-                      <p className="text-[11px] text-muted-foreground">Verified Document File</p>
+                      <p className="text-[11px] text-muted-foreground">
+                        Verified Document File
+                      </p>
                     </div>
                   </div>
                   <ExternalLink className="size-4 text-muted-foreground group-hover:text-sky-600 transition-colors" />

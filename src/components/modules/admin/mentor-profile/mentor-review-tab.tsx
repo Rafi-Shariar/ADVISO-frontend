@@ -29,8 +29,12 @@ export const MentorReviewsTab = ({
             <Star className="size-6 fill-amber-500" />
           </div>
           <div>
-            <p className="text-2xl font-black text-foreground">{averageRatings || "0.0"}</p>
-            <p className="text-xs text-muted-foreground font-medium">Average Rating (out of 5)</p>
+            <p className="text-2xl font-black text-foreground">
+              {averageRatings || "0.0"}
+            </p>
+            <p className="text-xs text-muted-foreground font-medium">
+              Average Rating (out of 5)
+            </p>
           </div>
         </div>
 
@@ -39,8 +43,12 @@ export const MentorReviewsTab = ({
             <MessageSquareQuote className="size-6" />
           </div>
           <div>
-            <p className="text-2xl font-black text-foreground">{totalReviews || 0}</p>
-            <p className="text-xs text-muted-foreground font-medium">Total Reviews Written</p>
+            <p className="text-2xl font-black text-foreground">
+              {totalReviews || 0}
+            </p>
+            <p className="text-xs text-muted-foreground font-medium">
+              Total Reviews Written
+            </p>
           </div>
         </div>
 
@@ -49,8 +57,12 @@ export const MentorReviewsTab = ({
             <Star className="size-6" />
           </div>
           <div>
-            <p className="text-2xl font-black text-foreground">{totalSessions || 0}</p>
-            <p className="text-xs text-muted-foreground font-medium">Mentorship Engagements</p>
+            <p className="text-2xl font-black text-foreground">
+              {totalSessions || 0}
+            </p>
+            <p className="text-xs text-muted-foreground font-medium">
+              Mentorship Engagements
+            </p>
           </div>
         </div>
       </div>
@@ -81,7 +93,11 @@ export const MentorReviewsTab = ({
                   </div>
                   <span className="flex items-center gap-1.5 text-xs text-muted-foreground">
                     <Calendar className="size-3 text-muted-foreground" />
-                    {new Date(rev.createdAt).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}
+                    {new Date(rev.createdAt).toLocaleDateString("en-US", {
+                      month: "short",
+                      day: "numeric",
+                      year: "numeric",
+                    })}
                   </span>
                 </div>
                 <p className="text-sm text-foreground/90 leading-relaxed italic">

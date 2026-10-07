@@ -8,14 +8,22 @@ interface ReviewsTabProps {
   totalReviews: number;
 }
 
-export const ReviewsTab = ({ reviews, averageRatings, totalReviews }: ReviewsTabProps) => {
+export const ReviewsTab = ({
+  reviews,
+  averageRatings,
+  totalReviews,
+}: ReviewsTabProps) => {
   return (
     <div className="rounded-3xl border border-border/70 bg-card p-6 sm:p-7 shadow-xs space-y-5">
       <div className="flex items-center justify-between pb-3 border-b border-border/50">
         <div>
-          <h3 className="text-base font-bold text-foreground">Mentee Reviews</h3>
+          <h3 className="text-base font-bold text-foreground">
+            Mentee Reviews
+          </h3>
           <p className="text-xs text-muted-foreground mt-0.5">
-            Average Score: <strong className="text-foreground">{averageRatings}</strong> across {totalReviews} reviews
+            Average Score:{" "}
+            <strong className="text-foreground">{averageRatings}</strong> across{" "}
+            {totalReviews} reviews
           </p>
         </div>
       </div>
@@ -40,14 +48,21 @@ export const ReviewsTab = ({ reviews, averageRatings, totalReviews }: ReviewsTab
                   <div className="flex items-center gap-2.5">
                     <div className="relative size-8 rounded-full overflow-hidden bg-muted border border-border">
                       {avatar ? (
-                        <Image src={avatar} alt={studentName} fill className="object-cover" />
+                        <Image
+                          src={avatar}
+                          alt={studentName}
+                          fill
+                          className="object-cover"
+                        />
                       ) : (
                         <div className="size-full flex items-center justify-center font-bold text-xs text-orange-600 bg-orange-50 dark:bg-orange-950/30">
                           {studentName.slice(0, 1)}
                         </div>
                       )}
                     </div>
-                    <span className="text-xs font-semibold text-foreground">{studentName}</span>
+                    <span className="text-xs font-semibold text-foreground">
+                      {studentName}
+                    </span>
                   </div>
 
                   <div className="flex items-center gap-1 bg-amber-500/10 px-2 py-0.5 rounded-lg border border-amber-500/20">
