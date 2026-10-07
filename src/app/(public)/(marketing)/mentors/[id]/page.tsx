@@ -1,5 +1,5 @@
 import { getAllMentorsPublic } from "@/api";
-import MentorDetailsView from "@/components/modules/mentor/mentor-details-view";
+import MentorDetailsView from "@/components/modules/mentor/mentor-details-public/mentor-details-view";
 import { IMentorProfile } from "@/types/mentor.type";
 
 export async function generateStaticParams() {

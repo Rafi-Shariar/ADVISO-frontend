@@ -1,6 +1,6 @@
 import { getAllMentorsAdmin, getAllMentorsPublic } from "@/api";
 import MentorProfileView from "@/components/modules/admin/mentor-profile/mentor-profile-view";
-import MentorDetailsView from "@/components/modules/mentor/mentor-details-view";
+import MentorDetailsView from "@/components/modules/mentor/mentor-details-public/mentor-details-view";
 import ApplicationReviewView from "@/components/modules/review-application/review-application-view";
 import { IMentorProfile } from "@/types/mentor.type";
 
