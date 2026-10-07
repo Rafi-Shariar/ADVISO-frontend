@@ -28,14 +28,18 @@ import MentorApprovalTableSkeleton from "../mentor-approval/mentor-approval-tabl
 import { Separator } from "radix-ui";
 import { DropdownMenuSeparator } from "@/components/ui/dropdown-menu";
 import MentorPageSkeleton from "./mentor-page-skeleton";
+import { useSearchParams } from "next/navigation";
 
 const MentorTabs = () => {
   const [searchInput, setSearchInput] = useState("");
   const debouncedSearch = useDebounce(searchInput);
 
+  const searchParams = useSearchParams();
+  const domainFromUrl = searchParams.get("domain") || "";
+
   const [page, setPage] = useState(1);
 
-  const [domain, setDomain] = useState("");
+  const [domain, setDomain] = useState(domainFromUrl);
 
   const [sortBy, setSortBy] = useState("");
   const [sortOrder, setSortOrder] = useState("");
