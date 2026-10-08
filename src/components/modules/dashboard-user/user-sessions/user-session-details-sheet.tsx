@@ -64,7 +64,10 @@ export function UserSessionDetailsSheet({
   const formatSafeDate = (dateStr?: string | null) => {
     if (!dateStr) return "N/A";
     try {
-      const normalized = dateStr.replace(/(\d{2}:\d{2}:\d{2}):(\d{3})/, "$1.$2");
+      const normalized = dateStr.replace(
+        /(\d{2}:\d{2}:\d{2}):(\d{3})/,
+        "$1.$2",
+      );
       const parsed = new Date(normalized);
       if (isNaN(parsed.getTime())) return dateStr.split(" GMT")[0];
       return format(parsed, "dd MMM yyyy, hh:mm a");
@@ -84,14 +87,14 @@ export function UserSessionDetailsSheet({
     <Sheet open={isOpen} onOpenChange={(open) => !open && onClose()}>
       {/* 🚀 Desktop-এর জন্য বর্ধিত ও রেসপন্সিভ Width (sm:max-w-xl lg:max-w-2xl) */}
       <SheetContent className="sm:max-w-xl lg:max-w-2xl w-full overflow-y-auto p-0 flex flex-col gap-0 border-l border-zinc-200/90 dark:border-zinc-800 bg-white dark:bg-zinc-950">
-        
         {/* ১. টপ হেডার বার */}
         <div className="p-6 border-b border-zinc-100 dark:border-zinc-800 bg-zinc-50/60 dark:bg-zinc-900/40">
           <SheetHeader className="space-y-1.5 text-left">
             <div className="flex flex-wrap items-center justify-between gap-2">
               <div className="flex items-center gap-2">
                 <span className="font-mono text-xs font-bold text-zinc-400 uppercase tracking-wider">
-                  Session ID: #{session?.sessionId?.slice(0, 8) || sessionId?.slice(0, 8)}
+                  Session ID: #
+                  {session?.sessionId?.slice(0, 8) || sessionId?.slice(0, 8)}
                 </span>
               </div>
 
@@ -127,7 +130,8 @@ export function UserSessionDetailsSheet({
               Session Dossier
             </SheetTitle>
             <SheetDescription className="text-xs text-zinc-500">
-              Verified 1-on-1 tactical strategy session details and meeting telemetry.
+              Verified 1-on-1 tactical strategy session details and meeting
+              telemetry.
             </SheetDescription>
           </SheetHeader>
         </div>
@@ -142,13 +146,13 @@ export function UserSessionDetailsSheet({
           </div>
         ) : session ? (
           <div className="flex-1 p-6 sm:p-7 space-y-6">
-            
             {/* ক্যান্সেলেশন অ্যালার্ট (যদি স্ট্যাটাস CANCELLED হয়) */}
             {isCancelled && (
               <div className="rounded-[12px] border border-rose-500/20 bg-rose-50/50 dark:bg-rose-950/20 p-4 space-y-2">
                 <div className="flex items-center justify-between text-xs font-bold text-rose-700 dark:text-rose-400">
                   <span className="flex items-center gap-1.5">
-                    <AlertCircle className="size-4" /> This Session Has Been Cancelled
+                    <AlertCircle className="size-4" /> This Session Has Been
+                    Cancelled
                   </span>
                   {session.cancelledAt && (
                     <span className="text-[11px] font-normal text-zinc-400">
@@ -158,7 +162,9 @@ export function UserSessionDetailsSheet({
                 </div>
                 {session.cancellationReason && (
                   <p className="text-xs text-rose-600/90 dark:text-rose-400/80 leading-relaxed">
-                    <strong className="font-semibold text-rose-800 dark:text-rose-300">Stated Reason:</strong>{" "}
+                    <strong className="font-semibold text-rose-800 dark:text-rose-300">
+                      Stated Reason:
+                    </strong>{" "}
                     {session.cancellationReason}
                   </p>
                 )}
@@ -225,7 +231,10 @@ export function UserSessionDetailsSheet({
                 </span>
                 <p className="text-sm font-bold text-zinc-900 dark:text-zinc-100">
                   {session.sessionDate
-                    ? format(new Date(session.sessionDate), "EEEE, dd MMMM, yyyy")
+                    ? format(
+                        new Date(session.sessionDate),
+                        "EEEE, dd MMMM, yyyy",
+                      )
                     : "N/A"}
                 </p>
               </div>
@@ -235,7 +244,8 @@ export function UserSessionDetailsSheet({
                   <Clock className="size-3.5 text-sky-500" /> Slot Time Window
                 </span>
                 <p className="text-sm font-bold text-zinc-900 dark:text-zinc-100">
-                  {formatSlotTime(session.startUTC)} - {formatSlotTime(session.endUTC)}
+                  {formatSlotTime(session.startUTC)} -{" "}
+                  {formatSlotTime(session.endUTC)}
                 </p>
               </div>
             </div>
@@ -243,10 +253,12 @@ export function UserSessionDetailsSheet({
             {/* সেশন পারপাস ও এজেন্ডা */}
             <div className="rounded-[12px] border border-zinc-200/90 dark:border-zinc-800 bg-white dark:bg-zinc-900/60 p-4 sm:p-5 space-y-2 shadow-2xs">
               <span className="text-[11px] font-bold uppercase tracking-wider text-zinc-400 flex items-center gap-1.5">
-                <Target className="size-3.5 text-orange-500" /> Discussion Agenda & Objective
+                <Target className="size-3.5 text-orange-500" /> Discussion
+                Agenda & Objective
               </span>
               <div className="p-3.5 rounded-[12px] bg-zinc-50 dark:bg-zinc-900/80 border border-zinc-200/70 dark:border-zinc-800 text-xs sm:text-sm leading-relaxed text-zinc-800 dark:text-zinc-200 whitespace-pre-line">
-                {session.purpose || "No specific purpose provided during booking."}
+                {session.purpose ||
+                  "No specific purpose provided during booking."}
               </div>
             </div>
 
@@ -255,7 +267,8 @@ export function UserSessionDetailsSheet({
               <div className="rounded-[12px] border border-zinc-200/90 dark:border-zinc-800 bg-white dark:bg-zinc-900/60 p-4 sm:p-5 space-y-3.5 shadow-2xs">
                 <div className="flex items-center justify-between pb-2 border-b border-zinc-100 dark:border-zinc-800">
                   <span className="text-[11px] font-bold uppercase tracking-wider text-zinc-400 flex items-center gap-1.5">
-                    <Receipt className="size-3.5 text-orange-500" /> Payment & Transaction Ledger
+                    <Receipt className="size-3.5 text-orange-500" /> Payment &
+                    Transaction Ledger
                   </span>
                   <span className="inline-flex items-center px-2.5 py-0.5 rounded-[12px] text-[10px] font-bold uppercase tracking-wider bg-emerald-500/10 text-emerald-600 border border-emerald-500/20">
                     {session.payment.status}
@@ -274,7 +287,9 @@ export function UserSessionDetailsSheet({
                     <span className="text-zinc-500">Trx ID</span>
                     <button
                       type="button"
-                      onClick={() => handleCopyId(session.payment?.transactionId || "")}
+                      onClick={() =>
+                        handleCopyId(session.payment?.transactionId || "")
+                      }
                       className="font-mono text-xs font-semibold text-zinc-900 dark:text-zinc-100 flex items-center gap-1 hover:text-orange-600 transition-colors cursor-pointer"
                     >
                       <span>{session.payment.transactionId}</span>
@@ -302,7 +317,8 @@ export function UserSessionDetailsSheet({
             {session.feedbackByMentor && (
               <div className="rounded-[12px] border border-orange-500/20 bg-orange-500/5 dark:bg-orange-950/20 p-4 space-y-2">
                 <span className="text-[11px] font-bold uppercase tracking-wider text-orange-600 flex items-center gap-1.5">
-                  <MessageSquare className="size-3.5" /> Mentor's Follow-up Feedback
+                  <MessageSquare className="size-3.5" /> Mentor's Follow-up
+                  Feedback
                 </span>
                 <p className="text-xs sm:text-sm text-zinc-800 dark:text-zinc-200 leading-relaxed whitespace-pre-line italic">
                   "{session.feedbackByMentor}"
@@ -331,7 +347,8 @@ export function UserSessionDetailsSheet({
                 </Button>
               ) : isPendingStatus ? (
                 <div className="p-3.5 rounded-[12px] bg-amber-500/10 border border-amber-500/20 text-center text-xs font-semibold text-amber-700 dark:text-amber-400">
-                  Payment is pending for this slot. Complete payment from the sessions table to confirm.
+                  Payment is pending for this slot. Complete payment from the
+                  sessions table to confirm.
                 </div>
               ) : isCompleted ? (
                 <div className="p-3.5 rounded-[12px] bg-purple-500/10 border border-purple-500/20 text-center text-xs font-semibold text-purple-700 dark:text-purple-400 flex items-center justify-center gap-1.5">
@@ -340,7 +357,6 @@ export function UserSessionDetailsSheet({
                 </div>
               ) : null}
             </div>
-
           </div>
         ) : (
           <div className="flex-1 flex flex-col items-center justify-center gap-2 p-12 text-center text-zinc-400">

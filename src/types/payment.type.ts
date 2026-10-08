@@ -28,3 +28,21 @@ export interface IPayment {
     endUTC: string;
   };
 }
+
+export interface IUserPayment {
+  paymentId: string
+  amount: number;
+  paidAt: string
+  status: string
+  session: {
+    mentor: {
+      user: {
+        name: string;
+        profileURL: string
+      };
+    };
+    sessionDate: string
+    startUTC: string
+    endUTC: string
+  };
+}

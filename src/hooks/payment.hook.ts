@@ -1,4 +1,8 @@
-import { getAllPaymentsAdmin, getPaymentDetailsAdmin } from "@/api/payment.api";
+import {
+  getAllPaymentsAdmin,
+  getAllPaymentsUser,
+  getPaymentDetailsAdmin,
+} from "@/api/payment.api";
 import { PaymentParams } from "@/types/payment.type";
 import { useQuery, useSuspenseQuery } from "@tanstack/react-query";
 
@@ -14,5 +18,12 @@ export function usePaymentDetailsAdmin(id: string) {
     queryKey: [`payment-details`, id],
     queryFn: () => getPaymentDetailsAdmin(id),
     enabled: Boolean(id),
+  });
+}
+
+export function useGetAllPaymentUser() {
+  return useQuery({
+    queryKey: [`my-payments`],
+    queryFn: getAllPaymentsUser,
   });
 }

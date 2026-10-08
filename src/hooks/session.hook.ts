@@ -67,6 +67,7 @@ export function usePaySchedule() {
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: ["mentor-session"] });
       await queryClient.invalidateQueries({ queryKey: ["mentor-sessions"] });
+      await queryClient.invalidateQueries({ queryKey: ["my-payments"] });
     },
   });
 }
@@ -94,6 +95,7 @@ export function useCancleSession() {
       await queryClient.invalidateQueries({ queryKey: ["mentor-sessions"] });
       await queryClient.invalidateQueries({ queryKey: ["user-stats"] });
       await queryClient.invalidateQueries({ queryKey: ["my-sessions"] });
+      await queryClient.invalidateQueries({ queryKey: ["my-payments"] });
     },
   });
 }

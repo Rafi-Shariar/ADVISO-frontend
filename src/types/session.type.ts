@@ -126,7 +126,11 @@ export interface CancleSession {
   cancellationReason: string;
 }
 
-export type SessionStatusType = "PENDING" | "COMFIRMED" | "CONFIRMED" | "CANCELLED";
+export type SessionStatusType =
+  | "PENDING"
+  | "COMFIRMED"
+  | "CONFIRMED"
+  | "CANCELLED";
 
 export interface IUserSessionDetails {
   sessionId: string;
