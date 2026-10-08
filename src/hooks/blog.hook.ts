@@ -31,7 +31,7 @@ export function useBlogDetails(id: string) {
 
 export function useSuspenseGetAllBlogsAdmin(params: BlogParams) {
   return useSuspenseQuery({
-    queryKey: [`payments`, params],
+    queryKey: [`all-blogs`, params],
     queryFn: () => getAllBlogsAdmin(params),
   });
 }
