@@ -125,3 +125,42 @@ export interface CancleSession {
   sessionId: string;
   cancellationReason: string;
 }
+
+export type SessionStatusType = "PENDING" | "COMFIRMED" | "CONFIRMED" | "CANCELLED";
+
+export interface IUserSessionDetails {
+  sessionId: string;
+  userId: string;
+  mentorId: string;
+  scheduleId: string;
+  slotId: string;
+  sessionFees: string | number;
+  sessionDate: string;
+  startUTC: string;
+  endUTC: string;
+  status: SessionStatusType;
+  purpose: string;
+  completedSession: boolean;
+  feedbackByMentor: string | null;
+  meetingLink: string | null;
+  cancellationReason: string | null;
+  cancelledAt: string | null;
+  createdAt: string;
+  updatedAt: string;
+  mentor: {
+    mentorId: string;
+    headline: string;
+    user: {
+      name: string;
+      email: string;
+      profileURL?: string;
+    };
+  };
+  payment?: {
+    paymentId: string;
+    status: string;
+    amount: string | number;
+    transactionId: string;
+    paidAt: string;
+  } | null;
+}

@@ -11,7 +11,6 @@ export const formatSlotTime = (isoString?: string) => {
   return isValid(date) ? format(date, "h:mm a") : "Invalid Time";
 };
 
-
 // সেফ ডেট ফরম্যাটিং ফাংশন
 export const formatPaidDate = (dateStr?: string) => {
   if (!dateStr) return "N/A";
@@ -20,7 +19,7 @@ export const formatPaidDate = (dateStr?: string) => {
     // 1. কোলন যুক্ত মিলিসেকেন্ড ফিক্স করা: "15:32:41:427" -> "15:32:41.427"
     const normalizedStr = dateStr.replace(
       /(\d{2}:\d{2}:\d{2}):(\d{3})/,
-      "$1.$2"
+      "$1.$2",
     );
 
     const parsedDate = new Date(normalizedStr);

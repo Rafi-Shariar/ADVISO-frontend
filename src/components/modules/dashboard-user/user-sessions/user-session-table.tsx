@@ -11,7 +11,11 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { usePaySchedule, useSessionsMentor, useSessionsUser } from "@/hooks/session.hook";
+import {
+  usePaySchedule,
+  useSessionsMentor,
+  useSessionsUser,
+} from "@/hooks/session.hook";
 import { ISessionDetailsAdmin, MentorSessions } from "@/types/session.type";
 import {
   formatScheduleDate,
@@ -34,16 +38,22 @@ import UserSesionTableSkeleton from "./user-session-table-skeleton";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { UserSessionDetailsSheet } from "./user-session-details-sheet";
 import { toast } from "sonner";
+import { CancelSessionModal } from "./user-cancle-session-modal";
 
 const UserSessionsTable = () => {
   const { data, isPending } = useSessionsUser();
-  const {mutate : PayAgain} = usePaySchedule()
+  const { mutate: PayAgain } = usePaySchedule();
   const sessions: ISessionDetailsAdmin[] = data?.data || [];
 
   // Sheet ওপেন রাখা ও সিলেক্টেড সেশনের স্টেট
   const [selectedSessionId, setSelectedSessionId] = useState<string | null>(
     null,
   );
+
+  const [cancelModalSession, setCancelModalSession] =
+    useState<ISessionDetailsAdmin | null>(null);
+  const [isCancelModalOpen, setIsCancelModalOpen] = useState(false);
+
   const [isSheetOpen, setIsSheetOpen] = useState(false);
 
   const handleOpenDetails = (sessionId: string) => {
@@ -51,51 +61,54 @@ const UserSessionsTable = () => {
     setIsSheetOpen(true);
   };
 
-   const handlePayAgain = (sessionId: string) => {
-  PayAgain(
-    { sessionId },
-    {
-      onSuccess: (res: any) => {
-        console.log("Pay Again Response:", res);
+  const handlePayAgain = (sessionId: string) => {
+    PayAgain(
+      { sessionId },
+      {
+        onSuccess: (res: any) => {
+          console.log("Pay Again Response:", res);
 
-        // API রেসপন্স থেকে পেমেন্ট URL বের করা
-        const paymentUrl =
-          res?.data?.paymentURL ||
-          res?.data?.bkashURL ||
-          res?.data?.paymentUrl ||
-          res?.paymentURL ||
-          res?.bkashURL;
+          // API রেসপন্স থেকে পেমেন্ট URL বের করা
+          const paymentUrl =
+            res?.data?.paymentURL ||
+            res?.data?.bkashURL ||
+            res?.data?.paymentUrl ||
+            res?.paymentURL ||
+            res?.bkashURL;
 
-        if (paymentUrl) {
-          toast.info("Connecting to bKash gateway...", {
+          if (paymentUrl) {
+            toast.info("Connecting to bKash gateway...", {
+              position: "top-right",
+            });
+            // 🚀 bKash গেটওয়েতে রিডাইরেক্ট
+            window.location.href = paymentUrl;
+          } else {
+            toast.error("Payment gateway URL not received. Please try again.", {
+              position: "top-right",
+            });
+          }
+        },
+        onError: (err: any) => {
+          console.error("Pay Again Error:", err);
+          const errorMsg =
+            err?.response?.data?.message ||
+            err?.data?.message ||
+            err?.message ||
+            "Failed to initialize payment.";
+
+          toast.error("Payment Failed", {
+            description: errorMsg,
             position: "top-right",
           });
-          // 🚀 bKash গেটওয়েতে রিডাইরেক্ট
-          window.location.href = paymentUrl;
-        } else {
-          toast.error("Payment gateway URL not received. Please try again.", {
-            position: "top-right",
-          });
-        }
+        },
       },
-      onError: (err: any) => {
-        console.error("Pay Again Error:", err);
-        const errorMsg =
-          err?.response?.data?.message ||
-          err?.data?.message ||
-          err?.message ||
-          "Failed to initialize payment.";
+    );
+  };
 
-        toast.error("Payment Failed", {
-          description: errorMsg,
-          position: "top-right",
-        });
-      },
-    }
-  );
-};
-
-
+  const handleOpenCancelModal = (session: any) => {
+    setCancelModalSession(session);
+    setIsCancelModalOpen(true);
+  };
 
   if (isPending) {
     return <UserSesionTableSkeleton />;
@@ -138,25 +151,63 @@ const UserSessionsTable = () => {
                   {formatSlotTime(session.endUTC)}
                 </TableCell>
 
-                <TableCell>{session.status}</TableCell>
+                <TableCell>
+                  {(() => {
+                    switch (session.status) {
+                      case "COMFIRMED":
+                        return (
+                          <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-[12px] text-[10px] font-bold  tracking-wider bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
+                            <span className="size-1 rounded-full bg-emerald-500" />
+                            Confirmed
+                          </span>
+                        );
+                      case "CANCELLED":
+                        return (
+                          <span className="inline-flex items-center px-2.5 py-0.5 rounded-[12px] text-[10px] font-bold  tracking-wider bg-rose-500/10 text-rose-600 dark:text-rose-400 border border-rose-500/20">
+                            Cancelled
+                          </span>
+                        );
+                      case "PENDING":
+                      default:
+                        return (
+                          <span className="inline-flex items-center px-2.5 py-0.5 rounded-[12px] text-[10px] font-bold  tracking-wider bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20">
+                            Pending
+                          </span>
+                        );
+                    }
+                  })()}
+                </TableCell>
 
                 <TableCell>
-                  <Button
-                    asChild
-                    size="sm"
-                    variant="outline"
-                    className="h-8 rounded-lg text-xs gap-1.5 border-border/80 hover:bg-orange-500/10 hover:text-orange-600 transition-colors"
-                  >
-                    <a
-                      href={session.meetingLink}
-                      target="_blank"
-                      rel="noreferrer"
+                  {session.status === "CANCELLED" ||
+                  session.status === "PENDING" ? (
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      disabled
+                      className="h-8 rounded-[12px] text-xs gap-1.5 border-border/80 opacity-50 cursor-not-allowed"
                     >
-                      <Video className="size-3.5 text-orange-500" />
-                      Join
-                      <ExternalLink className="size-3 text-muted-foreground" />
-                    </a>
-                  </Button>
+                      <Video className="size-3.5 text-zinc-400" />
+                      <span>Join</span>
+                    </Button>
+                  ) : (
+                    <Button
+                      asChild
+                      size="sm"
+                      variant="outline"
+                      className="h-8 rounded-[12px] text-xs gap-1.5 border-border/80 hover:bg-orange-500/10 hover:border-orange-500/50 hover:text-orange-600 transition-colors"
+                    >
+                      <a
+                        href={session.meetingLink}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        <Video className="size-3.5 text-orange-500" />
+                        <span>Join</span>
+                        <ExternalLink className="size-3 text-muted-foreground" />
+                      </a>
+                    </Button>
+                  )}
                 </TableCell>
 
                 <TableCell>$ {session.sessionFees}</TableCell>
@@ -171,7 +222,7 @@ const UserSessionsTable = () => {
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end">
                       <DropdownMenuItem
-                      onClick={() => handleOpenDetails(session.sessionId)}
+                        onClick={() => handleOpenDetails(session.sessionId)}
                       >
                         Session Details
                       </DropdownMenuItem>
@@ -179,7 +230,7 @@ const UserSessionsTable = () => {
                       {session.status === "COMFIRMED" ? (
                         <DropdownMenuItem
                           variant="destructive"
-                          //   onClick={() => handleDeleteModal(user)}
+                          onClick={() => handleOpenCancelModal(session)}
                         >
                           Cancle Session
                         </DropdownMenuItem>
@@ -187,7 +238,6 @@ const UserSessionsTable = () => {
 
                       {session.status === "PENDING" ? (
                         <DropdownMenuItem
-
                           onClick={() => handlePayAgain(session.sessionId)}
                         >
                           Pay & Confirm
@@ -203,9 +253,15 @@ const UserSessionsTable = () => {
       </div>
 
       <UserSessionDetailsSheet
-       sessionId={selectedSessionId}
-       isOpen={isSheetOpen}
+        sessionId={selectedSessionId}
+        isOpen={isSheetOpen}
         onClose={() => setIsSheetOpen(false)}
+      />
+
+      <CancelSessionModal
+        isOpen={isCancelModalOpen}
+        onClose={() => setIsCancelModalOpen(false)}
+        session={cancelModalSession}
       />
     </div>
   );

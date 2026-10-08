@@ -93,6 +93,7 @@ export function useCancleSession() {
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: ["mentor-sessions"] });
       await queryClient.invalidateQueries({ queryKey: ["user-stats"] });
+      await queryClient.invalidateQueries({ queryKey: ["my-sessions"] });
     },
   });
 }
