@@ -1,3 +1,4 @@
+import AdminPaymentTabs from "@/components/modules/admin-payments/admin-payments-tab";
 import MentorApprovalTable from "@/components/modules/mentor-approval/mentor-approval-table";
 import MentorApprovalTabs from "@/components/modules/mentor-approval/mentor-approval-tabs";
 import React from "react";
@@ -7,7 +8,7 @@ const PaymentsPageAdmin = () => {
     <div>
       <h1>Platform Payment History</h1>
       <div className="">
-        <MentorApprovalTabs />
+        <AdminPaymentTabs/>
       </div>
     </div>
   );
