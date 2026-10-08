@@ -113,7 +113,8 @@ export function AdminPaymentDetailsSheet({
             <div className="rounded-[12px] border border-zinc-200/90 dark:border-zinc-800 bg-white dark:bg-zinc-900/60 p-5 shadow-2xs space-y-4">
               <div className="flex items-center justify-between">
                 <span className="text-xs font-bold uppercase tracking-wider text-zinc-400 flex items-center gap-1.5">
-                  <Receipt className="size-3.5 text-orange-500" /> Gross Invoiced
+                  <Receipt className="size-3.5 text-orange-500" /> Gross
+                  Invoiced
                 </span>
                 <span className="text-2xl font-black text-zinc-900 dark:text-zinc-100">
                   ${payment.amount}
@@ -161,7 +162,10 @@ export function AdminPaymentDetailsSheet({
                   {payment.refundedAt && (
                     <p className="text-[11px] text-zinc-400">
                       Refund Date:{" "}
-                      {format(new Date(payment.refundedAt), "dd MMM yyyy, hh:mm a")}
+                      {format(
+                        new Date(payment.refundedAt),
+                        "dd MMM yyyy, hh:mm a",
+                      )}
                     </p>
                   )}
                 </div>
@@ -199,7 +203,9 @@ export function AdminPaymentDetailsSheet({
                 <div className="flex items-center justify-between">
                   <span className="text-zinc-500">Internal Invoice / Trx</span>
                   <span className="font-mono text-zinc-600 dark:text-zinc-400 text-[11px]">
-                    {payment.transactionId ? `#${payment.transactionId.slice(0, 14)}...` : "N/A"}
+                    {payment.transactionId
+                      ? `#${payment.transactionId.slice(0, 14)}...`
+                      : "N/A"}
                   </span>
                 </div>
 
@@ -234,7 +240,9 @@ export function AdminPaymentDetailsSheet({
                     ) : (
                       <div className="size-full flex items-center justify-center font-bold text-xs text-orange-600 bg-orange-50 dark:bg-orange-950/30">
                         {payment.session.mentor?.user?.name
-                          ? payment.session.mentor.user.name.slice(0, 2).toUpperCase()
+                          ? payment.session.mentor.user.name
+                              .slice(0, 2)
+                              .toUpperCase()
                           : "ME"}
                       </div>
                     )}
@@ -253,7 +261,10 @@ export function AdminPaymentDetailsSheet({
                     <Calendar className="size-3.5 text-orange-500" />
                     <span className="font-semibold">
                       {payment.session.sessionDate
-                        ? format(new Date(payment.session.sessionDate), "dd MMM, yyyy")
+                        ? format(
+                            new Date(payment.session.sessionDate),
+                            "dd MMM, yyyy",
+                          )
                         : "N/A"}
                     </span>
                   </div>

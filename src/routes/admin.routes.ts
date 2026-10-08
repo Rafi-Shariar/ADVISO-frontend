@@ -59,7 +59,7 @@ export const adminRoutes = [
     title: "Account Settings",
     url: "#",
     items: [
-       {
+      {
         title: "Change Profile Picture",
         url: "/admin/profile-picture",
       },

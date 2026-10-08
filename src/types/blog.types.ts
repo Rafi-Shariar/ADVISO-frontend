@@ -10,6 +10,7 @@ export interface BlogItem {
     user: {
       name: string;
       profileURL: string;
+      email ?: string
     };
   };
 }
@@ -20,3 +21,8 @@ export interface BlogItemInMentorDetails {
   title: string;
   createdAt: string;
 }
+
+export interface BlogParams {
+  searchTerm?: string;
+}
+

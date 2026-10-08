@@ -6,7 +6,6 @@ export default function NotFound() {
   return (
     <main className="min-h-[85vh] flex items-center justify-center px-4 sm:px-6 lg:px-8 bg-[#FAFAFA] dark:bg-zinc-950 selection:bg-orange-500/20 selection:text-orange-600">
       <div className="max-w-xl w-full text-center space-y-8">
-        
         {/* Visual Badge & 404 Accent Display */}
         <div className="relative flex flex-col items-center justify-center">
           {/* Subtle Orange Glow Ambient */}
@@ -30,7 +29,8 @@ export default function NotFound() {
             Lost in the roadmap?
           </h2>
           <p className="text-xs sm:text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed">
-            The page or strategy session you are looking for has been moved, rescheduled, or doesn't exist in our verified directory.
+            The page or strategy session you are looking for has been moved,
+            rescheduled, or doesn't exist in our verified directory.
           </p>
         </div>
 
@@ -68,7 +68,6 @@ export default function NotFound() {
             </Link>
           </Button>
         </div>
-
       </div>
     </main>
   );

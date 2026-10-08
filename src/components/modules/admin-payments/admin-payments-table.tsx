@@ -2,11 +2,7 @@
 
 import { log } from "console";
 import React, { Dispatch, SetStateAction, useState } from "react";
-import {
-
-  ShieldAlert,
-
-} from "lucide-react";
+import { ShieldAlert } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 import {
@@ -25,7 +21,6 @@ import {
 } from "@/types/mentor.type";
 ShieldAlert;
 import TablePagination from "@/components/ui/table-pagination";
-;
 import EmptyTableUI from "@/components/layout/private/empty-table-ui";
 import { useSuspenseGetAllPaymentsAdmin } from "@/hooks/payment.hook";
 import { IPayment } from "@/types/payment.type";
@@ -37,9 +32,7 @@ interface Props extends MentorParams {
 }
 
 const PaymentsTableAdmin = ({ handlePageChange, ...params }: Props) => {
-  const [selectedPayment, setSelectedPayment] = useState<string | null>(
-      null,
-    );
+  const [selectedPayment, setSelectedPayment] = useState<string | null>(null);
   const { data } = useSuspenseGetAllPaymentsAdmin(params);
 
   const payments: IPayment[] = data?.data?.data || [];
@@ -75,13 +68,20 @@ const PaymentsTableAdmin = ({ handlePageChange, ...params }: Props) => {
                   ? "-"
                   : `$ ${payment.platformCharge}`}
               </TableCell>
-              <TableCell>{payment.status === "FAILED" || payment.status === "PENDING"
+              <TableCell>
+                {payment.status === "FAILED" || payment.status === "PENDING"
                   ? "-"
-                  : `$ ${payment.mentorEarnings}`}</TableCell>
+                  : `$ ${payment.mentorEarnings}`}
+              </TableCell>
               <TableCell>{payment.status}</TableCell>
 
               <TableCell>
-                <Button variant={"link"} onClick={()=> setSelectedPayment(payment.paymentId)}>details</Button>
+                <Button
+                  variant={"link"}
+                  onClick={() => setSelectedPayment(payment.paymentId)}
+                >
+                  details
+                </Button>
               </TableCell>
             </TableRow>
           ))}
@@ -97,10 +97,10 @@ const PaymentsTableAdmin = ({ handlePageChange, ...params }: Props) => {
       </div>
 
       <AdminPaymentDetailsSheet
-              paymentId={selectedPayment}
-              isOpen={!!selectedPayment}
-              onClose={() => setSelectedPayment(null)}
-            />
+        paymentId={selectedPayment}
+        isOpen={!!selectedPayment}
+        onClose={() => setSelectedPayment(null)}
+      />
     </div>
   );
 };

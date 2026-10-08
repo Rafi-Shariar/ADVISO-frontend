@@ -50,10 +50,10 @@ const PaymentTableSkeletonAdmin = () => {
               <TableCell>
                 <Skeleton className="h-6 w-10"></Skeleton>
               </TableCell>
-               <TableCell>
+              <TableCell>
                 <Skeleton className="h-6 w-10"></Skeleton>
               </TableCell>
-               <TableCell>
+              <TableCell>
                 <Skeleton className="h-6 w-10"></Skeleton>
               </TableCell>
             </TableRow>

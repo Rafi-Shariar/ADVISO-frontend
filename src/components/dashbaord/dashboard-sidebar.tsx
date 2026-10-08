@@ -35,7 +35,7 @@ export function DashbaordSidebar({ role }: { role: UserRole }) {
       <SidebarHeader>
         <Logo />
       </SidebarHeader>
-      <Separator/>
+      <Separator />
       <SidebarContent>
         {/* We create a SidebarGroup for each parent. */}
         {routes.map((item) => (

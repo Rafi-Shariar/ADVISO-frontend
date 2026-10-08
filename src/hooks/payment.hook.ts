@@ -9,7 +9,6 @@ export function useSuspenseGetAllPaymentsAdmin(params: PaymentParams) {
   });
 }
 
-
 export function usePaymentDetailsAdmin(id: string) {
   return useQuery({
     queryKey: [`payment-details`, id],

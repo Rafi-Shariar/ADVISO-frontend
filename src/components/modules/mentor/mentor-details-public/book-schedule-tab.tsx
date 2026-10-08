@@ -58,7 +58,8 @@ export const BookScheduleTab = ({
             Available 1:1 Strategy Slots
           </h2>
           <p className="text-xs text-zinc-500 mt-0.5">
-            Select a slot to confirm your booking. Synced with mentor's timezone ({timezone}).
+            Select a slot to confirm your booking. Synced with mentor's timezone
+            ({timezone}).
           </p>
         </div>
 

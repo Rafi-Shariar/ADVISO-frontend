@@ -8,7 +8,7 @@ const PaymentsPageAdmin = () => {
     <div>
       <h1>Platform Payment History</h1>
       <div className="">
-        <AdminPaymentTabs/>
+        <AdminPaymentTabs />
       </div>
     </div>
   );

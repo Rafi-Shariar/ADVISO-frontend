@@ -37,7 +37,6 @@ const AdminPaymentTabs = () => {
 
   const [page, setPage] = useState(1);
 
-
   const handleSearch = (e: any) => {
     setSearchInput(e.target.value);
     setPage(1);
@@ -48,11 +47,9 @@ const AdminPaymentTabs = () => {
     setPage(1);
   };
 
-
-
   const queryParams: PaymentParams = {
     page: page,
-    limit: 10,    
+    limit: 10,
     ...(tab === "ALL" ? {} : { status: tab }),
     ...(debouncedSearch ? { searchTerm: debouncedSearch } : {}),
   };
@@ -72,8 +69,6 @@ const AdminPaymentTabs = () => {
               onChange={(e) => handleSearch(e)}
             />
           </div>
-
-
         </div>
 
         {/* Tabs with Horizontal Scroll for Mobile */}

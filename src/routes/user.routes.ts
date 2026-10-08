@@ -37,7 +37,7 @@ export const userRoutes = [
     title: "Account Settings",
     url: "#",
     items: [
-       {
+      {
         title: "Change Profile Picture",
         url: "/user/profile-picture",
       },
