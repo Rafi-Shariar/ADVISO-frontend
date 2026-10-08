@@ -1,5 +1,6 @@
 import apiClient from "@/lib/apiClient";
 import {
+  IMentorProfileUpdatePayload,
   MentorApplicationPayload,
   MentorParams,
   ReviewApplicationPaylaod,
@@ -44,3 +45,16 @@ export const reviewApplication = (payload: ReviewApplicationPaylaod) => {
     body: payload,
   });
 };
+
+
+export const getMentorProfile = () => {
+  return apiClient(`/api/v1/mentor/mentor/me`);
+};
+
+export const updateMentorProfile = (paylaod : IMentorProfileUpdatePayload) => {
+  return apiClient("/api/v1/mentor/update-profile", {
+    method: "PATCH",
+    body: paylaod,
+  });
+}
+

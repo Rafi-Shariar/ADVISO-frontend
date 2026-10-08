@@ -5,7 +5,9 @@ import {
   getFeaturedMentors,
   getMentorDetails,
   getMentorDetailsAdmin,
+  getMentorProfile,
   reviewApplication,
+  updateMentorProfile,
 } from "@/api/mentor.api";
 import { MentorParams } from "@/types/mentor.type";
 import {
@@ -71,6 +73,26 @@ export function useReviewApplication() {
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: ["mentors"] });
       await queryClient.invalidateQueries({ queryKey: ["application-status"] });
+    },
+  });
+}
+
+export function useGetMentorProfile() {
+  return useQuery({
+    queryKey: [`mentor-profile`],
+    queryFn: getMentorProfile,
+  });
+}
+
+
+export function useUpdateMentorProfile() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: updateMentorProfile,
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey: ["mentors"] });
+      await queryClient.invalidateQueries({ queryKey: ["mentor-profile"] });
     },
   });
 }

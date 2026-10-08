@@ -10,7 +10,7 @@ import {
   SheetTitle,
 } from "@/components/ui/sheet";
 import { usePaymentDetailsAdmin } from "@/hooks/payment.hook"; // আপনার হুকের সঠিক পাথ দিন
-import { formatSlotTime } from "@/utils/date-time-converter";
+import { formatPaidDate, formatSlotTime } from "@/utils/date-time-converter";
 import {
   DollarSign,
   Calendar,
@@ -162,10 +162,7 @@ export function AdminPaymentDetailsSheet({
                   {payment.refundedAt && (
                     <p className="text-[11px] text-zinc-400">
                       Refund Date:{" "}
-                      {format(
-                        new Date(payment.refundedAt),
-                        "dd MMM yyyy, hh:mm a",
-                      )}
+                       {formatPaidDate(payment.refundedAt)}
                     </p>
                   )}
                 </div>
@@ -213,7 +210,7 @@ export function AdminPaymentDetailsSheet({
                   <div className="flex items-center justify-between border-t border-zinc-100 dark:border-zinc-800 pt-2">
                     <span className="text-zinc-500">Paid Timestamp</span>
                     <span className="font-semibold text-zinc-800 dark:text-zinc-200">
-                      {format(new Date(payment.paidAt), "dd MMM yyyy, hh:mm a")}
+                      {formatPaidDate(payment.paidAt)}
                     </span>
                   </div>
                 )}

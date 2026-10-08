@@ -86,6 +86,8 @@ export interface ApplicationData {
   sessionCharge: number;
 }
 
+export interface UpdateMentorProfile extends Partial<ApplicationData>{}
+
 export interface MentorApplicationPayload {
   data: ApplicationData;
   resume: File;
@@ -143,4 +145,18 @@ export interface ReviewApplicationPaylaod {
 export interface MentorProfileAdmin extends ApplicationReview {
   blogs: BlogItemInMentorDetails[];
   reviews: IReview[];
+}
+
+
+export interface IMentorProfileUpdatePayload {
+	name?: string;
+	timezone?: string;
+	headline?: string;
+	bio?: string;
+	yearOfExperience?: number;
+	expertiseTags?: string[];
+	linkedinURL?: string;
+	professionalDomain?: string;
+	portfolioURL?: string;
+	sessionCharge?: number;
 }

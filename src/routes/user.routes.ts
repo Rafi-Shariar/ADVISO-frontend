@@ -24,16 +24,6 @@ export const userRoutes = [
     ],
   },
   {
-    title: "Feedback",
-    url: "#",
-    items: [
-      {
-        title: "My Reviews",
-        url: "/user/reviews",
-      },
-    ],
-  },
-  {
     title: "Account Settings",
     url: "#",
     items: [
