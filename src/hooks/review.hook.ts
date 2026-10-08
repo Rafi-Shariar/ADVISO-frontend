@@ -8,7 +8,6 @@ export function useFeaturedReviews() {
   });
 }
 
-
 export function useGetAllReviewAdmin() {
   return useQuery({
     queryKey: [`all-reviews`],

@@ -6,7 +6,7 @@ const BlogsPageAdmin = () => {
     <div>
       <h1>Blogs Archive</h1>
 
-      <AdminBlogTabs/>
+      <AdminBlogTabs />
     </div>
   );
 };

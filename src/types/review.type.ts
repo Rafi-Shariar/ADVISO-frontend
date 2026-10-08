@@ -10,27 +10,27 @@ export interface IReview {
 }
 
 export interface IFeedback {
-  reviewId: string
+  reviewId: string;
   sessionId: string;
   mentorId: string;
   ratings: string;
-  comment: string
-  createdAt: string
-  updatedAt: string
+  comment: string;
+  createdAt: string;
+  updatedAt: string;
   session: {
-    sessionId: string
-    sessionDate: string
+    sessionId: string;
+    sessionDate: string;
     user: {
-      userId: string
-      name: string
-      email: string
+      userId: string;
+      name: string;
+      email: string;
     };
   };
   mentor: {
-    mentorId: string
+    mentorId: string;
     user: {
-      name: string
-      email: string
+      name: string;
+      email: string;
     };
   };
 }

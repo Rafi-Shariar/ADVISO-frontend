@@ -10,7 +10,7 @@ export interface BlogItem {
     user: {
       name: string;
       profileURL: string;
-      email ?: string
+      email?: string;
     };
   };
 }
@@ -25,4 +25,3 @@ export interface BlogItemInMentorDetails {
 export interface BlogParams {
   searchTerm?: string;
 }
-

@@ -2,7 +2,6 @@
 
 import { ShieldAlert } from "lucide-react";
 
-
 import {
   Table,
   TableBody,
@@ -47,10 +46,7 @@ const BlogsTableAdmin = ({ ...params }: Props) => {
               <TableCell>{blog.mentor.user.name}</TableCell>
               <TableCell>{blog.mentor.user.email}</TableCell>
               <TableCell>{blog.title}</TableCell>
-              <TableCell>
-                {formatScheduleDate(blog.createdAt)}
-              </TableCell>
-              
+              <TableCell>{formatScheduleDate(blog.createdAt)}</TableCell>
             </TableRow>
           ))}
         </TableBody>

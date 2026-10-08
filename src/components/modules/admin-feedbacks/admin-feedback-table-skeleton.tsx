@@ -20,7 +20,7 @@ const AdminReviewTableSkeleton = () => {
             <TableHead>Session Date</TableHead>
             <TableHead>Ratings</TableHead>
             <TableHead>Feedback</TableHead>
-            
+
             <TableHead>Reviewed</TableHead>
           </TableRow>
         </TableHeader>

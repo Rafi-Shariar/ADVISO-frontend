@@ -103,7 +103,10 @@ const FeedbackTableAdmin = () => {
                             Feedback
                           </span>
                           <p className="text-xs text-zinc-700 dark:text-zinc-300 leading-relaxed italic">
-                            "{feedback.comment || "No detailed written feedback provided."}"
+                            "
+                            {feedback.comment ||
+                              "No detailed written feedback provided."}
+                            "
                           </p>
                         </div>
                       </div>

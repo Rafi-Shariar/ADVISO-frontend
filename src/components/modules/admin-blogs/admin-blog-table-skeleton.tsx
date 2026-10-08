@@ -36,7 +36,6 @@ const BlogTableSkeletonAdmin = () => {
               <TableCell>
                 <Skeleton className="h-6 w-20"></Skeleton>
               </TableCell>
-        
             </TableRow>
           ))}
         </TableBody>
