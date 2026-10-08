@@ -3,9 +3,9 @@
 import React from "react";
 
 import { useUserStats } from "@/hooks/analytics.hook";
-import UserOverviewSkeleton from "@/components/modules/dashboard-user/dashbaord-overview/user-overview-skeleton";
-import { UserStatsCards } from "@/components/modules/dashboard-user/dashbaord-overview/user-stats-card";
-import { UserNextSession } from "@/components/modules/dashboard-user/dashbaord-overview/user-next-session";
+import UserOverviewSkeleton from "@/components/modules/dashboard-user/user-overview/user-overview-skeleton";
+import { UserStatsCards } from "@/components/modules/dashboard-user/user-overview/user-stats-card";
+import { UserNextSession } from "@/components/modules/dashboard-user/user-overview/user-next-session";
 import { IUserAnalytic } from "@/types/analytic.type";
 
 const UserPage = () => {

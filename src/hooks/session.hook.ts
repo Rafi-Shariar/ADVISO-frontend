@@ -1,10 +1,13 @@
 import {
   bookSchedule,
+  cancleSession,
   getAllSessionsAdmin,
   getAllSessionsMentor,
+  getAllSessionsUser,
   getSessionsAdminDetails,
   getSessionsDetailsMentor,
   getSessionsOfMentor,
+  getSessionsUserDetails,
   PaySchedule,
 } from "@/api";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
@@ -64,6 +67,35 @@ export function usePaySchedule() {
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: ["mentor-session"] });
       await queryClient.invalidateQueries({ queryKey: ["mentor-sessions"] });
+    },
+  });
+}
+
+
+
+export function useSessionsUser() {
+  return useQuery({
+    queryKey: ["my-sessions"],
+    queryFn: getAllSessionsUser,
+  });
+}
+
+
+export function useSessionDetailsUser(id: string) {
+  return useQuery({
+    queryKey: [`my-session`, id],
+    queryFn: () => getSessionsUserDetails(id),
+    enabled: Boolean(id),
+  });
+}
+
+export function useCancleSession() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: cancleSession,
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey: ["mentor-sessions"] });
+      await queryClient.invalidateQueries({ queryKey: ["user-stats"] });
     },
   });
 }

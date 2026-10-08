@@ -13,6 +13,7 @@ export default function UserOverviewSkeleton() {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {Array.from({ length: 4 }).map((_, idx) => (
           <div
+            // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
             key={idx}
             className="p-5 rounded-[12px] border border-zinc-200/80 dark:border-zinc-800 bg-white dark:bg-zinc-900/60 space-y-3"
           >

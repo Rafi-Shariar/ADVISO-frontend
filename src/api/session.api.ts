@@ -1,5 +1,5 @@
 import apiClient from "@/lib/apiClient";
-import { BookSchedule, PaySchedulePayload } from "@/types/session.type";
+import { BookSchedule, CancleSession, PaySchedulePayload } from "@/types/session.type";
 
 export const getAllSessionsAdmin = () => {
   return apiClient("/api/v1/session/admin/all-sessions");
@@ -34,3 +34,20 @@ export const PaySchedule = (payload: PaySchedulePayload) => {
     body: payload,
   });
 };
+
+
+export const getAllSessionsUser = () => {
+  return apiClient("/api/v1/session/my-sessions");
+};
+
+export const getSessionsUserDetails = (id: string) => {
+  return apiClient(`/api/v1/session/my-sessions/${id}`);
+};
+
+export const cancleSession = (payload: CancleSession) => {
+  return apiClient("/api/v1/session/cancel", {
+    method: "POST",
+    body: payload,
+  });
+};
+
