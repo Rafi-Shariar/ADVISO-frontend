@@ -1,7 +1,7 @@
 "use client";
 
 import { log } from "console";
-import React, { Dispatch, SetStateAction } from "react";
+import React, { Dispatch, SetStateAction, useState } from "react";
 import {
 
   ShieldAlert,
@@ -30,12 +30,16 @@ import EmptyTableUI from "@/components/layout/private/empty-table-ui";
 import { useSuspenseGetAllPaymentsAdmin } from "@/hooks/payment.hook";
 import { IPayment } from "@/types/payment.type";
 import { formatScheduleDate } from "@/utils/date-time-converter";
+import { AdminPaymentDetailsSheet } from "./admin-payment-details-sheet";
 
 interface Props extends MentorParams {
   handlePageChange: Dispatch<SetStateAction<number>>;
 }
 
 const PaymentsTableAdmin = ({ handlePageChange, ...params }: Props) => {
+  const [selectedPayment, setSelectedPayment] = useState<string | null>(
+      null,
+    );
   const { data } = useSuspenseGetAllPaymentsAdmin(params);
 
   const payments: IPayment[] = data?.data?.data || [];
@@ -77,7 +81,7 @@ const PaymentsTableAdmin = ({ handlePageChange, ...params }: Props) => {
               <TableCell>{payment.status}</TableCell>
 
               <TableCell>
-                <Button variant={"link"}>details</Button>
+                <Button variant={"link"} onClick={()=> setSelectedPayment(payment.paymentId)}>details</Button>
               </TableCell>
             </TableRow>
           ))}
@@ -91,6 +95,12 @@ const PaymentsTableAdmin = ({ handlePageChange, ...params }: Props) => {
           page={params.page ?? 0}
         />
       </div>
+
+      <AdminPaymentDetailsSheet
+              paymentId={selectedPayment}
+              isOpen={!!selectedPayment}
+              onClose={() => setSelectedPayment(null)}
+            />
     </div>
   );
 };
