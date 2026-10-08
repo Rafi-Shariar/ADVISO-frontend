@@ -121,8 +121,7 @@ export interface PaySchedulePayload {
   sessionId: string;
 }
 
-
 export interface CancleSession {
   sessionId: string;
-  cancellationReason : string;
+  cancellationReason: string;
 }

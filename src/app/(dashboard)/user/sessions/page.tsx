@@ -1,12 +1,13 @@
-import React from 'react';
+import UserSessionsTable from "@/components/modules/dashboard-user/user-sessions/user-session-table";
+import React from "react";
 
 const MySessionsPage = () => {
-    return (
-        <div>
-            My Sessions
-            
-        </div>
-    );
+  return (
+    <div>
+      My Sessions
+      <UserSessionsTable />
+    </div>
+  );
 };
 
 export default MySessionsPage;

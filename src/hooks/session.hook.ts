@@ -71,15 +71,12 @@ export function usePaySchedule() {
   });
 }
 
-
-
 export function useSessionsUser() {
   return useQuery({
     queryKey: ["my-sessions"],
     queryFn: getAllSessionsUser,
   });
 }
-
 
 export function useSessionDetailsUser(id: string) {
   return useQuery({
