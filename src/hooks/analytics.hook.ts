@@ -1,4 +1,9 @@
-import { getAdminStats, getMentorStats, getPublicStats } from "@/api";
+import {
+  getAdminStats,
+  getMentorStats,
+  getPublicStats,
+  getUserStats,
+} from "@/api";
 import { useMutation, useQuery } from "@tanstack/react-query";
 
 export function usePublicStats() {
@@ -23,6 +28,15 @@ export function useMentorStats() {
   return useQuery({
     queryKey: ["mentor-stats"],
     queryFn: getMentorStats,
+    staleTime: 0,
+    refetchOnWindowFocus: "always",
+  });
+}
+
+export function useUserStats() {
+  return useQuery({
+    queryKey: ["user-stats"],
+    queryFn: getUserStats,
     staleTime: 0,
     refetchOnWindowFocus: "always",
   });

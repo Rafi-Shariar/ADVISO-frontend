@@ -11,3 +11,7 @@ export const getAdminStats = () => {
 export const getMentorStats = () => {
   return apiClient("/api/v1/analytics/mentor");
 };
+
+export const getUserStats = () => {
+  return apiClient("/api/v1/analytics/user");
+};

@@ -10,9 +10,9 @@ const MentorsPage = () => {
         </h1>
       </div>
 
-     <Suspense fallback={"loading"}>
-       <MentorTabs />
-     </Suspense>
+      <Suspense fallback={"loading"}>
+        <MentorTabs />
+      </Suspense>
     </div>
   );
 };

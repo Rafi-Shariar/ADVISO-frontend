@@ -1,6 +1,4 @@
-
 import ApplicationReviewView from "@/components/modules/review-application/review-application-view";
-
 
 interface PageProps {
   params: Promise<{ id: string }>;

@@ -1,5 +1,5 @@
 "use client";
-export const dynamic = "force-dynamic"
+export const dynamic = "force-dynamic";
 import ApplyAsMentorForm from "@/components/forms/apply-as-mentor-form";
 import { ApplicationApprovedCard } from "@/components/modules/apply-as-mentor/status-approved";
 import { ApplicationPendingCard } from "@/components/modules/apply-as-mentor/status-pending";

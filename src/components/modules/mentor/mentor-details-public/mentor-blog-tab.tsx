@@ -3,7 +3,6 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { BlogItemInMentorDetails } from "@/types/blog.types";
 
-
 export const MentorBlogsTab = ({
   blogs,
 }: {
