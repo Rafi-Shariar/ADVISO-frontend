@@ -50,8 +50,8 @@ export const adminRoutes = [
         url: "/admin/blogs",
       },
       {
-        title: "Reviews",
-        url: "/admin/reviews",
+        title: "Feedbacks",
+        url: "/admin/feedbacks",
       },
     ],
   },
