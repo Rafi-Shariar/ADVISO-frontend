@@ -7,6 +7,8 @@ import { MentorSlotItem } from "../book-schedule/slot-card";
 import { ScheduleSkeleton } from "../book-schedule/schedule-loading-skeleton";
 import { DateSlotGroup } from "../book-schedule/date-slot-group";
 import { BookScheduleModal } from "../book-schedule/book-slot-modal";
+import { useUserStore } from "@/store/useUserStore";
+import { LoginRequiredCard } from "./login-required-card";
 
 interface BookScheduleTabProps {
   mentorId: string;
@@ -17,6 +19,12 @@ export const BookScheduleTab = ({
   mentorId,
   timezone,
 }: BookScheduleTabProps) => {
+
+  const { user } = useUserStore();
+  const isAuthenticated = Boolean(user?.id || user?.email);
+
+
+
   const { data, isPending } = useSessionsOfMentor(mentorId);
   const rawSlots: MentorSlotItem[] = data?.data || [];
 
@@ -50,7 +58,12 @@ export const BookScheduleTab = ({
   };
 
   return (
-    <div className="space-y-6">
+
+    <div>
+      {
+        !isAuthenticated ? <LoginRequiredCard/> : (
+
+          <div className="space-y-6">
       {/* Header Info */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-2 border-b border-zinc-200 dark:border-zinc-800">
         <div>
@@ -106,6 +119,11 @@ export const BookScheduleTab = ({
         onOpenChange={setIsModalOpen}
         slot={selectedSlot}
       />
+    </div>
+
+        )
+      }
+    
     </div>
   );
 };

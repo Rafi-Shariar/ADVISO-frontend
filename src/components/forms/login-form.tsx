@@ -6,7 +6,7 @@ import { Button } from "../ui/button";
 import { Field, FieldError, FieldLabel, FieldSeparator } from "../ui/field";
 import { AuthValidation } from "@/validation/auth.validation";
 import { useGetMe, useGoogleOAuth, useLogin } from "@/hooks";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { toast } from "sonner";
 import { Spinner } from "../ui/spinner";
 import { GoogleLogin } from "@react-oauth/google";
@@ -18,6 +18,12 @@ const LoginForm = () => {
   const { mutate: login, isPending } = useLogin();
   const { mutate: googleLogin } = useGoogleOAuth();
   const router = useRouter();
+
+  const searchParams = useSearchParams();
+const rawRedirect = searchParams.get("redirect");
+
+// %2Fmentors%2F... কে ডিকোড করে /mentors/... বানানো
+const redirectUrl = rawRedirect ? decodeURIComponent(rawRedirect) : "/";
 
   const form = useForm({
     defaultValues: {
@@ -35,7 +41,7 @@ const LoginForm = () => {
 
       login(loginData, {
         onSuccess: (_res) => {
-          router.push("/");
+          router.push(redirectUrl);
           toast.success("Login Successful.", {
             description: "Welcome back to ADVISO",
             position: "top-right",
@@ -72,7 +78,7 @@ const LoginForm = () => {
       { idToken, timezone },
       {
         onSuccess: (_res) => {
-          router.push("/");
+          router.push(redirectUrl);
           toast.success("Login Successful.", {
             description: "Welcome back to ADVISO",
             position: "top-right",
@@ -118,7 +124,7 @@ const LoginForm = () => {
 
     login(credential, {
       onSuccess: (_res) => {
-        router.push("/");
+        router.push(redirectUrl);
         toast.success(`Login Successful as ${value}`, {
           description: "Welcome back to ADVISO",
           position: "top-right",
