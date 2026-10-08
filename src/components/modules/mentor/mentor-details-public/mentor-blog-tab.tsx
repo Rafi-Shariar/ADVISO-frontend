@@ -1,7 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
-import { BlogItemInMentorDetails } from "@/types/mentor.type";
+import { BlogItemInMentorDetails } from "@/types/blog.types";
+
 
 export const MentorBlogsTab = ({
   blogs,

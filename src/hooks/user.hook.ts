@@ -8,6 +8,7 @@ import {
 import { updateStatusArgs, UserParams } from "@/types/user.type";
 import {
   useMutation,
+  useQuery,
   useQueryClient,
   useSuspenseQuery,
 } from "@tanstack/react-query";
@@ -43,9 +44,11 @@ export function useDeleteAccount() {
 }
 
 export function useGetApplicationStatus() {
-  return useSuspenseQuery({
+  return useQuery({
     queryKey: ["application-status"],
     queryFn: () => getApplicationStatus(),
+    enabled: typeof window !== "undefined",
+    retry: false,
   });
 }
 

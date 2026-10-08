@@ -1,5 +1,5 @@
 import MentorTabs from "@/components/modules/mentor/mentor-tabs";
-import React from "react";
+import React, { Suspense } from "react";
 
 const MentorsPage = () => {
   return (
@@ -10,7 +10,9 @@ const MentorsPage = () => {
         </h1>
       </div>
 
-      <MentorTabs />
+     <Suspense fallback={"loading"}>
+       <MentorTabs />
+     </Suspense>
     </div>
   );
 };

@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { Star } from "lucide-react";
-import { IReview } from "@/types/mentor.type";
+import { IReview } from "@/types/review.type";
+
 
 interface MentorReviewsTabProps {
   reviews: IReview[];
