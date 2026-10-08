@@ -49,7 +49,6 @@ export function useGetApplicationStatus() {
   });
 }
 
-
 export function useChangeProfilePhoto() {
   const queryClient = useQueryClient();
 

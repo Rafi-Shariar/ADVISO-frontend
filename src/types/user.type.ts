@@ -37,6 +37,5 @@ export interface updateStatusArgs {
 }
 
 export interface profileImagePayload {
-  profileImage : File
+  profileImage: File;
 }
-

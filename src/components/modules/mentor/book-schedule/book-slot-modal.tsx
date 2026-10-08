@@ -11,7 +11,10 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { useBookSchedule } from "@/hooks/session.hook";
-import { formatScheduleDate, formatSlotTime } from "@/utils/date-time-converter";
+import {
+  formatScheduleDate,
+  formatSlotTime,
+} from "@/utils/date-time-converter";
 import { MentorSlotItem } from "./slot-card";
 import { Calendar, Clock, Loader2, Sparkles, AlertCircle } from "lucide-react";
 import { toast } from "sonner";
@@ -104,7 +107,8 @@ export const BookScheduleModal = ({
               Confirm 1:1 Session
             </DialogTitle>
             <DialogDescription className="text-xs text-zinc-500">
-              Share what you would like to discuss so your mentor can prepare effectively.
+              Share what you would like to discuss so your mentor can prepare
+              effectively.
             </DialogDescription>
           </DialogHeader>
 
@@ -124,7 +128,8 @@ export const BookScheduleModal = ({
                 <Clock className="size-3.5 text-zinc-400" /> Time Window
               </span>
               <span className="text-zinc-900 dark:text-zinc-100 font-bold">
-                {formatSlotTime(slot.startTime)} - {formatSlotTime(slot.endTime)}
+                {formatSlotTime(slot.startTime)} -{" "}
+                {formatSlotTime(slot.endTime)}
               </span>
             </div>
           </div>

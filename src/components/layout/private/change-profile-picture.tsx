@@ -66,47 +66,46 @@ const ChangeProfilePicture = () => {
   };
 
   const handleUpload = () => {
-  if (!selectedFile) {
-    toast.error("No Image Selected", {
-      description: "Please choose a new profile picture to update.",
-      position: "top-right",
-    });
-    return;
-  }
-
-  // FormData-r bodole type onujayi object pathan:
-  changeProfilePhoto(
-    { profileImage: selectedFile },
-    {
-      onSuccess: () => {
-        toast.success("Profile Updated", {
-          description: "Your profile photo has been changed successfully.",
-          position: "top-right",
-        });
-        handleCancelSelection();
-        router.push("/");
-      },
-      onError: (err: any) => {
-        const errorMsg =
-          err?.response?.data?.message ||
-          err?.message ||
-          "Failed to update profile picture.";
-
-        toast.error("Update Failed", {
-          description: errorMsg,
-          position: "top-right",
-        });
-      },
+    if (!selectedFile) {
+      toast.error("No Image Selected", {
+        description: "Please choose a new profile picture to update.",
+        position: "top-right",
+      });
+      return;
     }
-  );
-};
+
+    // FormData-r bodole type onujayi object pathan:
+    changeProfilePhoto(
+      { profileImage: selectedFile },
+      {
+        onSuccess: () => {
+          toast.success("Profile Updated", {
+            description: "Your profile photo has been changed successfully.",
+            position: "top-right",
+          });
+          handleCancelSelection();
+          router.push("/");
+        },
+        onError: (err: any) => {
+          const errorMsg =
+            err?.response?.data?.message ||
+            err?.message ||
+            "Failed to update profile picture.";
+
+          toast.error("Update Failed", {
+            description: errorMsg,
+            position: "top-right",
+          });
+        },
+      },
+    );
+  };
   // বর্তমান ডিসপ্লে ইমেজ
   const displayImage = previewURL || currentProfileURL;
 
   return (
     <div className="max-w-xl mx-auto px-4 py-10 sm:py-16">
       <div className="rounded-[12px] border border-zinc-200/90 dark:border-zinc-800 bg-white dark:bg-zinc-900/60 p-6 sm:p-8 shadow-xs space-y-6">
-        
         {/* Top Header */}
         <div className="flex items-center justify-between pb-5 border-b border-zinc-100 dark:border-zinc-800">
           <div>
@@ -174,7 +173,9 @@ const ChangeProfilePicture = () => {
 
           <div className="text-center space-y-1">
             <p className="text-xs font-semibold text-zinc-700 dark:text-zinc-300">
-              {selectedFile ? selectedFile.name : "Recommended: Square JPG, PNG (Max 5MB)"}
+              {selectedFile
+                ? selectedFile.name
+                : "Recommended: Square JPG, PNG (Max 5MB)"}
             </p>
             {selectedFile && (
               <p className="text-[11px] text-orange-600 dark:text-orange-400 font-bold">
@@ -218,7 +219,6 @@ const ChangeProfilePicture = () => {
             )}
           </Button>
         </div>
-
       </div>
     </div>
   );

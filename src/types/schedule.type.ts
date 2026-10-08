@@ -49,5 +49,3 @@ export interface CreateSchedulePayload {
 export interface DeleteSchedulePayload {
   scheduleId: string;
 }
-
-

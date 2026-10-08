@@ -1,5 +1,11 @@
-import { getAllBlogsPublic, getBlogDetails, getFeaturedBlogs } from "@/api";
-import { useQuery } from "@tanstack/react-query";
+import {
+  getAllBlogsAdmin,
+  getAllBlogsPublic,
+  getBlogDetails,
+  getFeaturedBlogs,
+} from "@/api";
+import { BlogParams } from "@/types/blog.types";
+import { useQuery, useSuspenseQuery } from "@tanstack/react-query";
 
 export function useFeaturedBlogs() {
   return useQuery({
@@ -20,5 +26,12 @@ export function useBlogDetails(id: string) {
     queryKey: [`blog-${id}`],
     queryFn: () => getBlogDetails(id),
     enabled: Boolean(id),
+  });
+}
+
+export function useSuspenseGetAllBlogsAdmin(params: BlogParams) {
+  return useSuspenseQuery({
+    queryKey: [`payments`, params],
+    queryFn: () => getAllBlogsAdmin(params),
   });
 }

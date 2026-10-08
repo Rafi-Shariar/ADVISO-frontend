@@ -1,5 +1,9 @@
 import apiClient from "@/lib/apiClient";
-import { profileImagePayload, updateStatusArgs, UserParams } from "@/types/user.type";
+import {
+  profileImagePayload,
+  updateStatusArgs,
+  UserParams,
+} from "@/types/user.type";
 
 export const getAllUsersAdmin = (params: UserParams) => {
   return apiClient(`api/v1/user/admin/all-user`, { params });
@@ -21,7 +25,6 @@ export const deleteUserAccount = (id: string) => {
 export const getApplicationStatus = () => {
   return apiClient(`api/v1/user/application-status`);
 };
-
 
 export const changeProfilePhoto = (paylaod: profileImagePayload) => {
   const formData = new FormData();

@@ -21,7 +21,6 @@ export const getSessionsOfMentor = (id: string) => {
   return apiClient(`/api/v1/session/slots/${id}`);
 };
 
-
 export const bookSchedule = (payload: BookSchedule) => {
   return apiClient("/api/v1/session/book", {
     method: "POST",
