@@ -141,11 +141,11 @@ const MentorTabs = () => {
               <SelectContent>
                 <SelectGroup>
                   <SelectLabel>Experience</SelectLabel>
-                  <SelectItem value="yearOfExperience-asc">
+                  <SelectItem value="yearOfExperience-desc">
                     <Briefcase className="size-3.5 " />{" "}
                     <span>Most to Least</span>
                   </SelectItem>
-                  <SelectItem value="yearOfExperience-desc">
+                  <SelectItem value="yearOfExperience-asc">
                     <Briefcase className="size-3.5 text-muted-foreground" />
                     <span>Least to Most</span>
                   </SelectItem>

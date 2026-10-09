@@ -19,7 +19,7 @@ const MentorCardContainer = ({ handlePageChange, ...params }: Props) => {
 
   return (
     <>
-      <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 lg:gap-2 my-6 items-stretch">
+      <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 lg:gap-5 my-6 items-stretch">
         {mentors.map((mentor) => (
           <MentorCard mentor={mentor} key={mentor.mentorId} />
         ))}

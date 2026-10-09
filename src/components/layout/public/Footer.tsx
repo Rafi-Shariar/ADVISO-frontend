@@ -35,10 +35,10 @@ const navigationLinks = {
   ],
   company: [
     { label: "About Adviso", href: "/about-us" },
-    { label: "How It Works", href: "/about-us#how-it-works" },
-    { label: "Customer Stories", href: "/stories" },
+    { label: "How It Works", href: "/about-us" },
+    { label: "Customer Stories", href: "/contact" },
     { label: "Contact Support", href: "/contact" },
-    { label: "Privacy & Terms", href: "/terms" },
+    { label: "Privacy & Terms", href: "/about-us" },
   ],
 };
 
