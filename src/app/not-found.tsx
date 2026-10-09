@@ -1,74 +1,44 @@
 import Link from "next/link";
-import { ArrowLeft, Home, Compass, Sparkles } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { ArrowLeft, Compass } from "lucide-react";
 
 export default function NotFound() {
   return (
-    <main className="min-h-[85vh] flex items-center justify-center px-4 sm:px-6 lg:px-8 bg-[#FAFAFA] dark:bg-zinc-950 selection:bg-orange-500/20 selection:text-orange-600">
-      <div className="max-w-xl w-full text-center space-y-8">
-        {/* Visual Badge & 404 Accent Display */}
-        <div className="relative flex flex-col items-center justify-center">
-          {/* Subtle Orange Glow Ambient */}
-          <div className="absolute size-48 rounded-[12px] bg-orange-500/10 dark:bg-orange-500/5 blur-3xl pointer-events-none" />
+    <div className="relative flex min-h-[80vh] flex-col items-center justify-center px-4 py-16 text-center">
+      {/* Background Soft Glow matching ADVISO hero */}
+      <div className="pointer-events-none absolute -top-10 left-1/2 -z-10 h-72 w-96 -translate-x-1/2 rounded-full bg-orange-400/10 blur-[100px]" />
 
-          {/* Pill Badge */}
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-[12px] bg-orange-500/10 text-orange-600 border border-orange-500/20 text-xs font-bold tracking-wide uppercase mb-4">
-            <Sparkles className="size-3.5" />
-            <span>Navigation Drift</span>
-          </div>
-
-          {/* Large Stylized 404 Header */}
-          <h1 className="text-8xl sm:text-9xl font-black tracking-tighter text-zinc-900 dark:text-zinc-100 select-none">
-            4<span className="text-orange-600">0</span>4
-          </h1>
+      <div className="mx-auto flex max-w-xl flex-col items-center">
+        {/* Subtle Icon Wrapper */}
+        <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl border border-border/80 bg-background/80 shadow-sm backdrop-blur-sm">
+          <Compass className="h-8 w-8 text-orange-500" />
         </div>
 
-        {/* Narrative Description */}
-        <div className="space-y-2.5 max-w-md mx-auto">
-          <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100">
-            Lost in the roadmap?
-          </h2>
-          <p className="text-xs sm:text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed">
-            The page or strategy session you are looking for has been moved,
-            rescheduled, or doesn't exist in our verified directory.
-          </p>
-        </div>
+        <h1 className="text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
+          Page not found
+        </h1>
 
-        {/* Quick Route Suggestions / Memo Card */}
-        <div className="p-4 rounded-[12px] bg-white dark:bg-zinc-900 border border-zinc-200/80 dark:border-zinc-800 shadow-xs max-w-sm mx-auto text-left space-y-1.5">
-          <div className="flex items-center justify-between text-[11px] font-mono text-zinc-400 uppercase tracking-wider">
-            <span>Route Memo</span>
-            <span className="text-orange-600 font-bold">Suggested Action</span>
-          </div>
-          <p className="text-xs font-semibold text-zinc-800 dark:text-zinc-200">
-            "Verify the link destination or browse top industry leaders."
-          </p>
-        </div>
+        <p className="mt-4 text-base text-muted-foreground sm:text-lg">
+          The roadmap or resource you are looking for has been moved, renamed,
+          or does not exist in this trajectory.
+        </p>
 
-        {/* Action Button Controls */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
-          <Button
-            asChild
-            className="w-full sm:w-auto h-11 px-5 rounded-[12px] bg-zinc-900 hover:bg-black text-white dark:bg-zinc-100 dark:hover:bg-white dark:text-zinc-900 text-xs sm:text-sm font-bold shadow-xs active:scale-[0.98] transition-all gap-2"
+        <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+          <Link
+            href="/"
+            className="inline-flex h-11 items-center justify-center gap-2 rounded-xl bg-foreground px-6 text-sm font-semibold text-background shadow transition-all hover:opacity-90 active:scale-[0.98]"
           >
-            <Link href="/">
-              <Home className="size-4" />
-              <span>Back to Home</span>
-            </Link>
-          </Button>
+            <ArrowLeft className="h-4 w-4" />
+            Back to Home
+          </Link>
 
-          <Button
-            asChild
-            variant="outline"
-            className="w-full sm:w-auto h-11 px-5 rounded-[12px] border-zinc-200/90 dark:border-zinc-800 bg-white dark:bg-zinc-900 text-zinc-700 dark:text-zinc-300 hover:border-orange-500/50 hover:text-orange-600 dark:hover:text-orange-400 text-xs sm:text-sm font-bold shadow-2xs active:scale-[0.98] transition-all gap-2"
+          <Link
+            href="/mentors"
+            className="inline-flex h-11 items-center justify-center rounded-xl border border-border bg-background px-6 text-sm font-semibold text-foreground transition-all hover:bg-muted active:scale-[0.98]"
           >
-            <Link href="/mentors">
-              <Compass className="size-4 text-orange-500" />
-              <span>Explore Mentors</span>
-            </Link>
-          </Button>
+            Explore Mentors
+          </Link>
         </div>
       </div>
-    </main>
+    </div>
   );
 }

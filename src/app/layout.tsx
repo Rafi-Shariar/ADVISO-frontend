@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import Providers from "@/providers";
 import { Toaster } from "sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import ScrollToTop from "@/components/layout/public/scroll-to-top";
 
 const josefin = Nunito({
   subsets: ["latin"],
@@ -30,6 +31,7 @@ export default function RootLayout({
       >
         <Providers>
           <TooltipProvider>
+            <ScrollToTop/>
             {children}
             <Toaster />
           </TooltipProvider>
