@@ -24,7 +24,7 @@ export default function NotFound() {
 
         <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
           <Link
-            href="/admin"
+            href="/mentor"
             className="inline-flex h-11 items-center justify-center gap-2 rounded-xl bg-foreground px-6 text-sm font-semibold text-background shadow transition-all hover:opacity-90 active:scale-[0.98]"
           >
             <ArrowLeft className="h-4 w-4" />
@@ -32,7 +32,7 @@ export default function NotFound() {
           </Link>
 
           <Link
-            href="/admin/sessions"
+            href="/mentor/sessions"
             className="inline-flex h-11 items-center justify-center rounded-xl border border-border bg-background px-6 text-sm font-semibold text-foreground transition-all hover:bg-muted active:scale-[0.98]"
           >
             Explore Sessions

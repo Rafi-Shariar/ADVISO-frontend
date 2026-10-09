@@ -3,11 +3,12 @@
 import { useMentorDetailsAdmin } from "@/hooks/mentor.hook";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
-import { UserCheck, Info, Star, BookOpen } from "lucide-react";
+import { UserCheck, Info, Star, BookOpen, Home } from "lucide-react";
 import { ProfileHeroHeader } from "./mentor-profile-header";
 import { MentorInfoTab } from "./mentor-info-tab";
 import { MentorReviewsTab } from "./mentor-review-tab";
 import { MentorBlogsTab } from "./mentor-blog-tab";
+import Link from "next/link";
 
 interface MentorProfileViewProps {
   id: string;
@@ -38,6 +39,15 @@ const MentorProfileView = ({ id }: MentorProfileViewProps) => {
         <p className="text-sm text-muted-foreground">
           The mentor profile does not exist or may have been deactivated.
         </p>
+        <div>
+          <Link
+            href="/admin/mentors"
+            className="inline-flex h-11 items-center justify-center gap-2 rounded-xl border border-border bg-background px-6 text-sm font-semibold text-foreground transition-all hover:bg-muted active:scale-[0.98]"
+          >
+            <Home className="h-4 w-4" />
+            Explore Other Mentors
+          </Link>
+        </div>
       </div>
     );
   }
