@@ -207,13 +207,28 @@ const ApplyAsMentorForm = () => {
                       min={1}
                       max={50}
                       inputMode="numeric"
-                      value={field.state.value}
+                      // 0 বা খালি থাকলে ইনপুট বক্স ব্ল্যাঙ্ক থাকবে, ফলে প্লেসহোল্ডার '10' দেখা যাবে
+                      value={
+                        field.state.value === 0 || !field.state.value
+                          ? ""
+                          : field.state.value
+                      }
                       onChange={(e) => {
-                        const val = e.target.valueAsNumber;
-                        field.handleChange(Number.isNaN(val) ? 0 : val);
+                        const rawValue = e.target.value;
+
+                        // ব্যাকস্পেস দিয়ে সব মুছলে স্টেটে 0 যাবে, কিন্তু ইনপুট বক্স খালি দেখাবে
+                        if (rawValue === "") {
+                          field.handleChange(0);
+                          return;
+                        }
+
+                        const val = parseInt(rawValue, 10);
+                        if (!Number.isNaN(val)) {
+                          field.handleChange(val);
+                        }
                       }}
                       onBlur={field.handleBlur}
-                      autoComplete="headline"
+                      autoComplete="off"
                       placeholder="10"
                       className="h-10 text-sm transition-all focus-visible:ring-1 focus-visible:ring-primary/80"
                     />
@@ -240,21 +255,34 @@ const ApplyAsMentorForm = () => {
                       name={field.name}
                       type="number"
                       min={0}
-                      step="0.01"
+                      step="any"
                       inputMode="decimal"
-                      value={field.state.value === 0 ? "" : field.state.value}
+                      value={
+                        field.state.value === 0 || !field.state.value
+                          ? ""
+                          : field.state.value
+                      }
                       onChange={(e) => {
                         const rawValue = e.target.value;
-                        // When cleared, reset to 0
+
+                        // ফাঁকা করলে ০ সেট হবে, value লজিকের কারণে ইনপুট খালি দেখাবে
                         if (rawValue === "") {
                           field.handleChange(0);
                           return;
                         }
-                        const val = e.target.valueAsNumber;
-                        field.handleChange(Number.isNaN(val) ? 0 : val);
+
+                        // ইউজার যখন কেবল ডট টাইপ করছে (যেমন "10.") তখন যাতে আটকে না যায়
+                        if (rawValue.endsWith(".")) {
+                          return;
+                        }
+
+                        const val = parseFloat(rawValue);
+                        if (!Number.isNaN(val)) {
+                          field.handleChange(val);
+                        }
                       }}
                       onBlur={field.handleBlur}
-                      autoComplete="portfolioURL"
+                      autoComplete="sessionCharge"
                       placeholder="10.99"
                       className="h-10 text-sm transition-all focus-visible:ring-1 focus-visible:ring-primary/80"
                     />

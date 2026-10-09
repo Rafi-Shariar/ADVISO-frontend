@@ -208,10 +208,21 @@ const UpdateMentorProfileForm = () => {
                       type="number"
                       min={1}
                       max={50}
-                      value={field.state.value}
+                      // স্টেটের মান 0 বা undefined/null হলে ফাঁকা স্ট্রিং দেখাবে
+                      value={
+                        field.state.value === 0 || field.state.value == null
+                          ? ""
+                          : field.state.value
+                      }
                       onChange={(e) => {
-                        const val = e.target.valueAsNumber;
-                        field.handleChange(Number.isNaN(val) ? 0 : val);
+                        const rawVal = e.target.value;
+                        // পুরোটা ক্লিয়ার করলে স্টেট খালি স্ট্রিং বা undefined হবে
+                        if (rawVal === "") {
+                          field.handleChange("" as unknown as number);
+                          return;
+                        }
+                        // সংখ্যা লিখলে পার্স করে স্টেটে পাঠাবে
+                        field.handleChange(Number(rawVal));
                       }}
                       onBlur={field.handleBlur}
                       className="h-10 text-xs sm:text-sm rounded-[12px] transition-all focus-visible:ring-1 focus-visible:ring-primary/80"
@@ -241,11 +252,26 @@ const UpdateMentorProfileForm = () => {
                       name={field.name}
                       type="number"
                       min={0}
-                      step="1"
-                      value={field.state.value}
+                      step="any"
+                      // 0 বা null/undefined হলে ইনপুট বক্সে খালি স্ট্রিং দেখাবে
+                      value={
+                        field.state.value === 0 || !field.state.value
+                          ? ""
+                          : field.state.value
+                      }
                       onChange={(e) => {
-                        const val = e.target.valueAsNumber;
-                        field.handleChange(Number.isNaN(val) ? 0 : val);
+                        const rawVal = e.target.value;
+
+                        // পুরোটা মুছলে 0 পাস হবে, কিন্তু value-এর কারণে ইনপুট খালি দেখাবে
+                        if (rawVal === "") {
+                          field.handleChange(0);
+                          return;
+                        }
+
+                        const num = Number(rawVal);
+                        if (!Number.isNaN(num)) {
+                          field.handleChange(num);
+                        }
                       }}
                       onBlur={field.handleBlur}
                       className="h-10 text-xs sm:text-sm rounded-[12px] transition-all focus-visible:ring-1 focus-visible:ring-primary/80"

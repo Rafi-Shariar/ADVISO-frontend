@@ -166,10 +166,10 @@ const Header = () => {
                         >
                           <Button
                             variant="outline"
-                            className="w-full justify-between rounded-xl border-orange-500/40 text-orange-600 hover:bg-orange-500 hover:text-white dark:text-orange-400 text-xs font-bold px-3.5"
+                            className=" justify-between rounded-[12px] border-orange-500/40 p-4 text-orange-600 hover:bg-orange-500 hover:text-white dark:text-orange-400 text-xs font-bold px-3.5"
                           >
                             <span className="flex items-center gap-2">
-                              <Sparkles className="size-3.5" />
+                              
                               Become a mentor
                             </span>
                             <ArrowRight className="size-3.5" />
@@ -227,7 +227,7 @@ const Header = () => {
                           <Button
                             variant="outline"
                             size="sm"
-                            className="w-full justify-start rounded-xl gap-2 text-xs font-medium border-border/60"
+                            className="w-full justify-start rounded-xl gap-2 text-xs font-medium border-border/60 py-6"
                           >
                             <LayoutDashboard className="size-3.5 text-orange-500" />
                             <span>Go to Dashboard</span>
@@ -239,7 +239,7 @@ const Header = () => {
                           size="sm"
                           onClick={handleLogout}
                           disabled={isLoggingOut}
-                          className="w-full justify-start rounded-xl gap-2 text-xs font-medium text-destructive hover:bg-destructive/10 hover:text-destructive"
+                          className="w-full justify-start rounded-xl gap-2 text-xs font-medium text-destructive hover:bg-destructive/10 hover:text-destructive py-6"
                         >
                           <LogOut className="size-3.5" />
                           <span>

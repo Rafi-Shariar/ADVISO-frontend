@@ -40,12 +40,6 @@ const LoginForm = () => {
 
       login(loginData, {
         onSuccess: async (res) => {
-          // const accessToken = res?.data?.accessToken;
-          // const refreshToken = res?.data?.refreshToken;
-
-          // if (accessToken) {
-          //   await setAuthCookies({ accessToken, refreshToken });
-          // }
           router.push(redirectUrl);
           toast.success("Login Successful.", {
             description: "Welcome back to ADVISO",
@@ -135,7 +129,6 @@ const LoginForm = () => {
 
     login(credential, {
       onSuccess: async (res) => {
-
         // const accessToken = res?.data?.accessToken;
         //   const refreshToken = res?.data?.refreshToken;
 

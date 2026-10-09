@@ -3,6 +3,7 @@
 import {
   Sidebar,
   SidebarContent,
+  SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
   SidebarGroupLabel,
@@ -19,6 +20,7 @@ import { SidebarItems } from "@/types/sidebar.type";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { Separator } from "../ui/separator";
+import LogoutButton from "../layout/public/logout-button";
 
 const sidebarRoutes: Record<UserRole, SidebarItems> = {
   SUPER_ADMIN: adminRoutes,
@@ -30,39 +32,51 @@ const sidebarRoutes: Record<UserRole, SidebarItems> = {
 export function DashbaordSidebar({ role }: { role: UserRole }) {
   const routes: SidebarItems = sidebarRoutes[role] || [];
   const pathname = usePathname();
+
   return (
     <Sidebar className="bg-orange-300">
       <SidebarHeader>
-        <Logo />
+        <Logo size="md" />
       </SidebarHeader>
+      
       <Separator />
+
+      {/* Main scrollable navigation */}
       <SidebarContent>
-        {/* We create a SidebarGroup for each parent. */}
         {routes.map((item) => (
           <SidebarGroup key={item.title}>
             <SidebarGroupLabel>{item.title}</SidebarGroupLabel>
             <SidebarGroupContent>
               <SidebarMenu>
-                {item.items.map((item) => (
-                  <SidebarMenuItem key={item.title}>
-                    <SidebarMenuButton
-                      asChild
-                      isActive={item.url === pathname}
-                      className={
-                        item.url === pathname
-                          ? "bg-orange-50 text-orange-600 font-medium"
-                          : undefined
-                      }
-                    >
-                      <Link href={item.url}>{item.title}</Link>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
-                ))}
+                {item.items.map((subItem) => {
+                  const isActive = pathname === subItem.url;
+                  return (
+                    <SidebarMenuItem key={subItem.title}>
+                      <SidebarMenuButton
+                        asChild
+                        isActive={isActive}
+                        className={
+                          isActive
+                            ? "!bg-orange-500 !text-white font-semibold shadow-sm hover:!bg-orange-100/80"
+                            : "hover:bg-orange-200/60 transition-colors"
+                        }
+                      >
+                        <Link href={subItem.url}>{subItem.title}</Link>
+                      </SidebarMenuButton>
+                    </SidebarMenuItem>
+                  );
+                })}
               </SidebarMenu>
             </SidebarGroupContent>
           </SidebarGroup>
         ))}
       </SidebarContent>
+
+      {/* Bottom Sticky Section */}
+      <SidebarFooter className="border-t border-border/40 p-3">
+        <LogoutButton className="hover:text-red-600" />
+      </SidebarFooter>
+
       <SidebarRail />
     </Sidebar>
   );

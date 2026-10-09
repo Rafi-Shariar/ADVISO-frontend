@@ -32,7 +32,7 @@ export default function DashbaordShell({ children, role }: Props) {
           </div>
         </header>
 
-        <div className="mx-16 my-6">{children}</div>
+        <div className="mx-3 lg:mx-16 my-6">{children}</div>
       </SidebarInset>
     </SidebarProvider>
   );

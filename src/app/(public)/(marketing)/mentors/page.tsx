@@ -1,3 +1,4 @@
+import MentorPageSkeleton from "@/components/modules/mentor/mentor-page-skeleton";
 import MentorTabs from "@/components/modules/mentor/mentor-tabs";
 import React, { Suspense } from "react";
 
@@ -10,7 +11,7 @@ const MentorsPage = () => {
         </h1>
       </div>
 
-      <Suspense fallback={"loading"}>
+      <Suspense fallback={<MentorPageSkeleton/>}>
         <MentorTabs />
       </Suspense>
     </div>

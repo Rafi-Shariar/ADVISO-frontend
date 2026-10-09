@@ -32,7 +32,7 @@ const AdminScheduleTabs = () => {
 
   return (
     <div className="max-w-7xl mx-auto">
-      <div className="flex justify-between my-6">
+      <div className="flex  justify-between gap-2 my-6">
         <div className="w-full sm:w-64 md:w-100">
           <Input
             type="search"

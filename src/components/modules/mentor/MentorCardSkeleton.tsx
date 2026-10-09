@@ -2,7 +2,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 export function MentorCardSkeleton() {
   return (
-    <div className="shrink-0 w-[240px] sm:w-[250px] snap-start rounded-[12px] bg-card border border-border/60 p-3 flex flex-col justify-between select-none">
+    <div className="shrink-0 w-[190px] sm:w-[250px] snap-start rounded-[12px] bg-card border border-border/60 p-3 flex flex-col justify-between select-none">
       <div>
         {/* Square Image Skeleton with Badge Placeholder */}
         <div className="relative w-full aspect-square rounded-[12px] overflow-hidden mb-3 border border-border/40">

@@ -13,7 +13,7 @@ const MentorCard = ({ mentor }: Props) => {
     <Link
       key={mentor.mentorId}
       href={`/mentors/${mentor.mentorId}`}
-      className="group shrink-0 w-[200px] sm:w-[250px] snap-start rounded-[12px] bg-card border border-border/60 hover:border-orange-500/50 p-3 flex flex-col justify-between transition-all duration-300 hover:shadow-md hover:-translate-y-0.5 select-none"
+      className="group shrink-0 w-[190px] sm:w-[240px] snap-start rounded-[12px] bg-card border border-border/60 hover:border-orange-500/50 p-3 flex flex-col justify-between transition-all duration-300 hover:shadow-md hover:-translate-y-0.5 select-none"
     >
       <div>
         {/* Balanced Compact Portrait Image */}
@@ -30,9 +30,7 @@ const MentorCard = ({ mentor }: Props) => {
           <div className="absolute bottom-2 left-2 bg-black/65 backdrop-blur-md text-white px-2 py-0.5 rounded-[8px] text-[11px] font-semibold flex items-center gap-1 border border-white/10 shadow-sm">
             <Star className="size-3 fill-amber-400 text-amber-400" />
             <span>{mentor.averageRatings}</span>
-            <span className="text-[10px] text-white/70">
-              ({mentor.totalReviews})
-            </span>
+           
           </div>
         </div>
 
