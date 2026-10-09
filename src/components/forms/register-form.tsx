@@ -115,7 +115,7 @@ const SignUpForm = () => {
     <div className="w-full space-y-6">
       {/* Brand Header */}
       <div className="flex flex-col items-center text-center space-y-3">
-        <div className="p-2 rounded-2xl bg-orange-500/5 ring-1 ring-orange-500/10">
+        <div className="p-2">
           <Logo size="md" />
         </div>
         <div className="space-y-1">

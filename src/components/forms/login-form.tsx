@@ -12,12 +12,13 @@ import { Spinner } from "../ui/spinner";
 import { GoogleLogin } from "@react-oauth/google";
 import Link from "next/link";
 import Logo from "../layout/public/Logo";
-import { ArrowRight, GraduationCap, ShieldCheck, User } from "lucide-react";
+import { ArrowRight, Eye, EyeOff, GraduationCap, ShieldCheck, User } from "lucide-react";
 import { useState } from "react";
 import { ResetPasswordModal } from "../auth/forgot-password-modal";
 
 const LoginForm = () => {
   const [isForgotModalOpen, setIsForgotModalOpen] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const { mutate: login, isPending } = useLogin();
   const { mutate: googleLogin } = useGoogleOAuth();
   const router = useRouter();
@@ -238,10 +239,12 @@ const LoginForm = () => {
                     Forgot Password?
                   </button>
                 </div>
-                <Input
+
+                <div className="relative">
+<Input
                   id={field.name}
                   name={field.name}
-                  type="password"
+                   type={showPassword ? "text" : "password"}
                   value={field.state.value}
                   onChange={(e) => field.handleChange(e.target.value)}
                   onBlur={field.handleBlur}
@@ -249,6 +252,22 @@ const LoginForm = () => {
                   placeholder="••••••"
                   className="rounded-xl px-4 h-11 text-sm bg-background/60 border-border/60 focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:border-orange-500 transition-all shadow-inner"
                 />
+                <button
+                    type="button"
+                    onClick={() => setShowPassword((prev) => !prev)}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors focus:outline-none p-1"
+                    aria-label={
+                      showPassword ? "Hide password" : "Show password"
+                    }
+                  >
+                    {showPassword ? (
+                      <EyeOff className="size-4" />
+                    ) : (
+                      <Eye className="size-4" />
+                    )}
+                  </button>
+                </div>
+                
                 {isInvalid && <FieldError errors={field.state.meta.errors} />}
               </Field>
             );
