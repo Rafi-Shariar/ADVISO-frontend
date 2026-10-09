@@ -1,9 +1,13 @@
+import { PaymentStatusModal } from "@/components/modules/dashboard-user/user-sessions/user-payment-status-modal";
 import UserSessionsTable from "@/components/modules/dashboard-user/user-sessions/user-session-table";
-import React from "react";
+import React, { Suspense } from "react";
 
 const MySessionsPage = () => {
   return (
     <div>
+      <Suspense fallback={null}>
+        <PaymentStatusModal />
+      </Suspense>
       <header className="border-b border-border/60 pb-5">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div className="space-y-1">
