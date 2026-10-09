@@ -13,7 +13,7 @@ const MentorCard = ({ mentor }: Props) => {
     <Link
       key={mentor.mentorId}
       href={`/mentors/${mentor.mentorId}`}
-      className="group shrink-0 w-[190px] sm:w-[240px] snap-start rounded-[12px] bg-card border border-border/60 hover:border-orange-500/50 p-3 flex flex-col justify-between transition-all duration-300 hover:shadow-md hover:-translate-y-0.5 select-none"
+      className="group shrink-0 w-full md:w-[240px] snap-start rounded-[12px] bg-card border border-border/60 hover:border-orange-500/50 p-3 flex flex-col justify-between transition-all duration-300 hover:shadow-md hover:-translate-y-0.5 select-none"
     >
       <div>
         {/* Balanced Compact Portrait Image */}
