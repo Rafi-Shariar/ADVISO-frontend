@@ -20,10 +20,9 @@ const LoginForm = () => {
   const router = useRouter();
 
   const searchParams = useSearchParams();
-const rawRedirect = searchParams.get("redirect");
+  const rawRedirect = searchParams.get("redirect");
 
-// %2Fmentors%2F... কে ডিকোড করে /mentors/... বানানো
-const redirectUrl = rawRedirect ? decodeURIComponent(rawRedirect) : "/";
+  const redirectUrl = rawRedirect ? decodeURIComponent(rawRedirect) : "/";
 
   const form = useForm({
     defaultValues: {
@@ -40,7 +39,13 @@ const redirectUrl = rawRedirect ? decodeURIComponent(rawRedirect) : "/";
       };
 
       login(loginData, {
-        onSuccess: (_res) => {
+        onSuccess: async (res) => {
+          // const accessToken = res?.data?.accessToken;
+          // const refreshToken = res?.data?.refreshToken;
+
+          // if (accessToken) {
+          //   await setAuthCookies({ accessToken, refreshToken });
+          // }
           router.push(redirectUrl);
           toast.success("Login Successful.", {
             description: "Welcome back to ADVISO",
@@ -77,7 +82,13 @@ const redirectUrl = rawRedirect ? decodeURIComponent(rawRedirect) : "/";
     googleLogin(
       { idToken, timezone },
       {
-        onSuccess: (_res) => {
+        onSuccess: async (res) => {
+          // const accessToken = res?.data?.accessToken;
+          // const refreshToken = res?.data?.refreshToken;
+
+          // if (accessToken) {
+          //   await setAuthCookies({ accessToken, refreshToken });
+          // }
           router.push(redirectUrl);
           toast.success("Login Successful.", {
             description: "Welcome back to ADVISO",
@@ -123,7 +134,14 @@ const redirectUrl = rawRedirect ? decodeURIComponent(rawRedirect) : "/";
     }
 
     login(credential, {
-      onSuccess: (_res) => {
+      onSuccess: async (res) => {
+
+        // const accessToken = res?.data?.accessToken;
+        //   const refreshToken = res?.data?.refreshToken;
+
+        //   if (accessToken) {
+        //     await setAuthCookies({ accessToken, refreshToken });
+        //   }
         router.push(redirectUrl);
         toast.success(`Login Successful as ${value}`, {
           description: "Welcome back to ADVISO",

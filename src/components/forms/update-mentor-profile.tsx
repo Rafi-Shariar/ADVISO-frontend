@@ -11,12 +11,16 @@ import { Badge } from "../ui/badge";
 import { Button } from "../ui/button";
 
 import { UpdateMentorProfile } from "@/types/mentor.type";
-import { useGetMentorProfile, useUpdateMentorProfile } from "@/hooks/mentor.hook";
+import {
+  useGetMentorProfile,
+  useUpdateMentorProfile,
+} from "@/hooks/mentor.hook";
 
 const UpdateMentorProfileForm = () => {
   const [inputValue, setInputValue] = useState("");
   const { data, isPending } = useGetMentorProfile();
-  const { mutate: updateProfile, isPending: updating } = useUpdateMentorProfile();
+  const { mutate: updateProfile, isPending: updating } =
+    useUpdateMentorProfile();
 
   const currentProfile = data?.data;
 
@@ -54,7 +58,8 @@ const UpdateMentorProfileForm = () => {
           }
 
           toast.success("Profile Updated", {
-            description: "Your professional profile has been updated successfully.",
+            description:
+              "Your professional profile has been updated successfully.",
             position: "top-right",
           });
         },
@@ -127,7 +132,8 @@ const UpdateMentorProfileForm = () => {
               }}
             >
               {(field) => {
-                const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid;
+                const isInvalid =
+                  field.state.meta.isTouched && !field.state.meta.isValid;
                 return (
                   <Field data-invalid={isInvalid} className="space-y-1.5">
                     <FieldLabel className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
@@ -143,7 +149,6 @@ const UpdateMentorProfileForm = () => {
                       placeholder="e.g. Senior Software Architect at Google"
                       className="h-10 text-xs sm:text-sm rounded-[12px] transition-all focus-visible:ring-1 focus-visible:ring-primary/80"
                     />
-                    {isInvalid && <FieldError errors={field.state.meta.errors} />}
                   </Field>
                 );
               }}
@@ -157,7 +162,8 @@ const UpdateMentorProfileForm = () => {
               }}
             >
               {(field) => {
-                const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid;
+                const isInvalid =
+                  field.state.meta.isTouched && !field.state.meta.isValid;
                 return (
                   <Field data-invalid={isInvalid} className="space-y-1.5">
                     <FieldLabel className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
@@ -173,7 +179,6 @@ const UpdateMentorProfileForm = () => {
                       placeholder="Share your career journey, expertise, and how you help mentees..."
                       className="w-full rounded-[12px] border border-input bg-transparent p-3 text-xs sm:text-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary/80 transition-all resize-none"
                     />
-                    {isInvalid && <FieldError errors={field.state.meta.errors} />}
                   </Field>
                 );
               }}
@@ -190,7 +195,8 @@ const UpdateMentorProfileForm = () => {
               }}
             >
               {(field) => {
-                const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid;
+                const isInvalid =
+                  field.state.meta.isTouched && !field.state.meta.isValid;
                 return (
                   <Field data-invalid={isInvalid} className="space-y-1.5">
                     <FieldLabel className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
@@ -210,7 +216,6 @@ const UpdateMentorProfileForm = () => {
                       onBlur={field.handleBlur}
                       className="h-10 text-xs sm:text-sm rounded-[12px] transition-all focus-visible:ring-1 focus-visible:ring-primary/80"
                     />
-                    {isInvalid && <FieldError errors={field.state.meta.errors} />}
                   </Field>
                 );
               }}
@@ -224,7 +229,8 @@ const UpdateMentorProfileForm = () => {
               }}
             >
               {(field) => {
-                const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid;
+                const isInvalid =
+                  field.state.meta.isTouched && !field.state.meta.isValid;
                 return (
                   <Field data-invalid={isInvalid} className="space-y-1.5">
                     <FieldLabel className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
@@ -244,7 +250,13 @@ const UpdateMentorProfileForm = () => {
                       onBlur={field.handleBlur}
                       className="h-10 text-xs sm:text-sm rounded-[12px] transition-all focus-visible:ring-1 focus-visible:ring-primary/80"
                     />
-                    {isInvalid && <FieldError errors={field.state.meta.errors} />}
+                    {isInvalid && (
+                      <span className="text-destructive font-medium tracking-tight">
+                        {field.state.meta.errors
+                          .map((e: any) => e?.message || e)
+                          .join(", ")}
+                      </span>
+                    )}
                   </Field>
                 );
               }}
@@ -262,10 +274,16 @@ const UpdateMentorProfileForm = () => {
             }}
           >
             {(field) => {
-              const tags: string[] = Array.isArray(field.state.value) ? field.state.value : [];
-              const isInvalid = field.state.meta.isTouched && field.state.meta.errors.length > 0;
+              const tags: string[] = Array.isArray(field.state.value)
+                ? field.state.value
+                : [];
+              const isInvalid =
+                field.state.meta.isTouched &&
+                field.state.meta.errors.length > 0;
 
-              const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+              const handleKeyDown = (
+                e: React.KeyboardEvent<HTMLInputElement>,
+              ) => {
                 if (e.key === "Enter") {
                   e.preventDefault();
                   const trimmed = inputValue.trim();
@@ -275,13 +293,19 @@ const UpdateMentorProfileForm = () => {
                     field.handleChange([...tags, trimmed]);
                   }
                   setInputValue("");
-                } else if (e.key === "Backspace" && !inputValue && tags.length > 0) {
+                } else if (
+                  e.key === "Backspace" &&
+                  !inputValue &&
+                  tags.length > 0
+                ) {
                   field.handleChange(tags.slice(0, -1));
                 }
               };
 
               const removeTag = (indexToRemove: number) => {
-                field.handleChange(tags.filter((_, idx) => idx !== indexToRemove));
+                field.handleChange(
+                  tags.filter((_, idx) => idx !== indexToRemove),
+                );
               };
 
               return (
@@ -302,7 +326,7 @@ const UpdateMentorProfileForm = () => {
                   >
                     {tags.map((tag, index) => (
                       <Badge
-                        key={`${tag}-${index}`}
+                        key={`${tag}`}
                         variant="secondary"
                         className="pl-2.5 pr-1 py-1 text-xs font-normal rounded-[8px] border border-border/60 bg-muted/80 text-foreground flex items-center gap-1.5 shadow-2xs"
                       >
@@ -340,7 +364,9 @@ const UpdateMentorProfileForm = () => {
                     </span>
                     {isInvalid && (
                       <span className="text-destructive font-medium tracking-tight">
-                        {field.state.meta.errors.join(", ")}
+                        {field.state.meta.errors
+                          .map((e: any) => e?.message || e)
+                          .join(", ")}
                       </span>
                     )}
                   </div>
@@ -359,7 +385,8 @@ const UpdateMentorProfileForm = () => {
               }}
             >
               {(field) => {
-                const isInvalid = field.state.meta.isTouched && !field.state.meta.isValid;
+                const isInvalid =
+                  field.state.meta.isTouched && !field.state.meta.isValid;
                 return (
                   <Field data-invalid={isInvalid} className="space-y-1.5">
                     <FieldLabel className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
@@ -375,7 +402,13 @@ const UpdateMentorProfileForm = () => {
                       placeholder="https://linkedin.com/in/username"
                       className="h-10 text-xs sm:text-sm rounded-[12px] transition-all focus-visible:ring-1 focus-visible:ring-primary/80"
                     />
-                    {isInvalid && <FieldError errors={field.state.meta.errors} />}
+                    {isInvalid && (
+                      <span className="text-destructive font-medium tracking-tight">
+                        {field.state.meta.errors
+                          .map((e: any) => e?.message || e)
+                          .join(", ")}
+                      </span>
+                    )}
                   </Field>
                 );
               }}

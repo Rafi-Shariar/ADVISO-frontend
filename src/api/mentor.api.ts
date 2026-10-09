@@ -46,15 +46,13 @@ export const reviewApplication = (payload: ReviewApplicationPaylaod) => {
   });
 };
 
-
 export const getMentorProfile = () => {
   return apiClient(`/api/v1/mentor/mentor/me`);
 };
 
-export const updateMentorProfile = (paylaod : IMentorProfileUpdatePayload) => {
+export const updateMentorProfile = (paylaod: IMentorProfileUpdatePayload) => {
   return apiClient("/api/v1/mentor/update-profile", {
     method: "PATCH",
     body: paylaod,
   });
-}
-
+};

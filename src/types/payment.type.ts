@@ -30,19 +30,19 @@ export interface IPayment {
 }
 
 export interface IUserPayment {
-  paymentId: string
+  paymentId: string;
   amount: number;
-  paidAt: string
-  status: string
+  paidAt: string;
+  status: string;
   session: {
     mentor: {
       user: {
         name: string;
-        profileURL: string
+        profileURL: string;
       };
     };
-    sessionDate: string
-    startUTC: string
-    endUTC: string
+    sessionDate: string;
+    startUTC: string;
+    endUTC: string;
   };
 }

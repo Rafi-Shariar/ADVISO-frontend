@@ -1,7 +1,8 @@
 import LoginForm from "@/components/forms/login-form";
 import Image from "next/image";
 import loginIllustration from "@/assets/auth/login.svg";
-import { Sparkles, Compass, ShieldCheck } from "lucide-react";
+import { Sparkles, Compass, ShieldCheck, LoaderCircle } from "lucide-react";
+import { Suspense } from "react";
 
 export default function LoginPage() {
   return (
@@ -16,9 +17,18 @@ export default function LoginPage() {
       />
 
       {/* Left Column: Focused Glass Authentication Pod */}
+
       <div className="lg:col-span-6  flex flex-col justify-center items-center px-6 py-12 sm:px-12 relative z-10">
         <div className="w-full max-w-[420px] rounded-3xl border border-border/40 bg-card/60 dark:bg-card/40 backdrop-blur-xl p-8 sm:p-10 shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-[0_8px_30px_rgb(0,0,0,0.2)]">
-          <LoginForm />
+          <Suspense
+            fallback={
+              <div className="min-h-[50vh] flex items-center justify-center">
+                <LoaderCircle className="size-6 text-orange-500 animate-spin" />
+              </div>
+            }
+          >
+            <LoginForm />
+          </Suspense>
         </div>
       </div>
 

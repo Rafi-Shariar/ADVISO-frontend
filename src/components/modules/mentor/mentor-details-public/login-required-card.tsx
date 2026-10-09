@@ -35,7 +35,8 @@ export const LoginRequiredCard = ({ onCancel }: LoginRequiredCardProps) => {
           Sign in to Reserve Slot
         </h3>
         <p className="text-xs text-zinc-500 dark:text-zinc-400 leading-relaxed font-medium">
-          You need an active mentee account to confirm 1-on-1 strategy sessions and initiate checkout.
+          You need an active mentee account to confirm 1-on-1 strategy sessions
+          and initiate checkout.
         </p>
       </div>
 

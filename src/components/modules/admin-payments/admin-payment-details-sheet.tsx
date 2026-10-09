@@ -161,8 +161,7 @@ export function AdminPaymentDetailsSheet({
                   </p>
                   {payment.refundedAt && (
                     <p className="text-[11px] text-zinc-400">
-                      Refund Date:{" "}
-                       {formatPaidDate(payment.refundedAt)}
+                      Refund Date: {formatPaidDate(payment.refundedAt)}
                     </p>
                   )}
                 </div>

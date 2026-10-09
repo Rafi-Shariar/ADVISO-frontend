@@ -84,7 +84,6 @@ export function useGetMentorProfile() {
   });
 }
 
-
 export function useUpdateMentorProfile() {
   const queryClient = useQueryClient();
 

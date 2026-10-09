@@ -1,6 +1,5 @@
 "use client";
 
-
 import {
   Table,
   TableBody,
@@ -11,11 +10,10 @@ import {
 } from "@/components/ui/table";
 
 import {
-    formatPaidDate,
+  formatPaidDate,
   formatScheduleDate,
   formatSlotTime,
 } from "@/utils/date-time-converter";
-
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
@@ -49,8 +47,7 @@ const UserPaymentTable = () => {
           <TableBody>
             {payments.map((payment) => (
               <TableRow key={payment.paymentId}>
-
-                 <TableCell>#{payment.paymentId.slice(0,7)}</TableCell>
+                <TableCell>#{payment.paymentId.slice(0, 7)}</TableCell>
 
                 <TableCell className="font-medium flex items-center gap-3">
                   <Avatar>
@@ -64,7 +61,9 @@ const UserPaymentTable = () => {
                   {payment.session.mentor.user.name}
                 </TableCell>
 
-                <TableCell>{formatScheduleDate(payment.session.sessionDate)}</TableCell>
+                <TableCell>
+                  {formatScheduleDate(payment.session.sessionDate)}
+                </TableCell>
 
                 <TableCell>
                   {formatSlotTime(payment.session.startUTC)} -{" "}
@@ -74,16 +73,15 @@ const UserPaymentTable = () => {
                 <TableCell>{payment.status}</TableCell>
 
                 <TableCell>
-                    {payment.status === "PAID" ? `${formatPaidDate(payment.paidAt)}` : "-"}
+                  {payment.status === "PAID"
+                    ? `${formatPaidDate(payment.paidAt)}`
+                    : "-"}
                 </TableCell>
-                
               </TableRow>
             ))}
           </TableBody>
         </Table>
       </div>
-
-      
     </div>
   );
 };

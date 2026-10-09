@@ -11,7 +11,6 @@ export const formatSlotTime = (isoString?: string) => {
   return isValid(date) ? format(date, "h:mm a") : "Invalid Time";
 };
 
-
 export const formatPaidDate = (dateStr?: string | null): string => {
   if (!dateStr || dateStr === "-") return "-";
 
@@ -29,7 +28,7 @@ export const formatPaidDate = (dateStr?: string | null): string => {
     // ৩. যদি তাও Invalid Date থাকে, তবে ম্যানুয়ালি Date & Time এক্সট্রাক্ট করা
     if (isNaN(parsedDate.getTime())) {
       const match = dateStr.match(
-        /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})/
+        /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})/,
       );
       if (match) {
         const [, year, month, day, hour, min, sec] = match;
@@ -40,7 +39,7 @@ export const formatPaidDate = (dateStr?: string | null): string => {
           Number(day),
           Number(hour),
           Number(min),
-          Number(sec)
+          Number(sec),
         );
       }
     }
