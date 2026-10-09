@@ -130,7 +130,7 @@ export default function HelpScopeSection() {
                 </div>
 
                 {/* Overlapping Floating Pill */}
-                <div className="absolute right-2 bottom-3 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-[12px] bg-white dark:bg-zinc-800 border border-border/70 shadow-md">
+                <div className="absolute right-2 bottom-3 md:bottom-42 md:-right-7 lg:right-2 lg:bottom-3 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-[12px] bg-white dark:bg-zinc-800 border border-border/70 shadow-md">
                   <CheckCircle2 className="size-3.5 text-orange-500" />
                   <span className="text-[11px] font-medium text-foreground">
                     {card.visual.pillText}

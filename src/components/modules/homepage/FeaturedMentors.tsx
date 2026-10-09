@@ -19,6 +19,7 @@ import { useFeaturedMentors } from "@/hooks/mentor.hook";
 import { IMentorProfile } from "@/types/mentor.type";
 import { MentorCardSkeleton } from "../mentor/MentorCardSkeleton";
 import MentorCard from "../mentor/mentor-card";
+import MentorCardHomepage from "../mentor/mentor-card-homepage";
 
 export default function FeaturedMentors() {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
@@ -120,7 +121,8 @@ export default function FeaturedMentors() {
               style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
             >
               {mentors.map((mentor) => (
-                <MentorCard key={mentor.mentorId} mentor={mentor} />
+                // <MentorCard key={mentor.mentorId} mentor={mentor} />
+                <MentorCardHomepage  key={mentor.mentorId} mentor={mentor}/>
               ))}
             </div>
           )}
