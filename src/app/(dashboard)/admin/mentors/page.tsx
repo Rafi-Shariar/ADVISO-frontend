@@ -12,7 +12,8 @@ const MentorsPageAdmin = () => {
               Community Experts
             </h1>
             <p className="text-sm text-muted-foreground sm:text-base">
-              Manage our community experts, approve new applications, manage mentorship status and more.
+              Manage our community experts, approve new applications, manage
+              mentorship status and more.
             </p>
           </div>
         </div>

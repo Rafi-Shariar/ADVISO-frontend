@@ -13,7 +13,8 @@ const PaymentsPageAdmin = () => {
               System Finance
             </h1>
             <p className="text-sm text-muted-foreground sm:text-base">
-              Track ongoing transaction in the system. Audit failed and refunded trasactions and more. 
+              Track ongoing transaction in the system. Audit failed and refunded
+              trasactions and more.
             </p>
           </div>
         </div>

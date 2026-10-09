@@ -1,6 +1,8 @@
 import {
+  forgotPassword,
   getMe,
   googleAuth,
+  resetPassword,
   userLogin,
   userLogout,
   userRegistration,
@@ -43,5 +45,17 @@ export function useGoogleOAuth() {
 export function useVerifyAccount() {
   return useMutation({
     mutationFn: verifyAccount,
+  });
+}
+
+export function useForgotPassword() {
+  return useMutation({
+    mutationFn: forgotPassword,
+  });
+}
+
+export function useResetPassword() {
+  return useMutation({
+    mutationFn: resetPassword,
   });
 }

@@ -9,9 +9,9 @@ const Providers = ({ children }: { children: ReactNode }) => {
   return (
     <GoogleAuthProvider>
       <SmoothScrollProvider>
-      <QueryProvider>
-        <ThemeProvider>{children}</ThemeProvider>
-      </QueryProvider>
+        <QueryProvider>
+          <ThemeProvider>{children}</ThemeProvider>
+        </QueryProvider>
       </SmoothScrollProvider>
     </GoogleAuthProvider>
   );

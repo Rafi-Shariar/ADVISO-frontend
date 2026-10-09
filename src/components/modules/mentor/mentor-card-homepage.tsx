@@ -30,7 +30,6 @@ const MentorCardHomepage = ({ mentor }: Props) => {
           <div className="absolute bottom-2 left-2 bg-black/65 backdrop-blur-md text-white px-2 py-0.5 rounded-[8px] text-[11px] font-semibold flex items-center gap-1 border border-white/10 shadow-sm">
             <Star className="size-3 fill-amber-400 text-amber-400" />
             <span>{mentor.averageRatings}</span>
-           
           </div>
         </div>
 

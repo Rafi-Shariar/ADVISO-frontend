@@ -21,3 +21,9 @@ export interface IVerifyEmailPayload {
 }
 
 export type UserRole = "ADMIN" | "USER" | "MENTOR" | "SUPER_ADMIN";
+
+export interface IResetPassword {
+  email: string;
+  otp: string;
+  password: string;
+}

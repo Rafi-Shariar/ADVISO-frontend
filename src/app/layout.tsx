@@ -31,7 +31,7 @@ export default function RootLayout({
       >
         <Providers>
           <TooltipProvider>
-            <ScrollToTop/>
+            <ScrollToTop />
             {children}
             <Toaster />
           </TooltipProvider>

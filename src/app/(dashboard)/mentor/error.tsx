@@ -40,8 +40,6 @@ export default function MarketingError({
             Try again
           </Button>
 
-          
-
           <Link
             href="/mentor"
             className="inline-flex h-11 items-center justify-center gap-2 rounded-xl border border-border bg-background px-6 text-sm font-semibold text-foreground transition-all hover:bg-muted active:scale-[0.98]"

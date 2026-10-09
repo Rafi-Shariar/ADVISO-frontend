@@ -169,7 +169,6 @@ const Header = () => {
                             className=" justify-between rounded-[12px] border-orange-500/40 p-4 text-orange-600 hover:bg-orange-500 hover:text-white dark:text-orange-400 text-xs font-bold px-3.5"
                           >
                             <span className="flex items-center gap-2">
-                              
                               Become a mentor
                             </span>
                             <ArrowRight className="size-3.5" />

@@ -3,6 +3,7 @@ import {
   IGoogleLoginPayload,
   ILoginUserPayload,
   IRegisterUser,
+  IResetPassword,
   IVerifyEmailPayload,
 } from "@/types/auth.type";
 
@@ -28,6 +29,20 @@ export const googleAuth = (payload: IGoogleLoginPayload) => {
 
 export const verifyAccount = (payload: IVerifyEmailPayload) => {
   return apiClient("/api/v1/auth/verify-email", {
+    method: "POST",
+    body: payload,
+  });
+};
+
+export const forgotPassword = (email: string) => {
+  return apiClient("/api/v1/auth/forgot-password", {
+    method: "POST",
+    body: { email },
+  });
+};
+
+export const resetPassword = (payload: IResetPassword) => {
+  return apiClient("/api/v1/auth/reset-password", {
     method: "POST",
     body: payload,
   });

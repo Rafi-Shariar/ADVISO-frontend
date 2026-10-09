@@ -13,8 +13,11 @@ import { GoogleLogin } from "@react-oauth/google";
 import Link from "next/link";
 import Logo from "../layout/public/Logo";
 import { ArrowRight, GraduationCap, ShieldCheck, User } from "lucide-react";
+import { useState } from "react";
+import { ResetPasswordModal } from "../auth/forgot-password-modal";
 
 const LoginForm = () => {
+  const [isForgotModalOpen, setIsForgotModalOpen] = useState(false);
   const { mutate: login, isPending } = useLogin();
   const { mutate: googleLogin } = useGoogleOAuth();
   const router = useRouter();
@@ -227,12 +230,13 @@ const LoginForm = () => {
                   >
                     Password
                   </FieldLabel>
-                  <Link
-                    href="/forgot-password"
+                  <button
+                    type="button"
+                    onClick={() => setIsForgotModalOpen(true)}
                     className="text-xs font-medium text-orange-600 hover:text-orange-700 dark:text-orange-400 hover:underline transition-colors"
                   >
                     Forgot Password?
-                  </Link>
+                  </button>
                 </div>
                 <Input
                   id={field.name}
@@ -339,6 +343,11 @@ const LoginForm = () => {
           <span>Admin</span>
         </Button>
       </div>
+
+      <ResetPasswordModal
+        open={isForgotModalOpen}
+        onOpenChange={setIsForgotModalOpen}
+      />
     </div>
   );
 };

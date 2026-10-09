@@ -11,7 +11,7 @@ const MentorsPage = () => {
         </h1>
       </div>
 
-      <Suspense fallback={<MentorPageSkeleton/>}>
+      <Suspense fallback={<MentorPageSkeleton />}>
         <MentorTabs />
       </Suspense>
     </div>

@@ -10,10 +10,13 @@ import { toast } from "sonner";
 
 interface LogoutButtonProps {
   className?: string;
-  isCollapsed?: boolean; 
+  isCollapsed?: boolean;
 }
 
-const LogoutButton = ({ className, isCollapsed = false }: LogoutButtonProps) => {
+const LogoutButton = ({
+  className,
+  isCollapsed = false,
+}: LogoutButtonProps) => {
   const router = useRouter();
   const queryClient = useQueryClient();
   const { removeUser } = useUserStore();
@@ -23,7 +26,6 @@ const LogoutButton = ({ className, isCollapsed = false }: LogoutButtonProps) => 
     logout(undefined, {
       onSuccess: () => {
         toast.success("Logged out successfully");
-        
 
         queryClient.removeQueries({ queryKey: ["user"] });
         queryClient.removeQueries({ queryKey: ["currentUser"] });

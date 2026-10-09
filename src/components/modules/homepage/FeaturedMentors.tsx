@@ -122,7 +122,7 @@ export default function FeaturedMentors() {
             >
               {mentors.map((mentor) => (
                 // <MentorCard key={mentor.mentorId} mentor={mentor} />
-                <MentorCardHomepage  key={mentor.mentorId} mentor={mentor}/>
+                <MentorCardHomepage key={mentor.mentorId} mentor={mentor} />
               ))}
             </div>
           )}
